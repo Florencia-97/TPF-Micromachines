@@ -9,9 +9,9 @@
 
 int main (int argc, char** argv) {
 	Socket socket;
-    socket.server(PORT); // remove harcoded after
+    socket.server(PORT); 
 	Socket client = socket.acceptClient();
 	Talker talker = Talker(client);
-	talker.sendYaml();
+	talker.sendYaml(); //It know contains just an example!
 	Configuration config; //Not used yet
 }

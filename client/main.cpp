@@ -7,8 +7,10 @@
 
 int main (int argc, char** argv) {
 	Socket socket;
-    socket.client(SERVICE ,PORT); //remove hardcode
-    std::string hola = Protocol::recvMsg(&socket);
-    std::cout << hola << std::endl;
+    socket.client(SERVICE ,PORT);
+    std::string initMsg = Protocol::recvMsg(&socket);
+    std::cout << initMsg << std::endl;
+    std::string yaml = "{x: 2, y: 5}";
+    Protocol::sendMsg(yaml, &socket);
     std::cout << "Client leaves with grace !\n";
 }
