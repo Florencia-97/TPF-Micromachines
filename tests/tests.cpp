@@ -19,19 +19,19 @@ int main( int argc, char *argv[] ) {
     status = CxxTest::Main< CxxTest::ErrorPrinter >( tmp, argc, argv );
     return status;
 }
-bool suite_MyTestSuite_init = false;
+bool suite_ServerConfigTest_init = false;
 #include "MyTestSuite.h"
 
-static MyTestSuite suite_MyTestSuite;
+static ServerConfigTest suite_ServerConfigTest;
 
-static CxxTest::List Tests_MyTestSuite = { 0, 0 };
-CxxTest::StaticSuiteDescription suiteDescription_MyTestSuite( "MyTestSuite.h", 3, "MyTestSuite", suite_MyTestSuite, Tests_MyTestSuite );
+static CxxTest::List Tests_ServerConfigTest = { 0, 0 };
+CxxTest::StaticSuiteDescription suiteDescription_ServerConfigTest( "MyTestSuite.h", 7, "ServerConfigTest", suite_ServerConfigTest, Tests_ServerConfigTest );
 
-static class TestDescription_suite_MyTestSuite_testAddition : public CxxTest::RealTestDescription {
+static class TestDescription_suite_ServerConfigTest_testServerConfigFile : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testAddition() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 6, "testAddition" ) {}
- void runTest() { suite_MyTestSuite.testAddition(); }
-} testDescription_suite_MyTestSuite_testAddition;
+ TestDescription_suite_ServerConfigTest_testServerConfigFile() : CxxTest::RealTestDescription( Tests_ServerConfigTest, suiteDescription_ServerConfigTest, 14, "testServerConfigFile" ) {}
+ void runTest() { suite_ServerConfigTest.testServerConfigFile(); }
+} testDescription_suite_ServerConfigTest_testServerConfigFile;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

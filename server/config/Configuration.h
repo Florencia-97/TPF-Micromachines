@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include <map>
 
+// Maybe i dont need it because of yaml error
 class fileConfigurationNotFound : public std::exception {
     virtual const char* what() const throw() {
         std::string error = "Configuration file wasnt found,";
@@ -13,11 +14,13 @@ class fileConfigurationNotFound : public std::exception {
 };
 
 class Configuration{
-    void _loadConfigs();
+    void _loadConfigs(std::string path);
+    std::map<std::string, float> configs;
 
     public:
-    std::map<std::string, float> configs;
+    float getConfigurationData(std::string conf);
     Configuration();
+    Configuration(std::string path);
 };
 
 #endif
