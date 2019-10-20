@@ -17,7 +17,9 @@ void Configuration::_loadConfigs(){
 	if (file.IsNull()){
 		throw fileConfigurationNotFound();
 	}
-	float max_car_speed = file["max_car_speed"].as<float>();
-    this->configs.insert({"max_car_speed", max_car_speed});
+	// Saving in map all configurations in yaml file
+	for(YAML::const_iterator it=file.begin();it!=file.end();++it) {
+		this->configs.insert({it->first.as<std::string>(), it->second.as<float>()});
+	}
 	std::cout << "Server configuration loaded correctly!\n" << std::endl;
 }

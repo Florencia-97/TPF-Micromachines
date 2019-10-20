@@ -1,7 +1,7 @@
 #include <iostream>
 #include "yaml-cpp/yaml.h"
 
-#include "configuration.h"
+#include "config/configuration.h"
 
 int main (int argc, char** argv) {
 	Configuration config;
