@@ -5,11 +5,11 @@
 #include "Talker.h"
 #include "../common/Socket.h"
 #include "../common/Protocol.h"
-
+#include "../common/constants.h"
 
 int main (int argc, char** argv) {
 	Socket socket;
-    socket.server("8080"); // remove harcoded after
+    socket.server(PORT); // remove harcoded after
 	Socket client = socket.acceptClient();
 	Talker talker = Talker(client);
 	talker.sendYaml();
