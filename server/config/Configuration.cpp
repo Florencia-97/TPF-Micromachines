@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 #include "yaml-cpp/yaml.h"
 
-#include "configuration.h"
+#include "Configuration.h"
 
 Configuration::Configuration() {
 	this->_loadConfigs();

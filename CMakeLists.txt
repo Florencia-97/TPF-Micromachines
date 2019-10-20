@@ -14,7 +14,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/server)
 
 set(SERVER_SOURCE_FILES
-	server/config/configuration.cpp
+	server/config/Configuration.cpp
+	common/Socket.cpp
 )
 
 set(TEST_SOURCE_FILES
