@@ -12,6 +12,6 @@ int main (int argc, char** argv) {
     socket.server(PORT); 
 	Socket client = socket.acceptClient();
 	Talker talker = Talker(client);
-	talker.sendYaml(); //It know contains just an example!
+	talker.sendYaml(); //It now contains just an example!
 	Configuration config; //Not used yet
 }

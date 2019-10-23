@@ -30,10 +30,15 @@ set(CLIENT_SOURCE_FILES
 set(TEST_SOURCE_FILES
         tests/tests.cpp)
 
-add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
+add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/GameWorld.cpp server/GameWorld.h)
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp)
 target_link_libraries(Client yaml-cpp)
 target_link_libraries(Test yaml-cpp)
+
+#box2d
+target_link_libraries (Server Box2D)
+include_directories(server/Box2D)
+add_subdirectory(server/Box2D)
