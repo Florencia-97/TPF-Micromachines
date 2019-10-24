@@ -20,8 +20,8 @@ set(SERVER_SOURCE_FILES
 	common/Socket.cpp
 	server/Talker.cpp
 	common/Protocol.cpp
-	server/RaceCar.cpp
 	server/GameObject.cpp
+	server/RaceCar.cpp
 	server/GameWorld.cpp
 )
 
@@ -42,6 +42,5 @@ add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 target_link_libraries(Server yaml-cpp)
 target_link_libraries(Client yaml-cpp)
 target_link_libraries(Test yaml-cpp)
-
-#box2d
 target_link_libraries (Server Box2D)
+target_link_libraries (Test Box2D)
