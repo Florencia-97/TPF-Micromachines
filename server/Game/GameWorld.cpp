@@ -11,7 +11,7 @@ namespace {
     }
 
     void createAndAddFixture(GameObject* obj, int hx, int hy, int density,
-            uint16 catBits, uint16 maskBits){
+            uint16 catBits, uint16 maskBits, bool isSensor){
 
         b2PolygonShape boxShape;
         boxShape.SetAsBox(hx, hy);
@@ -20,6 +20,7 @@ namespace {
         boxFixtureDef.density = density;
         boxFixtureDef.filter.categoryBits = catBits;
         boxFixtureDef.filter.maskBits = maskBits;
+        boxFixtureDef.isSensor = isSensor;
         obj->attachFixture(boxFixtureDef);
     }
 }
@@ -27,10 +28,13 @@ void GameWorld::createBackgroundObject() {
     b2Body* newBody = makeNewBody(world, b2_staticBody);
     this->background_objs.emplace_back(newBody);
 
-    createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, GRASS, ROAD_SENSOR);
+    createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, GRASS, ROAD_SENSOR, false);
 }
 
 RaceCar& GameWorld::createCar(std::string &carStats) {
     b2Body* newBody = makeNewBody(world, b2_dynamicBody);
     cars.emplace_back(1, carStats, newBody);
+
+    createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),2,1,1,ROAD_SENSOR, GRASS | ROAD, true);
 }

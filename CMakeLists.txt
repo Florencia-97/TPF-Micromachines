@@ -12,6 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 #target_link_libraries(ej1 myclasses)
 
 include_directories(${PROJECT_SOURCE_DIR}/server)
+include_directories(${PROJECT_SOURCE_DIR}/server/Game)
 include_directories(${PROJECT_SOURCE_DIR}/server/Box2D)
 add_subdirectory(${PROJECT_SOURCE_DIR}/server/Box2D)
 
@@ -20,9 +21,9 @@ set(SERVER_SOURCE_FILES
 	common/Socket.cpp
 	server/Talker.cpp
 	common/Protocol.cpp
-	server/GameObject.cpp
-	server/RaceCar.cpp
-	server/GameWorld.cpp
+        server/Game/GameObject.cpp
+        server/Game/RaceCar.cpp
+        server/Game/GameWorld.cpp
 )
 
 set(CLIENT_SOURCE_FILES

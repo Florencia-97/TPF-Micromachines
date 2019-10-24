@@ -6,11 +6,13 @@
 #include "../common/Socket.h"
 #include "../common/Protocol.h"
 #include "../common/constants.h"
-#include "GameWorld.h"
+#include "Game/GameWorld.h"
 
 int main (int argc, char** argv) {
 	Socket socket;
-    socket.server(PORT); 
+	GameWorld world;
+
+    socket.server(PORT);
 	Socket client = socket.acceptClient();
 	Talker talker = Talker(client);
 	talker.sendYaml(); //It now contains just an example!
