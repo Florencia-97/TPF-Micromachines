@@ -4,6 +4,7 @@
 
 #include "Box2D/Box2D.h"
 #include <vector>
+#include "GameObject.h"
 
 class GameWorld {
     b2World world;
@@ -11,7 +12,8 @@ class GameWorld {
     //std::vector<Car> cars;
 
     //objects which are a static part of the map background
-    //std::vector<GameObject> background_objs;
+    std::vector<GameObject> background_objs;
+
     //Dynamic Instances are those which come and go from the field, (ie items)
     //std::vector<GameObject> dynamic_objs;
 
@@ -25,11 +27,11 @@ public:
 
       &GameObject createDynamicObject(yaml &stats?);
 
-      void createBackgroundObject(yaml &stats?);
-
       void Step();
 
      */
+
+    void createBackgroundObject(); //yaml &stats?
 };
 
 

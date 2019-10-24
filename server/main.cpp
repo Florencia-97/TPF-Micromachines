@@ -6,6 +6,7 @@
 #include "../common/Socket.h"
 #include "../common/Protocol.h"
 #include "../common/constants.h"
+#include "GameWorld.h"
 
 int main (int argc, char** argv) {
 	Socket socket;
