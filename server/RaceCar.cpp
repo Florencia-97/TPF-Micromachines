@@ -12,8 +12,8 @@ bool RaceCar::isDead() {
 }
 
 //TODO get stats from yaml
-RaceCar::RaceCar(int carId, std::string stats, b2Body *&newBody) \
-            : GameObject(PLAYER, newBody) {
+RaceCar::RaceCar(int carId, std::string stats, b2Body* &newBody) \
+            : GameObject(newBody) {
     this->health = 10;
     this->id = carId;
     this->stats = stats;

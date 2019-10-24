@@ -2,9 +2,8 @@
 
 #include "GameObject.h"
 
-GameObject::GameObject(uint16 type, b2Body* &newBody) {
+GameObject::GameObject(b2Body* &newBody) {
     this->body = newBody;
-    this->type = type;
     this->x_size = 0;
     this->y_size = 0;
     this->enabled = true;

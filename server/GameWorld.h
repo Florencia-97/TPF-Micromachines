@@ -5,11 +5,22 @@
 #include "Box2D/Box2D.h"
 #include <vector>
 #include "GameObject.h"
+#include "RaceCar.h"
+
+enum _entityCategory {
+    STATIC_OBJ = 0x0001,
+    DYNAMIC_OBJ = 0x0002,
+    PLAYER = 0x0004,
+    ROAD_SENSOR = 0x0008,
+    ROAD = 0x00016,
+    GRASS = 0x00032,
+    BONUSES = 0x00064
+};
 
 class GameWorld {
     b2World world;
     //CollisionDetector cd;
-    //std::vector<Car> cars;
+    std::vector<RaceCar> cars;
 
     //objects which are a static part of the map background
     std::vector<GameObject> background_objs;
@@ -22,9 +33,9 @@ public:
     //POS creates a world with no gravity for top-down action
     GameWorld() : world(b2Vec2(0,0)){};
 
-    /*
-      &Car createCar(yaml &carStats);
 
+      RaceCar& createCar(std::string &carStats);
+    /*
       &GameObject createDynamicObject(yaml &stats?);
 
       void Step();
