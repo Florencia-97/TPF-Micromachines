@@ -30,7 +30,7 @@ set(CLIENT_SOURCE_FILES
 set(TEST_SOURCE_FILES
         tests/tests.cpp)
 
-add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/GameWorld.cpp server/GameWorld.h)
+add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/GameWorld.cpp server/GameWorld.h server/GameObject.cpp server/GameObject.h)
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
