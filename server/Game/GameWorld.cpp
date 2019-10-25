@@ -31,10 +31,21 @@ void GameWorld::createBackgroundObject() {
     createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, GRASS, ROAD_SENSOR, false);
 }
 
-RaceCar& GameWorld::createCar(std::string &carStats) {
+int GameWorld::createCar(std::string &carStats) {
     b2Body* newBody = makeNewBody(world, b2_dynamicBody);
-    cars.emplace_back(1, carStats, newBody);
+    int carId = cars.size();
+    cars.emplace_back(carId, carStats, newBody);
 
     createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),2,1,1,ROAD_SENSOR, GRASS | ROAD, true);
+
+    return carId;
+}
+
+RaceCar &GameWorld::getCar(int id) {
+    return cars.at(id);
+}
+
+void GameWorld::Step() {
+
 }

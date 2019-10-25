@@ -8,11 +8,12 @@
 //probably make this one a virtual class
 class GameObject {
     bool enabled;
-    b2Body* body;
     int y_size;
     int x_size;
     //std::string stats;
 
+protected:
+    b2Body* body;
 public:
 
     //only supports making objects with a square bounding box

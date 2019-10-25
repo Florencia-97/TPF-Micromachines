@@ -14,11 +14,12 @@ class RaceCar : public GameObject {
 public:
     RaceCar(int carId, std::string stats, b2Body* &newBody);
 
-    //POS applies acceleration in a given direction
-    //void Accelerate(b2Vec2 accDir);
+    //PRE x and y must be between [0-1]
+    //POS accelerates the car in the specified direction
+    b2Vec2 accelerate(b2Vec2 direction);
 
-    //pos applies the dampening to the acceleration and other "over time" mods to stats
-    //void Step();
+    //POS advances the car simulation one timestep
+    void Step();
 
     //POS the car takes damage and returns true if life went below 0
     bool takeDamage(int dmg);

@@ -13,8 +13,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 include_directories(${PROJECT_SOURCE_DIR}/server)
 include_directories(${PROJECT_SOURCE_DIR}/server/Game)
-include_directories(${PROJECT_SOURCE_DIR}/server/Box2D)
-add_subdirectory(${PROJECT_SOURCE_DIR}/server/Box2D)
+include_directories(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
+add_subdirectory(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
 
 set(SERVER_SOURCE_FILES
 	server/config/Configuration.cpp

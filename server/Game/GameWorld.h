@@ -34,13 +34,16 @@ public:
     GameWorld() : world(b2Vec2(0,0)){};
 
 
-      RaceCar& createCar(std::string &carStats);
+      int createCar(std::string &carStats);
+
+      RaceCar& getCar(int id);
     /*
       &GameObject createDynamicObject(yaml &stats?);
 
-      void Step();
-
      */
+
+    //POS advances the simulation and all instances within one timestep
+    void Step();
 
     void createBackgroundObject(); //yaml &stats?
 };
