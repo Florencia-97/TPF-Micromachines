@@ -63,3 +63,14 @@ void RaceCar::step(){
     float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : .5);
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
 }
+
+InfoBlock RaceCar::stateAsInfoBlock() {
+    InfoBlock info("",false);
+    info.src_yaml["hp"] = health;
+    auto pos = body->GetPosition();
+    info.src_yaml["x"] = pos.x ;
+    info.src_yaml["y"] = pos.y;
+    info.src_yaml["r"] = body->GetAngle();
+    
+    return info;
+}
