@@ -32,8 +32,8 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 }
 
 void GameWorld::Step() {
-    for (int i=0; i< cars.size(); i++){
-        cars[i].step();
+    for (auto & car : cars){
+        car.step();
     }
 
     float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
@@ -56,7 +56,7 @@ int GameWorld::createCar(std::string &carStats) {
     cars.emplace_back(carId, carStats, newBody);
 
     createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),2,1,1,ROAD_SENSOR, GRASS | ROAD, true);
+    createAndAddFixture(&(cars.back()),2/2,1/2,0,ROAD_SENSOR, GRASS | ROAD, true);
 
     return carId;
 }

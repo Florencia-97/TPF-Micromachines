@@ -24,6 +24,7 @@ public:
         return this->src_yaml[key].as<T>();
     }
 
+    bool exists(std::string key);
 };
 
 

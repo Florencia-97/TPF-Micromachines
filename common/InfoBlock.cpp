@@ -18,6 +18,14 @@ float InfoBlock::getFloat(const std::string key) {
     return src_yaml[key].as<float>();
 }
 
+bool InfoBlock::exists(std::string key){
+    try{
+        return src_yaml[key] && src_yaml[key] != nullptr;
+    } catch (...) {
+        return false;
+    }
+}
+
 std::string InfoBlock::srcString() {
     std::string s = "{";
     for(YAML::iterator i = src_yaml.begin(); i != src_yaml.end(); i++){
