@@ -1,5 +1,3 @@
-
-
 #include "InfoBlock.h"
 
 InfoBlock::InfoBlock(const std::string &init, bool fromFile) {
@@ -17,6 +15,13 @@ int InfoBlock::getInt(const std::string key) {
 float InfoBlock::getFloat(const std::string key) {
     return src_yaml[key].as<float>();
 }
+
+std::list<int> getList(std::string key){
+    //Implement me
+    std::list<int> list;
+    return list;
+}
+
 
 std::string InfoBlock::srcString() {
     std::string s = "{";

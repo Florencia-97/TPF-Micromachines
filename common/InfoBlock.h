@@ -17,6 +17,8 @@ public:
 
     float getFloat(std::string key);
 
+    std::list<int> getList(std::string key);
+
     std::string srcString();
 
     template <class T>
