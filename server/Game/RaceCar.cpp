@@ -71,6 +71,6 @@ InfoBlock RaceCar::stateAsInfoBlock() {
     info.src_yaml["x"] = pos.x ;
     info.src_yaml["y"] = pos.y;
     info.src_yaml["r"] = body->GetAngle();
-    
+
     return info;
 }

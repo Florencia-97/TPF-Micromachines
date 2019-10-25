@@ -18,6 +18,7 @@ float InfoBlock::getFloat(const std::string key) {
     return src_yaml[key].as<float>();
 }
 
+
 bool InfoBlock::exists(std::string key){
     try{
         return src_yaml[key] && src_yaml[key] != nullptr;
@@ -34,4 +35,8 @@ std::string InfoBlock::srcString() {
     s.substr(0, s.size()- 3);
     s += "}";
     return s;
+}
+
+InfoBlock InfoBlock::getNestedInfo(std::string key) {
+    return InfoBlock(this->getString(key), true);
 }
