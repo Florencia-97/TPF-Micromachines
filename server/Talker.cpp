@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "yaml-cpp/yaml.h"
+#include "../common/InfoBlock.h"
 #include "./Talker.h"
 #include "../common/Protocol.h"
 
@@ -12,7 +12,7 @@ bool Talker::sendYaml(){
     if (Protocol::sendMsg(initMsg, &this->skt) < 0) return false;
     std::string position = Protocol::recvMsg(&this->skt);
     if (position == "") return false;
-    YAML::Node yaml = YAML::Load(position);
-    std::cout << "x:" << yaml["x"].as<std::string>() << std::endl;
-    std::cout << "y:" << yaml["y"].as<std::string>() << std::endl;
+    InfoBlock info(position, false);
+    std::cout << "x:" << info.getString("x") << std::endl;
+    std::cout << "y:" << info.getInt("y") << std::endl;
 }

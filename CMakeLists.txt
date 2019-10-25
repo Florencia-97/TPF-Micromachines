@@ -24,6 +24,7 @@ set(SERVER_SOURCE_FILES
         server/Game/GameObject.cpp
         server/Game/RaceCar.cpp
         server/Game/GameWorld.cpp
+		common/InfoBlock.cpp
 )
 
 set(CLIENT_SOURCE_FILES
@@ -31,7 +32,7 @@ set(CLIENT_SOURCE_FILES
 	common/Socket.cpp
 	server/Talker.cpp
 	common/Protocol.cpp
-		)
+		common/InfoBlock.cpp )
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp)

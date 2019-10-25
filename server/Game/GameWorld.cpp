@@ -3,10 +3,11 @@
 
 //local use namespace for local functions
 namespace {
-    b2Body* makeNewBody(b2World &world, b2BodyType bodyType){
+    b2Body* makeNewBody(b2World &world, b2BodyType bodyType, float32 x, float32 y){
         b2BodyDef myBodyDef;
         myBodyDef.type = bodyType;
         myBodyDef.angle = 0;
+        myBodyDef.position.Set(x, y);
         return world.CreateBody(&myBodyDef);
     }
 
@@ -43,14 +44,14 @@ void GameWorld::Step() {
 
 
 void GameWorld::createBackgroundObject() {
-    b2Body* newBody = makeNewBody(world, b2_staticBody);
+    b2Body* newBody = makeNewBody(world, b2_staticBody,0,0);
     this->background_objs.emplace_back(newBody);
 
     createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, GRASS, ROAD_SENSOR, false);
 }
 
 int GameWorld::createCar(std::string &carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,0,0);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
