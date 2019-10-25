@@ -19,7 +19,7 @@ public:
     b2Vec2 accelerate(b2Vec2 direction);
 
     //POS advances the car simulation one timestep
-    void Step();
+    void step();
 
     //POS the car takes damage and returns true if life went below 0
     bool takeDamage(int dmg);

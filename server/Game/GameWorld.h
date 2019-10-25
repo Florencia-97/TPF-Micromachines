@@ -31,7 +31,7 @@ class GameWorld {
 public:
 
     //POS creates a world with no gravity for top-down action
-    GameWorld() : world(b2Vec2(0,0)){};
+    GameWorld();
 
 
       int createCar(std::string &carStats);

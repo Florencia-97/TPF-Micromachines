@@ -24,6 +24,24 @@ namespace {
         obj->attachFixture(boxFixtureDef);
     }
 }
+
+GameWorld::GameWorld() : world(b2Vec2(0,0)) {
+    //CollisionListener cl;
+    //world.SetContactListener(&cl);
+}
+
+void GameWorld::Step() {
+    for (int i=0; i< cars.size(); i++){
+        cars[i].step();
+    }
+
+    float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
+    int32 velocityIterations = 8;//how strongly to correct velocity
+    int32 positionIterations = 3;//how strongly to correct position
+    world.Step(timeStep, velocityIterations, positionIterations);
+}
+
+
 void GameWorld::createBackgroundObject() {
     b2Body* newBody = makeNewBody(world, b2_staticBody);
     this->background_objs.emplace_back(newBody);
@@ -44,8 +62,4 @@ int GameWorld::createCar(std::string &carStats) {
 
 RaceCar &GameWorld::getCar(int id) {
     return cars.at(id);
-}
-
-void GameWorld::Step() {
-
 }

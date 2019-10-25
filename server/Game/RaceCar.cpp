@@ -27,7 +27,7 @@ b2Vec2 RaceCar::accelerate(b2Vec2 direction){
 //Q:Why does the step() apply the LinearImpulse and not accelerate?
 //A:We still want to apply a linear impulse even when the car did not
 //accelerate to simulate the change of speed correctly
-void RaceCar::Step(){
+void RaceCar::step(){
     b2Vec2 vel = body->GetLinearVelocity();
     float maxVel = 10;//yaml stats.max_speed TODO
     float goalVelX = (accel.x > maxVel) ? maxVel : accel.x;
