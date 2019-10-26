@@ -1,7 +1,6 @@
 #ifndef _CAR_
 #define _CAR_
 
-
 class Car{
     public:
     //The dimensions of the dot
