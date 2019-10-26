@@ -13,13 +13,12 @@ struct key_directions {
 class RaceCar : public GameObject {
     b2Vec2 accel;
     int health;
-    InfoBlock stats;
 
 public:
     int id;
+    InfoBlock stats;
 
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
-
 
     //POS advances the car simulation one timestep
     void step();

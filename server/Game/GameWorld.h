@@ -6,16 +6,8 @@
 #include <vector>
 #include "GameObject.h"
 #include "RaceCar.h"
+#include "CollisionDetector.h"
 
-enum _entityCategory {
-    STATIC_OBJ = 0x0001,
-    DYNAMIC_OBJ = 0x0002,
-    PLAYER = 0x0004,
-    ROAD_SENSOR = 0x0008,
-    ROAD = 0x00016,
-    GRASS = 0x00032,
-    BONUSES = 0x00064
-};
 
 class GameWorld {
     b2World world;

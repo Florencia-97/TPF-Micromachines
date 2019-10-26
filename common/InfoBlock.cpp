@@ -1,21 +1,34 @@
 
 
 #include "InfoBlock.h"
+#include <iostream>
+
+void InfoBlock::Load(const std::string &init, bool fromFile) {
+    if (!fromFile) {
+        this->src_yaml = YAML::Load(init);
+    } else {
+        try {
+            this->src_yaml = YAML::LoadFile(init);
+        } catch (std::runtime_error e) {
+            std::cerr <<  e.what() << HERE << std::endl;
+        }
+    }
+}
 
 InfoBlock::InfoBlock(const std::string &init, bool fromFile) {
-    this->src_yaml = YAML::Load(init);
+    this->Load(init, fromFile);
 }
 
 std::string InfoBlock::getString(const std::string key) {
-    return src_yaml[key].as<std::string>();
+    return get<std::string>(key);
 }
 
 int InfoBlock::getInt(const std::string key) {
-    return src_yaml[key].as<int>();
+    return get<int>(key);
 }
 
 float InfoBlock::getFloat(const std::string key) {
-    return src_yaml[key].as<float>();
+    return get<float>(key);
 }
 
 

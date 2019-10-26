@@ -25,7 +25,7 @@ set(SERVER_SOURCE_FILES
         server/Game/RaceCar.cpp
         server/Game/GameWorld.cpp
 		common/InfoBlock.cpp
-)
+        server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionDetector.cpp server/Game/CollisionDetector.h)
 
 set(CLIENT_SOURCE_FILES
 	server/config/Configuration.cpp
@@ -35,7 +35,7 @@ set(CLIENT_SOURCE_FILES
 		common/InfoBlock.cpp )
 
 set(TEST_SOURCE_FILES
-        tests/tests.cpp)
+        tests/tests.cpp server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionDetector.cpp server/Game/CollisionDetector.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})

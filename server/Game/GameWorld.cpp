@@ -47,7 +47,7 @@ void GameWorld::createBackgroundObject() {
     b2Body* newBody = makeNewBody(world, b2_staticBody,0,0);
     this->background_objs.emplace_back(newBody);
 
-    createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, GRASS, ROAD_SENSOR, false);
+    createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, TILE, SENSOR, false);
 }
 
 int GameWorld::createCar(std::string &carStats) {
@@ -56,7 +56,7 @@ int GameWorld::createCar(std::string &carStats) {
     cars.emplace_back(carId, carStats, newBody);
 
     createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),2/2,1/2,0,ROAD_SENSOR, GRASS | ROAD, true);
+    createAndAddFixture(&(cars.back()),2/2,1/2,0,SENSOR, TILE, true);
 
     return carId;
 }
