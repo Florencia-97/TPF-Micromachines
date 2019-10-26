@@ -1,8 +1,8 @@
 
 
-#include "GameObject.h"
+#include "Entity.h"
 
-GameObject::GameObject(b2Body* &newBody) {
+Entity::Entity(b2Body* &newBody) {
     this->body = newBody;
     this->x_size = 0;
     this->y_size = 0;
@@ -12,22 +12,22 @@ GameObject::GameObject(b2Body* &newBody) {
 }
 
 
-void GameObject::attachFixture(b2FixtureDef &boxFixtureDef){
+void Entity::attachFixture(b2FixtureDef &boxFixtureDef){
     body->CreateFixture(&boxFixtureDef);
 }
 
-void GameObject::resolveCollision(b2Fixture &collidedWith) {
+void Entity::resolveCollision(b2Fixture &collidedWith) {
     //do nothing (for now)
 }
 
-b2Vec2 GameObject::getPosition() {
+b2Vec2 Entity::getPosition() {
     return this->body->GetPosition();
 }
 
-b2Vec2 GameObject::getSize() {
+b2Vec2 Entity::getSize() {
     return b2Vec2(x_size,y_size);
 }
 
-float32 GameObject::getAngle(){
+float32 Entity::getAngle(){
     return body->GetAngle();
 }

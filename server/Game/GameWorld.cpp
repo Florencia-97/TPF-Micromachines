@@ -11,8 +11,8 @@ namespace {
         return world.CreateBody(&myBodyDef);
     }
 
-    void createAndAddFixture(GameObject* obj, int hx, int hy, int density,
-            uint16 catBits, uint16 maskBits, bool isSensor){
+    void createAndAddFixture(Entity* obj, int hx, int hy, int density,
+                             uint16 catBits, uint16 maskBits, bool isSensor){
 
         b2PolygonShape boxShape;
         boxShape.SetAsBox(hx, hy);

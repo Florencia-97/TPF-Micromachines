@@ -4,9 +4,9 @@
 
 #include "Box2D/Box2D.h"
 #include <vector>
-#include "GameObject.h"
+#include "Entity.h"
 #include "RaceCar.h"
-#include "CollisionDetector.h"
+#include "CollisionsManager.h"
 
 
 class GameWorld {
@@ -15,10 +15,10 @@ class GameWorld {
     std::vector<RaceCar> cars;
 
     //objects which are a static part of the map background
-    std::vector<GameObject> background_objs;
+    std::vector<Entity> background_objs;
 
     //Dynamic Instances are those which come and go from the field, (ie items)
-    //std::vector<GameObject> dynamic_objs;
+    //std::vector<Entity> dynamic_objs;
 
 public:
 
@@ -30,7 +30,7 @@ public:
 
       RaceCar& getCar(int id);
     /*
-      &GameObject createDynamicObject(yaml &stats?);
+      &Entity createDynamicObject(yaml &stats?);
 
      */
 

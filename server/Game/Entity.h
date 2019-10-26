@@ -1,12 +1,12 @@
 
 
-#ifndef MICROMACHINES_GAMEOBJECT_H
-#define MICROMACHINES_GAMEOBJECT_H
+#ifndef MICROMACHINES_ENTITY_H
+#define MICROMACHINES_ENTITY_H
 
 #include "Box2D/Box2D.h"
 
 //probably make this one a virtual class
-class GameObject {
+class Entity {
     bool enabled;
     int y_size;
     int x_size;
@@ -17,7 +17,7 @@ protected:
 public:
 
     //only supports making objects with a square bounding box
-    GameObject(b2Body* &newbody);
+    Entity(b2Body* &newbody);
 
     virtual void resolveCollision(b2Fixture &collidedWith);
 
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif //MICROMACHINES_GAMEOBJECT_H
+#endif //MICROMACHINES_ENTITY_H

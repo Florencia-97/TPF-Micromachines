@@ -21,11 +21,11 @@ set(SERVER_SOURCE_FILES
 	common/Socket.cpp
 	server/Talker.cpp
 	common/Protocol.cpp
-        server/Game/GameObject.cpp
+		server/Game/Entity.cpp
         server/Game/RaceCar.cpp
         server/Game/GameWorld.cpp
 		common/InfoBlock.cpp
-        server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionDetector.cpp server/Game/CollisionDetector.h)
+        server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h)
 
 set(CLIENT_SOURCE_FILES
 	server/config/Configuration.cpp
@@ -35,7 +35,7 @@ set(CLIENT_SOURCE_FILES
 		common/InfoBlock.cpp )
 
 set(TEST_SOURCE_FILES
-        tests/tests.cpp server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionDetector.cpp server/Game/CollisionDetector.h)
+        tests/tests.cpp server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})

@@ -3,14 +3,11 @@
 #ifndef MICROMACHINES_RACECAR_H
 #define MICROMACHINES_RACECAR_H
 
-#include "GameObject.h"
+#include "Entity.h"
 #include "../../common/InfoBlock.h"
+#include <set>
 
-struct key_directions {
-
-};
-
-class RaceCar : public GameObject {
+class RaceCar : public Entity {
     b2Vec2 accel;
     int health;
 
@@ -39,6 +36,5 @@ public:
 
     InfoBlock stateAsInfoBlock();
 };
-
 
 #endif //MICROMACHINES_RACECAR_H
