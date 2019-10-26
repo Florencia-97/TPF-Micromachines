@@ -13,8 +13,14 @@ class InfoBlock {
 public:
     YAML::Node src_yaml;
 
+    //POS if using default constructor method calls are undefined until load(2) is called
+    InfoBlock() = default;
+
+    //Loads the source string as a YAML table
     explicit InfoBlock(const std::string &init, bool fromFile);
 
+    //Loads the source string as a YAML table
+    //discards current contents (if any)
     void Load(const std::string &init, bool fromFile);
 
     std::string getString(std::string key);
@@ -29,6 +35,7 @@ public:
 
     bool exists(std::string key);
 
+    //POS returns the YAML table in key as an InfoBlock
     InfoBlock getNestedInfo(std::string key);
 
     template <class T>

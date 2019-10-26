@@ -26,7 +26,7 @@ public:
     GameWorld();
 
 
-      int createCar(std::string &carStats);
+      int createCar(InfoBlock carStats);
 
       RaceCar& getCar(int id);
     /*

@@ -8,11 +8,10 @@
 Talker::Talker(Socket& socket) : skt(std::move(socket)) {}
 
 bool Talker::sendYaml(){
-    std::string initMsg = "{race: 1 , players: 5}"; //Example sending and receiving to and from server
-    if (Protocol::sendMsg(initMsg, &this->skt) < 0) return false;
-    std::string position = Protocol::recvMsg(&this->skt);
-    if (position == "") return false;
-    InfoBlock info(position, false);
-    std::cout << "x:" << info.getString("x") << std::endl;
-    std::cout << "y:" << info.getInt("y") << std::endl;
+    InfoBlock msg("{race: 1 , players: 5}", false);
+    if (!Protocol::sendMsg(&this->skt, msg)) return false;
+    bool s = Protocol::recvMsg(&this->skt, msg);
+    if (!s) return false;
+    std::cout << "x:" << msg.getString("x") << std::endl;
+    std::cout << "y:" << msg.getInt("y") << std::endl;
 }

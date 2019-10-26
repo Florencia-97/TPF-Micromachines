@@ -50,7 +50,7 @@ void GameWorld::createBackgroundObject() {
     createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, TILE, SENSOR, false);
 }
 
-int GameWorld::createCar(std::string &carStats) {
+int GameWorld::createCar(InfoBlock carStats) {
     b2Body* newBody = makeNewBody(world, b2_dynamicBody,0,0);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);

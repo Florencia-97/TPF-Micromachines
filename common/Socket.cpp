@@ -108,7 +108,7 @@ int Socket::server(std::string service){
         }
     }
     freeaddrinfo(result);
-    return  connect == false? 1 : this->_listen(MAX_CLIENTES);
+    return  !connect? 1 : this->_listen(MAX_CLIENTES);
 }
 
 int Socket::receive(void* buffer, size_t size){
@@ -125,8 +125,8 @@ int Socket::receive(void* buffer, size_t size){
         }
     }
     buffer = buf;
-    if (s == 0 || s < 0) throw socketDesconectado();
-    return is_the_socket_valid == true ? 0 : 1;
+    if (s == 0 || s < 0) throw socketDisconnected();
+    return is_the_socket_valid ? 0 : 1;
 }
 
 int Socket::sendMsg(const void* buffer, size_t len){
@@ -134,7 +134,7 @@ int Socket::sendMsg(const void* buffer, size_t len){
     size_t bytes_sent = 0;
     bool valid = true, close = false;
     char* buf = (char*) buffer;
-    while (bytes_sent < len && valid && close == false) {
+    while (bytes_sent < len && valid && !close) {
         s = send(this->fd , &buf[bytes_sent], len - bytes_sent, MSG_NOSIGNAL);
         if (s == -1) {
             valid = false;
@@ -144,7 +144,7 @@ int Socket::sendMsg(const void* buffer, size_t len){
             bytes_sent += s;
         }
     }
-    if (s == 0 || s < 0) throw socketDesconectado();
+    if (s == 0 || s < 0) throw socketDisconnected();
     return bytes_sent;
 }
 

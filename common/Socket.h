@@ -3,9 +3,9 @@
 
 #include <string>
 
-class socketDesconectado : public std::exception {
+class socketDisconnected : public std::exception {
     virtual const char* what() const throw() {
-        return "El socket se desconectó\n";
+        return "Socket was disconnected\n";
     }
 };
 
