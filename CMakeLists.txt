@@ -30,13 +30,13 @@ set(SERVER_SOURCE_FILES
         server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h)
 
 set(CLIENT_SOURCE_FILES
-	#server/config/Configuration.cpp
 	common/Socket.cpp
-	#server/Talker.cpp
 	common/Protocol.cpp
 	common/InfoBlock.cpp
 	common/Thread.cpp
-	client/communication/UserInput.cpp)
+	common/Event.cpp
+	common/SafeEventQueue.cpp
+	client/communication/UserInput.cpp common/SafeEventQueue.cpp common/SafeEventQueue.h common/Event.cpp common/Event.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
