@@ -6,7 +6,7 @@
 #include "Box2D/Box2D.h"
 #include "RaceCar.h"
 #include "Tile.h"
-#include <set>
+#include <map>
 
 enum _entityCategory {
     TILE = 0x0001,
@@ -24,7 +24,7 @@ struct carMods{
 };
 
 class CollisionsManager : b2ContactListener {
-    std::set<std::string, carMods> delayed_effects;
+    std::map<std::string, carMods> delayed_effects;
 public:
     void BeginContact(b2Contact* contact) override;
 

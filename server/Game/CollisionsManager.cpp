@@ -22,9 +22,9 @@ void CollisionsManager::BeginContact(b2Contact *contact) {
     bool r = sortFixtures(sensorFixture, objectFixture);
     if (!r) return; //I dont care about these collisions
     auto car = (RaceCar*)sensorFixture->GetUserData();
-    
+
     //replace with case
-    if (! objectFixture->GetFilterData().categoryBits & TILE) return;
+    if (! (objectFixture->GetFilterData().categoryBits & TILE)) return;
     std::string key = std::to_string(TILE)+ "&" + std::to_string(car->id);
     if (delayed_effects.find(key) != delayed_effects.end()){
 
