@@ -36,7 +36,12 @@ set(CLIENT_SOURCE_FILES
 	common/Thread.cpp
 	common/Event.cpp
 	common/SafeEventQueue.cpp
-	client/communication/UserInput.cpp common/SafeEventQueue.cpp common/SafeEventQueue.h common/Event.cpp common/Event.h)
+		client/SDLStarter.cpp
+		client/communication/UserInput.cpp
+		common/SafeEventQueue.cpp
+		common/SafeEventQueue.h
+		common/Event.cpp
+		common/Event.h client/TextureLoader.cpp client/TextureLoader.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp

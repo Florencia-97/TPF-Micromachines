@@ -1,17 +1,19 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <Game/Tile.h>
 #include "SDLStarter.h"
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
-  SDLStarter starter = SDLStarter();
+  SDLStarter starter = SDLStarter(SCREEN_HEIGHT, SCREEN_WIDTH, nullptr, nullptr);
+  LTexture loader = LTexture();
   //Start up SDL and create window
-  if (!init()) {
+  if (!starter.init()) {
     printf("Failed to initialize!\n");
   } else {
-    //The level tiles
-    Tile *tileSet[TOTAL_TILES];
-
+    Tile *tileSet[1];
     //Load media
     if (!loadMedia(tileSet)) {
       printf("Failed to load media!\n");

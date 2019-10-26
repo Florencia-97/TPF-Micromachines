@@ -1,0 +1,12 @@
+//
+// Created by brian on 10/26/19.
+//
+
+#ifndef MICROMACHINES_CLIENT_TEXTURELOADER_H_
+#define MICROMACHINES_CLIENT_TEXTURELOADER_H_
+
+class TextureLoader {
+
+};
+
+#endif //MICROMACHINES_CLIENT_TEXTURELOADER_H_
