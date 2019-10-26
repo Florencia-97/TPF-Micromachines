@@ -34,6 +34,8 @@ public:
 
     bool isDead();
 
+    //POS parses the car's current status into an infoblock with keys
+    // {x, y, r, hp}
     InfoBlock stateAsInfoBlock();
 };
 

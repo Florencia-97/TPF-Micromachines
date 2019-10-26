@@ -5,6 +5,13 @@
 
 #include "Box2D/Box2D.h"
 
+struct statusEffect{
+    double delay; //in seconds
+    double duration; //in seconds
+    int stacks;
+    void (*f)(b2Fixture&);
+};
+
 //probably make this one a virtual class
 class Entity {
     bool enabled;
@@ -20,6 +27,8 @@ public:
     Entity(b2Body* &newbody);
 
     virtual void resolveCollision(b2Fixture &collidedWith);
+
+    virtual void addEffects(){};
 
     b2Vec2 getPosition();
 

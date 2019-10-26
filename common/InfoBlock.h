@@ -38,6 +38,10 @@ public:
     //POS returns the YAML table in key as an InfoBlock
     InfoBlock getNestedInfo(std::string key);
 
+    YAML::Node operator[] (std::string x) {
+        return src_yaml[x];
+    }
+
     template <class T>
     std::list<T> getList(std::string key){
         //Implement me

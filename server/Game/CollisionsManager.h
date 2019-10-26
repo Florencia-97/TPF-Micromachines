@@ -15,16 +15,10 @@ enum _entityCategory {
     SENSOR = 0x0008
 };
 
-struct carMods{
-    double delay;
-    double duration;
-    int stacks;
-    RaceCar* car;
-    void (*f)(RaceCar&);
-};
+
 
 class CollisionsManager : b2ContactListener {
-    std::map<std::string, carMods> delayed_effects;
+    //todo std::map<std::string, carMods> delayed_effects;
 public:
     void BeginContact(b2Contact* contact) override;
 
