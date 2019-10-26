@@ -32,10 +32,15 @@ set(CLIENT_SOURCE_FILES
 	common/Socket.cpp
 	server/Talker.cpp
 	common/Protocol.cpp
-		common/InfoBlock.cpp )
+	common/InfoBlock.cpp
+	common/Thread.cpp)
 
 set(TEST_SOURCE_FILES
-        tests/tests.cpp server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h)
+        tests/tests.cpp
+		server/Game/Tile.cpp
+		server/Game/Tile.h
+		server/Game/CollisionsManager.cpp
+		server/Game/CollisionsManager.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
