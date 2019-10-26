@@ -4,8 +4,8 @@
 
 #include "Box2D/Box2D.h"
 #include <vector>
-#include "Entity.h"
-#include "RaceCar.h"
+#include "Game/entities/Entity.h"
+#include "Game/entities/RaceCar.h"
 #include "CollisionsManager.h"
 
 

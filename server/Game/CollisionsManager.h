@@ -4,8 +4,7 @@
 #define MICROMACHINES_COLLISIONSMANAGER_H
 
 #include "Box2D/Box2D.h"
-#include "RaceCar.h"
-#include "Tile.h"
+#include "Game/entities/RaceCar.h"
 #include <map>
 
 enum _entityCategory {

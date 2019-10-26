@@ -4,7 +4,7 @@
 #define MICROMACHINES_RACECAR_H
 
 #include "Entity.h"
-#include "../../common/InfoBlock.h"
+#include "../../../common/InfoBlock.h"
 #include <set>
 
 class RaceCar : public Entity {

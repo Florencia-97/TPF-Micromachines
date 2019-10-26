@@ -4,8 +4,6 @@ before_install:
   - sudo apt-get install libcurl4-openssl-dev
   - sudo apt-get install libsdl2-dev
   - sudo apt-get install libsdl2-image-dev
-  - chmod +x installMPG123.sh
-  - ./installMPG123.sh
 
 # Enable C++ support
 language: cpp

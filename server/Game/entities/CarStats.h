@@ -1,0 +1,12 @@
+
+
+#ifndef MICROMACHINES_CARSTATS_H
+#define MICROMACHINES_CARSTATS_H
+
+
+class CarStats {
+
+};
+
+
+#endif //MICROMACHINES_CARSTATS_H
