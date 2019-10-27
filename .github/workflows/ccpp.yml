@@ -1,0 +1,17 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run: install libsdl2-dev libsdl2-image-dev
+    - name: cmake configure
+      run: cmake .
+    - name: cmake build
+      run: cmake --build .

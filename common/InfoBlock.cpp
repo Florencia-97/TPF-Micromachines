@@ -3,6 +3,10 @@
 #include "InfoBlock.h"
 #include <iostream>
 
+InfoBlock::InfoBlock() {
+    this->Load("{}",false);
+}
+
 void InfoBlock::Load(const std::string &init, bool fromFile) {
     if (!fromFile) {
         this->src_yaml = YAML::Load(init);
