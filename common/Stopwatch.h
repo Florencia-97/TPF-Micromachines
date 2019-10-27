@@ -3,26 +3,27 @@
 #ifndef MICROMACHINES_STOPWATCH_H
 #define MICROMACHINES_STOPWATCH_H
 
-#include <chrono>
+
+#include <ctime>
 
 #define SEC_TO_MIL 1000
 #define FRAME_RATE 1/60
 
 
 class Stopwatch {
-    std::chrono::duration<double, std::milli>  t1;
+    clock_t t1;
 public:
 
-    //POS creates a Stopwatch and calls setNow()
+    //creates a stopwatch set at t1 = now
     Stopwatch();
 
-    //POS sets t1 to 0
-    void setNow();
+    //POS sets t1 to now
+    void reset();
 
-    //POS adds a delta d in milliseconds to t1
+    //POS adds a delta time d in seconds to t1
     void addDelta(double d);
 
-    //POS returns the difference between now and t1 in milliseconds
+    //POS returns the difference between now and t1 in seconds
     double diff();
 
 
