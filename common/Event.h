@@ -7,6 +7,7 @@ class Event {
     std::string actionName; // We have to see
 public:
     Event(std::string& action);
+    std::string toYamlString();
     ~Event();
 };
 
