@@ -12,5 +12,5 @@ SpeedStatusEffect::SpeedStatusEffect(int id, double delay, double duration, floa
 }
 
 void SpeedStatusEffect::applyEffect(CarStats &entity) {
-    StatusEffect::applyEffect(entity);
+    //
 }

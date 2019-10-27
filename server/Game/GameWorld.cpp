@@ -32,11 +32,11 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 }
 
 void GameWorld::Step() {
+    float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
     for (auto & car : cars){
-        car.step();
+        car.step(timeStep);
     }
 
-    float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timeStep, velocityIterations, positionIterations);

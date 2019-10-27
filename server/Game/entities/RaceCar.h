@@ -3,22 +3,28 @@
 #ifndef MICROMACHINES_RACECAR_H
 #define MICROMACHINES_RACECAR_H
 
+#include "CarStats.h"
 #include "Entity.h"
 #include "../../../common/InfoBlock.h"
-#include <set>
+#include "../status_effects/StatusEffect.h"
+#include <list>
+#include <pthread.h>
 
 class RaceCar : public Entity {
     b2Vec2 accel;
     int health;
+    CarStats car_stats;
 
 public:
     int id;
     InfoBlock stats;
+    std::list<std::shared_ptr<StatusEffect>> status_effects;
+
 
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
 
     //POS advances the car simulation one timestep
-    void step();
+    void step(float timestep);
 
     //PRE x and y must be between [0-1]
     //POS accelerates the car in the specified direction
