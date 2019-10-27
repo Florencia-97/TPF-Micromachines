@@ -56,6 +56,7 @@ public:
         return list;
     }
 
+    //returns the value stored in key as a value of class T
     template <class T>
     T get(std::string key){
         return this->src_yaml[key].as<T>();
