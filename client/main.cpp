@@ -3,19 +3,25 @@
 #include <SDL2/SDL_image.h>
 #include "Tile.h"
 #include "SDLStarter.h"
+#include "TextureLoader.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
-  SDLStarter starter = SDLStarter(SCREEN_HEIGHT, SCREEN_WIDTH, nullptr, nullptr);
-  LTexture loader = LTexture();
+  SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
+                                  SCREEN_WIDTH,
+                                  nullptr,
+                                  nullptr);
+  TextureLoader loader = TextureLoader();
   //Start up SDL and create window
   if (!starter.init()) {
     printf("Failed to initialize!\n");
   } else {
     Tile *tileSet[1];
-    //Load media
-    if (!loadMedia(tileSet)) {
+    //Load media for dot
+    LTexture *dot;
+    SDL_Renderer *gRenderer = nullptr;
+    if (!loader.load_texture("dot.bmp", dot,) {
       printf("Failed to load media!\n");
     } else {
       //Main loop flag
