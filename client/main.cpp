@@ -18,8 +18,10 @@ int main(int argc, char *args[]) {
     printf("Failed to initialize!\n");
   } else {
     Tile *tileSet[1];
-    //Load media
-    if (!loadMedia(tileSet)) {
+    //Load media for dot
+    LTexture *dot;
+    SDL_Renderer *gRenderer = nullptr;
+    if (!loader.load_texture("dot.bmp", dot,) {
       printf("Failed to load media!\n");
     } else {
       //Main loop flag
