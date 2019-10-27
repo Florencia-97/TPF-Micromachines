@@ -3,3 +3,6 @@
 //
 
 #include "TextureLoader.h"
+bool TextureLoader::load_texture(std::string path, LTexture texture) {
+  return false;
+}

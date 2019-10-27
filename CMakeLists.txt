@@ -23,12 +23,11 @@ set(SERVER_SOURCE_FILES
 	server/Talker.cpp
 	common/Thread.cpp
 	common/Protocol.cpp
-		server/Game/entities/Entity.cpp
-		server/Game/entities/RaceCar.cpp
+		server/Game/Entity.cpp
+		server/Game/RaceCar.cpp
         server/Game/GameWorld.cpp
 		common/InfoBlock.cpp
-		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h)
+		server/Game/Tile.cpp server/Game/Tile.h server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h)
 
 set(CLIENT_SOURCE_FILES
 	common/Socket.cpp
@@ -42,12 +41,16 @@ set(CLIENT_SOURCE_FILES
 		common/SafeEventQueue.cpp
 		common/SafeEventQueue.h
 		common/Event.cpp
-		common/Event.h client/TextureLoader.cpp client/TextureLoader.h common/Stopwatch.cpp common/Stopwatch.h)
+		common/Event.h client/TextureLoader.cpp
+		client/TextureLoader.h
+		client/SDLStarter.h client/LTexture.cpp client/LTexture.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
+		server/Game/Tile.cpp
+		server/Game/Tile.h
 		server/Game/CollisionsManager.cpp
-		server/Game/CollisionsManager.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h server/Game/entities/CarStats.cpp server/Game/entities/CarStats.h common/Stopwatch.cpp common/Stopwatch.h)
+		server/Game/CollisionsManager.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
