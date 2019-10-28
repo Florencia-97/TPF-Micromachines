@@ -49,7 +49,7 @@ std::string InfoBlock::srcString() {
     for(YAML::iterator i = src_yaml.begin(); i != src_yaml.end(); i++){
         s += i->first.as<std::string>() + ": " + i->second.as<std::string>() + ", ";
     }
-    s.substr(0, s.size()- 3);
+    s = s.substr(0, s.size()- 2);
     s += "}";
     return s;
 }

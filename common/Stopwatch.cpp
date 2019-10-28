@@ -12,10 +12,5 @@ void Stopwatch::reset() {
 
 double Stopwatch::diff() {
     clock_t t2 = clock();
-    return double(t2-t1);
-}
-
-
-void Stopwatch::addDelta(double d){
-    this->t1 += d;
+    return double(t2-t1)/(double)CLOCKS_PER_SEC;
 }

@@ -20,9 +20,6 @@ public:
     //POS sets t1 to now
     void reset();
 
-    //POS adds a delta time d in seconds to t1
-    void addDelta(double d);
-
     //POS returns the difference between now and t1 in seconds
     double diff();
 
