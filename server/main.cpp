@@ -3,18 +3,24 @@
 
 #include "config/Configuration.h"
 #include "Talker.h"
-#include "../common/stream/Socket.h"
-#include "../common/stream/Protocol.h"
+#include "../common/infostream/Socket.h"
 #include "../common/constants.h"
+#include "threads/GameThread.h"
 #include "Game/GameWorld.h"
 
 int main (int argc, char** argv) {
 	Socket socket;
-	GameWorld world;
-
     socket.server(PORT);
 	Socket client = socket.acceptClient();
-	Talker talker = Talker(client);
-	talker.sendYaml(); //It now contains just an example!
-	Configuration config; //Not used yet
+
+	//example test
+	PlayerThread p(client);
+	p.run();
+	InfoBlock msg;
+	while (p.isRunning() && !msg.exists("exit")){
+	    msg = p.event_q.pop();
+	    std::cout<<msg.srcString()<<std::endl;
+	}
+	p.close();
+	p.join();
 }

@@ -8,6 +8,7 @@
 #include "../../common/infostream/InfoBlock.h"
 #include "../../common/infostream/Protocol.h"
 #include <queue>
+#include "../../common/SafeQueue.h"
 
 class PlayerThread : public BaseThread {
 
@@ -15,7 +16,7 @@ class PlayerThread : public BaseThread {
     Socket skt;
 
 public:
-    std::queue<InfoBlock> event_q;
+    SafeQueue<InfoBlock> event_q; //TODO change to normal queue (non blocking)
     SenderThread sender;
 
     PlayerThread(Socket &my_skt);

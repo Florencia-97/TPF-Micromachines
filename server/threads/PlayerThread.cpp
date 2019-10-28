@@ -4,10 +4,11 @@
 
 void PlayerThread::_run() {
     bool s = true;
+    this->sender.run();
     while (!this->isClosed() && s && skt.isValid()){
         InfoBlock info;
         s = Protocol::recvMsg(&skt, info);
-        if (s) event_q.emplace(info.srcString(),false);
+        if (s) event_q.push(info);
     }
     close();
 }
