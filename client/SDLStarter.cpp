@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
 
+
 bool SDLStarter::init() {
   bool success = true;
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -42,4 +43,23 @@ bool SDLStarter::init() {
 }
 SDL_Renderer *SDLStarter::get_global_renderer() {
   return renderer;
+}
+void SDLStarter::close(mapTile *tiles[]) {
+  //Deallocate tiles
+  for (int i = 0; i < 192; ++i) {
+    if (tiles[i] == nullptr) {
+      delete tiles[i];
+      tiles[i] = nullptr;
+    }
+  }
+
+  //Destroy window
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
+  window = nullptr;
+  renderer = nullptr;
+
+  //Quit SDL subsystems
+  IMG_Quit();
+  SDL_Quit();
 }

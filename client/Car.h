@@ -1,5 +1,5 @@
-#ifndef _CAR_
-#define _CAR_
+#ifndef MICROMACHINES_CLIENT_CAR_H
+#define MICROMACHINES_CLIENT_CAR_H
 
 #include <SDL_rect.h>
 #include <SDL_events.h>

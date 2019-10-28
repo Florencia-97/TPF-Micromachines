@@ -4,7 +4,6 @@
 
 #include <fstream>
 #include "MapManager.h"
-
 #define TILE_WIDTH  80
 #define TILE_HEIGHT  80
 #define LEVEL_WIDTH  1280
@@ -44,7 +43,7 @@ bool MapManager::checkCollision(SDL_Rect a, SDL_Rect b) {
   return leftA < rightB;
 }
 
-bool MapManager::setTiles(Tile **tiles, int totalTiles) {
+bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
   bool tilesLoaded = true;
   //The tile offsets
   int x = 0, y = 0;
@@ -168,3 +167,7 @@ bool MapManager::touchesWall(SDL_Rect box, Tile **tiles) {
   //If no wall tiles were touched
   return false;
 }
+SDL_Rect *MapManager::get_tiles_clip() {
+  return gTileClips; //chequearEsto
+}
+

@@ -21,11 +21,11 @@ int main(int argc, char *args[]) {
   } else {
     Tile *tileSet[1];
     //Load media
-    LTexture dot;
+    LTexture carTexture;
     LTexture tiles;
     MapManager manager = MapManager();
     SDL_Renderer *gRenderer = starter.get_global_renderer();
-    if (!loader.load_texture("dot.bmp", dot, gRenderer) ||
+    if (!loader.load_texture("dot.bmp", carTexture, gRenderer) ||
         !loader.load_texture("tiles.png", tiles, gRenderer) ||
         !manager.setTiles(tileSet, 1)) {
       printf("Failed to load media!\n");
@@ -56,7 +56,7 @@ int main(int argc, char *args[]) {
         }
 
         //Move the dot
-        car.move(tileSet);
+        car.move(tileSet, manager);
         car.setCamera(camera);
 
         //Clear screen
@@ -64,12 +64,12 @@ int main(int argc, char *args[]) {
         SDL_RenderClear(gRenderer);
 
         //Render level
-        for (int i = 0; i < TOTAL_TILES; ++i) {
+        for (int i = 0; i < 192; ++i) {
           tileSet[i]->render(camera);
         }
 
         //Render dot
-        dot.render(camera);
+        car.render(camera, &carTexture);
 
         //Update screen
         SDL_RenderPresent(gRenderer);
@@ -77,7 +77,9 @@ int main(int argc, char *args[]) {
     }
 
     //Free resources and close SDL
-    close(tileSet);
+    carTexture.free();
+    starter.close(tileSet);
+    tiles.free();
   }
 
   return 0;

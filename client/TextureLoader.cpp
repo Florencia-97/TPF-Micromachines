@@ -3,9 +3,8 @@
 //
 
 #include "TextureLoader.h"
-bool TextureLoader::load_texture(const std::string &path,
-                                 LTexture &texture,
-                                 SDL_Renderer *renderer) {
+
+bool TextureLoader::load_texture(const std::string &path, LTexture &texture, SDL_Renderer *renderer) {
   bool success = true;
   if (!texture.load_from_file(path,
                               renderer)) {

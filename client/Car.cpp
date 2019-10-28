@@ -18,14 +18,14 @@ void Car::move(Tile *tiles[], MapManager manager) {
   //Move the dot left or right
   mBox.x += mVelX;
   //If the dot went too far to the left or right or touched a wall
-  if ((mBox.x < 0) || (mBox.x + CAR_WIDTH > LEVEL_WIDTH) || touchesWall(mBox, tiles)) {
+  if ((mBox.x < 0) || (mBox.x + CAR_WIDTH > LEVEL_WIDTH) || manager.touchesWall(mBox, tiles)) {
     //move back
     mBox.x -= mVelX;
   }
   //Move the dot up or down
   mBox.y += mVelY;
   //If the dot went too far up or down or touched a wall
-  if ((mBox.y < 0) || (mBox.y + CAR_HEIGHT > LEVEL_HEIGHT) || touchesWall(mBox, tiles)) {
+  if ((mBox.y < 0) || (mBox.y + CAR_HEIGHT > LEVEL_HEIGHT) || manager.touchesWall(mBox, tiles)) {
     //move back
     mBox.y -= mVelY;
   }

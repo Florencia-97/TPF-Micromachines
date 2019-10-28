@@ -32,22 +32,14 @@ set(SERVER_SOURCE_FILES
 		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 set(CLIENT_SOURCE_FILES
-		common/infostream/Socket.cpp
-		common/infostream/Protocol.cpp
-		common/infostream/InfoBlock.cpp
-	common/Thread.cpp
-	common/Event.cpp
 		client/SDLStarter.cpp
 		client/Car.cpp
 		client/Car.h
 		client/communication/UserInput.cpp
-		common/SafeQueue.h
-		common/Event.cpp
-		common/Event.h client/TextureLoader.cpp
 		client/TextureLoader.h
+		client/TextureLoader.cpp
 		client/SDLStarter.h
-		client/Tile.cpp
-		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
+		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/Tile.cpp client/Tile.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
