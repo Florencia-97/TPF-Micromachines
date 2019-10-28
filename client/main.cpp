@@ -4,6 +4,8 @@
 #include "Tile.h"
 #include "SDLStarter.h"
 #include "TextureLoader.h"
+#include "MapManager.h"
+#include "Car.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
@@ -18,10 +20,14 @@ int main(int argc, char *args[]) {
     printf("Failed to initialize!\n");
   } else {
     Tile *tileSet[1];
-    //Load media for dot
-    LTexture *dot;
-    SDL_Renderer *gRenderer = nullptr;
-    if (!loader.load_texture("dot.bmp", dot) {
+    //Load media
+    LTexture dot;
+    LTexture tiles;
+    MapManager manager = MapManager();
+    SDL_Renderer *gRenderer = starter.get_global_renderer();
+    if (!loader.load_texture("dot.bmp", dot, gRenderer) ||
+        !loader.load_texture("tiles.png", tiles, gRenderer) ||
+        !manager.setTiles(tileSet, 1)) {
       printf("Failed to load media!\n");
     } else {
       //Main loop flag
@@ -31,7 +37,7 @@ int main(int argc, char *args[]) {
       SDL_Event e;
 
       //The dot that will be moving around on the screen
-      Dot dot;
+      Car car;
 
       //Level camera
       SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -46,7 +52,7 @@ int main(int argc, char *args[]) {
           }
 
           //Handle input for the dot
-          dot.handleEvent(e);
+          car.handleEvent(e);
         }
 
         //Move the dot

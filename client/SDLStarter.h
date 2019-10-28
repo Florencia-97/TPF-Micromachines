@@ -20,6 +20,7 @@ class SDLStarter {
       window(nullptr),
       renderer(nullptr) {};
   bool init();
+  SDL_Renderer *get_global_renderer();
 
 };
 

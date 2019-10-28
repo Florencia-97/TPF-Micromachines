@@ -38,6 +38,8 @@ set(CLIENT_SOURCE_FILES
 	common/Thread.cpp
 	common/Event.cpp
 		client/SDLStarter.cpp
+		client/Car.cpp
+		client/Car.h
 		client/communication/UserInput.cpp
 		common/SafeQueue.h
 		common/Event.cpp

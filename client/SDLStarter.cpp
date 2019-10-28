@@ -40,3 +40,6 @@ bool SDLStarter::init() {
   }
   return success;
 }
+SDL_Renderer *SDLStarter::get_global_renderer() {
+  return renderer;
+}

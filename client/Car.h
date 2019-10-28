@@ -1,24 +1,27 @@
 #ifndef _CAR_
 #define _CAR_
 
+#include <SDL_rect.h>
+#include <SDL_events.h>
+#include "LTexture.h"
 class Car{
-    public:
-    //The dimensions of the dot
-    static const int DOT_WIDTH = 20;
-    static const int DOT_HEIGHT = 20;
-
-    //Initializes the variables
-    Dot();
-
-    //Centers the camera over the dot
-    void setCamera( SDL_Rect& camera );
-
-    //Shows the dot on the screen
-    void render( SDL_Rect& camera );
-
-    private:
-    //Collision box of the dot
-    SDL_Rect mBox;
+ private:
+  //Collision box of the dot
+  SDL_Rect mBox;
+  //The dimensions of the car
+  const int CAR_WIDTH = 20;
+  const int CAR_HEIGHT = 20;
+  //Speed of car
+  const int CAR_VEL = 10;
+  int mVelX, mVelY;
+ public:
+  //Initializes the variables
+  Car();
+  //Centers the camera over the car
+  void setCamera(SDL_Rect &camera);
+  //Shows the car on the screen
+  void render(SDL_Rect &camera, LTexture *texture);
+  void handleEvent(SDL_Event event);
 };
 
 #endif

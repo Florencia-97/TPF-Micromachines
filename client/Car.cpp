@@ -1,19 +1,23 @@
 
 #include "Car.h"
-
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int LEVEL_WIDTH = 1280;
+const int LEVEL_HEIGHT = 960;
 Car::Car(){
     //Initialize the collision box
+
     mBox.x = 0;
     mBox.y = 0;
-    mBox.w = DOT_WIDTH;
-    mBox.h = DOT_HEIGHT;
+  mBox.w = CAR_WIDTH;
+  mBox.h = CAR_HEIGHT;
 
 }
 
 void Car::setCamera( SDL_Rect& camera ){
     //Center the camera over the dot
-    camera.x = ( mBox.x + DOT_WIDTH / 2 ) - SCREEN_WIDTH / 2;
-    camera.y = ( mBox.y + DOT_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
+  camera.x = (mBox.x + CAR_WIDTH / 2) - SCREEN_WIDTH / 2;
+  camera.y = (mBox.y + CAR_HEIGHT / 2) - SCREEN_HEIGHT / 2;
 
     //Keep the camera in bounds
     if( camera.x < 0 ) camera.x = 0;
@@ -22,6 +26,36 @@ void Car::setCamera( SDL_Rect& camera ){
     if( camera.y > LEVEL_HEIGHT - camera.h ) camera.y = LEVEL_HEIGHT - camera.h;
 }
 
-void Car::render( SDL_Rect& camera ){
-    gDotTexture.render( mBox.x - camera.x, mBox.y - camera.y );
+void Car::render(SDL_Rect &camera, LTexture *texture) {
+  texture->render(mBox.x - camera.x, mBox.y - camera.y);
+}
+void Car::handleEvent(SDL_Event event) {
+  //If a key was pressed
+  if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
+    //Adjust the velocity
+    switch (event.key.keysym.sym) {
+      case SDLK_UP: mVelY -= CAR_VEL;
+        break;
+      case SDLK_DOWN: mVelY += CAR_VEL;
+        break;
+      case SDLK_LEFT: mVelX -= CAR_VEL;
+        break;
+      case SDLK_RIGHT: mVelX += CAR_VEL;
+        break;
+    }
+  }
+    //If a key was released
+  else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
+    //Adjust the velocity
+    switch (event.key.keysym.sym) {
+      case SDLK_UP: mVelY += CAR_VEL;
+        break;
+      case SDLK_DOWN: mVelY -= CAR_VEL;
+        break;
+      case SDLK_LEFT: mVelX += CAR_VEL;
+        break;
+      case SDLK_RIGHT: mVelX -= CAR_VEL;
+        break;
+    }
+  }
 }
