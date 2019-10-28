@@ -30,19 +30,19 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
 
     // It does nothing important right now!
     switch( e.key.keysym.sym ){
-        case SDLK_UP:
+        case SDLK_UP | SDLK_w:
             std::cout << "Key up was pressed!\n";
             break;
 
-        case SDLK_DOWN:
+        case SDLK_DOWN | SDLK_s:
             std::cout << "Key down was pressed!\n";
             break;
 
-        case SDLK_LEFT:
+        case SDLK_LEFT | SDLK_a:
             std::cout << "Key left was pressed!\n";
             break;
 
-        case SDLK_RIGHT:
+        case SDLK_RIGHT | SDLK_d:
             std::cout << "Key right was pressed!\n";
             break;
 
