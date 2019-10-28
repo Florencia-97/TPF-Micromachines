@@ -11,7 +11,7 @@ void BaseThread::join() {
 }
 
 bool BaseThread::isClosed() {
-    return keep_running.load();
+    return !keep_running.load();
 }
 
 void BaseThread::run() {

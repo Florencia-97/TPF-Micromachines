@@ -3,8 +3,8 @@
 
 #include "config/Configuration.h"
 #include "Talker.h"
-#include "../common/Socket.h"
-#include "../common/Protocol.h"
+#include "../common/stream/Socket.h"
+#include "../common/stream/Protocol.h"
 #include "../common/constants.h"
 #include "Game/GameWorld.h"
 

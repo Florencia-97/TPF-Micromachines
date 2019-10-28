@@ -3,7 +3,7 @@
 #ifndef MICROMACHINES_CARSTATS_H
 #define MICROMACHINES_CARSTATS_H
 
-#include "../../../common/InfoBlock.h"
+#include "../../../common/stream/InfoBlock.h"
 
 class CarStats {
 public:

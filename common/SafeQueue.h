@@ -15,11 +15,16 @@ class SafeQueue{
     std::queue<T> q;
     std::mutex m;
     std::condition_variable cv;
+    bool open;
 
 public:
+    SafeQueue();
+
     void push(T& event);
 
     T pop();
+
+    bool isOpen();
 
 };
 
@@ -35,10 +40,23 @@ T SafeQueue<T>::pop() {
     std::unique_lock<std::mutex> lock(this->m);
     while (this->q.empty()){
         this->cv.wait(lock);
+        if (!open) return T();
     }
     T comp = this->q.front();
     this->q.pop();
     return comp;
+}
+
+
+template<class T>
+SafeQueue<T>::SafeQueue() {
+    open = true;
+}
+
+template<class T>
+bool SafeQueue<T>::isOpen() {
+    return open;
+    cv.notify_all();
 }
 
 #endif //MICROMACHINES_SAFEQUEUE_H

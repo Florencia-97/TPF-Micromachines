@@ -24,7 +24,8 @@ public:
 
     bool isRunning();
 
-    //POS closes the game and prepares to join thread
+    //POS closes the thread and prepares to join
+    //isClosed returns true
     virtual void close();
 
     void join();

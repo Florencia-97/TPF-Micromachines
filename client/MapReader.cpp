@@ -1,6 +1,6 @@
 
 #include "MapReader.h"
-#include "../common/InfoBlock.h"
+#include "../common/stream/InfoBlock.h"
 
 std::list<std::list<int>> MapReader::createMap(std::string arenaPath){
     std::list<std::list<int>> matrix;

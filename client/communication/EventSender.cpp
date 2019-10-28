@@ -1,8 +1,8 @@
 #include "EventSender.h"
 
 #include "../common/Event.h"
-#include "../common/Protocol.h"
-#include "../common/InfoBlock.h"
+#include "../../common/stream/Protocol.h"
+#include "../../common/stream/InfoBlock.h"
 
 EventSender::EventSender(Socket& skt, SafeEventQueue& queue) :
         alive(true) ,skt(skt), queue(queue) {}

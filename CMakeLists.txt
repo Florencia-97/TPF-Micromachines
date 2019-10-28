@@ -19,22 +19,22 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
 
 set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
-		common/Socket.cpp
+		common/infostream/Socket.cpp
 		server/Talker.cpp
 		common/Thread.cpp
-		common/Protocol.cpp
+		common/infostream/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
 		server/Game/entities/CarStats.cpp
 		server/Game/GameWorld.cpp
-		common/InfoBlock.cpp
+		common/infostream/InfoBlock.cpp
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/BaseThread.cpp common/BaseThread.h)
+		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 set(CLIENT_SOURCE_FILES
-	common/Socket.cpp
-	common/Protocol.cpp
-	common/InfoBlock.cpp
+		common/infostream/Socket.cpp
+		common/infostream/Protocol.cpp
+		common/infostream/InfoBlock.cpp
 	common/Thread.cpp
 	common/Event.cpp
 		client/SDLStarter.cpp
@@ -45,12 +45,12 @@ set(CLIENT_SOURCE_FILES
 		client/TextureLoader.h
 		client/SDLStarter.h
 		client/Tile.cpp
-		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/BaseThread.cpp common/BaseThread.h)
+		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
 		server/Game/CollisionsManager.cpp
-		server/Game/CollisionsManager.h server/threads/GameThread.cpp server/threads/GameThread.h common/BaseThread.cpp common/BaseThread.h server/threads/PlayerThread.cpp server/threads/PlayerThread.h)
+		server/Game/CollisionsManager.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h server/threads/PlayerThread.cpp server/threads/PlayerThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})

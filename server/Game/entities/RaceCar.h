@@ -5,7 +5,7 @@
 
 #include "CarStats.h"
 #include "Entity.h"
-#include "../../../common/InfoBlock.h"
+#include "../../../common/stream/InfoBlock.h"
 #include "../status_effects/StatusEffect.h"
 #include <list>
 #include <pthread.h>

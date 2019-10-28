@@ -2,7 +2,7 @@
 #define MICROMACHINES_EVENTSENDER_H
 
 #include "../../common/SafeQueue.h"
-#include "../common/Socket.h"
+#include "../../common/stream/Socket.h"
 #include "../common/Thread.h"
 
 /*

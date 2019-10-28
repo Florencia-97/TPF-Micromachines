@@ -3,10 +3,10 @@
 #ifndef MICROMACHINES_PLAYERTHREAD_H
 #define MICROMACHINES_PLAYERTHREAD_H
 
-#include "../../common/Socket.h"
-#include "../../common/BaseThread.h"
-#include "../../common/InfoBlock.h"
-#include "../../common/Protocol.h"
+#include "../../common/stream/Socket.h"
+#include "../../common/conc/BaseThread.h"
+#include "../../common/stream/InfoBlock.h"
+#include "../../common/stream/Protocol.h"
 #include <queue>
 
 class PlayerThread : public BaseThread {
