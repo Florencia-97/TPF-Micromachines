@@ -21,7 +21,7 @@ int main(int argc, char *args[]) {
     //Load media for dot
     LTexture *dot;
     SDL_Renderer *gRenderer = nullptr;
-    if (!loader.load_texture("dot.bmp", dot,) {
+    if (!loader.load_texture("dot.bmp", dot) {
       printf("Failed to load media!\n");
     } else {
       //Main loop flag

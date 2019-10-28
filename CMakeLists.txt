@@ -25,10 +25,11 @@ set(SERVER_SOURCE_FILES
 		common/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
+		server/Game/entities/CarStats.cpp
 		server/Game/GameWorld.cpp
 		common/InfoBlock.cpp
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h)
+		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/BaseThread.cpp common/BaseThread.h)
 
 set(CLIENT_SOURCE_FILES
 	common/Socket.cpp
@@ -46,12 +47,12 @@ set(CLIENT_SOURCE_FILES
 		client/TextureLoader.h
 		client/SDLStarter.h
 		client/Tile.cpp
-		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h)
+		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/BaseThread.cpp common/BaseThread.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
 		server/Game/CollisionsManager.cpp
-		server/Game/CollisionsManager.h)
+		server/Game/CollisionsManager.h server/threads/GameThread.cpp server/threads/GameThread.h common/BaseThread.cpp common/BaseThread.h server/threads/PlayerThread.cpp server/threads/PlayerThread.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
