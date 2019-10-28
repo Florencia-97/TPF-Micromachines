@@ -15,7 +15,7 @@ class SafeQueue{
     std::queue<T> q;
     std::mutex m;
     std::condition_variable cv;
-    bool open;
+    bool open;//should probably be atomic
 
 public:
     SafeQueue();
@@ -24,13 +24,16 @@ public:
 
     T pop();
 
+    void setOpen(bool v);
+
     bool isOpen();
 
 };
 
 template<class T>
 void SafeQueue<T>::push(T &event) {
-    std::unique_lock<std::mutex> lock(this->m);
+    //std::unique_lock<std::mutex> lock(this->m);
+    //we dont want this to be locked, only when its empty
     this->q.push(event);
     this->cv.notify_one();
 }
@@ -57,6 +60,11 @@ template<class T>
 bool SafeQueue<T>::isOpen() {
     return open;
     cv.notify_all();
+}
+
+template<class T>
+void SafeQueue<T>::setOpen(bool v) {
+    this->open = v;
 }
 
 #endif //MICROMACHINES_SAFEQUEUE_H

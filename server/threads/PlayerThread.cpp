@@ -3,16 +3,23 @@
 #include "PlayerThread.h"
 
 void PlayerThread::_run() {
-    while (!this->isClosed()){
-
+    bool s = true;
+    while (!this->isClosed() && s && skt.isValid()){
+        InfoBlock info;
+        s = Protocol::recvMsg(&skt, info);
+        if (s) event_q.emplace(s);
     }
+    close();
 }
 
-void PlayerThread::close() {
+void PlayerThread::close(){
+    if (!this->isClosed()) return;
     skt.closeSd();
+    sender.close();
+    sender.join();
     BaseThread::close();
 }
 
-PlayerThread::PlayerThread(Socket &my_skt) {
+PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
     this->skt = std::move(my_skt);
 }

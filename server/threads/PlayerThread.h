@@ -4,7 +4,7 @@
 #define MICROMACHINES_PLAYERTHREAD_H
 
 #include "../../common/stream/Socket.h"
-#include "../../common/conc/BaseThread.h"
+#include "../../common/conc/SenderThread.h"
 #include "../../common/stream/InfoBlock.h"
 #include "../../common/stream/Protocol.h"
 #include <queue>
@@ -16,7 +16,7 @@ class PlayerThread : public BaseThread {
 
 public:
     std::queue<InfoBlock> event_q;
-    std::queue<InfoBlock> send_to_client;
+    SenderThread sender;
 
     PlayerThread(Socket &my_skt);
 
