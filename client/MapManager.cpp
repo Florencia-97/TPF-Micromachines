@@ -152,3 +152,19 @@ bool MapManager::setTiles(Tile **tiles, int totalTiles) {
   //If the map was loaded fine
   return tilesLoaded;
 }
+
+bool MapManager::touchesWall(SDL_Rect box, Tile **tiles) {
+  //Go through the tiles
+  for (int i = 0; i < 12; ++i) { //Tiene numeros hardcodeados que son para el ejemplo solamente
+    //If the tile is a wall type tile
+    if ((tiles[i]->getType() >= 3) && (tiles[i]->getType() <= 11)) {
+      //If the collision box touches the wall tile
+      if ((this->checkCollision(box, tiles[i]->getBox()))) {
+        return true;
+      }
+    }
+  }
+
+  //If no wall tiles were touched
+  return false;
+}

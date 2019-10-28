@@ -4,6 +4,8 @@
 #include <SDL_rect.h>
 #include <SDL_events.h>
 #include "LTexture.h"
+#include "Tile.h"
+#include "MapManager.h"
 class Car{
  private:
   //Collision box of the dot
@@ -22,6 +24,7 @@ class Car{
   //Shows the car on the screen
   void render(SDL_Rect &camera, LTexture *texture);
   void handleEvent(SDL_Event event);
+  void move(Tile *tiles[], MapManager manager);
 };
 
 #endif

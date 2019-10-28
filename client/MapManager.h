@@ -14,5 +14,6 @@ class MapManager {
   MapManager() = default;
   bool checkCollision(SDL_Rect a, SDL_Rect b);
   bool setTiles(Tile *tiles[], int totalTiles);
+  bool touchesWall(SDL_Rect box, Tile *tiles[]);
 };
 #endif //MICROMACHINES_CLIENT_MAPMANAGER_H_

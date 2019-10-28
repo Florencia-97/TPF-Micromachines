@@ -56,8 +56,8 @@ int main(int argc, char *args[]) {
         }
 
         //Move the dot
-        dot.move(tileSet);
-        dot.setCamera(camera);
+        car.move(tileSet);
+        car.setCamera(camera);
 
         //Clear screen
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);

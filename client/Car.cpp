@@ -14,6 +14,23 @@ Car::Car(){
 
 }
 
+void Car::move(Tile *tiles[], MapManager manager) {
+  //Move the dot left or right
+  mBox.x += mVelX;
+  //If the dot went too far to the left or right or touched a wall
+  if ((mBox.x < 0) || (mBox.x + CAR_WIDTH > LEVEL_WIDTH) || touchesWall(mBox, tiles)) {
+    //move back
+    mBox.x -= mVelX;
+  }
+  //Move the dot up or down
+  mBox.y += mVelY;
+  //If the dot went too far up or down or touched a wall
+  if ((mBox.y < 0) || (mBox.y + CAR_HEIGHT > LEVEL_HEIGHT) || touchesWall(mBox, tiles)) {
+    //move back
+    mBox.y -= mVelY;
+  }
+}
+
 void Car::setCamera( SDL_Rect& camera ){
     //Center the camera over the dot
   camera.x = (mBox.x + CAR_WIDTH / 2) - SCREEN_WIDTH / 2;
