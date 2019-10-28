@@ -37,11 +37,9 @@ set(CLIENT_SOURCE_FILES
 	common/InfoBlock.cpp
 	common/Thread.cpp
 	common/Event.cpp
-	common/SafeEventQueue.cpp
 		client/SDLStarter.cpp
 		client/communication/UserInput.cpp
-		common/SafeEventQueue.cpp
-		common/SafeEventQueue.h
+		common/SafeQueue.h
 		common/Event.cpp
 		common/Event.h client/TextureLoader.cpp
 		client/TextureLoader.h

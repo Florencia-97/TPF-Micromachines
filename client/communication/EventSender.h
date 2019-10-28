@@ -1,7 +1,7 @@
 #ifndef MICROMACHINES_EVENTSENDER_H
 #define MICROMACHINES_EVENTSENDER_H
 
-#include "../common/SafeEventQueue.h"
+#include "../../common/SafeQueue.h"
 #include "../common/Socket.h"
 #include "../common/Thread.h"
 
