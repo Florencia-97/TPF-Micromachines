@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "../common/stream/InfoBlock.h"
+#include "../common/infostream/InfoBlock.h"
 #include "./Talker.h"
-#include "../common/stream/Protocol.h"
+#include "../common/infostream/Protocol.h"
 
 
 Talker::Talker(Socket& socket) : skt(std::move(socket)) {}

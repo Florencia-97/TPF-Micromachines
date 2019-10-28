@@ -7,7 +7,7 @@ void PlayerThread::_run() {
     while (!this->isClosed() && s && skt.isValid()){
         InfoBlock info;
         s = Protocol::recvMsg(&skt, info);
-        if (s) event_q.emplace(s);
+        if (s) event_q.emplace(info.srcString(),false);
     }
     close();
 }

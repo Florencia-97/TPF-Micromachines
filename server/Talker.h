@@ -1,7 +1,7 @@
 #ifndef _TALKER_
 #define _TALKER_
 
-#include "../common/stream/Socket.h"
+#include "../common/infostream/Socket.h"
 
 // Talks to client following protocol, sending yamls
 class Talker{

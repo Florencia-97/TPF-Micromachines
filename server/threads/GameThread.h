@@ -4,7 +4,7 @@
 #define MICROMACHINES_GAMETHREAD_H
 
 #include "../Game/GameWorld.h"
-#include "../../common/stream/Socket.h"
+#include "../../common/infostream/Socket.h"
 #include "../../common/conc/BaseThread.h"
 #include "PlayerThread.h"
 #include <queue>
