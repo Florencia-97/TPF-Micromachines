@@ -26,3 +26,16 @@ BaseThread::BaseThread() : keep_running(true) {
 bool BaseThread::isRunning() {
     return running;
 }
+
+BaseThread::BaseThread(BaseThread&& other) {
+    this->keep_running.store(other.keep_running);
+    this->running = other.running;
+    this->t= std::move(other.t);
+}
+
+BaseThread & BaseThread::operator=(BaseThread&& other) {
+    this->keep_running.store(other.keep_running);
+    this->running = other.running;
+    this->t= std::move(other.t);
+    return *this;
+}

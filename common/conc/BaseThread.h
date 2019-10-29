@@ -30,6 +30,10 @@ public:
 
     void join();
 
+    BaseThread(BaseThread&& other);
+
+    BaseThread& operator=(BaseThread&& other);
+
 };
 
 

@@ -23,24 +23,13 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     if( e.type != SDL_KEYDOWN) return;
 
     // It does nothing important right now!
-    switch( e.key.keysym.sym ){
-        case SDLK_UP | SDLK_w:
+        if (e.key.keysym.sym & (SDLK_UP | SDLK_w)) {
             std::cout << "Key up was pressed!\n";
-            break;
-
-        case SDLK_DOWN | SDLK_s:
+        } else if (e.key.keysym.sym &(SDLK_DOWN | SDLK_s)) {
             std::cout << "Key down was pressed!\n";
-            break;
-
-        case SDLK_LEFT | SDLK_a:
+        } else if (e.key.keysym.sym &(SDLK_LEFT | SDLK_a)) {
             std::cout << "Key left was pressed!\n";
-            break;
-
-        case SDLK_RIGHT | SDLK_d:
+        } else if (e.key.keysym.sym &(SDLK_RIGHT | SDLK_d)){
             std::cout << "Key right was pressed!\n";
-            break;
-
-        default:
-            break;
-    }
+        }
 }

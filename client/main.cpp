@@ -78,5 +78,6 @@ int main(int argc, char *args[]) {
   UserInput in;
   in.run();
 
+  in.join();
   return 0;
 }
