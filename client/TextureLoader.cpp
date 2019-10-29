@@ -11,6 +11,7 @@ bool TextureLoader::load_texture(const std::string &path, LTexture &texture, SDL
     printf("Failed to load dot texture!\n");
     success = false;
   }
+  return success;
 }
 void TextureLoader::close(Tile **tiles,
                           int totalTiles,

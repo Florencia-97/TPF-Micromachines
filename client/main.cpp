@@ -13,17 +13,17 @@
 #define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
-    std::string mapPath = "maps/race_1.yaml";
-    MapReader map = MapReader(mapPath);
-    std::list<std::list<int>> matrix = map.getMatrix();
-    for (auto const& row : matrix) {
-        for(auto const& pos : row){
-            std::cout << pos << " ";
-        }
-        std::cout << std::endl;
-    }
-
-  /*SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
+  /*std::string mapPath = "maps/race_1.yaml";
+  MapReader map = MapReader(mapPath);
+  std::list<std::list<int>> matrix = map.getMatrix();
+  for (auto const& row : matrix) {
+      for(auto const& pos : row){
+          std::cout << pos << " ";
+      }
+      std::cout << std::endl;
+  }
+*/
+  SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
                                   SCREEN_WIDTH,
                                   nullptr,
                                   nullptr);
@@ -94,10 +94,10 @@ int main(int argc, char *args[]) {
     starter.close(tileSet);
     tiles.free();
   }
-    */
+  /*
   UserInput in;
   in.run();
 
-  in.join();
+  in.join();*/
   return 0;
 }
