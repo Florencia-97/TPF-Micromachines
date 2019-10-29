@@ -4,10 +4,14 @@
 #include <list>
 #include <string>
 
+//Creates a matrix that represents the arena in order to draw it
 class MapReader {
-    //Creates a matrix that represents the arena in order to draw it
+    std::list<std::list<int>> matrix;
+
     public:
-    std::list<std::list<int>> createMap(std::string arenaPath);
+    MapReader(std::string& arenaPath);
+    std::list<std::list<int>> getMatrix();
+    ~MapReader();
 };
 
 #endif

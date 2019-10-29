@@ -3,7 +3,8 @@
 
 #include "../../common/SafeQueue.h"
 #include "../../common/stream/Socket.h"
-#include "../common/Thread.h"
+#include "../common/conc/BaseThread.h"
+#include "../common/Event.h"
 
 /*
  * This class has a reference to a SafeEventQueue
@@ -12,15 +13,14 @@
  * It stops running at that moment
  */
 
-class EventSender: public Thread{
-    bool alive;
+class EventSender: public BaseThread{
     Socket& skt;
-    SafeEventQueue& queue;
+    SafeQueue<Event>& queue;
+    virtual void _run() override;
+
 public:
-    EventSender(Socket& skt, SafeEventQueue& queue);
-    virtual void run() override;
-    virtual void stop() override;
-    virtual bool isAlive() override;
+    EventSender(Socket& skt, SafeQueue<Event>&& queue);
+
     ~EventSender();
 };
 

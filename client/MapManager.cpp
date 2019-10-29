@@ -65,7 +65,7 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
       }
       //If the number is a valid tile number
       if ((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
-        tiles[i] = new Tile(x, y, tileType);
+        //tiles[i] = new Tile(x, y, tileType);
       } else {
         //Stop loading map
         printf("Error loading map: Invalid tile type at %d!\n", i);

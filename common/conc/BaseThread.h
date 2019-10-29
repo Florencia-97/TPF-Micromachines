@@ -20,15 +20,19 @@ public:
 
     void run();
 
-    bool isClosed();
+    bool isAlive();
 
     bool isRunning();
 
     //POS closes the thread and prepares to join
-    //isClosed returns true
+    //isAlive returns false
     virtual void close();
 
     void join();
+
+    BaseThread(BaseThread&& other);
+
+    BaseThread& operator=(BaseThread&& other);
 
 };
 

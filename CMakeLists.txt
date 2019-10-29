@@ -21,7 +21,7 @@ set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
 		common/infostream/Socket.cpp
 		server/Talker.cpp
-		common/Thread.cpp
+		server/GamesManager.cpp
 		common/infostream/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
@@ -29,9 +29,16 @@ set(SERVER_SOURCE_FILES
 		server/Game/GameWorld.cpp
 		common/infostream/InfoBlock.cpp
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
+		server/threads/PlayerThread.cpp
 		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 set(CLIENT_SOURCE_FILES
+		common/infostream/Socket.cpp
+		common/infostream/Protocol.cpp
+		common/infostream/InfoBlock.cpp
+		common/Event.cpp
+		client/MapReader.cpp
+		client/MapReader.h
 		client/SDLStarter.cpp
 		client/Car.cpp
 		client/Car.h
@@ -46,7 +53,7 @@ set(TEST_SOURCE_FILES
 		server/Game/CollisionsManager.cpp
 		server/Game/CollisionsManager.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h server/threads/PlayerThread.cpp server/threads/PlayerThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
-add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
+add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/GamesManager.cpp server/GamesManager.h)
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
@@ -55,5 +62,5 @@ target_link_libraries(Client yaml-cpp pthread
 		${SDL2_LIBRARY}
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2_TTF_LIBRARIES}
-		-lSDL2_ttf)
+		)
 target_link_libraries(Test yaml-cpp Box2D)

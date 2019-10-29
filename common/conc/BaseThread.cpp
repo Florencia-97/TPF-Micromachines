@@ -10,8 +10,8 @@ void BaseThread::join() {
     this->t.join();
 }
 
-bool BaseThread::isClosed() {
-    return !keep_running.load();
+bool BaseThread::isAlive() {
+    return keep_running.load();
 }
 
 void BaseThread::run() {
@@ -25,4 +25,17 @@ BaseThread::BaseThread() : keep_running(true) {
 
 bool BaseThread::isRunning() {
     return running;
+}
+
+BaseThread::BaseThread(BaseThread&& other) {
+    this->keep_running.store(other.keep_running);
+    this->running = other.running;
+    this->t= std::move(other.t);
+}
+
+BaseThread & BaseThread::operator=(BaseThread&& other) {
+    this->keep_running.store(other.keep_running);
+    this->running = other.running;
+    this->t= std::move(other.t);
+    return *this;
 }

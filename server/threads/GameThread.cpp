@@ -7,7 +7,7 @@
 void GameThread::_run() {
     //_runLobby();
 
-    if (!this->isClosed()) {
+    if (!this->isAlive()) {
         //_runGame();
     }
 }
@@ -29,7 +29,7 @@ void GameThread::addPLayer(Socket &plr_socket) {
 }
 
 void GameThread::_runLobby() {
-    while (!this->isClosed() && lobby_mode){//TODO remove false
+    while (!this->isAlive() && lobby_mode){
         while (!player_connection_queue.empty()){
             Socket player_socket = std::move(player_connection_queue.front());
             player_connection_queue.pop();
@@ -43,14 +43,14 @@ void GameThread::_runLobby() {
 }
 
 void GameThread::_runGame() {
-    while (!this->isClosed()) {
+    while (!this->isAlive()) {
         int size = plr_threads.size() - 1;
         int j = rand() % (size + 1 ); //rand between 0 and size
         for (int i=0; i< size; i++){
-            if (!plr_threads[j].event_q.empty()){
+          //  if (!plr_threads[j].event_q.empty()){
                 //get and process event from queue
-                j = (j + 1)%size;
-            }
+          //      j = (j + 1)%size;
+        //    }
         }
     }
 }
