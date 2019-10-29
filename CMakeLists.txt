@@ -21,6 +21,7 @@ set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
 		common/infostream/Socket.cpp
 		server/Talker.cpp
+		server/GamesManager.cpp
 		common/infostream/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
@@ -53,7 +54,7 @@ set(TEST_SOURCE_FILES
 		server/Game/CollisionsManager.cpp
 		server/Game/CollisionsManager.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h server/threads/PlayerThread.cpp server/threads/PlayerThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
-add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
+add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/GamesManager.cpp server/GamesManager.h)
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
