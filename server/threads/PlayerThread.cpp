@@ -5,7 +5,7 @@
 void PlayerThread::_run() {
     bool s = true;
     this->sender.run();
-    while (!this->isClosed() && s && skt.isValid()){
+    while (!this->isAlive() && s && skt.isValid()){
         InfoBlock info;
         s = Protocol::recvMsg(&skt, info);
         if (s) event_q.push(info);
@@ -14,7 +14,7 @@ void PlayerThread::_run() {
 }
 
 void PlayerThread::close(){
-    if (!this->isClosed()) return;
+    if (!this->isAlive()) return;
     skt.closeSd();
     sender.close();
     sender.join();

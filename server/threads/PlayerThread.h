@@ -19,7 +19,7 @@ public:
     SafeQueue<InfoBlock> event_q; //TODO change to normal queue (non blocking)
     SenderThread sender;
 
-    PlayerThread(Socket &my_skt);
+    explicit PlayerThread(Socket &my_skt);
 
     void close() override;
 };

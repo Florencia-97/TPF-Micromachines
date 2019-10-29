@@ -10,8 +10,8 @@ void BaseThread::join() {
     this->t.join();
 }
 
-bool BaseThread::isClosed() {
-    return !keep_running.load();
+bool BaseThread::isAlive() {
+    return keep_running.load();
 }
 
 void BaseThread::run() {

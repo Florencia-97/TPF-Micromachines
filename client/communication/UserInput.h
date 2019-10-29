@@ -2,23 +2,20 @@
 #define MICROMACHINES_USERINPUT_H
 
 #include <SDL2/SDL.h>
-#include "../common/Thread.h"
+#include "../common/conc/BaseThread.h"
 
 /*
  This thread reads user input.
 
  */
 
-class UserInput : public Thread {
-    bool alive;
+class UserInput : public BaseThread {
+
     void _rcvKeyInput(SDL_Event &e);
 
+    void _run() override;
+
 public:
-    UserInput();
-    virtual void run() override;
-    virtual void stop() override;
-    virtual bool isAlive() override;
-    //~UserInput();
 
 };
 

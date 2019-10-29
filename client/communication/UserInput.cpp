@@ -3,18 +3,12 @@
 
 #include "UserInput.h"
 
-UserInput::UserInput(): alive(true) {}
-
-void UserInput::stop() {this->alive = false;}
-
-bool UserInput::isAlive() {return this->alive;}
-
 
 // Why using sdl_WaitEvent? https://stackoverflow.com/questions/18860243/sdl-pollevent-vs-sdl-waitevent
-void UserInput::run(){
+void UserInput::_run(){
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
-    while (this->alive){
+    while (this ->isAlive()){
         while( SDL_WaitEvent(&e) != 0 ) {
             _rcvKeyInput(e);
         }
@@ -23,7 +17,7 @@ void UserInput::run(){
 
 void UserInput::_rcvKeyInput(SDL_Event &e){
     if ( e.type == SDL_QUIT){
-        this->alive = true;
+        this->close();
         return;
     }
     if( e.type != SDL_KEYDOWN) return;

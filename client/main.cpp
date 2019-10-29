@@ -1,14 +1,15 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "Tile.h"
+//#include "Tile.h"
 #include "SDLStarter.h"
+#include "communication/UserInput.h"
 #include "TextureLoader.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
-  SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
+  /*SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
                                   SCREEN_WIDTH,
                                   nullptr,
                                   nullptr);
@@ -73,6 +74,9 @@ int main(int argc, char *args[]) {
     //Free resources and close SDL
     close(tileSet);
   }
+    */
+  UserInput in;
+  in.run();
 
   return 0;
 }

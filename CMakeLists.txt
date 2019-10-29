@@ -29,6 +29,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/GameWorld.cpp
 		common/infostream/InfoBlock.cpp
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
+		server/threads/PlayerThread.cpp
 		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h common/Stopwatch.cpp common/Stopwatch.h server/threads/GameThread.cpp server/threads/GameThread.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 set(CLIENT_SOURCE_FILES
@@ -61,5 +62,5 @@ target_link_libraries(Client yaml-cpp pthread
 		${SDL2_LIBRARY}
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2_TTF_LIBRARIES}
-		-lSDL2_ttf)
+		)
 target_link_libraries(Test yaml-cpp Box2D)
