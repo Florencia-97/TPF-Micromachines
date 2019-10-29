@@ -27,19 +27,18 @@ int main(int argc, char *args[]) {
                                   SCREEN_WIDTH,
                                   nullptr,
                                   nullptr);
-  TextureLoader loader = TextureLoader();
   //Start up SDL and create window
   if (!starter.init()) {
     printf("Failed to initialize!\n");
   } else {
-    Tile *tileSet[1];
+    Tile *tileSet[192];
     //Load media
     LTexture carTexture;
     LTexture tiles;
     MapManager manager = MapManager();
     SDL_Renderer *gRenderer = starter.get_global_renderer();
-    if (!loader.load_texture("dot.bmp", carTexture, gRenderer) ||
-        !loader.load_texture("tiles.png", tiles, gRenderer) ||
+    if (!TextureLoader::load_texture("dot.bmp", carTexture, gRenderer) ||
+        !TextureLoader::load_texture("tiles.png", tiles, gRenderer) ||
         !manager.setTiles(tileSet, 1)) {
       printf("Failed to load media!\n");
     } else {
@@ -77,8 +76,8 @@ int main(int argc, char *args[]) {
         SDL_RenderClear(gRenderer);
 
         //Render level
-        for (int i = 0; i < 192; ++i) {
-          tileSet[i]->render(camera, manager.get_tiles_clip(), &tiles);
+        for (auto &element : tileSet) {
+          element->render(camera, manager.get_tiles_clip(), &tiles);
         }
 
         //Render dot
