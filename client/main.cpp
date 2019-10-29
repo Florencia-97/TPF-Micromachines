@@ -65,7 +65,7 @@ int main(int argc, char *args[]) {
 
         //Render level
         for (int i = 0; i < 192; ++i) {
-          tileSet[i]->render(camera);
+          tileSet[i]->render(camera, manager.get_tiles_clip(), &tiles);
         }
 
         //Render dot

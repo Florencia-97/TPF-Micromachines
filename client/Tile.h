@@ -7,7 +7,6 @@
 
 #include <SDL_rect.h>
 #include "LTexture.h"
-#include "MapManager.h"
 class Tile {
  private:
   //The attributes of the tile
@@ -18,11 +17,12 @@ class Tile {
   //Initializes position and type
   Tile(int x, int y, int tileType);
   //Shows the tile
-  void render(SDL_Rect &camera, MapManager manager, LTexture *tileTexture);
+  void render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture);
   //Get the tile type
   int getType();
   //Get the collision box
   SDL_Rect getBox();
+  static bool checkCollision(SDL_Rect a, SDL_Rect b);
 };
 
 #endif //MICROMACHINES_CLIENT_TILE_H_
