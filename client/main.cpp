@@ -4,11 +4,23 @@
 //#include "Tile.h"
 #include "SDLStarter.h"
 #include "communication/UserInput.h"
+#include "MapReader.h"
+#include <iostream>
 #include "TextureLoader.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
+    std::string mapPath = "maps/race_1.yaml";
+    MapReader map = MapReader(mapPath);
+    std::list<std::list<int>> matrix = map.getMatrix();
+    for (auto const& row : matrix) {
+        for(auto const& pos : row){
+            std::cout << pos << " ";
+        }
+        std::cout << std::endl;
+    }
+
   /*SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
                                   SCREEN_WIDTH,
                                   nullptr,

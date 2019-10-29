@@ -36,6 +36,8 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
 		common/Event.cpp
+		client/MapReader.cpp
+		client/MapReader.h
 		client/SDLStarter.cpp
 		client/communication/UserInput.cpp
 		common/SafeQueue.h
