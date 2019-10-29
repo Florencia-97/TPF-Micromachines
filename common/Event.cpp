@@ -6,7 +6,7 @@ Event::Event(std::string& action): actionName(action) {}
 
 std::string Event::toYamlString(){
     //Just an example
-    std::string yaml = "{ " + this->actionName + "}";
+    std::string yaml = "{actionName: " +  this->actionName + "}";
     return yaml;
 }
 
