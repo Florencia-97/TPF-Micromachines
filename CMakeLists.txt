@@ -21,7 +21,6 @@ set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
 		common/infostream/Socket.cpp
 		server/Talker.cpp
-		common/Thread.cpp
 		common/infostream/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
@@ -36,8 +35,7 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
-	common/Thread.cpp
-	common/Event.cpp
+		common/Event.cpp
 		client/SDLStarter.cpp
 		client/communication/UserInput.cpp
 		common/SafeQueue.h

@@ -22,14 +22,15 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     }
     if( e.type != SDL_KEYDOWN) return;
 
-    // It does nothing important right now!
-        if (e.key.keysym.sym & (SDLK_UP | SDLK_w)) {
-            std::cout << "Key up was pressed!\n";
-        } else if (e.key.keysym.sym &(SDLK_DOWN | SDLK_s)) {
-            std::cout << "Key down was pressed!\n";
-        } else if (e.key.keysym.sym &(SDLK_LEFT | SDLK_a)) {
-            std::cout << "Key left was pressed!\n";
-        } else if (e.key.keysym.sym &(SDLK_RIGHT | SDLK_d)){
-            std::cout << "Key right was pressed!\n";
-        }
+    // TODO
+    // Might want to see if bitwise actually works
+    if (e.key.keysym.sym & (SDLK_UP | SDLK_w)) {
+        std::cout << "Key up was pressed!\n";
+    } else if (e.key.keysym.sym &(SDLK_DOWN | SDLK_s)) {
+        std::cout << "Key down was pressed!\n";
+    } else if (e.key.keysym.sym &(SDLK_LEFT | SDLK_a)) {
+        std::cout << "Key left was pressed!\n";
+    } else if (e.key.keysym.sym &(SDLK_RIGHT | SDLK_d)){
+        std::cout << "Key right was pressed!\n";
+    }
 }
