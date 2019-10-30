@@ -12,12 +12,14 @@
  * Accepts  client and creates
  */
 
-class GamesManager {
+class GamesManager : public BaseThread{
     Socket skt; //Server's socket
     std::list<GameThread*> games;
-    void killGames();
+    void _killGames(bool all);
+    bool _addPlayerToArena(Socket& client, std::string arenaName);
 public:
     GamesManager(std::string port);
+    virtual void _run() override;
     void creatGames();
     ~GamesManager();
 };
