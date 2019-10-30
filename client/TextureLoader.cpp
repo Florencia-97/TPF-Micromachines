@@ -3,16 +3,15 @@
 //
 
 #include "TextureLoader.h"
+#include "TEXTURE_ERROR.h"
 
 bool TextureLoader::load_texture(const std::string &path, LTexture &texture, SDL_Renderer *renderer) {
-  bool success = true;
-  if (!texture.load_from_file(path,
-                              renderer)) {
-    printf("Failed to load dot texture!\n");
-    success = false;
+  if (!texture.load_from_file(path, renderer)) {
+    throw TEXTURE_ERROR("No pudo cargarse la imagen\n");
   }
-  return success;
+  return true;
 }
+
 void TextureLoader::close(Tile **tiles,
                           int totalTiles,
                           std::vector<LTexture> vector,

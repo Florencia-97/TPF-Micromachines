@@ -9,6 +9,7 @@
 #include "TextureLoader.h"
 #include "MapManager.h"
 #include "Car.h"
+#include "TEXTURE_ERROR.h"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
@@ -37,10 +38,14 @@ int main(int argc, char *args[]) {
     LTexture tiles;
     MapManager manager = MapManager();
     SDL_Renderer *gRenderer = starter.get_global_renderer();
-    //TODO
-    TextureLoader::load_texture("dot.bmp", carTexture, gRenderer);
-    TextureLoader::load_texture("tiles.png", tiles, gRenderer);
-    manager.setTiles(tileSet, 192);
+    try {
+      TextureLoader::load_texture("dot.bmp", carTexture, gRenderer);
+      TextureLoader::load_texture("tiles.png", tiles, gRenderer);
+      manager.setTiles(tileSet, 192);
+    }
+    catch (TEXTURE_ERROR &error) {
+      return 1;
+    }
 
       //Main loop flag
       bool quit = false;

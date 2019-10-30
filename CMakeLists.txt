@@ -46,7 +46,7 @@ set(CLIENT_SOURCE_FILES
 		client/TextureLoader.h
 		client/TextureLoader.cpp
 		client/SDLStarter.h
-		client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/Tile.cpp client/Tile.h)
+        client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/Tile.cpp client/Tile.h client/TEXTURE_ERROR.cpp client/TEXTURE_ERROR.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
