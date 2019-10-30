@@ -36,3 +36,8 @@ void GameRenderer::init(GameMap *game_map, const std::string &mapConfigPath, Car
 void GameRenderer::close(){
     starter.close();
 }
+void GameRenderer::move_car(int x, int y) {
+  this->car->move(x, y);
+}
+
+

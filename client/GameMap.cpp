@@ -24,7 +24,6 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
       y = rowTile * 512;
       x = columnTile * 512;
       const YAML::Node &col_value = *c;
-      printf("%d\n", col_value.as<int>());
       auto tile = tiles_factory.getTile(col_value.as<int>(), x, y, gRenderer);
       this->map.back().push_back(tile);
 

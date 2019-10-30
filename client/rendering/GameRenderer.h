@@ -24,17 +24,13 @@ class GameRenderer {
 
 
 public:
-
   //the map to render and the car to follow with the camera
-    explicit GameRenderer();
-
+  explicit GameRenderer();
   void init(GameMap *game_map, const std::string &mapConfigPath, Car *p_car);
-
-    void setCamera(int x, int y);
-
-    void render();
-
-    void close();
+  void setCamera(int x, int y);
+  void move_car(int x, int y);
+  void render();
+  void close();
 };
 
 
