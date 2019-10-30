@@ -37,16 +37,15 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
 		common/Event.cpp
-		client/MapReader.cpp
-		client/MapReader.h
-		client/SDLStarter.cpp
+		client/rendering/SDLStarter.cpp
 		client/Car.cpp
 		client/Car.h
 		client/communication/UserInput.cpp
-		client/TextureLoader.h
-		client/TextureLoader.cpp
-		client/SDLStarter.h
-        client/LTexture.cpp client/LTexture.h client/MapManager.cpp client/MapManager.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/Tile.cpp client/Tile.h client/TEXTURE_ERROR.cpp client/TEXTURE_ERROR.h)
+		client/rendering/TextureLoader.h
+		client/communication/EventSender.cpp
+		client/rendering/TextureLoader.cpp
+		client/rendering/SDLStarter.h
+		client/rendering/LTexture.cpp client/rendering/LTexture.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/tiles/Tile.cpp client/tiles/Tile.h client/rendering/TEXTURE_ERROR.cpp client/rendering/TEXTURE_ERROR.h client/RenderThread.cpp client/RenderThread.h client/rendering/GameRenderer.cpp client/rendering/GameRenderer.h client/GameMap.cpp client/GameMap.h client/tiles/TilesFactory.cpp client/tiles/TilesFactory.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp

@@ -3,7 +3,8 @@
 //
 #ifndef MICROMACHINES_SDLSTARTER_H
 #define MICROMACHINES_SDLSTARTER_H
-#include "Tile.h"
+#include "../tiles/Tile.h"
+
 class SDLStarter {
  private:
   const int screenWidth;
@@ -12,16 +13,14 @@ class SDLStarter {
   SDL_Renderer *renderer = nullptr;
  public:
   SDLStarter(const int width,
-             const int height,
-             SDL_Window *window,
-             SDL_Renderer *renderer) :
+             const int height) :
       screenWidth(width),
       screenHeight(height),
       window(nullptr),
       renderer(nullptr) {};
   bool init();
   SDL_Renderer *get_global_renderer();
-  void close(Tile *tiles[]);
+  void close();
 
 };
 

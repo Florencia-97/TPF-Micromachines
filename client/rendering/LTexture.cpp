@@ -76,40 +76,16 @@ void LTexture::set_color(Uint8 red,
                          blue);
 }
 
-/*Set blending*/
-void LTexture::set_blend_mode(SDL_BlendMode blending) {
-  SDL_SetTextureBlendMode(texture, blending);
-}
-/*Set alpha mod*/
-void LTexture::set_alpha(Uint8 alpha) {
-  SDL_SetTextureAlphaMod(texture,
-                         alpha);
-}
-/*Renders the texture. If some values are not passed, there are default
- *SDL_Rect *clip = nullptr,
- *double angle = 0.0,
- *SDL_Point *center = nullptr,
- *SDL_RendererFlip flip= SDL_FLIP_NONE,
- * SDL_Renderer* renderer = nullptr*/
-void LTexture::render(int x,
-                      int y,
-                      SDL_Rect *clip,
-                      double angle,
-                      SDL_Point *center,
-                      SDL_RendererFlip flip,
-                      SDL_Renderer *renderer) {
+
+
+void LTexture::render(int x, int y, SDL_Rect *clip, double angle, SDL_Point *center,
+                        SDL_RendererFlip flip, SDL_Renderer *renderer) {
   SDL_Rect renderQuad = {x, y, width, height};
   if (clip != nullptr) {
     renderQuad.w = clip->w;
     renderQuad.h = clip->h;
   }
-  SDL_RenderCopyEx(renderer,
-                   texture,
-                   clip,
-                   &renderQuad,
-                   angle,
-                   center,
-                   flip);
+  SDL_RenderCopyEx(renderer,texture, clip, &renderQuad, angle, center, flip);
 
 }
 

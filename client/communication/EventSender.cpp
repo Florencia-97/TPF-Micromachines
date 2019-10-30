@@ -1,26 +1,28 @@
 #include "EventSender.h"
 
-#include "../../common/stream/Protocol.h"
-#include "../../common/stream/InfoBlock.h"
+#include "../../common/infostream/Protocol.h"
 
-EventSender::EventSender(Socket& skt, SafeQueue<Event>& queue) :
-        alive(true) ,skt(skt), queue(queue) {}
+EventSender::EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue) :
+    skt(skt) {
+    this->safeQueue = safeQueue;
+}
 
-bool _isFinalEvent(Event& event){
-    return false; // Discuss how the event sends me the quit action!
+bool _isFinalEvent(InfoBlock& ib){
+    std::string actionType = ib.get<std::string>("action");
+    return actionType.compare("QUIT") == 0; // Discuss how the event sends me the quit action!
 }
 
 void EventSender::_run() {
     while (this->isAlive()){
-        Event event = queue.pop();
-        if (_isFinalEvent(event)){
+        InfoBlock ib = this->safeQueue->pop();
+        if (_isFinalEvent(ib)){
             break;
         }
-        InfoBlock infoBlock(event.toYamlString(), false ); //event should convert to InfoBlock?
-        if (Protocol::sendMsg(&this->skt, infoBlock) == false){
+        if (Protocol::sendMsg(&this->skt, ib) == false){
             break;
         }
     }
     close();
 }
 
+EventSender::~EventSender() {}

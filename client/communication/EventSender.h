@@ -2,9 +2,9 @@
 #define MICROMACHINES_EVENTSENDER_H
 
 #include "../../common/SafeQueue.h"
-#include "../../common/stream/Socket.h"
+#include "../../common/infostream/Socket.h"
 #include "../common/conc/BaseThread.h"
-#include "../common/Event.h"
+#include "../common/infostream/InfoBlock.h"
 
 /*
  * This class has a reference to a SafeEventQueue
@@ -15,12 +15,11 @@
 
 class EventSender: public BaseThread{
     Socket& skt;
-    SafeQueue<Event>& queue;
+    SafeQueue<InfoBlock>* safeQueue;
     virtual void _run() override;
 
 public:
-    EventSender(Socket& skt, SafeQueue<Event>&& queue);
-
+    EventSender(Socket& skt, SafeQueue<InfoBlock>* queue);
     ~EventSender();
 };
 

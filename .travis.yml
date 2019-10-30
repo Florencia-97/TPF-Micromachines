@@ -4,6 +4,7 @@ before_install:
   - sudo apt-get install libcurl4-openssl-dev
   - sudo apt-get install libsdl2-dev
   - sudo apt-get install libsdl2-image-dev
+  - sudo apt-get install yaml-cpp
 
 # Enable C++ support
 language: cpp

@@ -5,7 +5,6 @@
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
 
-
 bool SDLStarter::init() {
   bool success = true;
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -15,7 +14,7 @@ bool SDLStarter::init() {
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
       printf("Warning: Linear texture filtering not enabled!");
     }
-    window = SDL_CreateWindow("SDL Tutorial",
+    window = SDL_CreateWindow("Micromachines",
                               SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED,
                               this->screenWidth,
@@ -41,18 +40,12 @@ bool SDLStarter::init() {
   }
   return success;
 }
+
 SDL_Renderer *SDLStarter::get_global_renderer() {
   return renderer;
 }
-void SDLStarter::close(Tile *tiles[]) {
-  //Deallocate tiles
-  for (int i = 0; i < 192; ++i) {
-    if (tiles[i] == nullptr) {
-      delete tiles[i];
-      tiles[i] = nullptr;
-    }
-  }
 
+void SDLStarter::close() {
   //Destroy window
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
