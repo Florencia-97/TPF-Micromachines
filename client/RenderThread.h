@@ -8,17 +8,35 @@
 #include "../common/infostream/InfoBlock.h"
 #include "rendering/GameRenderer.h"
 #include <SDL2/SDL.h>
+#include <queue>
+#include <atomic>
+
+#define LOBBY_STATE 1
+#define GAME_STATE 2
 
 class RenderThread : BaseThread {
+    int current_frame;
+    int frames_per_second;
+    int state;
+    std::atomic<bool> in_menu;
+    InfoBlock previous_state;
 
-    void _run(); //TODO HIGH RENDER LOOP CALLS gameRenderer.render() and checks frames
+    void _run() override;
+
+    void renderMenu(int frame_id);
+
+    void renderGame(int frame_id);
+
+    void renderLobby(int frame_id);
 
     GameRenderer* gameRenderer;
 
 public:
-    //queue<InfoBlock> renderQueue;
+    std::queue<InfoBlock>* renderQueue;
 
-    RenderThread(GameRenderer &gr);
+    explicit RenderThread(GameRenderer &gr, std::queue<InfoBlock>& rq );
+
+    void proceedToLobby(bool is_leader);
 };
 
 

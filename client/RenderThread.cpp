@@ -2,27 +2,72 @@
 
 #include "RenderThread.h"
 
-void RenderThread::_run() {
-    //Level camera
-    SDL_Rect camera = {0, 0, 800, 600};
-    SDL_Event e;
-
-//    while (this->isAlive()) {
-/*        //Move the dot
-        car.move(tileSet, manager);
-        car.setCamera(camera);
-
-        //Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        SDL_RenderClear(gRenderer);
-
-        //Render level
-        for (auto &element : tileSet) {
-            element->render(camera, manager.get_tiles_clip(), &tiles, gRenderer);
+void RenderThread::_run(){
+    while (this->isAlive()) {
+        if (state == GAME_STATE){
+            renderGame(current_frame);
+        } else if (!in_menu.load()){ //if not in menu then in lobby
+            renderLobby(current_frame);
+        } else if (in_menu.load()){
+            renderMenu(current_frame);
         }
-        car.render(camera, &carTexture, gRenderer);
+        //todo check time and sleep
+        this->current_frame = (current_frame+1) % frames_per_second;
+    }
+}
 
-        //Update screen
-        SDL_RenderPresent(gRenderer);*/
- //   }
+void RenderThread::renderMenu(int frame_id) {
+    //menu.render(current_frame);
+    sleep(1/60);
+}
+
+void RenderThread::renderGame(int frame_id){
+    InfoBlock inf;//get map state
+    if (renderQueue->empty()){
+        //if no states to load use last
+        inf = previous_state;
+    }else {
+        while (!renderQueue->empty()){
+            inf = renderQueue->front();
+            renderQueue->pop();
+            //get the very last event
+        }
+    }
+
+    if (!inf.exists("game_end")) {
+        gameRenderer->render(); //(inf); //TODO UPDATE STATE
+        sleep(1/60); //todo variable time on sleep
+    } else {
+        state = -1;
+        in_menu.store(true);
+    }
+}
+
+void RenderThread::renderLobby(int frame_id) {
+    InfoBlock inf;//get map state
+    if (!renderQueue->empty()){
+        inf = renderQueue->front();
+        renderQueue->pop();
+        if (inf.exists("game")){
+            previous_state = inf;
+            state = GAME_STATE;
+        }
+    }
+    //TODO menu.render(frame_id);
+    sleep(1/60);
+}
+
+RenderThread::RenderThread(GameRenderer &gr, std::queue<InfoBlock>& rq) {
+    current_frame = 0;
+    frames_per_second = 60;
+    gameRenderer = &gr;
+    state = -1;
+    in_menu.store(true);
+}
+
+void RenderThread::proceedToLobby(bool is_leader) {
+    if (is_leader){
+        //lobby.setLeadership(); //display map options
+    }
+    in_menu.store(false);
 }
