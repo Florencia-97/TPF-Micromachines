@@ -42,6 +42,7 @@ set(CLIENT_SOURCE_FILES
 		client/Car.h
 		client/communication/UserInput.cpp
 		client/rendering/TextureLoader.h
+		client/communication/EventSender.cpp
 		client/rendering/TextureLoader.cpp
 		client/rendering/SDLStarter.h
 		client/rendering/LTexture.cpp client/rendering/LTexture.h common/conc/BaseThread.cpp common/conc/BaseThread.h common/conc/SenderThread.cpp common/conc/SenderThread.h common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h client/Tile.cpp client/Tile.h client/rendering/TEXTURE_ERROR.cpp client/rendering/TEXTURE_ERROR.h client/RenderThread.cpp client/RenderThread.h client/rendering/GameRenderer.cpp client/rendering/GameRenderer.h client/GameMap.cpp client/GameMap.h)
