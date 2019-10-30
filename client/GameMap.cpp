@@ -4,31 +4,31 @@
 
 void GameMap::loadMap(std::string mapPath) {
     YAML::Node config = YAML::LoadFile(mapPath);
-    YAML::Node mapyaml = config["Map"];
+    YAML::Node mapYaml = config["Map"];
 
     int num = 1;
-    for (YAML::iterator it = mapyaml.begin(); it != mapyaml.end(); ++it) {
+    for (YAML::iterator it = mapYaml.begin(); it != mapYaml.end(); ++it) {
         const YAML::Node& row = *it;
         std::string numberRow = std::to_string(num);
         this->map.emplace_back();
         YAML::Node column = row[numberRow];
-        int colnum = 0;
+        int colNum = 0;
         for (YAML::iterator c = column.begin(); c != column.end(); ++c) {
             const YAML::Node& col_value = *c;
             //this->map.back().emplace_back(TILE_WIDTH * colnum, TILE_HEIGHT * (num-1), col_value.as<int>());
             //TODO manage textures here
-            colnum++;
+            colNum++;
         }
         num ++;
     }
-    //std::cout << "Loaded!\n";
+    //std::cout << "Map Loaded!\n";
 }
 
 void GameMap::dummyInit(int x, int y, LTexture* texture) {
     for (int i=0; i<y; i++){
         map.emplace_back();
         for (int j= 0; j<x; j++){
-            map[i].emplace_back(j*TILE_WIDTH, i*TILE_HEIGHT,1, texture);
+            map[i].emplace_back(j*TILE_WIDTH, i*TILE_HEIGHT,1, texture, 512, 512);
         }
     }
 }

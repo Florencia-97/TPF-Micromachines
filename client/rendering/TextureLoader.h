@@ -12,7 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include "LTexture.h"
-#include "../Tile.h"
+#include "../tiles/Tile.h"
 
 class TextureLoader {
     std::unordered_map<std::string, LTexture> texture_cache;

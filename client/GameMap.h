@@ -4,7 +4,7 @@
 #define MICROMACHINES_GAMEMAP_H
 
 #include <vector>
-#include "Tile.h"
+#include "tiles/Tile.h"
 #include "yaml-cpp/yaml.h"
 
 #define TILE_WIDTH  512

@@ -5,7 +5,6 @@
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
 
-
 bool SDLStarter::init() {
   bool success = true;
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -41,9 +40,11 @@ bool SDLStarter::init() {
   }
   return success;
 }
+
 SDL_Renderer *SDLStarter::get_global_renderer() {
   return renderer;
 }
+
 void SDLStarter::close() {
   //Destroy window
   SDL_DestroyRenderer(renderer);

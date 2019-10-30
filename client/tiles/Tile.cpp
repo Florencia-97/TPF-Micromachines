@@ -2,15 +2,17 @@
 // Created by brian on 10/28/19.
 //
 #include "Tile.h"
-Tile::Tile(int x, int y, int tileType, LTexture* my_text) {
+
+Tile::Tile(int x, int y, int tileType, LTexture* my_text,
+        float width, float height) {
 
   //Get the offsets
   texture = my_text;
   mBox.x = x;
   mBox.y = y;
   //Set the collision box
-  mBox.w = 512; // todo check hardcoded
-  mBox.h = 512;
+  mBox.w = width;
+  mBox.h = height;
   //Get the tile type
   mType = tileType;
 
