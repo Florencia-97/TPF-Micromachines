@@ -1,11 +1,10 @@
-
-
 #include "GameMap.h"
+#include "tiles/TilesFactory.h"
 
-void GameMap::loadMap(std::string mapPath) {
+void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
     YAML::Node config = YAML::LoadFile(mapPath);
     YAML::Node mapYaml = config["Map"];
-
+  TilesFactory tiles_factory;
     int num = 1;
     for (YAML::iterator it = mapYaml.begin(); it != mapYaml.end(); ++it) {
         const YAML::Node& row = *it;
@@ -15,13 +14,12 @@ void GameMap::loadMap(std::string mapPath) {
         int colNum = 0;
         for (YAML::iterator c = column.begin(); c != column.end(); ++c) {
             const YAML::Node& col_value = *c;
-            //this->map.back().emplace_back(TILE_WIDTH * colnum, TILE_HEIGHT * (num-1), col_value.as<int>());
-            //TODO manage textures here
+          auto tile = tiles_factory.getTile(col_value.as<int>(), 0, 0, gRenderer);
+          this->map.back().emplace_back(tile);
             colNum++;
         }
         num ++;
     }
-    //std::cout << "Map Loaded!\n";
 }
 
 void GameMap::dummyInit(int x, int y, LTexture* texture) {
