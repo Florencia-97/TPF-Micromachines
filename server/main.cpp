@@ -2,9 +2,8 @@
 #include "yaml-cpp/yaml.h"
 
 #include "config/Configuration.h"
-#include "Talker.h"
 #include "../common/infostream/Socket.h"
-#include "../common/constants.h"
+#include "../config/constants.h"
 #include "threads/GameThread.h"
 #include "Game/GameWorld.h"
 

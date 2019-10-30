@@ -19,10 +19,8 @@ Tile::Tile(int x, int y, int tileType, LTexture* my_text,
 }
 void Tile::render(SDL_Rect &camera, SDL_Renderer *renderer) {
   //If the tile is on screen
-  if (checkCollision(camera, mBox)){
     texture->render(mBox.x - camera.x, mBox.y - camera.y,nullptr, \
                         0.0,nullptr,SDL_FLIP_NONE, renderer);
-  }
 }
 
 int Tile::getType() {

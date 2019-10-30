@@ -18,7 +18,7 @@ class Car {
   // Centers the camera over the car
   void setCamera(SDL_Rect &camera);
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
-  void move();
+  void move(int x, int y);
   ~Car();
 };
 

@@ -12,15 +12,13 @@ TilesFactory::TilesFactory() {
 
 Tile* TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
     Tile* tile = nullptr;
-    std::string path = "";
+  std::string path;
     switch (tyleType){
         case GRASS_TILE:
             path = this->ib.getString("grass_tile");
-            std::cout << path << std::endl; // Just for testing!
             break;
         case STRAIGHT_ROAD_TILE:
             path = this->ib.getString("straight_road_tile");
-            std::cout << path << std::endl;
             break;
         default:
             // we could make a default tile here, or an error tile if we want to!
