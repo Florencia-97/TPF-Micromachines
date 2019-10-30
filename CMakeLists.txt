@@ -20,7 +20,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
 set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
 		common/infostream/Socket.cpp
-		server/threads/GamesManager.cpp server/threads/GamesManager.h
 		common/infostream/Protocol.cpp
 		server/Game/entities/Entity.cpp
 		server/Game/entities/RaceCar.cpp
@@ -32,7 +31,8 @@ set(SERVER_SOURCE_FILES
 		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h
 		server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h
 		common/Stopwatch.cpp common/Stopwatch.h
-		server/threads/GameThread.cpp server/threads/GameThread.h
+		#server/threads/GameThread.cpp server/threads/GameThread.h
+        #server/threads/GamesManager.cpp server/threads/GamesManager.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h
@@ -65,13 +65,13 @@ set(CLIENT_SOURCE_FILES
 set(TEST_SOURCE_FILES
         tests/tests.cpp
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-		server/threads/GameThread.cpp server/threads/GameThread.h
+		#server/threads/GameThread.cpp server/threads/GameThread.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		server/threads/PlayerThread.cpp server/threads/PlayerThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
-add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES} server/threads/GamesManager.cpp server/threads/GamesManager.h)
+add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 

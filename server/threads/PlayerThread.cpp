@@ -1,6 +1,8 @@
-
-
 #include "PlayerThread.h"
+
+PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
+    this->skt = std::move(my_skt);
+}
 
 void PlayerThread::_run() {
     bool s = true;
@@ -8,7 +10,7 @@ void PlayerThread::_run() {
     while (!this->isAlive() && s && skt.isValid()){
         InfoBlock info;
         s = Protocol::recvMsg(&skt, info);
-        if (s) event_q.push(info);
+        if (s) this->eventQ.push(info);
     }
     close();
 }
@@ -19,8 +21,4 @@ void PlayerThread::close(){
     sender.close();
     sender.join();
     BaseThread::close();
-}
-
-PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
-    this->skt = std::move(my_skt);
 }

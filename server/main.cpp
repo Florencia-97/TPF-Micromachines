@@ -17,7 +17,7 @@ int main (int argc, char** argv) {
 	p.run();
 	InfoBlock msg;
 	while (p.isRunning() && !msg.exists("exit")){
-	    msg = p.event_q.pop();
+	    msg = p.eventQ.front();
 	    std::cout<<msg.srcString()<<std::endl;
 	}
 	p.close();
