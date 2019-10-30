@@ -13,9 +13,8 @@ void GameThread::_run() {
 }
 
 
-GameThread::GameThread(int id, Socket &lobby_owner) {
-    this->game_id = id;
-    this->lobby_mode = true;
+GameThread::GameThread(int id, Socket &lobby_owner, InfoBlock& ib)
+    : game_id(id), lobby_mode(true){
 
 }
 

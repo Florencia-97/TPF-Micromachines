@@ -22,6 +22,7 @@ class GameThread : public BaseThread {
     void startGame();
 
 public:
+    std::string gameName;
     bool lobby_mode;
     int game_id;
     std::vector<PlayerThread> plr_threads;
@@ -31,7 +32,7 @@ public:
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game
-    GameThread(int id, Socket &lobby_owner);
+    GameThread(int id, Socket &lobby_owner, InfoBlock& ib);
 
     //PRE lobby_mode must be true
     //POS adds player to the lobby
