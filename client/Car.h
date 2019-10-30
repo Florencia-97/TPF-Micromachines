@@ -4,7 +4,8 @@
 #include <SDL_rect.h>
 #include <SDL_events.h>
 #include "rendering/LTexture.h"
-#include "Tile.h"
+#include "tiles/Tile.h"
+
 class Car {
  private:
   //Collision box of the dot
