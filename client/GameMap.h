@@ -6,12 +6,14 @@
 #include <vector>
 #include "tiles/Tile.h"
 #include "yaml-cpp/yaml.h"
+#include "tiles/TilesFactory.h"
 
 #define TILE_WIDTH  512
 #define TILE_HEIGHT  512
 
 class GameMap {
-    std::vector<std::vector<Tile>> map;
+  std::vector<std::vector<Tile *>> map;
+  TilesFactory tiles_factory;
 
 public:
     GameMap() = default;

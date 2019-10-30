@@ -28,7 +28,7 @@ public:
   //the map to render and the car to follow with the camera
     explicit GameRenderer();
 
-  void init(GameMap *game_map, std::string mapConfigPath, Car *p_car);
+  void init(GameMap *game_map, const std::string &mapConfigPath, Car *p_car);
 
     void setCamera(int x, int y);
 

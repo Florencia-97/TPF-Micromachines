@@ -1,3 +1,3 @@
 # Just path for now, thinking always that we are drawing them with the same size
 grass_tile: "map/grass.png"
-straight_road_tile: "map/straight_road.png"
+straight_road_tile: "map/road_straight.png"
