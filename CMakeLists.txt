@@ -36,13 +36,13 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
-		common/Event.cpp
 		client/MapReader.cpp
 		client/MapReader.h
 		client/SDLStarter.cpp
 		client/Car.cpp
 		client/Car.h
 		client/communication/UserInput.cpp
+		client/communication/EventSender.cpp
 		client/TextureLoader.h
 		client/TextureLoader.cpp
 		client/SDLStarter.h
