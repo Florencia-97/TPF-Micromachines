@@ -6,11 +6,10 @@ const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
 
 Car::Car(){
-    //Initialize the collision box
     mBox.x = 0;
     mBox.y = 0;
-    mBox.w = CAR_WIDTH;
-    mBox.h = CAR_HEIGHT;
+    mBox.w = w;
+    mBox.h = h;
 }
 
 void Car::addTexture(LTexture *my_texture) {
@@ -18,17 +17,16 @@ void Car::addTexture(LTexture *my_texture) {
 }
 
 void Car::move() {
-  //Move the dot left or right
+  //Move the car left or right
   //todo change
 
 }
 
 void Car::setCamera( SDL_Rect& camera ){
-    //Center the camera over the dot
-  camera.x = (mBox.x + CAR_WIDTH / 2) - SCREEN_WIDTH / 2;
-  camera.y = (mBox.y + CAR_HEIGHT / 2) - SCREEN_HEIGHT / 2;
+  camera.x = (mBox.x + w / 2) - SCREEN_WIDTH / 2;
+  camera.y = (mBox.y + h / 2) - SCREEN_HEIGHT / 2;
 
-    //Keep the camera in bounds
+    // Keep the camera in bounds
     if( camera.x < 0 ) camera.x = 0;
     if( camera.y < 0 ) camera.y = 0;
     if( camera.x > LEVEL_WIDTH - camera.w ) camera.x = LEVEL_WIDTH - camera.w;
