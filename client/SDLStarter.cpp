@@ -15,7 +15,7 @@ bool SDLStarter::init() {
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
       printf("Warning: Linear texture filtering not enabled!");
     }
-    window = SDL_CreateWindow("SDL Tutorial",
+    window = SDL_CreateWindow("Micromachines",
                               SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED,
                               this->screenWidth,

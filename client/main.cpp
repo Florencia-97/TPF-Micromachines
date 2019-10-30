@@ -14,23 +14,10 @@
 #define SCREEN_HEIGHT 480
 
 int main(int argc, char *args[]) {
-  /*std::string mapPath = "maps/race_1.yaml";
-  MapReader map = MapReader(mapPath);
-  std::list<std::list<int>> matrix = map.getMatrix();
-  for (auto const& row : matrix) {
-      for(auto const& pos : row){
-          std::cout << pos << " ";
-      }
-      std::cout << std::endl;
-  }
-*/
-  SDLStarter starter = SDLStarter(SCREEN_WIDTH,
-                                  SCREEN_HEIGHT,
-                                  nullptr,
-                                  nullptr);
+  SDLStarter starter = SDLStarter(SCREEN_WIDTH, SCREEN_HEIGHT);
   //Start up SDL and create window
   if (!starter.init()) {
-    printf("Failed to initialize!\n");
+      throw std::runtime_error("Failed to initialized SDL STARTER");
   } else {
     Tile *tileSet[192];
     //Load media
@@ -49,8 +36,7 @@ int main(int argc, char *args[]) {
 
       //Main loop flag
       bool quit = false;
-
-      //Event handler
+      //Event handler TODO move from here
       SDL_Event e;
 
       //The dot that will be moving around on the screen
@@ -95,10 +81,5 @@ int main(int argc, char *args[]) {
     starter.close(tileSet);
     tiles.free();
   }
-  /*
-  UserInput in;
-  in.run();
-
-  in.join();*/
   return 0;
 }

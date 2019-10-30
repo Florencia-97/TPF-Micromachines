@@ -84,25 +84,14 @@ void LTexture::set_alpha(Uint8 alpha) {
  *SDL_Point *center = nullptr,
  *SDL_RendererFlip flip= SDL_FLIP_NONE,
  * SDL_Renderer* renderer = nullptr*/
-void LTexture::render(int x,
-                      int y,
-                      SDL_Rect *clip,
-                      double angle,
-                      SDL_Point *center,
-                      SDL_RendererFlip flip,
+void LTexture::render(int x, int y, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip,
                       SDL_Renderer *renderer) {
   SDL_Rect renderQuad = {x, y, width, height};
   if (clip != nullptr) {
     renderQuad.w = clip->w;
     renderQuad.h = clip->h;
   }
-  SDL_RenderCopyEx(renderer,
-                   texture,
-                   clip,
-                   &renderQuad,
-                   angle,
-                   center,
-                   flip);
+  SDL_RenderCopyEx(renderer,texture, clip, &renderQuad, angle, center, flip);
 
 }
 

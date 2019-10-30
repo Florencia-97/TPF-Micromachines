@@ -7,6 +7,9 @@
 
 #include <SDL_rect.h>
 #include "LTexture.h"
+
+#DE
+
 class Tile {
  private:
   //The attributes of the tile

@@ -12,9 +12,7 @@ class SDLStarter {
   SDL_Renderer *renderer = nullptr;
  public:
   SDLStarter(const int width,
-             const int height,
-             SDL_Window *window,
-             SDL_Renderer *renderer) :
+             const int height) :
       screenWidth(width),
       screenHeight(height),
       window(nullptr),
