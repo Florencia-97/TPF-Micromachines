@@ -65,7 +65,7 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
       }
       //If the number is a valid tile number
       if ((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
-        //tiles[i] = new Tile(x, y, tileType);
+        tiles[i] = new Tile(x, y, tileType);
       } else {
         //Stop loading map
         printf("Error loading map: Invalid tile type at %d!\n", i);
@@ -80,9 +80,21 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
         //Move to the next row
         y += TILE_HEIGHT;
       }
+      printf("X:%d\n", x);
+      printf("Y:%d\n", y);
     }
     //Clip the sprite sheet (Clip de img. Only for example)
     if (tilesLoaded) {
+      const int TILE_CENTER = 3;
+      const int TILE_TOP = 4;
+      const int TILE_TOPRIGHT = 5;
+      const int TILE_RIGHT = 6;
+      const int TILE_BOTTOMRIGHT = 7;
+      const int TILE_BOTTOM = 8;
+      const int TILE_BOTTOMLEFT = 9;
+      const int TILE_LEFT = 10;
+      const int TILE_TOPLEFT = 11;
+
       gTileClips[0].x = 0;
       gTileClips[0].y = 0;
       gTileClips[0].w = TILE_WIDTH;
@@ -98,51 +110,52 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
       gTileClips[2].w = TILE_WIDTH;
       gTileClips[2].h = TILE_HEIGHT;
 
-      gTileClips[3].x = 80;
-      gTileClips[3].y = 0;
-      gTileClips[3].w = TILE_WIDTH;
-      gTileClips[3].h = TILE_HEIGHT;
+      gTileClips[TILE_TOPLEFT].x = 80;
+      gTileClips[TILE_TOPLEFT].y = 0;
+      gTileClips[TILE_TOPLEFT].w = TILE_WIDTH;
+      gTileClips[TILE_TOPLEFT].h = TILE_HEIGHT;
 
-      gTileClips[4].x = 80;
-      gTileClips[4].y = 80;
-      gTileClips[4].w = TILE_WIDTH;
-      gTileClips[4].h = TILE_HEIGHT;
+      gTileClips[TILE_LEFT].x = 80;
+      gTileClips[TILE_LEFT].y = 80;
+      gTileClips[TILE_LEFT].w = TILE_WIDTH;
+      gTileClips[TILE_LEFT].h = TILE_HEIGHT;
 
-      gTileClips[5].x = 80;
-      gTileClips[5].y = 160;
-      gTileClips[5].w = TILE_WIDTH;
-      gTileClips[5].h = TILE_HEIGHT;
+      gTileClips[TILE_BOTTOMLEFT].x = 80;
+      gTileClips[TILE_BOTTOMLEFT].y = 160;
+      gTileClips[TILE_BOTTOMLEFT].w = TILE_WIDTH;
+      gTileClips[TILE_BOTTOMLEFT].h = TILE_HEIGHT;
 
-      gTileClips[6].x = 160;
-      gTileClips[6].y = 0;
-      gTileClips[6].w = TILE_WIDTH;
-      gTileClips[6].h = TILE_HEIGHT;
+      gTileClips[TILE_TOP].x = 160;
+      gTileClips[TILE_TOP].y = 0;
+      gTileClips[TILE_TOP].w = TILE_WIDTH;
+      gTileClips[TILE_TOP].h = TILE_HEIGHT;
 
-      gTileClips[7].x = 160;
-      gTileClips[7].y = 80;
-      gTileClips[7].w = TILE_WIDTH;
-      gTileClips[7].h = TILE_HEIGHT;
+      gTileClips[TILE_CENTER].x = 160;
+      gTileClips[TILE_CENTER].y = 80;
+      gTileClips[TILE_CENTER].w = TILE_WIDTH;
+      gTileClips[TILE_CENTER].h = TILE_HEIGHT;
 
-      gTileClips[8].x = 160;
-      gTileClips[8].y = 160;
-      gTileClips[8].w = TILE_WIDTH;
-      gTileClips[8].h = TILE_HEIGHT;
+      gTileClips[TILE_BOTTOM].x = 160;
+      gTileClips[TILE_BOTTOM].y = 160;
+      gTileClips[TILE_BOTTOM].w = TILE_WIDTH;
+      gTileClips[TILE_BOTTOM].h = TILE_HEIGHT;
 
-      gTileClips[9].x = 240;
-      gTileClips[9].y = 0;
-      gTileClips[9].w = TILE_WIDTH;
-      gTileClips[9].h = TILE_HEIGHT;
+      gTileClips[TILE_TOPRIGHT].x = 240;
+      gTileClips[TILE_TOPRIGHT].y = 0;
+      gTileClips[TILE_TOPRIGHT].w = TILE_WIDTH;
+      gTileClips[TILE_TOPRIGHT].h = TILE_HEIGHT;
 
-      gTileClips[10].x = 240;
-      gTileClips[10].y = 80;
-      gTileClips[10].w = TILE_WIDTH;
-      gTileClips[10].h = TILE_HEIGHT;
+      gTileClips[TILE_RIGHT].x = 240;
+      gTileClips[TILE_RIGHT].y = 80;
+      gTileClips[TILE_RIGHT].w = TILE_WIDTH;
+      gTileClips[TILE_RIGHT].h = TILE_HEIGHT;
 
-      gTileClips[11].x = 240;
-      gTileClips[11].y = 160;
-      gTileClips[11].w = TILE_WIDTH;
-      gTileClips[11].h = TILE_HEIGHT;
+      gTileClips[TILE_BOTTOMRIGHT].x = 240;
+      gTileClips[TILE_BOTTOMRIGHT].y = 160;
+      gTileClips[TILE_BOTTOMRIGHT].w = TILE_WIDTH;
+      gTileClips[TILE_BOTTOMRIGHT].h = TILE_HEIGHT;
     }
+
   }
 
   //Close the file
@@ -154,7 +167,7 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
 
 bool MapManager::touchesWall(SDL_Rect box, Tile **tiles) {
   //Go through the tiles
-  for (int i = 0; i < 12; ++i) { //Tiene numeros hardcodeados que son para el ejemplo solamente
+  for (int i = 0; i < 192; ++i) {
     //If the tile is a wall type tile
     if ((tiles[i]->getType() >= 3) && (tiles[i]->getType() <= 11)) {
       //If the collision box touches the wall tile

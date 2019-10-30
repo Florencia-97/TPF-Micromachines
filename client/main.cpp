@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-//#include "Tile.h"
+#include "Tile.h"
 #include "SDLStarter.h"
 #include "communication/UserInput.h"
 #include "MapReader.h"
@@ -23,8 +23,8 @@ int main(int argc, char *args[]) {
       std::cout << std::endl;
   }
 */
-  SDLStarter starter = SDLStarter(SCREEN_HEIGHT,
-                                  SCREEN_WIDTH,
+  SDLStarter starter = SDLStarter(SCREEN_WIDTH,
+                                  SCREEN_HEIGHT,
                                   nullptr,
                                   nullptr);
   //Start up SDL and create window
@@ -37,11 +37,11 @@ int main(int argc, char *args[]) {
     LTexture tiles;
     MapManager manager = MapManager();
     SDL_Renderer *gRenderer = starter.get_global_renderer();
-    if (!TextureLoader::load_texture("dot.bmp", carTexture, gRenderer) ||
-        !TextureLoader::load_texture("tiles.png", tiles, gRenderer) ||
-        !manager.setTiles(tileSet, 1)) {
-      printf("Failed to load media!\n");
-    } else {
+    //TODO
+    TextureLoader::load_texture("dot.bmp", carTexture, gRenderer);
+    TextureLoader::load_texture("tiles.png", tiles, gRenderer);
+    manager.setTiles(tileSet, 192);
+
       //Main loop flag
       bool quit = false;
 
@@ -77,16 +77,13 @@ int main(int argc, char *args[]) {
 
         //Render level
         for (auto &element : tileSet) {
-          element->render(camera, manager.get_tiles_clip(), &tiles);
+          element->render(camera, manager.get_tiles_clip(), &tiles, gRenderer);
         }
-
-        //Render dot
-        car.render(camera, &carTexture);
+        car.render(camera, &carTexture, gRenderer);
 
         //Update screen
         SDL_RenderPresent(gRenderer);
       }
-    }
 
     //Free resources and close SDL
     carTexture.free();

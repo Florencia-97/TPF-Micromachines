@@ -3,6 +3,7 @@
 //
 #include "Tile.h"
 Tile::Tile(int x, int y, int tileType) {
+
   //Get the offsets
   mBox.x = x;
   mBox.y = y;
@@ -12,11 +13,16 @@ Tile::Tile(int x, int y, int tileType) {
   //Get the tile type
   mType = tileType;
 }
-void Tile::render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture) {
+void Tile::render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture, SDL_Renderer *renderer) {
   //If the tile is on screen
   if (checkCollision(camera, mBox)) {
-    // ver como agregar esta funcion!!!
-    tileTexture->render(mBox.x - camera.x, mBox.y - camera.y, &gTileClips[mType]);
+    tileTexture->render(mBox.x - camera.x,
+                        mBox.y - camera.y,
+                        &gTileClips[mType],
+                        0.0,
+                        nullptr,
+                        SDL_FLIP_NONE,
+                        renderer);
   }
 }
 
@@ -28,7 +34,6 @@ SDL_Rect Tile::getBox() {
   return mBox;
 }
 bool Tile::checkCollision(SDL_Rect a, SDL_Rect b) {
-  {
     //The sides of the rectangles
     int leftA, leftB;
     int rightA, rightB;
@@ -60,6 +65,5 @@ bool Tile::checkCollision(SDL_Rect a, SDL_Rect b) {
       return false;
     }
     return leftA < rightB;
-  }
 }
 

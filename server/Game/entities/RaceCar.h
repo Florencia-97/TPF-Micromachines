@@ -19,10 +19,7 @@ public:
     int id;
     InfoBlock stats;
     std::list<std::shared_ptr<StatusEffect>> status_effects;
-
-
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
-
     //POS advances the car simulation one timestep
     void step(float timestep);
 

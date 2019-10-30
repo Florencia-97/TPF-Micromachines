@@ -22,7 +22,7 @@ class Car{
   //Centers the camera over the car
   void setCamera(SDL_Rect &camera);
   //Shows the car on the screen
-  void render(SDL_Rect &camera, LTexture *texture);
+  void render(SDL_Rect &camera, LTexture *texture, SDL_Renderer *renderer);
   void handleEvent(SDL_Event event);
   void move(Tile *tiles[], MapManager manager);
 };

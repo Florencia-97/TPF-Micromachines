@@ -6,15 +6,15 @@ const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
 Car::Car(){
     //Initialize the collision box
-
     mBox.x = 0;
     mBox.y = 0;
   mBox.w = CAR_WIDTH;
   mBox.h = CAR_HEIGHT;
-
+  mVelX = 0;
+  mVelY = 0;
 }
 
-void Car::move(Tile *tiles[], MapManager manager) {
+void Car::move(Tile **tiles, MapManager manager) {
   //Move the dot left or right
   mBox.x += mVelX;
   //If the dot went too far to the left or right or touched a wall
@@ -29,6 +29,7 @@ void Car::move(Tile *tiles[], MapManager manager) {
     //move back
     mBox.y -= mVelY;
   }
+
 }
 
 void Car::setCamera( SDL_Rect& camera ){
@@ -43,8 +44,8 @@ void Car::setCamera( SDL_Rect& camera ){
     if( camera.y > LEVEL_HEIGHT - camera.h ) camera.y = LEVEL_HEIGHT - camera.h;
 }
 
-void Car::render(SDL_Rect &camera, LTexture *texture) {
-  texture->render(mBox.x - camera.x, mBox.y - camera.y);
+void Car::render(SDL_Rect &camera, LTexture *texture, SDL_Renderer *renderer) {
+  texture->render(mBox.x - camera.x, mBox.y - camera.y, nullptr, 0.0, nullptr, SDL_FLIP_NONE, renderer);
 }
 void Car::handleEvent(SDL_Event event) {
   //If a key was pressed

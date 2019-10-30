@@ -17,7 +17,7 @@ class Tile {
   //Initializes position and type
   Tile(int x, int y, int tileType);
   //Shows the tile
-  void render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture);
+  void render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture, SDL_Renderer *renderer);
   //Get the tile type
   int getType();
   //Get the collision box
