@@ -339,7 +339,7 @@ void b2TimeOfImpact(b2TOIOutput* output, const b2TOIInput* input)
 			{
 				sweepA.GetTransform(&xfA, x);
 				sweepB.GetTransform(&xfB, x);
-				float32 f = fcn.Evaluate(xfA, xfB) - target;
+				float32 f = fcn.Evaluate(xfA, xfB) - car;
 
 				printf("%g %g\n", x, f);
 
@@ -403,7 +403,7 @@ void b2TimeOfImpact(b2TOIOutput* output, const b2TOIInput* input)
 				break;
 			}
 
-			// Compute 1D root of: f(x) - target = 0
+          // Compute 1D root of: f(x) - car = 0
 			int32 rootIterCount = 0;
 			float32 a1 = t1, a2 = t2;
 			for (;;)
