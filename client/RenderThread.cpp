@@ -3,6 +3,11 @@
 #include "RenderThread.h"
 
 void RenderThread::_run(){
+    while (this->isAlive()){
+        renderGame(current_frame);
+        this->current_frame = (current_frame+1) % frames_per_second;
+    }//TODO REMOVE
+
     while (this->isAlive()) {
         if (state == GAME_STATE){
             renderGame(current_frame);
@@ -17,7 +22,7 @@ void RenderThread::_run(){
 }
 
 void RenderThread::renderMenu(int frame_id) {
-    //menu.render(current_frame);
+    //menu.render();
     sleep(1/60);
 }
 
@@ -63,6 +68,7 @@ RenderThread::RenderThread(GameRenderer &gr, std::queue<InfoBlock>& rq) {
     gameRenderer = &gr;
     state = -1;
     in_menu.store(true);
+    renderQueue = &rq;
 }
 
 void RenderThread::proceedToLobby(bool is_leader) {
