@@ -38,8 +38,8 @@ void GameThread::addPLayer(Socket &plr_socket) {
         ib[CONNECTED_TO_GAME] = CONNECTED_TO_GAME_NO;
         return ;
     } else{
-        this->plr_threads.emplace_back(std::move(plr_socket));
-        this->plr_threads.back().run();
+        this->plr_threads.emplace_back(plr_socket);
+        this->plr_threads.back().run(); // should it run after the lobby is set?
         ib[CONNECTED_TO_GAME] = CONNECTED_TO_GAME_YES;
     }
     Protocol::recvMsg(&plr_socket, ib);
