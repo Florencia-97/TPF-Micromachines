@@ -1,7 +1,3 @@
-//
-// Created by brian on 10/26/19.
-//
-
 #ifndef MICROMACHINES_CLIENT_LTEXTURE_H_
 #define MICROMACHINES_CLIENT_LTEXTURE_H_
 

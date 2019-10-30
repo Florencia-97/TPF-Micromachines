@@ -1,5 +1,3 @@
-
-
 #include "GameMap.h"
 #include "tiles/TilesFactory.h"
 
