@@ -8,25 +8,22 @@
 #include "../../common/conc/BaseThread.h"
 #include "PlayerThread.h"
 #include <queue>
-#include <vector>
+#include <list>
 #include <random>
 
 class GameThread : public BaseThread {
     void _run() override;
-
-    void _runLobby();
-
+    void _killPlayers(bool all);
+    int _runLobby();
     void _runGame();
-
-    //POS lobby_mode = false and game starts
+    Socket sktOwner;
     void startGame();
 
 public:
     std::string gameName;
     bool lobby_mode;
     int game_id;
-    std::vector<PlayerThread> plr_threads;
-    std::queue<Socket> player_connection_queue;
+    std::list<PlayerThread> plr_threads;
 
     GameWorld game;
 
@@ -37,6 +34,8 @@ public:
     //PRE lobby_mode must be true
     //POS adds player to the lobby
     void addPLayer(Socket &plr_socket);
+
+    ~GameThread();
 
 };
 
