@@ -1,7 +1,6 @@
 #include "EventSender.h"
 
 #include "../../common/infostream/Protocol.h"
-#include "../../common/infostream/InfoBlock.h"
 
 EventSender::EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue) :
     skt(skt) {
