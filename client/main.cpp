@@ -24,21 +24,28 @@ int main(int argc, char *args[]) {
       std::cout << std::endl;
   }
 */
+  //Starter se encarga de iniciar SDL
   SDLStarter starter = SDLStarter(SCREEN_WIDTH,
                                   SCREEN_HEIGHT,
                                   nullptr,
                                   nullptr);
   //Start up SDL and create window
   if (!starter.init()) {
+    //TODO crear excepcion para esto
     printf("Failed to initialize!\n");
   } else {
+    // En total, tendremos 192 casillas individuales.
     Tile *tileSet[192];
     //Load media
+    //Texturas que contienen tanto al auto como a todas las tiles como una sola
     LTexture carTexture;
     LTexture tiles;
+    //Encargado de manejar colisiones y setear las tiles
     MapManager manager = MapManager();
+    //Renderer LINEAL global
     SDL_Renderer *gRenderer = starter.get_global_renderer();
     try {
+      //Carga de texturas inicial
       TextureLoader::load_texture("dot.bmp", carTexture, gRenderer);
       TextureLoader::load_texture("tiles.png", tiles, gRenderer);
       manager.setTiles(tileSet, 192);

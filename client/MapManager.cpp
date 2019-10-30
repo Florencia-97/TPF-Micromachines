@@ -47,6 +47,7 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
   bool tilesLoaded = true;
   //The tile offsets
   int x = 0, y = 0;
+  //Carga del archivo
   std::ifstream map("lazy.map");
   if (map.fail()) {
     printf("Unable to load map file!\n");
@@ -59,14 +60,18 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
       //Read tile from map file
       map >> tileType;
       if (map.fail()) {
+        //TODO arrojar excepcion
         printf("Error loading map: Unexpected end of file!\n");
         tilesLoaded = false;
         break;
       }
       //If the number is a valid tile number
+      //Como cada tipo de tile es un numero, recorro todos los tipos hasta el mas grande. Se podria hacer con un hash,
+      // pero son pocas
       if ((tileType >= 0) && (tileType < TOTAL_TILE_SPRITES)) {
         tiles[i] = new Tile(x, y, tileType);
       } else {
+        //TODO arrojar excepcion
         //Stop loading map
         printf("Error loading map: Invalid tile type at %d!\n", i);
         tilesLoaded = false;
@@ -83,7 +88,7 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
       printf("X:%d\n", x);
       printf("Y:%d\n", y);
     }
-    //Clip the sprite sheet (Clip de img. Only for example)
+    //TODO formatear esto para el tp bien.
     if (tilesLoaded) {
       const int TILE_CENTER = 3;
       const int TILE_TOP = 4;
@@ -165,10 +170,11 @@ bool MapManager::setTiles(Tile *tiles[], int totalTiles) {
   return tilesLoaded;
 }
 
+//Con esta funcion veo si toca las paredes para evitar que se superponga
 bool MapManager::touchesWall(SDL_Rect box, Tile **tiles) {
   //Go through the tiles
   for (int i = 0; i < 192; ++i) {
-    //If the tile is a wall type tile
+    //If the tile is a wall type tile (de 3 a 11 son wall type)
     if ((tiles[i]->getType() >= 3) && (tiles[i]->getType() <= 11)) {
       //If the collision box touches the wall tile
       if ((this->checkCollision(box, tiles[i]->getBox()))) {
@@ -181,6 +187,6 @@ bool MapManager::touchesWall(SDL_Rect box, Tile **tiles) {
   return false;
 }
 SDL_Rect *MapManager::get_tiles_clip() {
-  return gTileClips; //chequearEsto
+  return gTileClips;
 }
 
