@@ -14,7 +14,7 @@
 #define LOBBY_STATE 1
 #define GAME_STATE 2
 
-class RenderThread : BaseThread {
+class RenderThread : public BaseThread {
     int current_frame;
     int frames_per_second;
     int state;
