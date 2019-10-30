@@ -15,15 +15,13 @@
 
 class TextureLoader {
  public:
+
   TextureLoader() = default;
-  static bool load_texture(const std::string &path,
-                           LTexture &texture,
-                           SDL_Renderer *renderer);
-  static void close(Tile **tiles,
-                    int totalTiles,
-                    std::vector<LTexture> vector,
-                    SDL_Renderer *renderer,
-                    SDL_Window *window);
+
+  static bool load_texture(const std::string &path, LTexture *texture, SDL_Renderer *renderer);
+
+  static void close(Tile **tiles, int totalTiles, std::vector<LTexture> vector,
+                    SDL_Renderer *renderer, SDL_Window *window);
 };
 
 #endif //MICROMACHINES_CLIENT_TEXTURELOADER_H_

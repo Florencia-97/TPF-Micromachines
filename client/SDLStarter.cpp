@@ -44,15 +44,7 @@ bool SDLStarter::init() {
 SDL_Renderer *SDLStarter::get_global_renderer() {
   return renderer;
 }
-void SDLStarter::close(Tile *tiles[]) {
-  //Deallocate tiles
-  for (int i = 0; i < 192; ++i) {
-    if (tiles[i] == nullptr) {
-      delete tiles[i];
-      tiles[i] = nullptr;
-    }
-  }
-
+void SDLStarter::close() {
   //Destroy window
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

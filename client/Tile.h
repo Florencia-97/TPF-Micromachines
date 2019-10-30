@@ -8,9 +8,7 @@
 #include <SDL_rect.h>
 #include "LTexture.h"
 
-#DE
-
-class Tile {
+class Tile : public LTexture {
  private:
   //The attributes of the tile
   SDL_Rect mBox;
@@ -20,7 +18,7 @@ class Tile {
   //Initializes position and type
   Tile(int x, int y, int tileType);
   //Shows the tile
-  void render(SDL_Rect &camera, SDL_Rect *gTileClips, LTexture *tileTexture, SDL_Renderer *renderer);
+  void render(SDL_Rect &camera, SDL_Renderer *renderer);
   //Get the tile type
   int getType();
   //Get the collision box

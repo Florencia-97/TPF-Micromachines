@@ -21,6 +21,8 @@ public:
     void loadMap(std::string map);
 
     void render();
+
+    ~GameMap();
 };
 
 

@@ -4,10 +4,8 @@
 #include "Tile.h"
 #include "SDLStarter.h"
 #include "communication/UserInput.h"
-#include "MapReader.h"
 #include <iostream>
 #include "TextureLoader.h"
-#include "MapManager.h"
 #include "Car.h"
 #include "TEXTURE_ERROR.h"
 #define SCREEN_WIDTH 640
@@ -19,16 +17,14 @@ int main(int argc, char *args[]) {
   if (!starter.init()) {
       throw std::runtime_error("Failed to initialized SDL STARTER");
   } else {
-    Tile *tileSet[192];
+
     //Load media
     LTexture carTexture;
-    LTexture tiles;
-    MapManager manager = MapManager();
+    LTexture tileTexture;
     SDL_Renderer *gRenderer = starter.get_global_renderer();
     try {
-      TextureLoader::load_texture("dot.bmp", carTexture, gRenderer);
-      TextureLoader::load_texture("tiles.png", tiles, gRenderer);
-      manager.setTiles(tileSet, 192);
+      TextureLoader::load_texture("dot.bmp", &carTexture, gRenderer);
+      TextureLoader::load_texture("assets/map/grass.png", &tileTexture, gRenderer);
     }
     catch (TEXTURE_ERROR &error) {
       return 1;
@@ -40,7 +36,7 @@ int main(int argc, char *args[]) {
       SDL_Event e;
 
       //The dot that will be moving around on the screen
-      Car car;
+      Car car(&carTexture);
 
       //Level camera
       SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -59,7 +55,7 @@ int main(int argc, char *args[]) {
         }
 
         //Move the dot
-        car.move(tileSet, manager);
+        //car.move(tileSet, manager);
         car.setCamera(camera);
 
         //Clear screen
@@ -67,19 +63,15 @@ int main(int argc, char *args[]) {
         SDL_RenderClear(gRenderer);
 
         //Render level
-        for (auto &element : tileSet) {
-          element->render(camera, manager.get_tiles_clip(), &tiles, gRenderer);
-        }
-        car.render(camera, &carTexture, gRenderer);
+        car.render(camera, gRenderer);
 
         //Update screen
         SDL_RenderPresent(gRenderer);
       }
 
     //Free resources and close SDL
-    carTexture.free();
-    starter.close(tileSet);
-    tiles.free();
+    starter.close();
+
   }
   return 0;
 }

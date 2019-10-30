@@ -19,7 +19,7 @@ class SDLStarter {
       renderer(nullptr) {};
   bool init();
   SDL_Renderer *get_global_renderer();
-  void close(Tile *tiles[]);
+  void close();
 
 };
 

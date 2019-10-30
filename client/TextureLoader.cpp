@@ -5,8 +5,8 @@
 #include "TextureLoader.h"
 #include "TEXTURE_ERROR.h"
 
-bool TextureLoader::load_texture(const std::string &path, LTexture &texture, SDL_Renderer *renderer) {
-  if (!texture.load_from_file(path, renderer)) {
+bool TextureLoader::load_texture(const std::string &path, LTexture* texture, SDL_Renderer *renderer) {
+  if (!texture->load_from_file(path, renderer)) {
     throw TEXTURE_ERROR("No pudo cargarse la imagen\n");
   }
   return true;

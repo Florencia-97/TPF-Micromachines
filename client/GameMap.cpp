@@ -6,7 +6,6 @@ void GameMap::loadMap(std::string mapPath) {
     YAML::Node config = YAML::LoadFile(mapPath);
     YAML::Node mapyaml = config["Map"];
 
-
     int num = 1;
     for (YAML::iterator it = mapyaml.begin(); it != mapyaml.end(); ++it) {
         const YAML::Node& row = *it;
@@ -37,6 +36,14 @@ void GameMap::render(){
     for (const auto& row: map){
         for (auto tile: row){
     //        tile.render(camera, manager.get_tiles_clip(), &tiles, gRenderer)
+        }
+    }
+}
+
+GameMap::~GameMap() {
+    for (const auto& row: map){
+        for (auto tile: row){
+            tile.free();
         }
     }
 }
