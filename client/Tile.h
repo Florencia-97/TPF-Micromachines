@@ -6,7 +6,7 @@
 #define MICROMACHINES_CLIENT_TILE_H_
 
 #include <SDL_rect.h>
-#include "LTexture.h"
+#include "rendering/LTexture.h"
 
 class Tile{
 

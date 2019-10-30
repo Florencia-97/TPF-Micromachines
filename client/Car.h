@@ -3,7 +3,7 @@
 
 #include <SDL_rect.h>
 #include <SDL_events.h>
-#include "LTexture.h"
+#include "rendering/LTexture.h"
 #include "Tile.h"
 class Car {
  private:
@@ -18,15 +18,15 @@ class Car {
 
  public:
   //Initializes the variables
-  explicit Car(LTexture* my_texture);
+  explicit Car();
+
+  void addTexture(LTexture* my_texture);
 
   //Centers the camera over the car
   void setCamera(SDL_Rect &camera);
 
   //Shows the car on the screen
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
-
-  void handleEvent(SDL_Event event);
 
   void move();
 

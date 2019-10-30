@@ -21,10 +21,6 @@ class LTexture {
 
   void set_color(Uint8 red, Uint8 green, Uint8 blue);
 
-  void set_blend_mode(SDL_BlendMode blending);
-
-  void set_alpha(Uint8 alpha);
-
   void render(int x,
               int y,
               SDL_Rect *clip = nullptr,

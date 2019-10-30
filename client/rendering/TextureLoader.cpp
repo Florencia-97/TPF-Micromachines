@@ -5,11 +5,15 @@
 #include "TextureLoader.h"
 #include "TEXTURE_ERROR.h"
 
-bool TextureLoader::load_texture(const std::string &path, LTexture* texture, SDL_Renderer *renderer) {
-  if (!texture->load_from_file(path, renderer)) {
-    throw TEXTURE_ERROR("No pudo cargarse la imagen\n");
-  }
-  return true;
+LTexture* TextureLoader::load_texture(std::string name, SDL_Renderer *renderer) {
+    if (texture_cache.find(name) == texture_cache.end()){
+        texture_cache.emplace(name, LTexture{});
+        if (!texture_cache[name].load_from_file("assets/"+name, renderer)) {
+            texture_cache.erase(name);
+            throw TEXTURE_ERROR("error loading image\n");
+        }
+    }
+    return &texture_cache[name];
 }
 
 void TextureLoader::close(Tile **tiles,

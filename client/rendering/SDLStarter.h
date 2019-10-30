@@ -3,7 +3,7 @@
 //
 #ifndef MICROMACHINES_SDLSTARTER_H
 #define MICROMACHINES_SDLSTARTER_H
-#include "Tile.h"
+#include "../Tile.h"
 class SDLStarter {
  private:
   const int screenWidth;

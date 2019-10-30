@@ -10,17 +10,20 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <unordered_map>
 #include "LTexture.h"
-#include "Tile.h"
+#include "../Tile.h"
 
 class TextureLoader {
- public:
+    std::unordered_map<std::string, LTexture> texture_cache;
 
-  TextureLoader() = default;
+    public:
 
-  static bool load_texture(const std::string &path, LTexture *texture, SDL_Renderer *renderer);
+    TextureLoader() = default;
 
-  static void close(Tile **tiles, int totalTiles, std::vector<LTexture> vector,
+    LTexture* load_texture(std::string name, SDL_Renderer *renderer);
+
+    void close(Tile **tiles, int totalTiles, std::vector<LTexture> vector,
                     SDL_Renderer *renderer, SDL_Window *window);
 };
 
