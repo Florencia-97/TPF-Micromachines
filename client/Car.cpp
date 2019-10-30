@@ -1,12 +1,6 @@
 
 #include "Car.h"
-
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-const int LEVEL_WIDTH = 1280;
-const int LEVEL_HEIGHT = 960;
-//Todo hay que poner estos valores accesibles para todas las instancias
+#include "../config/constants.h"
 
 Car::Car(){
     mBox.x = 0;
@@ -25,7 +19,6 @@ void Car::move(int x, int y) {
 }
 
 void Car::setCamera( SDL_Rect& camera ){
-  //todo acomodarEsto
   camera.x = (mBox.x + w / 2) - SCREEN_WIDTH / 2;
   camera.y = (mBox.y + h / 2) - SCREEN_HEIGHT / 2;
     // Keep the camera in bounds
