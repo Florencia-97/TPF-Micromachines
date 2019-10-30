@@ -11,18 +11,16 @@
 #define TILE_HEIGHT  512
 
 class GameMap {
-    std::vector<std::vector<Tile>> map; //TODO maybe make vector so we can use []
+    std::vector<std::vector<Tile>> map;
 
 public:
     GameMap() = default;
 
-    void dummyInit(int xSize, int ySize);//todo remove
+    void dummyInit(int xSize, int ySize, LTexture* texture);//todo remove
 
     void loadMap(std::string map);
 
-    void render();
-
-    ~GameMap();
+    void render(SDL_Rect &camera, SDL_Renderer *renderer);
 };
 
 

@@ -7,9 +7,8 @@ void RenderThread::_run() {
     SDL_Rect camera = {0, 0, 800, 600};
     SDL_Event e;
 
-    while (this->isAlive()) {
-        //Handle events on queue
-        //Move the dot
+//    while (this->isAlive()) {
+/*        //Move the dot
         car.move(tileSet, manager);
         car.setCamera(camera);
 
@@ -24,10 +23,6 @@ void RenderThread::_run() {
         car.render(camera, &carTexture, gRenderer);
 
         //Update screen
-        SDL_RenderPresent(gRenderer);
-    }
-}
-
-RenderThread::RenderThread() {
-
+        SDL_RenderPresent(gRenderer);*/
+ //   }
 }

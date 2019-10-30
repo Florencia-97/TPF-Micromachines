@@ -8,8 +8,8 @@
 #include "../common/infostream/InfoBlock.h"
 #include <SDL2/SDL.h>
 
-class RenderThread : BaseThread {
-    void _run() override;
+class RenderThread {
+    void _run() ;
 
 public:
     //queue<InfoBlock> renderQueue;

@@ -1,13 +1,15 @@
+
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include "Tile.h"
 #include "SDLStarter.h"
-#include "communication/UserInput.h"
 #include <iostream>
 #include "TextureLoader.h"
 #include "Car.h"
 #include "TEXTURE_ERROR.h"
+#include <thread>
+#include <chrono>
+
+#include "GameMap.h"
+
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
@@ -22,6 +24,7 @@ int main(int argc, char *args[]) {
     LTexture carTexture;
     LTexture tileTexture;
     SDL_Renderer *gRenderer = starter.get_global_renderer();
+
     try {
       TextureLoader::load_texture("dot.bmp", &carTexture, gRenderer);
       TextureLoader::load_texture("assets/map/grass.png", &tileTexture, gRenderer);
@@ -37,6 +40,8 @@ int main(int argc, char *args[]) {
 
       //The dot that will be moving around on the screen
       Car car(&carTexture);
+      GameMap map;
+      map.dummyInit(5, 5, &tileTexture);
 
       //Level camera
       SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -44,15 +49,6 @@ int main(int argc, char *args[]) {
       //While application is running
       while (!quit) {
         //Handle events on queue
-        while (SDL_PollEvent(&e) != 0) {
-          //User requests quit
-          if (e.type == SDL_QUIT) {
-            quit = true;
-          }
-
-          //Handle input for the dot
-          car.handleEvent(e);
-        }
 
         //Move the dot
         //car.move(tileSet, manager);
@@ -64,9 +60,11 @@ int main(int argc, char *args[]) {
 
         //Render level
         car.render(camera, gRenderer);
+        map.render(camera, gRenderer);
 
         //Update screen
         SDL_RenderPresent(gRenderer);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
       }
 
     //Free resources and close SDL

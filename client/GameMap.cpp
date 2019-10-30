@@ -15,7 +15,8 @@ void GameMap::loadMap(std::string mapPath) {
         int colnum = 0;
         for (YAML::iterator c = column.begin(); c != column.end(); ++c) {
             const YAML::Node& col_value = *c;
-            this->map.back().emplace_back(TILE_WIDTH * colnum, TILE_HEIGHT * (num-1), col_value.as<int>());
+            //this->map.back().emplace_back(TILE_WIDTH * colnum, TILE_HEIGHT * (num-1), col_value.as<int>());
+            //TODO manage textures here
             colnum++;
         }
         num ++;
@@ -23,27 +24,19 @@ void GameMap::loadMap(std::string mapPath) {
     //std::cout << "Loaded!\n";
 }
 
-void GameMap::dummyInit(int x, int y) {
+void GameMap::dummyInit(int x, int y, LTexture* texture) {
     for (int i=0; i<y; i++){
         map.emplace_back();
         for (int j= 0; j<x; j++){
-            map[i].emplace_back(j*TILE_WIDTH, i*TILE_HEIGHT,1);
+            map[i].emplace_back(j*TILE_WIDTH, i*TILE_HEIGHT,1, texture);
         }
     }
 }
 
-void GameMap::render(){
+void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
     for (const auto& row: map){
         for (auto tile: row){
-    //        tile.render(camera, manager.get_tiles_clip(), &tiles, gRenderer)
-        }
-    }
-}
-
-GameMap::~GameMap() {
-    for (const auto& row: map){
-        for (auto tile: row){
-            tile.free();
+            tile.render(camera, renderer);
         }
     }
 }
