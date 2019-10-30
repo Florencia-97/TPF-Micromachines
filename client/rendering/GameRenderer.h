@@ -19,16 +19,16 @@ class GameRenderer {
     SDL_Renderer *gRenderer;
     SDLStarter starter;
     GameMap* map;
-    Car* target;
+  Car *car;
     TextureLoader tloader;
 
 
 public:
 
-    //the map to render and the target to follow with the camera
+  //the map to render and the car to follow with the camera
     explicit GameRenderer();
 
-    void init(GameMap *map, std::string mapConfigPath, Car* target);
+  void init(GameMap *game_map, std::string mapConfigPath, Car *p_car);
 
     void setCamera(int x, int y);
 

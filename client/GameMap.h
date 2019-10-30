@@ -18,7 +18,7 @@ public:
 
     void dummyInit(int xSize, int ySize, LTexture* texture);//todo remove
 
-    void loadMap(std::string map);
+  void loadMap(const std::string &map, SDL_Renderer *gRenderer);
 
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
 };

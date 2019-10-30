@@ -1,7 +1,3 @@
-//
-// Created by brian on 10/26/19.
-//
-
 #include <SDL2/SDL_image.h>
 #include "LTexture.h"
 
