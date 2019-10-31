@@ -16,6 +16,7 @@ class GameThread : public BaseThread {
     void _killPlayers(bool all);
     int _runLobby();
     void _runGame();
+    void _awakePlayersInLobby();
     Socket sktOwner;
     void startGame();
 
