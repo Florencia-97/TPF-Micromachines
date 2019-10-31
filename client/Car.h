@@ -10,6 +10,7 @@ class Car {
   SDL_Rect mBox;
   const int w = 20;
   const int h = 20;
+  float rotation;
   LTexture* texture;
 
  public:
@@ -18,7 +19,7 @@ class Car {
   // Centers the camera over the car
   void setCamera(SDL_Rect &camera);
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
-  void move(int x, int y);
+  void move(int x, int y, float r);
   ~Car();
 };
 

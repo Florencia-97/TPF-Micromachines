@@ -17,18 +17,21 @@ class Menu {
   std::vector<SDL_Rect> gSpriteClips;
   std::vector<Button> gButtons;
 
- public:
-
   bool load_media();
 
-  void init(SDL_Renderer *gRenderer);
+ public:
 
-  void render();
+    //POS initializes all the components of the menu
+    void init(SDL_Renderer *gRenderer);
 
-  //POS checks for events and updates button based on the event
-  //returns a pointer to the updated button or a nullptr if no button
-  //events were registered
-  Button* updateButtons(SDL_Event e);
+    //PRE must be initialized
+    void render();
+
+    //PRE must be initialized
+    //POS checks for events and updates button based on the event
+    //returns a pointer to the updated button or a nullptr if no button
+    //events were registered
+    Button* updateButtons(SDL_Event e);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
