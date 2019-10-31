@@ -1,7 +1,5 @@
 #include <iostream>
-#include "yaml-cpp/yaml.h"
 
-#include "config/Configuration.h"
 #include "../common/infostream/Socket.h"
 #include "../config/constants.h"
 #include "threads/GameThread.h"
