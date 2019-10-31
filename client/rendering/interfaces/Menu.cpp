@@ -9,14 +9,14 @@ bool Menu::load_media() {
     if (!gButtonSpriteSheetTexture.load_from_file("client/rendering/assets/buttons/button.png", gRenderer)) {
         printf("Failed to load button sprite texture!\n");
         success = false;
-    } else {
-        //Set sprites. Para ello, particiona la imagen.
+    } else {//todo arreglar que botones se cargan
+
         for (int i = 0; i < BUTTON_SPRITE_TOTAL; ++i) {
             gSpriteClips.emplace_back();
             gSpriteClips[i].x = 0;
             gSpriteClips[i].y = i * 200;
-            gSpriteClips[i].w = BUTTON_WIDTH;
-            gSpriteClips[i].h = BUTTON_HEIGHT;
+            gSpriteClips[i].w = (int)(gButtonSpriteSheetTexture.getWidth()/4);
+            gSpriteClips[i].h = (int)(gButtonSpriteSheetTexture.getHeight())/4;
         }
     }
     return success;
