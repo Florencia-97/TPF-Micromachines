@@ -4,17 +4,16 @@
 #include <SDL_render.h>
 #include <string>
 class LTexture {
- private:
   SDL_Texture *texture;
   int width;
   int height;
  public:
   LTexture();
   ~LTexture();
-  bool load_from_file(const std::string &path,
-                      SDL_Renderer *renderer);
+  bool load_from_file(const std::string &path, SDL_Renderer *renderer);
   void free();
 
+  // RGB
   void set_color(Uint8 red, Uint8 green, Uint8 blue);
 
   void render(int x,
