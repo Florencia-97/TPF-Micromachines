@@ -30,7 +30,6 @@ void GameRenderer::init(GameMap *game_map, const std::string &mapConfigPath, Car
   p_car->addTexture(tloader.load_texture("dot.bmp", gRenderer));
   this->map = game_map;
   game_map->loadMap(mapConfigPath, gRenderer);
-  //game_map->dummyInit(5,5,tloader.load_texture("map/grass.png",gRenderer));
 }
 
 void GameRenderer::close(){

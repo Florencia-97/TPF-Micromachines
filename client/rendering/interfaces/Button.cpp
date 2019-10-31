@@ -53,18 +53,19 @@ bool Button::handleEvent(SDL_Event *e) {
       }
     }
   }
-
+    return  false;
 }
 void Button::render() {
-  //Show current button sprite
-  gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gSpriteClips[mCurrentSprite]);
+  //for gSpriteClips we access the pointer, get the current sprite, and then we pass the address to said sprite
+  gButtonSpriteSheetTexture->render(mPosition.x, mPosition.y, &((*gSpriteClips)[mCurrentSprite]));
 }
 
-Button::Button(SDL_Window *window, SDL_Renderer *sdl_renderer) {
+Button::Button(SDL_Renderer *sdl_renderer,  LTexture *buttonSpriteSheet, std::vector<SDL_Rect> *spriteClips) {
   mPosition.x = 0;
   mPosition.y = 0;
+  gButtonSpriteSheetTexture = buttonSpriteSheet;
+  gSpriteClips = spriteClips;
   mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
   this->gRenderer = sdl_renderer;
-  this->gWindow = window;
 }
 

@@ -10,6 +10,8 @@
 
 #include <SDL_events.h>
 #include <SDL_system.h>
+#include <vector>
+
 class Button {
  private:
 //The window we'll be rendering to
@@ -18,12 +20,14 @@ class Button {
   SDL_Renderer *gRenderer = nullptr;
 
 //Mouse button sprites
-  SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
-  LTexture gButtonSpriteSheetTexture;
+  std::vector<SDL_Rect>* gSpriteClips;
+  LTexture* gButtonSpriteSheetTexture;
 //Buttons objects
+
  public:
+
   //Initializes internal variables
-  Button(SDL_Window *window, SDL_Renderer *sdl_renderer);
+  Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet, std::vector<SDL_Rect> *spriteClips);
   //Sets top left position
   void setPosition(int x, int y);
   //Handles mouse event. If the mouse is clicked, returns true
