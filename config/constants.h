@@ -5,12 +5,17 @@
 #define PORT "8080"
 
 // Selecting race
-#define NUMBER_RACE "number_race"
+#define RACE_ID "number_race"
 
 // Game connected
 #define CONNECTED_TO_GAME "conectado_al_juego"
 #define CONNECTED_TO_GAME_YES "OK"
 #define CONNECTED_TO_GAME_NO "ERROR"
+#define OWNER "owner"
+
+// answer
+#define OWNER_YES "yes"
+#define OWNER_NO "no"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"

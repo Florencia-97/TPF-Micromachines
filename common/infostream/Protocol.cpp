@@ -21,6 +21,7 @@ bool Protocol::recvMsg(Socket* socket, InfoBlock& info){
         info.Load(msg,false);
         return true;
     } catch (socketDisconnected &e){
+        std::cout << "Socket disconected\n";
         return false;
     } catch (...){
         std::cerr << "Unknown socket error "<< HERE << std::endl;
@@ -31,7 +32,7 @@ bool Protocol::recvMsg(Socket* socket, InfoBlock& info){
 // * it sends the length of msg (uint32_t)
 // * send msg
 bool Protocol::sendMsg(Socket* socket, InfoBlock& info){
-    auto msg = info.srcString();
+    std::string msg = info.srcString();
     uint32_t len = htonl(msg.size());
     try {
         socket->sendMsg(&len, LEN_MSG_NOTICE);
