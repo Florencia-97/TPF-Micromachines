@@ -54,7 +54,17 @@ void GameThread::addPLayer(Socket &plr_socket) {
     Protocol::recvMsg(&plr_socket, ib);
 }
 
+void GameThread::_awakePlayersInLobby(){
+    auto it = this->plr_threads.begin();
+    while (it != this->plr_threads.end()) {
+        // TODO: check if he is still connected, he could have left for gut.
+        (it)->run();
+        ++it;
+    }
+}
+
 void GameThread::_runGame() {
+    this->_awakePlayersInLobby();
     std::list<PlayerThread>::iterator it = this->plr_threads.begin();
     while (!this->isAlive()) {
         for (int i = 0 ; i < this->plr_threads.size(); i++){
@@ -76,12 +86,12 @@ void GameThread::_run() {
     int mapNumber = _runLobby();
     std::cout << "Race chosen: " << mapNumber << std::endl;
     // TODO load box2D world with the mapNumber given
-    this->lobby_mode = false;
+    this->lobby_mode = false; // Atomic?
     this->plr_threads.emplace_front(this->sktOwner);
-    this->plr_threads.front().run();
 
     // Not in lobby mode anymore !
     if (!this->isAlive()) {
+        std::cout << "Running race!\n";
         _runGame();
     }
     _killPlayers(true);
