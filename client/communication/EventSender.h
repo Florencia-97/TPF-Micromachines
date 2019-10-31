@@ -16,10 +16,10 @@
 class EventSender: public BaseThread{
     Socket& skt;
     SafeQueue<InfoBlock>* safeQueue;
-    virtual void _run() override;
+    void _run() override;
 
 public:
-    EventSender(Socket& skt, SafeQueue<InfoBlock>* queue);
+    EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue);
     ~EventSender();
 };
 

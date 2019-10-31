@@ -1,6 +1,7 @@
 #include "EventSender.h"
 
 #include "../../common/infostream/Protocol.h"
+#include "../../config/constants.h"
 
 EventSender::EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue) :
     skt(skt) {
@@ -8,8 +9,8 @@ EventSender::EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue) :
 }
 
 bool _isFinalEvent(InfoBlock& ib){
-    std::string actionType = ib.get<std::string>("action");
-    return actionType.compare("QUIT") == 0; // Discuss how the event sends me the quit action!
+    std::string actionType = ib.get<std::string>(ACTION_TYPE);
+    return actionType == QUIT;
 }
 
 void EventSender::_run() {
@@ -18,11 +19,11 @@ void EventSender::_run() {
         if (_isFinalEvent(ib)){
             break;
         }
-        if (Protocol::sendMsg(&this->skt, ib) == false){
+        if (!Protocol::sendMsg(&this->skt, ib)){
             break;
         }
     }
-    close();
+    this->close();
 }
 
 EventSender::~EventSender() {}

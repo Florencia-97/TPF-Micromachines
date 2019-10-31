@@ -12,11 +12,12 @@
  */
 
 class UserInput : public BaseThread {
-    SafeQueue<InfoBlock>* safeQueue;
-public:
-    UserInput(SafeQueue<InfoBlock>* safeQueue);
-    void _rcvKeyInput(SDL_Event &e);
+    SafeQueue<InfoBlock>* safeQueueServer;
+    SafeQueue<InfoBlock>* safeQueueClient;
     void _run() override;
+public:
+    UserInput(SafeQueue<InfoBlock>* safeQueueServer, SafeQueue<InfoBlock>* safeQueueClient);
+    void _rcvKeyInput(SDL_Event &e);
     ~UserInput();
 
 };
