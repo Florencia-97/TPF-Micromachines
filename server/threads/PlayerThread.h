@@ -3,11 +3,12 @@
 #ifndef MICROMACHINES_PLAYERTHREAD_H
 #define MICROMACHINES_PLAYERTHREAD_H
 
+#include <queue>
+
 #include "../../common/infostream/Socket.h"
 #include "../../common/conc/SenderThread.h"
 #include "../../common/infostream/InfoBlock.h"
 #include "../../common/infostream/Protocol.h"
-#include <queue>
 #include "../../common/SafeQueue.h"
 
 class PlayerThread : public BaseThread {
@@ -16,7 +17,7 @@ class PlayerThread : public BaseThread {
     Socket skt;
 
 public:
-    SafeQueue<InfoBlock> event_q; //TODO change to normal queue (non blocking)
+    std::queue<InfoBlock> eventQ; //TODO change to normal queue (non blocking)
     SenderThread sender;
 
     explicit PlayerThread(Socket &my_skt);
