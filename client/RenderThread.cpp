@@ -66,7 +66,7 @@ void RenderThread::renderLobby(int frame_id) {
 RenderThread::RenderThread(std::queue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SCREEN_HEIGHT) {
     current_frame = 0;
     state = -1;
-    in_menu.store(false);//todo start as true
+    in_menu.store(true);
     renderQueue = &rq;
 
     starter.init();

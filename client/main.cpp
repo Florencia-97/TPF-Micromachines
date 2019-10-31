@@ -10,6 +10,9 @@ int main(int argc, char *args[]) {
   RenderThread renderThread(event_receiver_queue);
   renderThread.run();
 
+  sleep(5);
+  renderThread.proceedToLobby(true);
+
   bool quit = false;
   SDL_Event e;
   //While application is running
