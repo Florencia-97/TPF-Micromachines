@@ -52,3 +52,11 @@ void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
         }
     }
 }
+
+GameMap::~GameMap() {
+    for (int row = 0; row < this->map.size(); ++row) {
+        for (int col = 0; col < this->map[row].size(); ++col) {
+            delete this->map[row][col];
+        }
+    }
+}

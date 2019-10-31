@@ -17,6 +17,7 @@ class GameMap {
 
 public:
     GameMap() = default;
+    ~GameMap();
 
     void dummyInit(int xSize, int ySize, LTexture* texture);//todo remove
 
