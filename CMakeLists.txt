@@ -46,8 +46,9 @@ set(CLIENT_SOURCE_FILES
 		client/RenderThread.cpp
 		client/rendering/SDLStarter.cpp
 		client/Car.cpp client/Car.h
-		client/communication/UserInput.cpp
-		client/communication/EventSender.cpp
+		client/communication/UserInput.cpp client/communication/UserInput.h
+		client/communication/EventSender.cpp client/communication/EventSender.h
+		client/communication/Receiver.cpp client/communication/Receiver.h
 		client/rendering/TextureLoader.cpp client/rendering/TextureLoader.h
 		client/rendering/SDLStarter.h
 		client/rendering/LTexture.cpp client/rendering/LTexture.h
@@ -60,7 +61,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/GameRenderer.cpp client/rendering/GameRenderer.h
 		client/GameMap.cpp client/GameMap.h
 		client/tiles/TilesFactory.cpp client/tiles/TilesFactory.h
-		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h)
+		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h
+		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp

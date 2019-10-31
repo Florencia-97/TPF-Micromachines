@@ -25,11 +25,13 @@ void UserInput::_run(){
 void UserInput::_rcvKeyInput(SDL_Event &e){
 
     if ( e.type == SDL_QUIT){
+        InfoBlock ib;
+        ib[ACTION_TYPE] = QUIT;
+        this->safeQueueClient->push(ib);
+        this->safeQueueServer->push(ib);
         this->close();
         return;
     }
-
-    if( e.type != SDL_KEYDOWN) return;
 
     std::string eventType;
     bool forServer = true;
@@ -49,6 +51,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             eventType = MOUSE_BUTTON_UP;
             break;
     }
+
+    if( e.type != SDL_KEYDOWN) return;
 
     // For keys
     switch (e.key.keysym.sym) {
