@@ -8,7 +8,7 @@ void Button::setPosition(int x, int y) {
   mPosition.x = x;
   mPosition.y = y;
 }
-void Button::handleEvent(SDL_Event *e) {
+bool Button::handleEvent(SDL_Event *e) {
   //If mouse event happened
   if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
     //Get mouse position
@@ -37,6 +37,7 @@ void Button::handleEvent(SDL_Event *e) {
 
     //Mouse is outside button
     if (!inside) {
+      //Pone el enum que representa que el mouse no esta encima;
       mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     }
       //Mouse is inside button
@@ -44,43 +45,21 @@ void Button::handleEvent(SDL_Event *e) {
       //Set mouse over sprite
       switch (e->type) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-          break;
-
+          return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-          break;
-
+          return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-          break;
+          return false;
       }
     }
   }
 
 }
 void Button::render() {
-
   //Show current button sprite
   gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gSpriteClips[mCurrentSprite]);
 }
-bool Button::load_media() {
-  //Loading success flag
-  bool success = true;
 
-  //Load sprites
-  if (!gButtonSpriteSheetTexture.load_from_file("button.png", gRenderer)) {
-    printf("Failed to load button sprite texture!\n");
-    success = false;
-  } else {
-    //Set sprites
-    for (int i = 0; i < BUTTON_SPRITE_TOTAL; ++i) {
-      gSpriteClips[i].x = 0;
-      gSpriteClips[i].y = i * 200;
-      gSpriteClips[i].w = BUTTON_WIDTH;
-      gSpriteClips[i].h = BUTTON_HEIGHT;
-    }
-  }
-
-  return success;
-}
 Button::Button(SDL_Window *window, SDL_Renderer *sdl_renderer) {
   mPosition.x = 0;
   mPosition.y = 0;

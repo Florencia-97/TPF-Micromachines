@@ -29,7 +29,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
 
     if( e.type != SDL_KEYDOWN) return;
 
-    std::string eventType = "";
+  std::string eventType;
 
     switch (e.key.keysym.sym) {
         case SDLK_UP:

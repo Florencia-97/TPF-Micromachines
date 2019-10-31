@@ -26,9 +26,8 @@ class Button {
   Button(SDL_Window *window, SDL_Renderer *sdl_renderer);
   //Sets top left position
   void setPosition(int x, int y);
-  bool load_media();
-  //Handles mouse event
-  void handleEvent(SDL_Event *e);
+  //Handles mouse event. If the mouse is clicked, returns true
+  bool handleEvent(SDL_Event *e);
 
   //Shows button sprite
   void render();
