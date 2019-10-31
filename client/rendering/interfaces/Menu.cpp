@@ -6,7 +6,7 @@
 #include "Menu.h"
 bool Menu::load_media() {
     bool success = true;
-    if (!gButtonSpriteSheetTexture.load_from_file("button.png", gRenderer)) {
+    if (!gButtonSpriteSheetTexture.load_from_file("client/rendering/assets/buttons/button.png", gRenderer)) {
         printf("Failed to load button sprite texture!\n");
         success = false;
     } else {
