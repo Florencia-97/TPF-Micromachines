@@ -70,10 +70,7 @@ RenderThread::RenderThread(std::queue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SC
     renderQueue = &rq;
 
     starter.init();
-    //TODO BUSCAR button.png para descomentar TODO TODO TODO TODO TODO TODO TODO
-    //menu.init(starter.get_global_renderer()); TODO FALTA PONER button.png para descomentar esta parte
-    //una vez descomentado verificar con debug y un breakpoint si menu se inicializa bien (no quedan NULL)
-    // yo despues organizo el thread para que .render() esto
+    menu.init(starter.get_global_renderer());
 }
 
 void RenderThread::proceedToLobby(bool is_leader) {

@@ -19,12 +19,6 @@ bool Menu::load_media() {
             gSpriteClips[i].h = BUTTON_HEIGHT;
         }
     }
-
-    //Set buttons in corners (HARDCODEADA LA CANTIDAD DE BOTONES)
-    gButtons[0].setPosition(0, 0);
-    gButtons[1].setPosition(SCREEN_WIDTH - BUTTON_WIDTH, 0);
-    gButtons[2].setPosition(0, SCREEN_HEIGHT - BUTTON_HEIGHT);
-    gButtons[3].setPosition(SCREEN_WIDTH - BUTTON_WIDTH, SCREEN_HEIGHT - BUTTON_HEIGHT);
     return success;
 }
 
@@ -36,6 +30,12 @@ void Menu::init(SDL_Renderer *gRenderer) {
     for (int i = 0; i < TOTAL_BUTTONS; ++i) {
         gButtons.emplace_back(gRenderer, &gButtonSpriteSheetTexture, &gSpriteClips);
     }
+
+    //Set buttons in corners (HARDCODEADA LA CANTIDAD DE BOTONES)
+    gButtons[0].setPosition(0, 0);
+    gButtons[1].setPosition(SCREEN_WIDTH - BUTTON_WIDTH, 0);
+    gButtons[2].setPosition(0, SCREEN_HEIGHT - BUTTON_HEIGHT);
+    gButtons[3].setPosition(SCREEN_WIDTH - BUTTON_WIDTH, SCREEN_HEIGHT - BUTTON_HEIGHT);
 }
 
 void Menu::render() {

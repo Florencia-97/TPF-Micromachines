@@ -14,15 +14,10 @@
 
 class Button {
  private:
-//The window we'll be rendering to
-  SDL_Window *gWindow = nullptr;
-//The window renderer
   SDL_Renderer *gRenderer = nullptr;
 
-//Mouse button sprites
   std::vector<SDL_Rect>* gSpriteClips;
   LTexture* gButtonSpriteSheetTexture;
-//Buttons objects
 
  public:
 

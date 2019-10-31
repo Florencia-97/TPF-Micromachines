@@ -74,7 +74,7 @@ set(TEST_SOURCE_FILES
 		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
-add_executable(client/main.cpp ${CLIENT_SOURCE_FILES})
+add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp pthread Box2D)
