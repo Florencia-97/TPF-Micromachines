@@ -25,16 +25,26 @@ const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
 
 enum ButtonSprite {
-  BUTTON_SPRITE_MOUSE_OUT = 0,
-  BUTTON_SPRITE_MOUSE_OVER_MOTION = 1,
-  BUTTON_SPRITE_MOUSE_DOWN = 2,
-  BUTTON_SPRITE_MOUSE_UP = 3,
-  BUTTON_SPRITE_TOTAL = 4
+  BUTTON_SPRITE_MOUSE_OUT,
+  BUTTON_SPRITE_MOUSE_OVER_MOTION ,
+  BUTTON_SPRITE_MOUSE_DOWN,
+  BUTTON_SPRITE_MOUSE_UP,
+  BUTTON_SPRITE_TOTAL
 };
 
 //Button constants
 const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 const int TOTAL_BUTTONS = 4;
+
+// Events
+#define ACTION_TYPE "tipo_accion"
+#define UP "up"
+#define DOWN "down"
+#define LEFT "left"
+#define RIGHT "right"
+#define MOUSE_BUTTON_DOWN "button_down"
+#define MOUSE_BUTTON_UP "button_up"
+#define MOUSE_MOTION "mouse_motion"
 
 #endif
