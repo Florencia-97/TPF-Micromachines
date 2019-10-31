@@ -3,7 +3,6 @@
 #include "GameMap.h"
 #include "RenderThread.h"
 
-#include <cmath>
 
 int main(int argc, char *args[]) {
   std::queue<InfoBlock> event_receiver_queue; //todo get from receiver

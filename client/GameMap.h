@@ -12,12 +12,11 @@
 #define TILE_HEIGHT  512
 
 class GameMap {
-  std::vector<std::vector<Tile *>> map;
+  std::vector<std::vector<std::shared_ptr<Tile>>> map;
   TilesFactory tiles_factory;
 
 public:
     GameMap() = default;
-    ~GameMap();
 
     void dummyInit(int xSize, int ySize, LTexture* texture);//todo remove
 
