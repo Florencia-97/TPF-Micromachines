@@ -22,6 +22,8 @@ void RenderThread::_run(){
 }
 
 void RenderThread::renderMenu(int frame_id) {
+    //menu.updateButtons();
+    //std::string buttonClicked = menu.checkButtons();
     //menu.render();
     sleep(1/60);
 }
