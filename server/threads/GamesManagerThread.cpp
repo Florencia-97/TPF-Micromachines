@@ -1,13 +1,14 @@
-#include "GamesManager.h"
+#include "GamesManagerThread.h"
 #include "../../common/infostream/Protocol.h"
 #include "../../config/constants.h"
 
-GamesManager::GamesManager(std::string port){
+GamesManagerThread::GamesManagerThread(std::string port){
     this->skt = Socket();
     this->skt.server(port);
+    std::cout << "Server's socket now working!\n";
 }
 
-void GamesManager::_killGames(bool all){
+void GamesManagerThread::_killGames(bool all){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if (all || !(*it)->isAlive() ){
@@ -21,7 +22,7 @@ void GamesManager::_killGames(bool all){
     }
 }
 
-bool GamesManager::_addPlayerToArena(Socket& client, std::string arenaName){
+bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if(!(*it)->isAlive()) continue;
@@ -35,7 +36,7 @@ bool GamesManager::_addPlayerToArena(Socket& client, std::string arenaName){
 }
 
 
-void GamesManager::_run(){
+void GamesManagerThread::_run(){
     while( this->isAlive() ){
         Socket client = this->skt.acceptClient();
         InfoBlock ib;
@@ -56,6 +57,15 @@ void GamesManager::_run(){
     _killGames(true);
 }
 
-GamesManager::~GamesManager(){
+
+void GamesManagerThread::close(){
+    if (!this->isAlive()) return;
+    skt.closeSd();
+    // This closes atomic alive ! Needed if i want to redifine close of base thread
+    BaseThread::close();
+}
+
+GamesManagerThread::~GamesManagerThread(){
+    this->close();
     _killGames(true);
 }

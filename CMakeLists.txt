@@ -32,7 +32,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h
 		common/Stopwatch.cpp common/Stopwatch.h
 		server/threads/GameThread.cpp server/threads/GameThread.h
-        server/threads/GamesManager.cpp server/threads/GamesManager.h
+        server/threads/GamesManagerThread.cpp server/threads/GamesManagerThread.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h
