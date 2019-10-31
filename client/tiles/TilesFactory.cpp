@@ -10,8 +10,7 @@ TilesFactory::TilesFactory() {
     this->ib = InfoBlock("config/tilesInfo.yaml", true);
 }
 
-Tile* TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
-    Tile* tile = nullptr;
+std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
   std::string path;
     switch (tyleType){
         case GRASS_TILE:
@@ -25,8 +24,8 @@ Tile* TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer)
             break;
     }
     //Create a smart pointer? Should avoid potencial problems
-    tile = new Tile(x, y, tyleType, tLoader.load_texture(path, gRenderer), 512, 512);
-    return tile;
+    std::shared_ptr<Tile> t(new Tile(x, y, tyleType, tLoader.load_texture(path, gRenderer), 512, 512));
+    return t;
 }
 
 

@@ -25,23 +25,13 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
       x = columnTile * 512;
       const YAML::Node &col_value = *c;
       auto tile = tiles_factory.getTile(col_value.as<int>(), x, y, gRenderer);
-      this->map.back().emplace_back(tile);
+      this->map.back().push_back(tile);
 
       colNum++;
       columnTile += 1;
     }
 
     num++;
-  }
-}
-
-void GameMap::dummyInit(int x, int y, LTexture* texture) {
-  for (int i = 0; i < y; i++) {
-    map.emplace_back();
-    for (int j = 0; j < x; j++) {
-      Tile *tile = new Tile(j * TILE_WIDTH, i * TILE_HEIGHT, 1, texture, 512, 512);
-      map.back().emplace_back(tile);
-    }
   }
 }
 
