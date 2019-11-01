@@ -31,7 +31,8 @@ void Car::setCamera( SDL_Rect& camera ){
 }
 
 void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
-  texture->render(mBox.x - camera.x, mBox.y - camera.y, nullptr, rotation, nullptr, SDL_FLIP_NONE, renderer);
+  //SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
+  texture->render_with_size(20, 20, renderer);
 }
 
 Car::~Car() {
