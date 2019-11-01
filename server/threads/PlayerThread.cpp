@@ -1,6 +1,9 @@
+#include "../../config/constants.h"
+
 #include "PlayerThread.h"
 
-PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
+PlayerThread::PlayerThread(Socket &my_skt, InfoBlock& ib) :
+    sender(&skt), car_type(ib.getString(CAR_TYPE)) {
     this->skt = std::move(my_skt);
 }
 
@@ -21,7 +24,6 @@ void PlayerThread::close(){
     skt.closeSd();
     sender.close();
     sender.join();
-    // This closes atomic alive ! Needed if i want to redifine close of base thread
     BaseThread::close();
 }
 

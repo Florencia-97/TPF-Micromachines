@@ -3,14 +3,16 @@
 
 #include "GameThread.h"
 
-GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, std::string& gameName)
-: lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(gameName){
+GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib)
+    : lobby_mode(true), sktOwner(std::move(lobby_owner)),
+    gameName(ib.getString(ARENA_GAME)) {
+    this->ownerInfo = ib;
 }
 
 void GameThread::_killPlayers(bool all){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        if (all || !(it)->isAlive() ){
+        if (all || !(it)->isAlive()){
             if ((it)->isAlive()) (it)->close();
             it = this->plr_threads.erase(it);
         } else {
@@ -46,12 +48,12 @@ int GameThread::_runLobby() {
     return mapNumber;
 }
 
-void GameThread::addPLayer(Socket &plr_socket) {
+void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     // Adds a new player to the game while lobby is on
     InfoBlock ib;
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
     if ( Protocol::sendMsg(&plr_socket, ib) && lobby_mode ) {
-        this->plr_threads.emplace_back(plr_socket);
+        this->plr_threads.emplace_back(plr_socket, playerInfo);
         this->plr_threads.back().run();
     }
 }
@@ -90,7 +92,7 @@ void GameThread::_run() {
     std::cout << "Race chosen is: " << mapNumber << std::endl;
     // TODO load box2D world with the mapNumber given
     this->lobby_mode = false; // Atomic?
-    this->plr_threads.emplace_front(this->sktOwner);
+    this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
     this->plr_threads.front().run();
 
     // Not in lobby mode anymore !

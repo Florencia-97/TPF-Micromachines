@@ -18,6 +18,7 @@ class GameThread : public BaseThread {
     void _runGame();
     void _sendAll(InfoBlock ib);
     Socket sktOwner;
+    InfoBlock ownerInfo;
 
 public:
     std::string gameName;
@@ -28,11 +29,11 @@ public:
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game
-    GameThread(Socket &lobby_owner, InfoBlock& ib, std::string& gameName);
+    GameThread(Socket &lobby_owner, InfoBlock& ib);
 
     //PRE lobby_mode must be true
     //POS adds player to the lobby
-    void addPLayer(Socket &plr_socket);
+    void addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
 
     ~GameThread();
 

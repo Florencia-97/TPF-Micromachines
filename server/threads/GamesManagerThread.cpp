@@ -20,12 +20,12 @@ void GamesManagerThread::_killGames(bool all){
     }
 }
 
-bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName){
+bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if(!(*it)->isAlive()) continue;
-        if ((*it)->gameName == arenaName){
-            (*it)->addPLayer(client);
+        if ((*it)->gameName == ib.getString(ARENA_GAME)){
+            (*it)->addPLayer(client, ib);
             return true;
         }
         ++it;
@@ -48,12 +48,10 @@ void GamesManagerThread::_run(){
         std::cout << arenaName << std::endl;
 
         // If players arena is not here, just go ahead and create one
-        if (!_addPlayerToArena(client, arenaName)){
-            // TODO: is game id really necessary after having a game name
-            std::cout << "Game created\n";
-            GameThread* game = new GameThread(client, ib, arenaName);
-            this->games.push_back(game);
+        if (!_addPlayerToArena(client, ib)){
+            GameThread* game = new GameThread(client, ib);
             game->run();
+            this->games.push_back(game);
         }
         _killGames(false);
     }
@@ -66,9 +64,10 @@ void GamesManagerThread::close(){
     if (!this->isAlive()) return;
     skt.closeSd();
     BaseThread::close();
+    _killGames(true);
 }
 
 GamesManagerThread::~GamesManagerThread(){
-    _killGames(true);
     this->close();
+    _killGames(true);
 }
