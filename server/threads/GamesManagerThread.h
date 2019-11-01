@@ -1,5 +1,5 @@
-#ifndef MICROMACHINES_GAMESMANAGER_H
-#define MICROMACHINES_GAMESMANAGER_H
+#ifndef MICROMACHINES_GAMESMANAGERTHREAD_H
+#define MICROMACHINES_GAMESMANAGERTHREAD_H
 
 #include <string>
 #include <list>
@@ -12,17 +12,18 @@
  * Accepts  client and creates
  */
 
-class GamesManager : public BaseThread{
+class GamesManagerThread : public BaseThread{
     Socket skt; //Server's socket
     std::list<GameThread*> games;
     void _killGames(bool all);
     bool _addPlayerToArena(Socket& client, std::string arenaName);
+    void _run() override;
 public:
-    GamesManager(std::string port);
-    virtual void _run() override;
+    GamesManagerThread(std::string port);
     void creatGames();
-    ~GamesManager();
+    void close() override;
+    ~GamesManagerThread();
 };
 
 
-#endif //MICROMACHINES_GAMESMANAGER_H
+#endif //MICROMACHINES_GAMESMANAGERTHREAD_H

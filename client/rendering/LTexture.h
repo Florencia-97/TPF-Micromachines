@@ -4,26 +4,21 @@
 #include <SDL_render.h>
 #include <string>
 class LTexture {
- private:
   SDL_Texture *texture;
   int width;
   int height;
  public:
   LTexture();
   ~LTexture();
-  bool load_from_file(const std::string &path,
-                      SDL_Renderer *renderer);
+  bool load_from_file(const std::string &path, SDL_Renderer *renderer);
   void free();
 
+  // RGB
   void set_color(Uint8 red, Uint8 green, Uint8 blue);
 
-  void render(int x,
-              int y,
-              SDL_Rect *clip = nullptr,
-              double angle = 0.0,
-              SDL_Point *center = nullptr,
-              SDL_RendererFlip flip = SDL_FLIP_NONE,
-              SDL_Renderer *renderer = nullptr);
+  void render(int x, int y, SDL_Rect *clip, double angle,
+              SDL_Point *center, SDL_RendererFlip flip, SDL_Renderer *renderer);
+
   int getWidth();
 
   int getHeight();

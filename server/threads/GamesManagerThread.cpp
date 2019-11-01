@@ -1,13 +1,13 @@
-#include "GamesManager.h"
-#include "../../common/infostream/Protocol.h"
+#include "GamesManagerThread.h"
 #include "../../config/constants.h"
 
-GamesManager::GamesManager(std::string port){
+GamesManagerThread::GamesManagerThread(std::string port){
     this->skt = Socket();
     this->skt.server(port);
+    std::cout << "Server's socket now working!\n";
 }
 
-void GamesManager::_killGames(bool all){
+void GamesManagerThread::_killGames(bool all){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if (all || !(*it)->isAlive() ){
@@ -21,7 +21,7 @@ void GamesManager::_killGames(bool all){
     }
 }
 
-bool GamesManager::_addPlayerToArena(Socket& client, std::string arenaName){
+bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if(!(*it)->isAlive()) continue;
@@ -35,27 +35,42 @@ bool GamesManager::_addPlayerToArena(Socket& client, std::string arenaName){
 }
 
 
-void GamesManager::_run(){
+void GamesManagerThread::_run(){
     while( this->isAlive() ){
         Socket client = this->skt.acceptClient();
+        if (!client.isValid()) break;
+        std::cout  << "Client accepted\n";
         InfoBlock ib;
-        if (!Protocol::recvMsg( &skt, ib )){
+        if (!Protocol::recvMsg( &client, ib )){
+            std::cout << "Error receiving msg\n";
             continue;
         }
+        std::cout << "First msg received!\n";
         std::string arenaName = ib.get<std::string>(ARENA_GAME);
+        std::cout << arenaName << std::endl;
 
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, arenaName)){
-            // TODO: is game id really neccesary after having a game name
+            // TODO: is game id really necessary after having a game name
             GameThread* game = new GameThread(1, client, ib);
+            std::cout << "Game created\n";
             this->games.push_back(game);
             game->run();
         }
         _killGames(false);
     }
     _killGames(true);
+    close();
 }
 
-GamesManager::~GamesManager(){
+
+void GamesManagerThread::close(){
+    if (!this->isAlive()) return;
+    skt.closeSd();
+    BaseThread::close();
+}
+
+GamesManagerThread::~GamesManagerThread(){
     _killGames(true);
+    this->close();
 }

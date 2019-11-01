@@ -18,7 +18,7 @@ class TilesFactory {
     TextureLoader tLoader;
 public:
     TilesFactory();
-    Tile* getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer);
+    std::shared_ptr<Tile> getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer);
     ~TilesFactory();
 };
 

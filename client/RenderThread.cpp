@@ -3,11 +3,6 @@
 #include "RenderThread.h"
 
 void RenderThread::_run(){
-    while (this->isAlive()){
-        renderGame(current_frame);
-        this->current_frame = (current_frame+1) % frames_per_second;
-    }//TODO REMOVE
-
     while (this->isAlive()) {
         if (state == GAME_STATE){
             renderGame(current_frame);
@@ -17,14 +12,12 @@ void RenderThread::_run(){
             renderMenu(current_frame);
         }
         //todo check time and sleep
-        this->current_frame = (current_frame+1) % frames_per_second;
+        this->current_frame = (current_frame+1) % FPS;
     }
 }
 
 void RenderThread::renderMenu(int frame_id) {
-    //menu.updateButtons();
-    //std::string buttonClicked = menu.checkButtons();
-    //menu.render();
+    menu.render();
     sleep(1/60);
 }
 
@@ -32,7 +25,7 @@ void RenderThread::renderGame(int frame_id){
     InfoBlock inf;//get map state
     if (renderQueue->empty()){
         //if no states to load use last
-        inf = previous_state;
+        inf = previous_game_state;
     }else {
         while (!renderQueue->empty()){
             inf = renderQueue->front();
@@ -42,7 +35,7 @@ void RenderThread::renderGame(int frame_id){
     }
 
     if (!inf.exists("game_end")) {
-        gameRenderer->render(); //(inf); //TODO UPDATE STATE
+        gameRenderer.render(); //(inf); //TODO UPDATE STATE
         sleep(1/60); //todo variable time on sleep
     } else {
         state = -1;
@@ -51,26 +44,33 @@ void RenderThread::renderGame(int frame_id){
 }
 
 void RenderThread::renderLobby(int frame_id) {
-    InfoBlock inf;//get map state
+    InfoBlock inf("{game: started}", false);//get map state
+    renderQueue->push(inf);
     if (!renderQueue->empty()){
         inf = renderQueue->front();
         renderQueue->pop();
         if (inf.exists("game")){
-            previous_state = inf;
+            previous_game_state = inf;
             state = GAME_STATE;
+
+            //problem, how to iterate over yaml [0] = [car_name, x: 0, y: 0, r: 0, hp: 100]? etc?
+            //maybe make it a subyaml TODO
+            InfoBlock info("{map_name: race_1.yaml, my_car_id: 0, 0: dot.bmp}",false);
+            gameRenderer.init(starter.get_global_renderer(), info);
         }
     }
-    //TODO menu.render(frame_id);
+    //lobby.render();
     sleep(1/60);
 }
 
-RenderThread::RenderThread(GameRenderer &gr, std::queue<InfoBlock>& rq) {
+RenderThread::RenderThread(std::queue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SCREEN_HEIGHT) {
     current_frame = 0;
-    frames_per_second = 60;
-    gameRenderer = &gr;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
+
+    starter.init();
+    menu.init(starter.get_global_renderer());
 }
 
 void RenderThread::proceedToLobby(bool is_leader) {
@@ -78,4 +78,8 @@ void RenderThread::proceedToLobby(bool is_leader) {
         //lobby.setLeadership(); //display map options
     }
     in_menu.store(false);
+}
+
+RenderThread::~RenderThread(){
+    starter.close();
 }

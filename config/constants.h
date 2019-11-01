@@ -5,17 +5,52 @@
 #define PORT "8080"
 
 // Selecting race
-#define NUMBER_RACE "number_race"
+#define RACE_ID "number_race"
 
 // Game connected
 #define CONNECTED_TO_GAME "conectado_al_juego"
 #define CONNECTED_TO_GAME_YES "OK"
 #define CONNECTED_TO_GAME_NO "ERROR"
+#define OWNER "owner"
+
+// answer
+#define OWNER_YES "yes"
+#define OWNER_NO "no"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
 
 // For messages between server and client
 #define ARENA_GAME "game_arena"
+
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
+const int LEVEL_WIDTH = 1280;
+const int LEVEL_HEIGHT = 960;
+
+enum ButtonSprite {
+  BUTTON_SPRITE_MOUSE_OUT,
+  BUTTON_SPRITE_MOUSE_OVER_MOTION ,
+  BUTTON_SPRITE_MOUSE_DOWN,
+  BUTTON_SPRITE_MOUSE_UP,
+  BUTTON_SPRITE_TOTAL
+};
+
+//Button constants
+const int BUTTON_WIDTH = 300;
+const int BUTTON_HEIGHT = 200;
+const int TOTAL_BUTTONS = 4;
+
+// Events
+#define ACTION_TYPE "tipe_accion"
+#define QUIT "quit"
+#define UP "up"
+#define DOWN "down"
+#define LEFT "left"
+#define RIGHT "right"
+#define MOUSE_BUTTON_DOWN "button_down"
+#define MOUSE_BUTTON_UP "button_up"
+#define MOUSE_MOTION "mouse_motion"
 
 #endif

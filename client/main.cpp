@@ -3,17 +3,14 @@
 #include "GameMap.h"
 #include "RenderThread.h"
 
-#include <cmath>
 
 int main(int argc, char *args[]) {
-  Car car;
-  GameMap map;
-  GameRenderer gr;
-  gr.init(&map, "maps/race_1.yaml", &car);
-
-  std::queue<InfoBlock> event_receiver_queue; //todo
-  RenderThread renderThread(gr, event_receiver_queue);
+  std::queue<InfoBlock> event_receiver_queue; //todo get from receiver
+  RenderThread renderThread(event_receiver_queue);
   renderThread.run();
+
+  sleep(5);
+  renderThread.proceedToLobby(true);
 
   bool quit = false;
   SDL_Event e;
@@ -31,6 +28,6 @@ int main(int argc, char *args[]) {
 
   renderThread.close();
   renderThread.join();
-  gr.close();
+
   return 0;
 }

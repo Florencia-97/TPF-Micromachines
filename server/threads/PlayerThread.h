@@ -12,17 +12,15 @@
 #include "../../common/SafeQueue.h"
 
 class PlayerThread : public BaseThread {
-
     void _run() override;
     Socket skt;
 
 public:
-    std::queue<InfoBlock> eventQ; //TODO change to normal queue (non blocking)
+    std::queue<InfoBlock> eventQ;
     SenderThread sender;
-
     explicit PlayerThread(Socket &my_skt);
-
     void close() override;
+    ~PlayerThread();
 };
 
 

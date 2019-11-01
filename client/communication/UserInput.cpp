@@ -2,11 +2,13 @@
 #include <iostream>
 
 #include "UserInput.h"
+#include "../../config/constants.h"
 #include "../common/SafeQueue.h"
 
-UserInput::UserInput(SafeQueue<InfoBlock>* safeQueue){
+UserInput::UserInput(SafeQueue<InfoBlock>* safeQueueServer, SafeQueue<InfoBlock>* safeQueueClient){
     // TODO assign to class safeQueue a way of being past  without pointer
-    this->safeQueue = safeQueue;
+    this->safeQueueServer = safeQueueServer;
+    this->safeQueueClient = safeQueueClient;
 }
 
 // Why using sdl_WaitEvent? https://stackoverflow.com/questions/18860243/sdl-pollevent-vs-sdl-waitevent
@@ -23,39 +25,61 @@ void UserInput::_run(){
 void UserInput::_rcvKeyInput(SDL_Event &e){
 
     if ( e.type == SDL_QUIT){
+        InfoBlock ib;
+        ib[ACTION_TYPE] = QUIT;
+        this->safeQueueClient->push(ib);
+        this->safeQueueServer->push(ib);
         this->close();
         return;
     }
 
+    std::string eventType;
+    bool forServer = true;
+
+    switch (e.type){
+        // I think we dont care about mouse motion
+//        case SDL_MOUSEMOTION:
+//            forServer = false;
+//            eventType = MOUSE_MOTION;
+//            break;
+        case SDL_MOUSEBUTTONDOWN:
+            forServer = false;
+            eventType = MOUSE_BUTTON_DOWN;
+            break;
+        case SDL_MOUSEBUTTONUP:
+            forServer = false;
+            eventType = MOUSE_BUTTON_UP;
+            break;
+    }
+
     if( e.type != SDL_KEYDOWN) return;
 
-    std::string eventType = "";
-
+    // For keys
     switch (e.key.keysym.sym) {
         case SDLK_UP:
             std::cout << "Key up was pressed!\n";
-            eventType = "UP";
+            eventType = UP;
             break;
         case SDLK_DOWN:
             std::cout << "Key down was pressed!\n";
-            eventType = "DOWN";
+            eventType = DOWN;
             break;
         case SDLK_LEFT:
             std::cout << "Key left was pressed!\n";
-            eventType = "LEFT";
+            eventType = LEFT;
             break;
         case SDLK_RIGHT:
             std::cout << "Key right was pressed!\n";
-            eventType = "RIGHT";
+            eventType = RIGHT;
             break;
         default:
             break;
     }
-
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
-    ib["action"] = eventType;
-    this->safeQueue->push(ib);
+    ib[ACTION_TYPE] = eventType;
+    if (forServer) this->safeQueueServer->push(ib);
+    else this->safeQueueClient->push(ib);
 }
 
 UserInput::~UserInput() {}

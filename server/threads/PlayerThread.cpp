@@ -5,14 +5,15 @@ PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
 }
 
 void PlayerThread::_run() {
-    bool s = true;
+    std::cout << "New player running";
     this->sender.run();
-    while (!this->isAlive() && s && skt.isValid()){
+    bool socketWorking = true;
+    while (this->isAlive() && socketWorking && skt.isValid()){
         InfoBlock info;
-        s = Protocol::recvMsg(&skt, info);
-        if (s) this->eventQ.push(info);
+        socketWorking = Protocol::recvMsg(&skt, info);
+        if (socketWorking) this->eventQ.push(info);
+        else break;
     }
-    close();
 }
 
 void PlayerThread::close(){
@@ -20,5 +21,10 @@ void PlayerThread::close(){
     skt.closeSd();
     sender.close();
     sender.join();
+    // This closes atomic alive ! Needed if i want to redifine close of base thread
     BaseThread::close();
+}
+
+PlayerThread::~PlayerThread(){
+    close();
 }

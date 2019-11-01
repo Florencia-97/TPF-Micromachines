@@ -6,6 +6,7 @@
 #include "../common/conc/BaseThread.h"
 #include "../common/SafeQueue.h"
 #include "../common/infostream/InfoBlock.h"
+#include "rendering/interfaces/Menu.h"
 #include "rendering/GameRenderer.h"
 #include <SDL2/SDL.h>
 #include <queue>
@@ -13,13 +14,19 @@
 
 #define LOBBY_STATE 1
 #define GAME_STATE 2
+#define FPS 60
 
 class RenderThread : public BaseThread {
+    SDLStarter starter;
     int current_frame;
-    int frames_per_second;
-    int state;
+    int state; //thread state
     std::atomic<bool> in_menu;
-    InfoBlock previous_state;
+    InfoBlock previous_game_state; //game state
+
+    Car car;
+    GameMap map;
+    GameRenderer gameRenderer;
+    Menu menu;
 
     void _run() override;
 
@@ -29,14 +36,14 @@ class RenderThread : public BaseThread {
 
     void renderLobby(int frame_id);
 
-    GameRenderer* gameRenderer;
-
 public:
     std::queue<InfoBlock>* renderQueue;
 
-    explicit RenderThread(GameRenderer &gr, std::queue<InfoBlock>& rq );
+    explicit RenderThread(std::queue<InfoBlock>& rq );
 
     void proceedToLobby(bool is_leader);
+
+    ~RenderThread();
 };
 
 

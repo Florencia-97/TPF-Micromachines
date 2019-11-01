@@ -35,16 +35,6 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
   }
 }
 
-void GameMap::dummyInit(int x, int y, LTexture* texture) {
-  for (int i = 0; i < y; i++) {
-    map.emplace_back();
-    for (int j = 0; j < x; j++) {
-      Tile *tile = new Tile(j * TILE_WIDTH, i * TILE_HEIGHT, 1, texture, 512, 512);
-      map.back().push_back(tile);
-    }
-  }
-}
-
 void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
     for (const auto& row: map){
         for (auto tile: row){
