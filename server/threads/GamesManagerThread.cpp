@@ -51,8 +51,7 @@ void GamesManagerThread::_run(){
         if (!_addPlayerToArena(client, arenaName)){
             // TODO: is game id really necessary after having a game name
             std::cout << "Game created\n";
-            GameThread* game = new GameThread(1, client, ib);
-            game->gameName = arenaName;
+            GameThread* game = new GameThread(client, ib, arenaName);
             this->games.push_back(game);
             game->run();
         }

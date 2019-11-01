@@ -28,7 +28,7 @@ public:
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game
-    GameThread(Socket &lobby_owner, InfoBlock& ib);
+    GameThread(Socket &lobby_owner, InfoBlock& ib, std::string& gameName);
 
     //PRE lobby_mode must be true
     //POS adds player to the lobby

@@ -3,8 +3,8 @@
 
 #include "GameThread.h"
 
-GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib)
-: lobby_mode(true), sktOwner(std::move(lobby_owner)){
+GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, std::string& gameName)
+: lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(gameName){
 }
 
 void GameThread::_killPlayers(bool all){
