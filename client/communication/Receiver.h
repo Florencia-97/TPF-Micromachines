@@ -6,17 +6,18 @@
 #include "../common/conc/BaseThread.h"
 #include "../../common/infostream/Socket.h"
 #include "../../common/infostream/InfoBlock.h"
+#include "../../common/SafeQueue.h"
 
 //It recvs from its socket by protocol the new view to draw
 // It updates de view to be rendered
 
 class Receiver: public BaseThread {
     Socket& skt;
-    std::queue<InfoBlock>* queue;
+    SafeQueue<InfoBlock>* queue;
     void _run() override;
 
     public:
-    Receiver(Socket& skt, std::queue<InfoBlock>* queue);
+    Receiver(Socket& skt, SafeQueue<InfoBlock>* queue);
     ~Receiver();
 
 
