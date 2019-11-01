@@ -9,14 +9,11 @@
 
 class SenderThread : public BaseThread {
     Socket *skt;
-
     void _run() override;
 
 public:
     SafeQueue<InfoBlock> to_send;
-
     explicit SenderThread(Socket* s) : skt(s){};
-
     void close() override;
 
 };

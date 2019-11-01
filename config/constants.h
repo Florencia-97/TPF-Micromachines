@@ -11,9 +11,9 @@
 #define CONNECTED_TO_GAME "CONNECTED_TO_GAME"
 #define CONNECTED_TO_GAME_NO "NOT_CONNECTED"
 #define CONNECTED_TO_GAME_YES "CONNECTED"
-#define OWNER "OWNER"
 
-// answer
+// Game owner
+#define OWNER "OWNER"
 #define OWNER_YES "YES"
 #define OWNER_NO "NO"
 
