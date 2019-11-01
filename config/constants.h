@@ -43,6 +43,12 @@ const int BUTTON_HEIGHT = 170;
 const int TOTAL_BUTTONS = 3;
 const int BLUE_CAR_BUTTON_X = 0;
 const int BLUE_CAR_BUTTON_Y = 120;
+const int BLACK_CAR_BUTTON_X = 120;
+const int BLACK_CAR_BUTTON_Y = 120;
+const int RED_CAR_BUTTON_X = 120;
+const int RED_CAR_BUTTON_Y = 240;
+const int WHITE_CAR_BUTTON_X = 120;
+const int WHITE_CAR_BUTTON_Y = 360;
 
 // Events
 #define ACTION_TYPE "tipe_accion"
