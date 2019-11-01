@@ -9,6 +9,7 @@ EventSender::EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue) :
 }
 
 bool _isFinalEvent(InfoBlock& ib){
+    if (!ib.exists(ACTION_TYPE)) return false;
     std::string actionType = ib.get<std::string>(ACTION_TYPE);
     return actionType == QUIT;
 }
