@@ -39,3 +39,6 @@ Car::~Car() {
         texture->free();
     }
 }
+SDL_Texture *Car::get_texture() {
+  return this->texture->get_texture();
+}

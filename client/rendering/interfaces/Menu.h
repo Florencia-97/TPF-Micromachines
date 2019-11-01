@@ -13,6 +13,9 @@
 class Menu {
  private:
   LTexture gButtonSpriteSheetTexture;
+  LTexture carRed;
+  LTexture carBlue;
+  LTexture carGreen;
   SDL_Renderer *gRenderer;
   std::vector<SDL_Rect> gSpriteClips;
   std::vector<Button> gButtons;
@@ -22,7 +25,7 @@ class Menu {
  public:
 
     //POS initializes all the components of the menu
-    void init(SDL_Renderer *gRenderer);
+    void init(SDL_Renderer *sdl_renderer);
 
     //PRE must be initialized
     void render();

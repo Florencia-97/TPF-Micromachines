@@ -8,7 +8,6 @@ int main(int argc, char *args[]) {
   std::queue<InfoBlock> event_receiver_queue; //todo get from receiver
   RenderThread renderThread(event_receiver_queue);
   renderThread.run();
-
   sleep(5);
   renderThread.proceedToLobby(true);
 
@@ -25,7 +24,6 @@ int main(int argc, char *args[]) {
     }
     sleep(1/60);
   }
-
   renderThread.close();
   renderThread.join();
 

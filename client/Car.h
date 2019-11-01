@@ -20,6 +20,7 @@ class Car {
   void setCamera(SDL_Rect &camera);
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
   void move(int x, int y, float r);
+  SDL_Texture *get_texture();
   ~Car();
 };
 
