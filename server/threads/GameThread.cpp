@@ -8,18 +8,14 @@ GameThread::GameThread(int id, Socket &lobby_owner, InfoBlock& ib)
 }
 
 void GameThread::_killPlayers(bool all){
-    try{
-        auto it = this->plr_threads.begin();
-        while (it != this->plr_threads.end()){
-            if (all || !(it)->isAlive() ){
-                if ((it)->isAlive()) (it)->close();
-                it = this->plr_threads.erase(it);
-            } else {
-                ++it;
-            }
+    auto it = this->plr_threads.begin();
+    while (it != this->plr_threads.end()){
+        if (all || !(it)->isAlive() ){
+            if ((it)->isAlive()) (it)->close();
+            it = this->plr_threads.erase(it);
+        } else {
+            ++it;
         }
-    } catch(...){
-        std::cout << "Something is going wrong here\n";
     }
 }
 
@@ -53,7 +49,6 @@ int GameThread::_runLobby() {
 void GameThread::addPLayer(Socket &plr_socket) {
     // Adds new players to the game
     InfoBlock ib;
-    //Refactor, this can be done a bit shorter i think
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
     std::cout << "Sending first msg to a new client\n";
     //Protocol::sendMsg(&plr_socket, ib);
@@ -100,6 +95,7 @@ void GameThread::_run() {
     // TODO load box2D world with the mapNumber given
     this->lobby_mode = false; // Atomic?
     this->plr_threads.emplace_front(this->sktOwner);
+    this->plr_threads.front().run();
 
     // Not in lobby mode anymore !
     if (this->isAlive()) {
