@@ -7,8 +7,8 @@
 
 UserInput::UserInput(SafeQueue<InfoBlock>* safeQueueServer, SafeQueue<InfoBlock>* safeQueueClient){
     // TODO assign to class safeQueue a way of being past  without pointer
-    this->safeQueueServer = safeQueueServer;
-    this->safeQueueClient = safeQueueClient;
+    this->keyboard_input = safeQueueServer;
+    this->mouse_input = safeQueueClient;
 }
 
 // Why using sdl_WaitEvent? https://stackoverflow.com/questions/18860243/sdl-pollevent-vs-sdl-waitevent
@@ -27,8 +27,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     if ( e.type == SDL_QUIT){
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
-        this->safeQueueClient->push(ib);
-        this->safeQueueServer->push(ib);
+        this->mouse_input->push(ib);
+        this->keyboard_input->push(ib);
         this->close();
         return;
     }
@@ -78,8 +78,11 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
     ib[ACTION_TYPE] = eventType;
-    if (forServer) this->safeQueueServer->push(ib);
-    else this->safeQueueClient->push(ib);
+    if (forServer) this->keyboard_input->push(ib);
+    else this->mouse_input->push(ib);
 }
 
-UserInput::~UserInput() {}
+UserInput::~UserInput() {
+    this->keyboard_input->setOpen(false);
+    this->mouse_input->setOpen(false);
+}
