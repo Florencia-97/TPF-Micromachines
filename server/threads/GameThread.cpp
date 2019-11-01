@@ -32,7 +32,7 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
  * Lobby mode is for game owner!
  * We let him know he is the first!
 */
-int GameThread::_runLobby() {
+std::string GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
     if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
         std::cout << "Error when sending status to player\n";
@@ -46,7 +46,7 @@ int GameThread::_runLobby() {
         _killPlayers(true);
         close();
     }
-    return ib.get<int>(RACE_ID);
+    return ib.get<std::string>(RACE_ID);
 }
 
 void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
@@ -59,10 +59,43 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     }
 }
 
-void GameThread::_sendAll(InfoBlock ib) {
+void GameThread::_sendAll(InfoBlock& ib) {
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         (it)->sender.to_send.push(ib); // Shoudn't check if client is alive here
+    }
+}
+
+void GameThread::_sendStartMsg(std::string raceId){
+    int cont = 0;
+    InfoBlock ib;
+    ib[RACE_ID] = raceId;
+    ib[PLAYERS_AMOUNT] = this->plr_threads.size();
+    auto it = this->plr_threads.begin();
+    while (it != this->plr_threads.end()){
+        ib["P" + std::to_string(cont)] = "[" + std::to_string(cont) + (it)->car_type + "0 , 3, 5" + "]";
+        cont++;
+        it++;
+    }
+
+    cont = 0;
+    it = this->plr_threads.begin();
+    while (it != this->plr_threads.end()){
+        ib[MY_ID] = cont;
+        (it)->sender.to_send.push(ib);
+        cont++;
+        it++;
+    }
+
+
+
+
+    while (it != this->plr_threads.end()){
+        InfoBlock ib;
+        ib[RACE_ID] = raceId;
+        ib[MY_ID] = cont;
+        (it)->sender.to_send.push(ib); // Shoudn't check if client is alive here
+        cont++;
     }
 }
 
@@ -80,9 +113,10 @@ void GameThread::_runGame() {
             }
         }
         _killPlayers(false);
+        // sleep goes here?
         // TODO: create a real infoblock with the new world
 //        This is just an example!
-//        InfoBlock worldActualization = Box2d.sumUp();
+//        InfoBlock worldActualization = world.step() 1/120 maybe too much
 //        _sendAll(worldActualization);
     }
     // TODO: when putting q in server its not leaving here (Flor fixs it)
@@ -91,15 +125,16 @@ void GameThread::_runGame() {
 
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
-    int mapNumber = _runLobby();
+    std::string mapNumber = _runLobby();
     std::cout << "Race chosen is: " << mapNumber << std::endl;
     // TODO load box2D world with the mapNumber given
     this->lobby_mode = false; // Atomic?
     this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
     this->plr_threads.front().run();
-    std::cout << "Running!\n";
     // Not in lobby mode anymore !
     if (this->isAlive()) {
+        // TODO: Clean queues
+        _sendStartMsg(mapNumber);
         _runGame();
     }
     _killPlayers(true);

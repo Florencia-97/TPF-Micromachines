@@ -38,7 +38,7 @@ void GamesManagerThread::_run(){
     while( this->isAlive() ){
         std::cout << "Waiting for a client\n";
         Socket client = this->skt.acceptClient();
-        if (!client.isValid()) break;
+        if (!this->skt.isValid()) break;
         std::cout  << "Client accepted\n";
         InfoBlock ib;
         if (!Protocol::recvMsg( &client, ib )){

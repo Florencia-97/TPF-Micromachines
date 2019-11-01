@@ -7,6 +7,7 @@
 #include "../../common/infostream/Socket.h"
 #include "../../common/conc/BaseThread.h"
 #include "PlayerThread.h"
+#include <string>
 #include <queue>
 #include <list>
 #include <random>
@@ -14,9 +15,10 @@
 class GameThread : public BaseThread {
     void _run() override;
     void _killPlayers(bool all);
-    int _runLobby();
+    std::string _runLobby();
     void _runGame();
-    void _sendAll(InfoBlock ib);
+    void _sendStartMsg(std::string raceId);
+    void _sendAll(InfoBlock& ib);
     Socket sktOwner;
     InfoBlock ownerInfo;
 

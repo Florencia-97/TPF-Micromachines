@@ -13,10 +13,10 @@
 
 class PlayerThread : public BaseThread {
     void _run() override;
-    std::string car_type;
     Socket skt;
 
 public:
+    std::string car_type;
     std::queue<InfoBlock> eventQ;
     SenderThread sender;
     PlayerThread(Socket &my_skt, InfoBlock& ib);

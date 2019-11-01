@@ -4,6 +4,11 @@
 #define SERVICE "localhost"
 #define PORT "8080"
 
+// First msg
+#define ARENA_GAME "GAME_ARENA"
+#define CAR_TYPE "CAR_TYPE"
+
+
 // Selecting race
 #define RACE_ID "NUMBER_RACE"
 
@@ -17,11 +22,13 @@
 #define OWNER_YES "YES"
 #define OWNER_NO "NO"
 
+// Msg starting race!
+// race_id already defined
+#define MY_ID "MY_ID"
+#define PLAYERS_AMOUNT "PLAYERS_AMOUNT"
+
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
-
-// For messages between server and client
-#define ARENA_GAME "GAME_ARENA"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
