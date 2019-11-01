@@ -37,9 +37,9 @@ class RenderThread : public BaseThread {
     void renderLobby(int frame_id);
 
 public:
-    std::queue<InfoBlock>* renderQueue;
+    SafeQueue<InfoBlock>* renderQueue;
 
-    explicit RenderThread(std::queue<InfoBlock>& rq );
+    explicit RenderThread(SafeQueue<InfoBlock>& rq );
 
     void proceedToLobby(bool is_leader);
 

@@ -23,13 +23,12 @@ void RenderThread::renderMenu(int frame_id) {
 
 void RenderThread::renderGame(int frame_id){
     InfoBlock inf;//get map state
-    if (renderQueue->empty()){
+    if (renderQueue->isEmpty()){
         //if no states to load use last
         inf = previous_game_state;
     }else {
-        while (!renderQueue->empty()){
-            inf = renderQueue->front();
-            renderQueue->pop();
+        while (!renderQueue->isEmpty()){
+            inf = renderQueue->pop();
             //get the very last event
         }
     }
@@ -44,12 +43,10 @@ void RenderThread::renderGame(int frame_id){
 }
 
 void RenderThread::renderLobby(int frame_id) {
-    InfoBlock inf("{game: started}", false);//get map state
-    renderQueue->push(inf);
-    if (!renderQueue->empty()){
-        inf = renderQueue->front();
-        renderQueue->pop();
-        if (inf.exists("game")){
+
+    if (!renderQueue->isEmpty()){
+        auto inf = renderQueue->pop();
+        if (inf.exists(RACE_ID)){
             previous_game_state = inf;
             state = GAME_STATE;
 
@@ -63,7 +60,7 @@ void RenderThread::renderLobby(int frame_id) {
     sleep(1/60);
 }
 
-RenderThread::RenderThread(std::queue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SCREEN_HEIGHT) {
+RenderThread::RenderThread(SafeQueue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SCREEN_HEIGHT) {
     current_frame = 0;
     state = -1;
     in_menu.store(true);

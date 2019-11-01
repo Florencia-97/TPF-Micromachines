@@ -60,9 +60,10 @@ set(CLIENT_SOURCE_FILES
 		client/RenderThread.cpp client/RenderThread.h
 		client/rendering/GameRenderer.cpp client/rendering/GameRenderer.h
 		client/GameMap.cpp client/GameMap.h
+		client/Client.cpp
 		client/tiles/TilesFactory.cpp client/tiles/TilesFactory.h
 		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h
-		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h)
+		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h client/Client.cpp client/Client.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp

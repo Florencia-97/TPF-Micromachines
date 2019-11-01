@@ -1,7 +1,7 @@
 #include "../common/infostream/Protocol.h"
 #include "Receiver.h"
 
-Receiver::Receiver(Socket& skt, std::queue<InfoBlock>* queue):
+Receiver::Receiver(Socket& skt, SafeQueue<InfoBlock>* queue):
     skt(skt) {
     this->queue = queue;
 }
