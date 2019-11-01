@@ -29,6 +29,7 @@ bool LTexture::load_from_file(const std::string &path, SDL_Renderer *renderer) {
                     SDL_TRUE,
                     SDL_MapRGB(loadedSurface->format,0, 0xFF,0xFF));
     //Textura final
+
     newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     //Todo ver si es necesaria excepcion
     if (newTexture == nullptr) {
@@ -83,4 +84,7 @@ int LTexture::getWidth() {
   return width;
 }
 
+SDL_Texture *LTexture::get_texture() {
+  return this->texture;
+}
 

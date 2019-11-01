@@ -13,6 +13,10 @@
 class Menu {
  private:
   LTexture gButtonSpriteSheetTexture;
+  LTexture carRed;
+  LTexture carBlue;
+  LTexture carBlack;
+  LTexture carWhite;
   SDL_Renderer *gRenderer;
   std::vector<SDL_Rect> gSpriteClips;
   std::vector<Button> gButtons;
@@ -22,16 +26,11 @@ class Menu {
  public:
 
     //POS initializes all the components of the menu
-    void init(SDL_Renderer *gRenderer);
+    void init(SDL_Renderer *sdl_renderer);
 
     //PRE must be initialized
     void render();
 
-    //PRE must be initialized
-    //POS checks for events and updates button based on the event
-    //returns a pointer to the updated button or a nullptr if no button
-    //events were registered
-    Button* updateButtons(SDL_Event e);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

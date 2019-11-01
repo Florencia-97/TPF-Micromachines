@@ -32,6 +32,11 @@
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+// For messages between server and client
+#define ARENA_GAME "GAME_ARENA"
+
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 960;
 
 const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
@@ -45,9 +50,17 @@ enum ButtonSprite {
 };
 
 //Button constants
-const int BUTTON_WIDTH = 300;
-const int BUTTON_HEIGHT = 200;
-const int TOTAL_BUTTONS = 4;
+const int BUTTON_WIDTH = 150;
+const int BUTTON_HEIGHT = 170;
+const int TOTAL_BUTTONS = 3;
+const int BLUE_CAR_BUTTON_X = 0;
+const int BLUE_CAR_BUTTON_Y = 120;
+const int BLACK_CAR_BUTTON_X = 120;
+const int BLACK_CAR_BUTTON_Y = 120;
+const int RED_CAR_BUTTON_X = 120;
+const int RED_CAR_BUTTON_Y = 240;
+const int WHITE_CAR_BUTTON_X = 120;
+const int WHITE_CAR_BUTTON_Y = 360;
 
 // Events
 #define ACTION_TYPE "tipe_accion"

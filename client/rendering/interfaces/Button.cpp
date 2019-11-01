@@ -7,6 +7,7 @@
 void Button::setPosition(int x, int y) {
   mPosition.x = x;
   mPosition.y = y;
+  set_area(x, y);
 }
 bool Button::handleEvent(SDL_Event *e) {
   //If mouse event happened
@@ -57,16 +58,17 @@ bool Button::handleEvent(SDL_Event *e) {
 }
 void Button::render() {
   //for gSpriteClips we access the pointer, get the current sprite, and then we pass the address to said sprite
-  gButtonSpriteSheetTexture->render(mPosition.x, mPosition.y, &((*gSpriteClips)[mCurrentSprite]), \
-                        0.0,nullptr,SDL_FLIP_NONE, gRenderer);
+  SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
 }
 
-Button::Button(SDL_Renderer *sdl_renderer,  LTexture *buttonSpriteSheet, std::vector<SDL_Rect> *spriteClips) {
+Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   mPosition.x = 0;
   mPosition.y = 0;
-  gButtonSpriteSheetTexture = buttonSpriteSheet;
-  gSpriteClips = spriteClips;
+  texture = buttonSpriteSheet;
   mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
   this->gRenderer = sdl_renderer;
+}
+void Button::set_area(int x, int y) {
+  this->area = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
 }
 

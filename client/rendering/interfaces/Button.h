@@ -15,22 +15,21 @@
 class Button {
  private:
   SDL_Renderer *gRenderer = nullptr;
-
-  std::vector<SDL_Rect>* gSpriteClips;
-  LTexture* gButtonSpriteSheetTexture;
+  LTexture *texture;
+  SDL_Rect area;
 
  public:
 
   //Initializes internal variables
-  Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet, std::vector<SDL_Rect> *spriteClips);
+  Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
   //Sets top left position
   void setPosition(int x, int y);
   //Handles mouse event. If the mouse is clicked, returns true
   bool handleEvent(SDL_Event *e);
-
   //Shows button sprite
   void render();
-
+  void set_area(int x,
+                int y);//todo hay que hacer una funcion que nos deje pasarle las constantes del area del boton a dibujar
  private:
   //Top left position
   SDL_Point mPosition;

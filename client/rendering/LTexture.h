@@ -4,6 +4,7 @@
 #include <SDL_render.h>
 #include <string>
 class LTexture {
+ private:
   SDL_Texture *texture;
   int width;
   int height;
@@ -20,7 +21,7 @@ class LTexture {
               SDL_Point *center, SDL_RendererFlip flip, SDL_Renderer *renderer);
 
   int getWidth();
-
+  SDL_Texture *get_texture();
   int getHeight();
 
 };
