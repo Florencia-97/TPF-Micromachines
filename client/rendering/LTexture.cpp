@@ -1,5 +1,6 @@
 #include <SDL2/SDL_image.h>
 #include "LTexture.h"
+#include "../../config/constants.h"
 
 /*Constructor of LTexture*/
 LTexture::LTexture() {
@@ -87,4 +88,11 @@ int LTexture::getWidth() {
 SDL_Texture *LTexture::get_texture() {
   return this->texture;
 }
+void LTexture::render_with_size(int x,
+                                int y,
+                                SDL_Renderer *renderer) {
+  SDL_Rect area = {x, y, CAR_WIDTH, CAR_HEIGHT};
+  SDL_RenderCopy(renderer, texture, nullptr, &area);
+}
+
 

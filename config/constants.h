@@ -60,6 +60,11 @@ const int RED_CAR_BUTTON_Y = 120;
 const int WHITE_CAR_BUTTON_X = 360;
 const int WHITE_CAR_BUTTON_Y = 120;
 
+//Car size
+const int CAR_WIDTH = 150;
+const int CAR_HEIGHT = 170;
+
+
 // Events
 #define ACTION_TYPE "tipe_accion"
 #define QUIT "quit"

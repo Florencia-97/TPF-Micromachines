@@ -12,15 +12,14 @@ void GameRenderer::render() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   map.render(camera, gRenderer);
-    dumbCar.render(camera, gRenderer);
-
+  dumbCar.render(camera, gRenderer);
   SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock game_info) {
   gRenderer = gr;
   my_car_id = game_info.get<int>("my_car_id");
-  dumbCar.addTexture(tloader.load_texture("dot.bmp", gRenderer));
+  dumbCar.addTexture(tloader.load_texture("cars/black_car.png", gRenderer));
 
   //todo use vector
   //possible implementation
