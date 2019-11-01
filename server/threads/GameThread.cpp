@@ -72,7 +72,6 @@ void GameThread::_runGame() {
             int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
             auto itj = std::next(plr_threads.begin(), j);
             if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
-                std::cout << "It is not empty!";
                 InfoBlock ib = itj->eventQ.front();
                 itj->eventQ.pop();
                 std::cout << ib.srcString() << std::endl;

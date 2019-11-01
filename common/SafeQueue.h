@@ -59,7 +59,6 @@ SafeQueue<T>::SafeQueue() {
 template<class T>
 bool SafeQueue<T>::isOpen() {
     return open;
-    cv.notify_all();
 }
 
 template<class T>
