@@ -4,7 +4,6 @@
 GamesManagerThread::GamesManagerThread(std::string port){
     this->skt = Socket();
     this->skt.server(port);
-    std::cout << "Server's socket now working!\n";
 }
 
 void GamesManagerThread::_killGames(bool all){
@@ -45,15 +44,15 @@ void GamesManagerThread::_run(){
             std::cout << "Error receiving msg\n";
             continue;
         }
-        std::cout << "First msg received!\n";
         std::string arenaName = ib.get<std::string>(ARENA_GAME);
         std::cout << arenaName << std::endl;
 
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, arenaName)){
             // TODO: is game id really necessary after having a game name
-            GameThread* game = new GameThread(1, client, ib);
             std::cout << "Game created\n";
+            GameThread* game = new GameThread(1, client, ib);
+            game->gameName = arenaName;
             this->games.push_back(game);
             game->run();
         }

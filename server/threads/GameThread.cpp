@@ -7,6 +7,22 @@ GameThread::GameThread(int id, Socket &lobby_owner, InfoBlock& ib)
 : game_id(id), lobby_mode(true), sktOwner(std::move(lobby_owner)){
 }
 
+void GameThread::_killPlayers(bool all){
+    try{
+        auto it = this->plr_threads.begin();
+        while (it != this->plr_threads.end()){
+            if (all || !(it)->isAlive() ){
+                if ((it)->isAlive()) (it)->close();
+                it = this->plr_threads.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    } catch(...){
+        std::cout << "Something is going wrong here\n";
+    }
+}
+
 InfoBlock _createFirstCommunication(std::string connected, std::string owner){
     InfoBlock ib;
     ib[CONNECTED_TO_GAME] = connected;
@@ -24,34 +40,28 @@ int GameThread::_runLobby() {
 
     // Now i wait for the number of race
     InfoBlock ib;
-    Protocol::recvMsg(&this->sktOwner, ib);
+    if (!Protocol::recvMsg(&this->sktOwner, ib)){
+        std::cout << "Error when receiving race id\n";
+        _killPlayers(true);
+        close();
+    }
     int mapNumber = ib.get<int>(RACE_ID);
     // TODO : check if what was sended is okay! it should be because we control it
     return mapNumber;
 }
 
-void GameThread::_killPlayers(bool all){
-    auto it = this->plr_threads.begin();
-    while (it != this->plr_threads.end()){
-        if (all || !(it)->isAlive() ){
-            if ((it)->isAlive()) (it)->close();
-            it = this->plr_threads.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
 void GameThread::addPLayer(Socket &plr_socket) {
     // Adds new players to the game
     InfoBlock ib;
-    if (!this->lobby_mode){
-        ib = _createFirstCommunication(CONNECTED_TO_GAME_NO, OWNER_NO);
-    } else{
-        this->plr_threads.emplace_back(plr_socket); //Not running yet!
-        ib = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_NO);
+    //Refactor, this can be done a bit shorter i think
+    ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
+    std::cout << "Sending first msg to a new client\n";
+    //Protocol::sendMsg(&plr_socket, ib);
+    if ( Protocol::sendMsg(&plr_socket, ib) && lobby_mode ) {
+        //Race condition?
+        this->plr_threads.emplace_back(plr_socket);
+        this->plr_threads.back().run();
     }
-    Protocol::recvMsg(&plr_socket, ib);
 }
 
 void GameThread::_awakePlayersInLobby(){
@@ -64,8 +74,7 @@ void GameThread::_awakePlayersInLobby(){
 }
 
 void GameThread::_runGame() {
-    this->_awakePlayersInLobby();
-    std::cout << "Players awaken\n";
+    //this->_awakePlayersInLobby();
     auto it = this->plr_threads.begin();
     while (this->isAlive()) {
         for (int i = 0 ; i < this->plr_threads.size(); i++){
@@ -84,7 +93,6 @@ void GameThread::_runGame() {
 }
 
 void GameThread::_run() {
-
     // Lobby mode
     std::cout << "Running a new game!\n";
     int mapNumber = _runLobby();
@@ -95,7 +103,6 @@ void GameThread::_run() {
 
     // Not in lobby mode anymore !
     if (this->isAlive()) {
-        std::cout << "Running race!\n";
         _runGame();
     }
     _killPlayers(true);
@@ -103,4 +110,5 @@ void GameThread::_run() {
 
 GameThread::~GameThread(){
     _killPlayers(true);
+    close();
 }
