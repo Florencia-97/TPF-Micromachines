@@ -1,5 +1,4 @@
 #include "GamesManagerThread.h"
-#include "../../common/infostream/Protocol.h"
 #include "../../config/constants.h"
 
 GamesManagerThread::GamesManagerThread(std::string port){

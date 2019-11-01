@@ -57,7 +57,7 @@ void GameThread::addPLayer(Socket &plr_socket) {
 void GameThread::_awakePlayersInLobby(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()) {
-        // TODO: check if he is still connected, he could have left for gut.
+        // TODO: check if he is still connected, he could have left for good.
         (it)->run();
         ++it;
     }
@@ -65,14 +65,17 @@ void GameThread::_awakePlayersInLobby(){
 
 void GameThread::_runGame() {
     this->_awakePlayersInLobby();
-    std::list<PlayerThread>::iterator it = this->plr_threads.begin();
-    while (!this->isAlive()) {
+    std::cout << "Games activated\n";
+    auto it = this->plr_threads.begin();
+    while (this->isAlive()) {
         for (int i = 0 ; i < this->plr_threads.size(); i++){
             int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
             auto itj = std::next(plr_threads.begin(), j);
-            InfoBlock ib = itj->eventQ.front();
-            itj->eventQ.pop();
-            // TODO : process event in physic world
+            if (!itj->eventQ.empty()){ // No race condition herem we are te only ones removing
+                InfoBlock ib = itj->eventQ.front();
+                itj->eventQ.pop();
+                // TODO : process event in physic world
+            }
         }
         // TODO : send the event.
         _killPlayers(false);
@@ -90,7 +93,7 @@ void GameThread::_run() {
     this->plr_threads.emplace_front(this->sktOwner);
 
     // Not in lobby mode anymore !
-    if (!this->isAlive()) {
+    if (this->isAlive()) {
         std::cout << "Running race!\n";
         _runGame();
     }

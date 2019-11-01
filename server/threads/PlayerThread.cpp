@@ -6,6 +6,7 @@ PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
 }
 
 void PlayerThread::_run() {
+    std::cout << "New player running";
     bool socketWorking = true;
     while (!this->isAlive() && socketWorking && skt.isValid()){
         InfoBlock info;
