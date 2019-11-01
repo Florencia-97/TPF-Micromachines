@@ -8,7 +8,7 @@ PlayerThread::PlayerThread(Socket &my_skt, InfoBlock& ib) :
 }
 
 void PlayerThread::_run() {
-    std::cout << "New player running";
+    std::cout << "New player running\n";
     this->sender.run();
     bool socketWorking = true;
     while (this->isAlive() && socketWorking && skt.isValid()){
@@ -17,6 +17,7 @@ void PlayerThread::_run() {
         if (socketWorking) this->eventQ.push(info);
         else break;
     }
+    std::cout << "Leaving here for good!\n";
 }
 
 void PlayerThread::close(){

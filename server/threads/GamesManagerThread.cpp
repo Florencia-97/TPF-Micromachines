@@ -36,6 +36,7 @@ bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
 
 void GamesManagerThread::_run(){
     while( this->isAlive() ){
+        std::cout << "Waiting for a client\n";
         Socket client = this->skt.acceptClient();
         if (!client.isValid()) break;
         std::cout  << "Client accepted\n";
@@ -62,12 +63,12 @@ void GamesManagerThread::_run(){
 
 void GamesManagerThread::close(){
     if (!this->isAlive()) return;
+    _killGames(true);
     skt.closeSd();
     BaseThread::close();
-    _killGames(true);
 }
 
 GamesManagerThread::~GamesManagerThread(){
-    this->close();
     _killGames(true);
+    this->close();
 }

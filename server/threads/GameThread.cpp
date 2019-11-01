@@ -34,8 +34,11 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
 */
 int GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
-    Protocol::sendMsg(&this->sktOwner, firstIb);
-
+    if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
+        std::cout << "Error when sending status to player\n";
+        _killPlayers(true);
+        close();
+    }
     // Now i wait for the id of the race
     InfoBlock ib;
     if (!Protocol::recvMsg(&this->sktOwner, ib)){
@@ -43,9 +46,7 @@ int GameThread::_runLobby() {
         _killPlayers(true);
         close();
     }
-    int mapNumber = ib.get<int>(RACE_ID);
-    // TODO : check if what was sended is okay! it should be because we control it
-    return mapNumber;
+    return ib.get<int>(RACE_ID);
 }
 
 void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
@@ -79,11 +80,13 @@ void GameThread::_runGame() {
             }
         }
         _killPlayers(false);
-        // TODO create a real infoblock with the nwe
+        // TODO: create a real infoblock with the new world
 //        This is just an example!
 //        InfoBlock worldActualization = Box2d.sumUp();
 //        _sendAll(worldActualization);
     }
+    // TODO: when putting q in server its not leaving here (Flor fixs it)
+    std::cout << "Leaving here auch" << std::endl;
 }
 
 void GameThread::_run() {
@@ -94,7 +97,7 @@ void GameThread::_run() {
     this->lobby_mode = false; // Atomic?
     this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
     this->plr_threads.front().run();
-
+    std::cout << "Running!\n";
     // Not in lobby mode anymore !
     if (this->isAlive()) {
         _runGame();
