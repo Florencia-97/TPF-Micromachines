@@ -30,8 +30,6 @@
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
 // For messages between server and client
 #define ARENA_GAME "GAME_ARENA"
 
@@ -57,10 +55,10 @@ const int BLUE_CAR_BUTTON_X = 0;
 const int BLUE_CAR_BUTTON_Y = 120;
 const int BLACK_CAR_BUTTON_X = 120;
 const int BLACK_CAR_BUTTON_Y = 120;
-const int RED_CAR_BUTTON_X = 120;
-const int RED_CAR_BUTTON_Y = 240;
-const int WHITE_CAR_BUTTON_X = 120;
-const int WHITE_CAR_BUTTON_Y = 360;
+const int RED_CAR_BUTTON_X = 240;
+const int RED_CAR_BUTTON_Y = 120;
+const int WHITE_CAR_BUTTON_X = 360;
+const int WHITE_CAR_BUTTON_Y = 120;
 
 // Events
 #define ACTION_TYPE "tipe_accion"
