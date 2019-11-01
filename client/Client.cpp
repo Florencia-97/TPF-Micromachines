@@ -47,12 +47,12 @@ int Client::play() {
     sleep(120);
 
     userInput.close();
-    userInput.join();
     sender.close();
-    sender.join();
     receiver.close();
-    receiver.join();
     renderThread.close();
+    receiver.join();
+    sender.join();
+    userInput.join();
     renderThread.join();
 
     return 0;
