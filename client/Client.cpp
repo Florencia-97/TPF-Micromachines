@@ -11,7 +11,7 @@ bool Client::attempConnection() {
     skt.client(SERVICE, PORT);
     if (!skt.isValid()) return false;
     connection_state[ARENA_GAME] = "insert funny meme";
-    //connection_state[CAR_TYPE] = "car_name";
+    connection_state[CAR_TYPE] = "car_name";
     if (!Protocol::sendMsg(&skt, connection_state)) return false;
     if (!Protocol::recvMsg(&skt, connection_state)) return false;
     return connectionCheck();

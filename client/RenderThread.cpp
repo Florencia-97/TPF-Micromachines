@@ -31,6 +31,7 @@ void RenderThread::renderGame(int frame_id){
             inf = renderQueue->pop();
             //get the very last event
         }
+        //process inf
     }
 
     if (!inf.exists("game_end")) {
