@@ -4,7 +4,6 @@
 GamesManagerThread::GamesManagerThread(std::string port){
     this->skt = Socket();
     this->skt.server(port);
-    std::cout << "Server's socket now working!\n";
 }
 
 void GamesManagerThread::_killGames(bool all){
@@ -21,12 +20,12 @@ void GamesManagerThread::_killGames(bool all){
     }
 }
 
-bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName){
+bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if(!(*it)->isAlive()) continue;
-        if ((*it)->gameName == arenaName){
-            (*it)->addPLayer(client);
+        if ((*it)->gameName == ib.getString(ARENA_GAME)){
+            (*it)->addPLayer(client, ib);
             return true;
         }
         ++it;
@@ -37,6 +36,7 @@ bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName
 
 void GamesManagerThread::_run(){
     while( this->isAlive() ){
+        std::cout << "Waiting for a client\n";
         Socket client = this->skt.acceptClient();
         if (!client.isValid()) break;
         std::cout  << "Client accepted\n";
@@ -45,17 +45,14 @@ void GamesManagerThread::_run(){
             std::cout << "Error receiving msg\n";
             continue;
         }
-        std::cout << "First msg received!\n";
         std::string arenaName = ib.get<std::string>(ARENA_GAME);
         std::cout << arenaName << std::endl;
 
         // If players arena is not here, just go ahead and create one
-        if (!_addPlayerToArena(client, arenaName)){
-            // TODO: is game id really necessary after having a game name
-            GameThread* game = new GameThread(1, client, ib);
-            std::cout << "Game created\n";
-            this->games.push_back(game);
+        if (!_addPlayerToArena(client, ib)){
+            GameThread* game = new GameThread(client, ib);
             game->run();
+            this->games.push_back(game);
         }
         _killGames(false);
     }
@@ -66,6 +63,7 @@ void GamesManagerThread::_run(){
 
 void GamesManagerThread::close(){
     if (!this->isAlive()) return;
+    _killGames(true);
     skt.closeSd();
     BaseThread::close();
 }

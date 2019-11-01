@@ -5,23 +5,23 @@
 #define PORT "8080"
 
 // Selecting race
-#define RACE_ID "number_race"
+#define RACE_ID "NUMBER_RACE"
 
 // Game connected
-#define CONNECTED_TO_GAME "conectado_al_juego"
-#define CONNECTED_TO_GAME_YES "OK"
-#define CONNECTED_TO_GAME_NO "ERROR"
-#define OWNER "owner"
+#define CONNECTED_TO_GAME "CONNECTED_TO_GAME"
+#define CONNECTED_TO_GAME_NO "NOT_CONNECTED"
+#define CONNECTED_TO_GAME_YES "CONNECTED"
 
-// answer
-#define OWNER_YES "yes"
-#define OWNER_NO "no"
+// Game owner
+#define OWNER "OWNER"
+#define OWNER_YES "YES"
+#define OWNER_NO "NO"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
 
 // For messages between server and client
-#define ARENA_GAME "game_arena"
+#define ARENA_GAME "GAME_ARENA"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
