@@ -19,7 +19,11 @@ class EventSender: public BaseThread{
     void _run() override;
 
 public:
+
     EventSender(Socket& skt, SafeQueue<InfoBlock>* safeQueue);
+
+    void close() override;
+
     ~EventSender();
 };
 

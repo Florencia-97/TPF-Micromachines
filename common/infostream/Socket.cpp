@@ -161,6 +161,7 @@ void Socket::closeSd(){
     if (this->fd != -1){
         shutdown(this->fd, SHUT_RDWR);
         close(this->fd);
+        fd = -1;
     }
 }
 

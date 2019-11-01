@@ -27,4 +27,11 @@ void EventSender::_run() {
     this->close();
 }
 
-EventSender::~EventSender() {}
+void EventSender::close() {
+    this->safeQueue->setOpen(false);
+    BaseThread::close();
+}
+
+EventSender::~EventSender() {
+
+}

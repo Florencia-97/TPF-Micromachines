@@ -44,8 +44,9 @@ int Client::play() {
         keyboard_e_queue.push(ib);
     }
 
-    sleep(120);
+    sleep(5);
 
+    skt.closeSd();
     userInput.close();
     sender.close();
     receiver.close();

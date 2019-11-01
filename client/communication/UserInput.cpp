@@ -82,7 +82,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     else this->mouse_input->push(ib);
 }
 
-UserInput::~UserInput() {
+void UserInput::close() {
     this->keyboard_input->setOpen(false);
     this->mouse_input->setOpen(false);
+    BaseThread::close();
 }
