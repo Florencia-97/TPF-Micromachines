@@ -65,15 +65,17 @@ void GameThread::_awakePlayersInLobby(){
 
 void GameThread::_runGame() {
     this->_awakePlayersInLobby();
-    std::cout << "Games activated\n";
+    std::cout << "Players awaken\n";
     auto it = this->plr_threads.begin();
     while (this->isAlive()) {
         for (int i = 0 ; i < this->plr_threads.size(); i++){
             int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
             auto itj = std::next(plr_threads.begin(), j);
-            if (!itj->eventQ.empty()){ // No race condition herem we are te only ones removing
+            if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
+                std::cout << "It is not empty!";
                 InfoBlock ib = itj->eventQ.front();
                 itj->eventQ.pop();
+                std::cout << ib.srcString() << std::endl;
                 // TODO : process event in physic world
             }
         }

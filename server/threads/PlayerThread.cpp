@@ -1,14 +1,15 @@
 #include "PlayerThread.h"
 
 PlayerThread::PlayerThread(Socket &my_skt) : sender(&skt) {
+    std::cout << "Created\n";
     this->skt = std::move(my_skt);
-    this->sender.run();
 }
 
 void PlayerThread::_run() {
     std::cout << "New player running";
-    bool socketWorking = true;
-    while (!this->isAlive() && socketWorking && skt.isValid()){
+    this->sender.run();
+    bool socketWorking = true; 
+    while (this->isAlive() && socketWorking && skt.isValid()){
         InfoBlock info;
         socketWorking = Protocol::recvMsg(&skt, info);
         if (socketWorking) this->eventQ.push(info);

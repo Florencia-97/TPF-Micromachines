@@ -38,6 +38,7 @@ bool GamesManagerThread::_addPlayerToArena(Socket& client, std::string arenaName
 void GamesManagerThread::_run(){
     while( this->isAlive() ){
         Socket client = this->skt.acceptClient();
+        if (!client.isValid()) break;
         std::cout  << "Client accepted\n";
         InfoBlock ib;
         if (!Protocol::recvMsg( &client, ib )){
