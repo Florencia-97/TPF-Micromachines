@@ -141,7 +141,7 @@ void GameThread::_run() {
         // Not in lobby mode anymore !
         // TODO: Clean queues
         //_createCars();
-        //this->game.loadWorld(mapName);
+        this->game.loadWorld(mapName);
         _sendStartMsg(mapName);
         _runGame();
     }

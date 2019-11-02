@@ -35,7 +35,7 @@ public:
 
     //POS advances the simulation and all instances within one timestep
     void Step();
-    void createBackgroundObject(); //yaml &stats?
+    void createBackgroundObject(int x, int y, int tileId); //yaml &stats?
 };
 
 

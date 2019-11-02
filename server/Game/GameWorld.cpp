@@ -35,7 +35,38 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 
 void GameWorld::loadWorld(std::string worldName){
     // TODO load box2D world with the mapNumber given
-    std::string raceYaml = "maps/" + worldName + ".yaml";
+    worldName = "race_1"; //Change for real names afterwards!!
+    YAML::Node config = YAML::LoadFile("maps/" + worldName + ".yaml");
+    YAML::Node mapYaml = config["Map"];
+    int y = 0;
+    int x = 0;
+    int rowTile = -1;
+    int num = 1;
+
+    for (YAML::iterator it = mapYaml.begin(); it != mapYaml.end(); ++it) {
+        rowTile += 1;
+        x = 0;
+
+        int columnTile = 0;
+        const YAML::Node &row = *it;
+        std::string numberRow = std::to_string(num);
+        YAML::Node column = row[numberRow];
+        int colNum = 0;
+
+        for (YAML::iterator c = column.begin(); c != column.end(); ++c) {
+            y = rowTile * 512;
+            x = columnTile * 512;
+            const YAML::Node &col_value = *c;
+
+            int numberTile = col_value.as<int>();
+            this->createBackgroundObject(x, y, numberTile);
+
+            colNum++;
+            columnTile += 1;
+        }
+
+        num++;
+    }
     return;
 }
 
@@ -43,18 +74,17 @@ InfoBlock GameWorld::status(){
     // TODO: create a real infoblock with the new world
     InfoBlock ib;
     ib[PLAYERS_AMOUNT] = this->cars.size();
-//    ib[PLAYERS_AMOUNT] = this->cars.size();
-//    for (auto & car : cars){
-//        std::string car_id = std::to_string(car.id);
-//        //ib["P" + car_id] = car.stateAsInfoBlock();
-//    }
-//    ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
-//    int cont = 0;
-//    for (auto & obj : objects){
-//        std::string obj_id = std::to_string(cont);
-//        ib["O" + obj_id] = obj.stateAsInfoBlock();
-//        cont++;
-//    }
+    for (auto & car : cars){
+        std::string car_id = std::to_string(car.id);
+        //ib["P" + car_id] = car.stateAsInfoBlock();
+    }
+    ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
+/*    int cont = 0;
+    for (auto & obj : objects){
+        std::string obj_id = std::to_string(cont);
+        ib["O" + obj_id] = obj.stateAsInfoBlock();
+        cont++;
+    }*/
     return ib;
 }
 
@@ -76,8 +106,9 @@ void GameWorld::Step() {
 }
 
 
-void GameWorld::createBackgroundObject() {
-    b2Body* newBody = makeNewBody(world, b2_staticBody,0,0);
+void GameWorld::createBackgroundObject(int x, int y, int tileType) {
+    // TODO: load proper tile depending in tileType given
+    b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     this->background_objs.emplace_back(newBody);
 
     createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, TILE, SENSOR, false);
