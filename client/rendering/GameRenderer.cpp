@@ -39,12 +39,12 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
     int n_cars = cars_info.exists(PLAYERS_AMOUNT) ? cars_info.get<int>(PLAYERS_AMOUNT) : 1;
     //auto a = cars_info.srcString();
     for (int i = 0; i < n_cars; i++) {
-        auto stats = cars_info.getNestedInfo("C"+std::to_string(i));
+        auto id = std::to_string(i);
         this->all_cars.emplace_back();
         all_cars.back().move(//set start position and rotation
-                stats.exists("x") ? stats.get<int>("x") : 0,
-                stats.exists("y") ? stats.get<int>("y") : 0,
-                stats.exists("r") ? stats.get<int>("r") : 0);
+                cars_info.exists("x"+id) ? cars_info.get<int>("x"+id) : 0,
+                cars_info.exists("y"+id) ? cars_info.get<int>("y"+id) : 0,
+                cars_info.exists("r"+id) ? cars_info.get<int>("r"+id) : 0);
         all_cars.back().addTexture(tloader.load_texture("cars/blue_car.png", gRenderer));
     }
 }
