@@ -84,7 +84,7 @@ void GameThread::_createCars(){
 void GameThread::_sendAll(InfoBlock& ib) {
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        (it)->sender.to_send.push(ib); // Shoudn't check if client is alive here
+        (it)->sender.to_send.push(ib);
         ++it;
     }
 }
@@ -111,17 +111,15 @@ void GameThread::_runGame() {
         for (int i = 0 ; i < this->plr_threads.size(); i++){
             auto itj = std::next(plr_threads.begin(), j);
             if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
-                InfoBlock ib = itj->eventQ.front();
+                InfoBlock event = itj->eventQ.front();
                 itj->eventQ.pop();
-                std::cout << ib.srcString() << std::endl;
-                // TODO : process event in physic world
+                this->game.processEvent(event);
             }
             j = (++j)%plr_threads.size();
         }
 
         if (_anyPlayersAlive()){
             // sleep goes here? dunno, probs
-            // TODO: create a real infoblock with the new world
             // this->game.Step(1/120.0);  1/120 may be too much
             InfoBlock worldActualization = this->game.status();
             _sendAll(worldActualization);
@@ -154,4 +152,5 @@ void GameThread::_run() {
 
 GameThread::~GameThread(){
     _killPlayers(true);
+    close();
 }

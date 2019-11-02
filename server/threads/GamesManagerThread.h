@@ -14,7 +14,7 @@
 
 class GamesManagerThread : public BaseThread{
     Socket skt; //Server's socket
-    std::list<GameThread*> games;
+    std::list<GameThread> games;
     void _killGames(bool all);
     bool _addPlayerToArena(Socket& client, InfoBlock& ib);
     void _run() override;

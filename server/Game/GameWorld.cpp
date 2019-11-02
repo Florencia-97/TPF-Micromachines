@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "GameWorld.h"
 
 //local use namespace for local functions
@@ -38,8 +39,15 @@ void GameWorld::loadWorld(std::string worldName){
 }
 
 InfoBlock GameWorld::status(){
+    // TODO: create a real infoblock with the new world
     InfoBlock ib;
     return ib;
+}
+
+void GameWorld::processEvent(InfoBlock event){
+    // TODO : process event in physic world
+    std::cout << event.srcString() << std::endl;
+    return;
 }
 
 void GameWorld::Step() {
