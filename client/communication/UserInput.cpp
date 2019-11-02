@@ -6,7 +6,7 @@
 #include "../common/SafeQueue.h"
 
 UserInput::UserInput(SafeQueue<InfoBlock>* safeQueueServer, SafeQueue<InfoBlock>* safeQueueClient){
-    // TODO assign to class safeQueue a way of being past  without pointer
+    // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
 }
@@ -16,7 +16,7 @@ void UserInput::_run(){
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
     while (this->isAlive()){
-        while( SDL_WaitEvent(&e) != 0 ) {
+        while( SDL_PollEvent(&e) != 0 && this->isAlive()) {
             _rcvKeyInput(e);
         }
     }

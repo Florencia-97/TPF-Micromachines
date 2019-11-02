@@ -19,7 +19,6 @@ public:
     UserInput(SafeQueue<InfoBlock>* q_keyboard, SafeQueue<InfoBlock>* q_mouse);
     void _rcvKeyInput(SDL_Event &e);
     void close() override;
-    ~UserInput();
 
 };
 

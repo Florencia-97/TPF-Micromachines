@@ -35,16 +35,18 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
 std::string GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
     if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
-        std::cout << "Error when sending status to player\n";
+        std::cout << "Error when sending status to player\n"<< HERE;
         _killPlayers(true);
         close();
+        return "";
     }
     // Now i wait for the id of the race
     InfoBlock ib;
     if (!Protocol::recvMsg(&this->sktOwner, ib)){
-        std::cout << "Error when receiving race id\n";
+        std::cout << "Error when receiving race id\n"<< HERE;
         _killPlayers(true);
         close();
+        return "";
     }
     return ib.get<std::string>(RACE_ID);
 }
@@ -93,8 +95,9 @@ void GameThread::_sendStartMsg(std::string raceId){
 void GameThread::_runGame() {
     auto it = this->plr_threads.begin();
     while (this->isAlive()) {
+
+        int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
         for (int i = 0 ; i < this->plr_threads.size(); i++){
-            int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
             auto itj = std::next(plr_threads.begin(), j);
             if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
                 InfoBlock ib = itj->eventQ.front();
@@ -102,13 +105,19 @@ void GameThread::_runGame() {
                 std::cout << ib.srcString() << std::endl;
                 // TODO : process event in physic world
             }
+            j = (++j)%plr_threads.size();
         }
+
         _killPlayers(false);
-        // sleep goes here?
-        // TODO: create a real infoblock with the new world
-//        this->game.Step(1/120.0);  1/120 maybe too much
-        InfoBlock worldActualization = this->game.status();
-        _sendAll(worldActualization);
+        if (!plr_threads.empty()){
+            // sleep goes here? dunno, probs
+            // TODO: create a real infoblock with the new world
+            // this->game.Step(1/120.0);  1/120 may be too much
+            InfoBlock worldActualization = this->game.status();
+            _sendAll(worldActualization);
+        } else {
+            close();
+        }
     }
     // TODO: when putting q in server its not leaving here (Flor fixs it)
     std::cout << "Leaving game" << std::endl;
@@ -117,12 +126,12 @@ void GameThread::_runGame() {
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
     std::string mapName = _runLobby();
-    std::cout << "Race chosen is: " << mapName << std::endl;
-    this->lobby_mode = false; // Atomic?
-    this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
-    this->plr_threads.front().run();
-    // Not in lobby mode anymore !
     if (this->isAlive()) {
+        std::cout << "Race chosen is: " << mapName << std::endl;
+        this->lobby_mode = false; // Atomic?
+        this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
+        this->plr_threads.front().run();
+        // Not in lobby mode anymore !
         // TODO: Clean queues
         //_createCars();
         //this->game.loadWorld(mapName);

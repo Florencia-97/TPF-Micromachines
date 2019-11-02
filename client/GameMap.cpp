@@ -37,7 +37,7 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
 
 void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
     for (const auto& row: map){
-        for (auto tile: row){
+        for (const auto& tile: row){
           tile->render(camera, renderer);
         }
     }
