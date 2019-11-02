@@ -9,11 +9,21 @@ GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib)
     this->ownerInfo = ib;
 }
 
+bool GameThread::_anyPlayersAlive(){
+   for (auto &p : this->plr_threads){
+        if (p.isAlive()){
+            return true;
+        }
+    }
+    return false;
+}
+
 void GameThread::_killPlayers(bool all){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         if (all || !(it)->isAlive()){
             if ((it)->isAlive()) (it)->close();
+            it->join();
             it = this->plr_threads.erase(it);
         } else {
             ++it;
@@ -108,8 +118,7 @@ void GameThread::_runGame() {
             j = (++j)%plr_threads.size();
         }
 
-        _killPlayers(false);
-        if (!plr_threads.empty()){
+        if (_anyPlayersAlive()){
             // sleep goes here? dunno, probs
             // TODO: create a real infoblock with the new world
             // this->game.Step(1/120.0);  1/120 may be too much
