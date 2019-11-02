@@ -22,7 +22,6 @@ public:
     SenderThread sender;
     PlayerThread(Socket &my_skt, InfoBlock& ib);
     void close() override;
-    ~PlayerThread();
 };
 
 

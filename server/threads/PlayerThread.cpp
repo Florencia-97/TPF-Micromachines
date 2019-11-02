@@ -28,7 +28,3 @@ void PlayerThread::close(){
     sender.join();
     BaseThread::close();
 }
-
-PlayerThread::~PlayerThread() {
-    close();
-}

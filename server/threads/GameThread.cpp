@@ -148,9 +148,9 @@ void GameThread::_run() {
         _runGame();
     }
     _killPlayers(true);
+    close();
 }
 
 GameThread::~GameThread(){
     _killPlayers(true);
-    close();
 }

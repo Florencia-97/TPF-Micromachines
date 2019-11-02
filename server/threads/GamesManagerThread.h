@@ -19,7 +19,7 @@ class GamesManagerThread : public BaseThread{
     bool _addPlayerToArena(Socket& client, InfoBlock& ib);
     void _run() override;
 public:
-    GamesManagerThread(std::string port);
+    explicit GamesManagerThread(std::string port);
     void close() override;
     ~GamesManagerThread();
 };
