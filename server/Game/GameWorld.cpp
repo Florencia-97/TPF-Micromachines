@@ -75,8 +75,9 @@ InfoBlock GameWorld::status(){
     ib[PLAYERS_AMOUNT] = this->cars.size();
     for (auto & car : cars){
         std::string car_id = std::to_string(car.id);
-      ib["C" + car_id] = "" + car.stateAsInfoBlock().srcString() + "";
+        car.stateAsString(ib);
     }
+    std::cout << ib.srcString() << std::endl;
     ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
 /*    int cont = 0;
     for (auto & obj : objects){
