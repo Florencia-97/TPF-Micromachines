@@ -50,7 +50,7 @@ void Menu::init_as_leader() {
   leaderWallpaper.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
   mapButtons.push_back(new MapButton(gRenderer, &leaderWallpaper));
   mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);//Boton asociado al primer mapa
-  wallpaper.render_with_size(0, 0, gRenderer);
+  wallpaper.render_with_size(0, 0, 0, gRenderer);
   for (auto &button : mapButtons) {
     button->render();
   }
