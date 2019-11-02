@@ -33,8 +33,6 @@
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
 
-// For messages between server and client
-#define ARENA_GAME "GAME_ARENA"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
@@ -64,7 +62,7 @@ const int WHITE_CAR_BUTTON_X = 360;
 const int WHITE_CAR_BUTTON_Y = 120;
 
 //Car size
-const int CAR_WIDTH = 150;
+const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
 
 

@@ -39,12 +39,12 @@ int Client::play() {
 
     if (skt.isValid()) {
         if (is_leader) {
-            sleep(10);
+            sleep(1);
             InfoBlock ib;
             ib[RACE_ID] = "rainbow road";
             keyboard_e_queue.push(ib);
         }
-        sleep(5);
+        sleep(15);
     }
 
     skt.closeSd();

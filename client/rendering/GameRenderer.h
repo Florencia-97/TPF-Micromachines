@@ -23,6 +23,7 @@ class GameRenderer {
     Car dumbCar; //todo remove and use the vector
     std::vector<Car> all_cars;
 
+    void loadCars(InfoBlock& inf);
 public:
 
   //the map to render and the car to follow with the camera
@@ -39,7 +40,7 @@ public:
 
   //pre must be init
   void move_car(short id, int x, int y, float r);
-  void load_cars(InfoBlock block);
+
   //pre must be init
   void render();
 

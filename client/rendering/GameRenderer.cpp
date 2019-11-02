@@ -2,6 +2,7 @@
 
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
+#include "../../config/constants.h"
 
 GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -12,27 +13,17 @@ void GameRenderer::render() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   map.render(camera, gRenderer);
-  Car car = all_cars.back();
-  car.setCamera(camera);
-  car.addTexture(tloader.load_texture("cars/black_car.png", gRenderer));
-  SDL_RenderClear(gRenderer);
-  car.render(camera, gRenderer);
+  for (auto &car: all_cars){
+      //car.setCamera(camera);
+      car.render(camera, gRenderer);
+  }
   SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock game_info) {
-  gRenderer = gr;
-  my_car_id = game_info.get<int>("my_car_id");
-  //dumbCar.addTexture(tloader.load_texture("cars/black_car.png", gRenderer));
-  InfoBlock ib = InfoBlock("config/tilesInfo.yaml", true);
-  load_cars(ib);
-  map.loadMap("maps/" + game_info.getString("map_name"), gRenderer);
-  int cantidad_de_autos = 1;
-  for (int i = 0; i < cantidad_de_autos; i++) {
-    this->all_cars.emplace_back();
-    all_cars.back().move(0, 0, 0);//todo ver como setear la posicion con el InfoBlock
-    all_cars.back().addTexture(tloader.load_texture("cars/black_car.png", gRenderer));
-  }
+    gRenderer = gr;
+    loadCars(game_info);
+    map.loadMap("maps/" + game_info.getString(ARENA_GAME), gRenderer);
 }
 
 void GameRenderer::move_car(short id, int x, int y, float r) {
@@ -42,6 +33,18 @@ void GameRenderer::move_car(short id, int x, int y, float r) {
     }
   }
 }
-void GameRenderer::load_cars(InfoBlock block) {
+
+void GameRenderer::loadCars(InfoBlock &cars_info) {
+    my_car_id = cars_info.exists(MY_ID) ? cars_info.get<int>(MY_ID) : 0;
+    int n_cars = cars_info.exists(PLAYERS_AMOUNT) ? cars_info.get<int>(PLAYERS_AMOUNT) : 1;
+    for (int i = 0; i < n_cars; i++) {
+        auto stats = cars_info.getNestedInfo("C"+std::to_string(i));
+        this->all_cars.emplace_back();
+        all_cars.back().move(//set start position and rotation
+                stats.exists("x") ? stats.get<int>("x") : 0,
+                stats.exists("y") ? stats.get<int>("y") : 0,
+                stats.exists("r") ? stats.get<int>("r") : 0);
+        all_cars.back().addTexture(tloader.load_texture("cars/blue_car.png", gRenderer));
+    }
 }
 

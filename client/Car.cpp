@@ -15,7 +15,7 @@ void Car::addTexture(LTexture *my_texture) {
     texture = my_texture;
 }
 
-void Car::move(int x, int y, float r) {
+void Car::move(int x, int y, int r) {
   this->mBox.x = x;
   this->mBox.y = y;
   this->rotation = r;
@@ -33,7 +33,7 @@ void Car::setCamera( SDL_Rect& camera ){
 
 void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
   //SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
-  texture->render_with_size(20, 20, renderer);
+  texture->render_with_size(mBox.x, mBox.y, rotation, renderer);
 }
 
 Car::~Car() {
