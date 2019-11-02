@@ -74,6 +74,10 @@ const int PLAY_BUTTON_HEIGHT = 100;
 
 const int MAP_BUTTON_1_X = 100;
 const int MAP_BUTTON_1_Y = 100;
+const int MAP_BUTTON_2_X = 200;
+const int MAP_BUTTON_2_Y = 100;
+const int MAP_BUTTON_3_X = 300;
+const int MAP_BUTTON_3_Y = 100;
 const int MAP_BUTTON_WIDTH = 300;
 const int MAP_BUTTON_HEIGHT = 300;
 

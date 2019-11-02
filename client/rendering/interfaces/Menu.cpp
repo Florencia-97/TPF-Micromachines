@@ -36,7 +36,7 @@ void Menu::init(SDL_Renderer *sdl_renderer) {
 void Menu::render_first_menu() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
-  wallpaper.render_with_size(0, 0,0, gRenderer);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH);
   for (auto &button : gButtons) {
     button->render();
   }
@@ -46,11 +46,22 @@ void Menu::render_first_menu() {
 void Menu::init_as_leader() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
-  LTexture leaderWallpaper;
-  leaderWallpaper.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.push_back(new MapButton(gRenderer, &leaderWallpaper));
-  mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);//Boton asociado al primer mapa
-  wallpaper.render_with_size(0, 0, 0, gRenderer);
+  LTexture map1;
+  LTexture map2;
+  LTexture map3;
+  map1.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  mapButtons.push_back(new MapButton(gRenderer, &map1));
+  map2.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  mapButtons.push_back(new MapButton(gRenderer, &map2));
+  map3.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  mapButtons.push_back(new MapButton(gRenderer, &map3));
+  mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
+  mapButtons[1]->setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
+  mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+  LTexture msg;
+  msg.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  msg.render_with_size(1200, 720, 0, gRenderer, 400, 500);
   for (auto &button : mapButtons) {
     button->render();
   }
