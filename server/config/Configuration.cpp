@@ -1,31 +1,56 @@
 #include <bits/stdc++.h>
-#include <fstream>
 #include <iostream>
 #include <string>
-#include <arpa/inet.h>
 #include "yaml-cpp/yaml.h"
 
 #include "Configuration.h"
+#include "../../config/constants.h"
 
 Configuration::Configuration() {
-	this->_loadConfigs("config/configuration_server.yaml");
+    this->_loadCarsConfigs("config/cars_configuration.yaml");
+    this->_loadServerConfigs("config/configuration_server.yaml");
 }
 
-Configuration::Configuration(std::string path){
-	this->_loadConfigs(path);
+void Configuration::_loadServerConfigs(std::string path){
+    YAML::Node serverConfigsFile = YAML::LoadFile(path);
+    if (serverConfigsFile.IsNull()){
+        throw fileConfigurationNotFound();
+    }
+
+    for (YAML::const_iterator it=serverConfigsFile.begin();it!=serverConfigsFile.end();++it) {
+        this->configs.insert({it->first.as<std::string>(), it->second.as<float>()});
+    }
+    std::cout << "Server configuration loaded correctly!\n" << std::endl;
 }
 
-void Configuration::_loadConfigs(std::string path){
-    //Adding try and catch in here?
-	YAML::Node file = YAML::LoadFile(path);
-	if (file.IsNull()){
-		throw fileConfigurationNotFound();
-	}
-	// Saving in map all configurations in yaml file string-float
-	for(YAML::const_iterator it=file.begin();it!=file.end();++it) {
-		this->configs.insert({it->first.as<std::string>(), it->second.as<float>()});
-	}
-	std::cout << "Server configuration loaded correctly!\n" << std::endl;
+void Configuration::_loadCarsConfigs(std::string path){
+    YAML::Node carsConfigFile = YAML::LoadFile(path);
+
+    if (carsConfigFile.IsNull()){
+        throw fileConfigurationNotFound();
+    }
+    for (YAML::iterator it = carsConfigFile.begin(); it != carsConfigFile.end(); ++it) {
+        std::string carName = it->first.as<std::string>();
+        YAML::Node &list = it->second;
+        std::map<std::string, float> mapCar;
+        //List
+        for (YAML::iterator l = list.begin(); l != list.end(); ++l) {
+            int cont;
+            const YAML::Node &list_value = *l;
+            float value = list_value.as<float>();
+            if (cont == 0) mapCar.insert({ HEALTH, value});
+            else if (cont == 1) mapCar.insert({ MAX_SPEED, value});
+            else if (cont == 2) mapCar.insert({ ACELERATION, value});
+            else if (cont == 3) mapCar.insert({ ROTATION_MAX, value});
+            cont++;
+        }
+        this->carsConfigs.insert({carName, mapCar});
+    }
+    std::cout << "Cars configuration loaded correctly\n" << std::endl;
+}
+
+float Configuration::getDataFromCar(std::string car, std::string field){
+    return this->carsConfigs[car][field];
 }
 
 float Configuration::getConfigurationData(std::string conf){

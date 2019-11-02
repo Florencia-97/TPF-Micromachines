@@ -65,7 +65,6 @@ set(CLIENT_SOURCE_FILES
 		client/tiles/TilesFactory.cpp client/tiles/TilesFactory.h
 		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h
 		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h client/Client.cpp client/Client.h client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h)
-		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h client/Client.cpp client/Client.h client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h)
 
 set(TEST_SOURCE_FILES
         tests/tests.cpp
