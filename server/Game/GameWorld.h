@@ -21,14 +21,12 @@ class GameWorld {
     //std::vector<Entity> dynamic_objs;
 
 public:
-
     //POS creates a world with no gravity for top-down action
     GameWorld();
-
-
-      int createCar(InfoBlock carStats);
-
-      RaceCar& getCar(int id);
+    int createCar(InfoBlock carStats);
+    RaceCar& getCar(int id);
+    void loadWorld(std::string);
+    InfoBlock status();
     /*
       &Entity createDynamicObject(yaml &stats?);
 
@@ -36,7 +34,6 @@ public:
 
     //POS advances the simulation and all instances within one timestep
     void Step();
-
     void createBackgroundObject(); //yaml &stats?
 };
 

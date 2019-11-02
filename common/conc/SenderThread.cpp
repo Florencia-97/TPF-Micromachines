@@ -10,6 +10,7 @@ void SenderThread::_run() {
 
 void SenderThread::close() {
     if (!this->isAlive()) return;
-    to_send.setOpen(false);
+    this->skt->closeSd();
+    this->to_send.setOpen(false);
     BaseThread::close();
 }

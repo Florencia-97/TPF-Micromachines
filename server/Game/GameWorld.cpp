@@ -31,6 +31,17 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
     //world.SetContactListener(&cl);
 }
 
+void GameWorld::loadWorld(std::string worldName){
+    // TODO load box2D world with the mapNumber given
+    std::string raceYaml = "maps/" + worldName + ".yaml";
+    return;
+}
+
+InfoBlock GameWorld::status(){
+    InfoBlock ib;
+    return ib;
+}
+
 void GameWorld::Step() {
     float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
     for (auto & car : cars){

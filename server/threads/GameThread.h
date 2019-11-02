@@ -13,15 +13,15 @@
 #include <random>
 
 class GameThread : public BaseThread {
+    Socket sktOwner;
+    InfoBlock ownerInfo;
     void _run() override;
     void _killPlayers(bool all);
     std::string _runLobby();
     void _runGame();
     void _sendStartMsg(std::string raceId);
     void _sendAll(InfoBlock& ib);
-    Socket sktOwner;
-    InfoBlock ownerInfo;
-
+    void _createCars();
 public:
     std::string gameName;
     bool lobby_mode;

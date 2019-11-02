@@ -9,7 +9,7 @@ GamesManagerThread::GamesManagerThread(std::string port){
 void GamesManagerThread::_killGames(bool all){
     auto it = this->games.begin();
     while (it != this->games.end()){
-        if (all || !(*it)->isAlive() ){
+        if (all || !(*it)->isAlive()){
             if ((*it)->isAlive()) (*it)->close();
             (*it)->join();
             delete(*it);

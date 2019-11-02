@@ -59,43 +59,34 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     }
 }
 
+void GameThread::_createCars(){
+    auto it = this->plr_threads.begin();
+    while (it != this->plr_threads.end()){
+        InfoBlock ibNewCar;
+        this->game.createCar(ibNewCar);
+        ++ it;
+    }
+}
+
 void GameThread::_sendAll(InfoBlock& ib) {
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         (it)->sender.to_send.push(ib); // Shoudn't check if client is alive here
+        ++it;
     }
 }
 
 void GameThread::_sendStartMsg(std::string raceId){
     int cont = 0;
-    InfoBlock ib;
+    InfoBlock ib = this->game.status();
     ib[RACE_ID] = raceId;
     ib[PLAYERS_AMOUNT] = this->plr_threads.size();
     auto it = this->plr_threads.begin();
-    while (it != this->plr_threads.end()){
-        ib["P" + std::to_string(cont)] = "[" + std::to_string(cont) + (it)->car_type + "0 , 3, 5" + "]";
-        cont++;
-        it++;
-    }
-
-    cont = 0;
-    it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = cont;
         (it)->sender.to_send.push(ib);
         cont++;
         it++;
-    }
-
-
-
-
-    while (it != this->plr_threads.end()){
-        InfoBlock ib;
-        ib[RACE_ID] = raceId;
-        ib[MY_ID] = cont;
-        (it)->sender.to_send.push(ib); // Shoudn't check if client is alive here
-        cont++;
     }
 }
 
@@ -115,26 +106,27 @@ void GameThread::_runGame() {
         _killPlayers(false);
         // sleep goes here?
         // TODO: create a real infoblock with the new world
-//        This is just an example!
-//        InfoBlock worldActualization = world.step() 1/120 maybe too much
-//        _sendAll(worldActualization);
+//        this->game.Step(1/120.0);  1/120 maybe too much
+        InfoBlock worldActualization = this->game.status();
+        _sendAll(worldActualization);
     }
     // TODO: when putting q in server its not leaving here (Flor fixs it)
-    std::cout << "Leaving here auch" << std::endl;
+    std::cout << "Leaving game" << std::endl;
 }
 
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
-    std::string mapNumber = _runLobby();
-    std::cout << "Race chosen is: " << mapNumber << std::endl;
-    // TODO load box2D world with the mapNumber given
+    std::string mapName = _runLobby();
+    std::cout << "Race chosen is: " << mapName << std::endl;
     this->lobby_mode = false; // Atomic?
     this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
     this->plr_threads.front().run();
     // Not in lobby mode anymore !
     if (this->isAlive()) {
         // TODO: Clean queues
-        _sendStartMsg(mapNumber);
+        //_createCars();
+        //this->game.loadWorld(mapName);
+        _sendStartMsg(mapName);
         _runGame();
     }
     _killPlayers(true);
