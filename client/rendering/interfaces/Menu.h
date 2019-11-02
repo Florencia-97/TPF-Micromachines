@@ -12,14 +12,13 @@
 
 class Menu {
  private:
-  LTexture gButtonSpriteSheetTexture;
   LTexture carRed;
   LTexture carBlue;
   LTexture carBlack;
   LTexture carWhite;
   LTexture wallpaper;
+  LTexture connectButton;
   SDL_Renderer *gRenderer;
-  std::vector<SDL_Rect> gSpriteClips;
   std::vector<Button> gButtons;
 
   bool load_media();
