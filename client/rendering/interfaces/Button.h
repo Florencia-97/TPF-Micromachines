@@ -29,7 +29,7 @@ class Button {
   //Shows button sprite
   void render();
   void set_area(int x,
-                int y);//todo hay que hacer una funcion que nos deje pasarle las constantes del area del boton a dibujar
+                int y);
  private:
   //Top left position
   SDL_Point mPosition;

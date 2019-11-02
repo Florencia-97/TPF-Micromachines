@@ -56,11 +56,11 @@ const int BUTTON_HEIGHT = 170;
 const int TOTAL_BUTTONS = 3;
 const int BLUE_CAR_BUTTON_X = 0;
 const int BLUE_CAR_BUTTON_Y = 120;
-const int BLACK_CAR_BUTTON_X = 120;
+const int BLACK_CAR_BUTTON_X = 320;
 const int BLACK_CAR_BUTTON_Y = 120;
-const int RED_CAR_BUTTON_X = 240;
+const int RED_CAR_BUTTON_X = 1280 / 4 * 3 - 150;
 const int RED_CAR_BUTTON_Y = 120;
-const int WHITE_CAR_BUTTON_X = 360;
+const int WHITE_CAR_BUTTON_X = 1280 - 150;
 const int WHITE_CAR_BUTTON_Y = 120;
 
 //Car size

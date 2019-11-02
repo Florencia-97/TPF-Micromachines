@@ -17,6 +17,7 @@ class Menu {
   LTexture carBlue;
   LTexture carBlack;
   LTexture carWhite;
+  LTexture wallpaper;
   SDL_Renderer *gRenderer;
   std::vector<SDL_Rect> gSpriteClips;
   std::vector<Button> gButtons;
