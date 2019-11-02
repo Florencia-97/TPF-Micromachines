@@ -37,14 +37,15 @@ int Client::play() {
     receiver.run();
     sender.run();
 
-    if (is_leader){
-      sleep(1);
-        InfoBlock ib;
-        ib[RACE_ID] = "rainbow road";
-        keyboard_e_queue.push(ib);
+    if (skt.isValid()) {
+        if (is_leader) {
+            sleep(1);
+            InfoBlock ib;
+            ib[RACE_ID] = "rainbow road";
+            keyboard_e_queue.push(ib);
+        }
+        sleep(150);
     }
-
-    sleep(5);
 
     skt.closeSd();
     userInput.close();

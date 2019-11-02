@@ -90,10 +90,11 @@ SDL_Texture *LTexture::get_texture() {
 }
 void LTexture::render_with_size(int x,
                                 int y,
+                                int r,
                                 SDL_Renderer *renderer) {
   if (x != 0) {
-    SDL_Rect area = {x, y, CAR_WIDTH, CAR_HEIGHT};
-    SDL_RenderCopy(renderer, texture, nullptr, &area);
+      SDL_Rect area = {x, y, CAR_WIDTH, CAR_HEIGHT};
+      SDL_RenderCopyEx(renderer, texture, nullptr, &area, r, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }

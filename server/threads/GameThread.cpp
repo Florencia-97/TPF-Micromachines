@@ -104,6 +104,8 @@ void GameThread::_sendStartMsg(std::string raceId){
         cont++;
         it++;
     }
+    auto i = ib.srcString();
+    int b=1;
 }
 
 void GameThread::_runGame() {

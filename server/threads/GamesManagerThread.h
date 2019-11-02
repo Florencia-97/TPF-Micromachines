@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <config/Configuration.h>
 #include "../../common/infostream/Socket.h"
 #include "threads/PlayerThread.h"
 #include "threads/GameThread.h"
@@ -13,6 +14,7 @@
  */
 
 class GamesManagerThread : public BaseThread{
+    Configuration configs;
     Socket skt; //Server's socket
     std::list<GameThread> games;
     void _killGames(bool all);
