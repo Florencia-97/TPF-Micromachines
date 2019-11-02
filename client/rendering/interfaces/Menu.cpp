@@ -33,7 +33,7 @@ void Menu::init(SDL_Renderer *sdl_renderer) {
 void Menu::render() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
-  wallpaper.render_with_size(0, 0, gRenderer);
+  wallpaper.render_with_size(0, 0, 0, gRenderer);
   gButtons[0].render();
   gButtons[1].render();
   gButtons[2].render();

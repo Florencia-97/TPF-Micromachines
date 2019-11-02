@@ -37,6 +37,7 @@ void GameRenderer::move_car(short id, int x, int y, float r) {
 void GameRenderer::loadCars(InfoBlock &cars_info) {
     my_car_id = cars_info.exists(MY_ID) ? cars_info.get<int>(MY_ID) : 0;
     int n_cars = cars_info.exists(PLAYERS_AMOUNT) ? cars_info.get<int>(PLAYERS_AMOUNT) : 1;
+    //auto a = cars_info.srcString();
     for (int i = 0; i < n_cars; i++) {
         auto stats = cars_info.getNestedInfo("C"+std::to_string(i));
         this->all_cars.emplace_back();

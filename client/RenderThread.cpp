@@ -48,13 +48,11 @@ void RenderThread::renderLobby(int frame_id) {
     if (!renderQueue->isEmpty()){
         auto inf = renderQueue->pop();
         if (inf.exists(RACE_ID)){
+            auto ri = inf.getString(RACE_ID);
             previous_game_state = inf;
             state = GAME_STATE;
-
-            //problem, how to iterate over yaml [0] = [car_name, x: 0, y: 0, r: 0, hp: 100]? etc?
-            //maybe make it a subyaml TODO
-            InfoBlock info("{map_name: race_1.yaml, my_car_id: 0, 0: dot.bmp}",false);
-            gameRenderer.init(starter.get_global_renderer(), info);
+            auto a = inf.srcString();
+            gameRenderer.init(starter.get_global_renderer(), inf);
         }
     }
     //lobby.render();

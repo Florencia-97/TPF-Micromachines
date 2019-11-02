@@ -44,7 +44,7 @@ int Client::play() {
             ib[RACE_ID] = "rainbow road";
             keyboard_e_queue.push(ib);
         }
-        sleep(15);
+        sleep(150);
     }
 
     skt.closeSd();
