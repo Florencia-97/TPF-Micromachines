@@ -76,7 +76,10 @@ void GameThread::_createCars(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         InfoBlock ibNewCar;
-        // TODO: Load infoBlock of new car
+        ibNewCar[HEALTH] = 100;
+        ibNewCar[MAX_SPEED] = 100;
+        ibNewCar[ACELERATION] = 20;
+        ibNewCar[ROTATION_MAX] = 15;
         this->game.createCar(ibNewCar);
         ++it;
     }
@@ -138,9 +141,8 @@ void GameThread::_run() {
         this->lobby_mode = false; // Atomic?
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
         this->plr_threads.front().run();
-        // Not in lobby mode anymore !
         // TODO: Clean queues
-        //_createCars();
+        _createCars();
         this->game.loadWorld(mapName);
         _sendStartMsg(mapName);
         _runGame();

@@ -29,6 +29,10 @@
 
 // Status world
 #define OBJECTS_AMOUNT "OBJECTS_AMOUNT"
+#define HEALTH "HEALTH"
+#define MAX_SPEED "MAX_SPEED"
+#define ACELERATION "ACELERATION"
+#define ROTATION_MAX "ROTATION_MAX"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
