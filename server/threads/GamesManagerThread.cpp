@@ -9,10 +9,9 @@ GamesManagerThread::GamesManagerThread(std::string port){
 void GamesManagerThread::_killGames(bool all){
     auto it = this->games.begin();
     while (it != this->games.end()){
-        if (all || !(*it)->isAlive()){
-            if ((*it)->isAlive()) (*it)->close();
-            (*it)->join();
-            delete(*it);
+        if (all || !(*it).isAlive()){
+            if ((*it).isAlive()) (*it).close();
+            (*it).join();
             it = this->games.erase(it);
         } else {
             ++it;
@@ -23,9 +22,9 @@ void GamesManagerThread::_killGames(bool all){
 bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
     auto it = this->games.begin();
     while (it != this->games.end()){
-        if(!(*it)->isAlive()) continue;
-        if ((*it)->gameName == ib.getString(ARENA_GAME)){
-            (*it)->addPLayer(client, ib);
+        if(!(*it).isAlive()) continue;
+        if ((*it).gameName == ib.getString(ARENA_GAME)){
+            (*it).addPLayer(client, ib);
             return true;
         }
         ++it;
@@ -50,9 +49,8 @@ void GamesManagerThread::_run(){
 
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, ib)){
-            GameThread* game = new GameThread(client, ib);
-            game->run();
-            this->games.push_back(game);
+            this->games.emplace_back(client, ib);
+            games.back().run();
         }
         _killGames(false);
     }

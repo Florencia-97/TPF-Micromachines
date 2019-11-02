@@ -52,7 +52,8 @@ std::string GameThread::_runLobby() {
     }
     // Now i wait for the id of the race
     InfoBlock ib;
-    if (!Protocol::recvMsg(&this->sktOwner, ib)){
+    if (!Protocol::recvMsg(&this->sktOwner, ib) ||
+        !ib.exists(RACE_ID)){
         std::cout << "Error when receiving race id\n"<< HERE;
         _killPlayers(true);
         close();
