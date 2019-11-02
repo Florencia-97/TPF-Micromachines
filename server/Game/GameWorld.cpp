@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "GameWorld.h"
+#include "../../config/constants.h"
 
 //local use namespace for local functions
 namespace {
@@ -41,6 +42,19 @@ void GameWorld::loadWorld(std::string worldName){
 InfoBlock GameWorld::status(){
     // TODO: create a real infoblock with the new world
     InfoBlock ib;
+    ib[PLAYERS_AMOUNT] = this->cars.size();
+//    ib[PLAYERS_AMOUNT] = this->cars.size();
+//    for (auto & car : cars){
+//        std::string car_id = std::to_string(car.id);
+//        //ib["P" + car_id] = car.stateAsInfoBlock();
+//    }
+//    ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
+//    int cont = 0;
+//    for (auto & obj : objects){
+//        std::string obj_id = std::to_string(cont);
+//        ib["O" + obj_id] = obj.stateAsInfoBlock();
+//        cont++;
+//    }
     return ib;
 }
 

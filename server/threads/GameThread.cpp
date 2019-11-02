@@ -76,8 +76,9 @@ void GameThread::_createCars(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         InfoBlock ibNewCar;
+        // TODO: Load infoBlock of new car
         this->game.createCar(ibNewCar);
-        ++ it;
+        ++it;
     }
 }
 
@@ -93,7 +94,6 @@ void GameThread::_sendStartMsg(std::string raceId){
     int cont = 0;
     InfoBlock ib = this->game.status();
     ib[RACE_ID] = raceId;
-    ib[PLAYERS_AMOUNT] = this->plr_threads.size();
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = cont;
@@ -119,7 +119,6 @@ void GameThread::_runGame() {
         }
 
         if (_anyPlayersAlive()){
-            // sleep goes here? dunno, probs
             // this->game.Step(1/120.0);  1/120 may be too much
             InfoBlock worldActualization = this->game.status();
             _sendAll(worldActualization);

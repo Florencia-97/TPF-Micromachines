@@ -12,7 +12,7 @@
 class GameWorld {
     b2World world;
     //CollisionDetector cd;
-    std::vector<RaceCar> cars;
+    std::vector<RaceCar> cars; // should be a list
 
     //objects which are a static part of the map background
     std::vector<Entity> background_objs;
