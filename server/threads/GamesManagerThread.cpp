@@ -1,7 +1,8 @@
 #include "GamesManagerThread.h"
 #include "../../config/constants.h"
 
-GamesManagerThread::GamesManagerThread(std::string port){
+GamesManagerThread::GamesManagerThread(std::string port)
+    : configs() {
     this->skt = Socket();
     this->skt.server(port);
 }

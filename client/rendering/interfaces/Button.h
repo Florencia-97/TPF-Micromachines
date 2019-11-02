@@ -13,28 +13,24 @@
 #include <vector>
 
 class Button {
- private:
+ protected:
   SDL_Renderer *gRenderer = nullptr;
   LTexture *texture;
-  SDL_Rect area;
   //Top left position
   SDL_Point mPosition;
   //Currently used global sprite
   ButtonSprite mCurrentSprite;
-
+  SDL_Rect area;
  public:
-
-  //Initializes internal variables
-  Button(SDL_Renderer *sdl_renderer,
-         LTexture *buttonSpriteSheet);
+  Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
   //Sets top left position
-  void setPosition(int x,
-                   int y);
+  virtual void setPosition(int x,
+                           int y);
   //Handles mouse event. If the mouse is clicked, returns true
-  bool handleEvent(SDL_Event *e);
+  virtual bool handleEvent(SDL_Event *e);
   //Shows button sprite
-  void render();
-  void set_area(int x,
+  virtual void render();
+  virtual void set_area(int x,
                 int y);
 };
 

@@ -64,8 +64,11 @@ const int RED_CAR_BUTTON_X = 1280 / 4 * 3 - 150;
 const int RED_CAR_BUTTON_Y = 120;
 const int WHITE_CAR_BUTTON_X = 1280 - 150;
 const int WHITE_CAR_BUTTON_Y = 120;
-const int PLAY_BUTTON_X = 1000;
-const int PLAY_BUTTON_Y = 500;
+
+const int PLAY_BUTTON_X = 701;
+const int PLAY_BUTTON_Y = 600;
+const int PLAY_BUTTON_WIDTH = 400;
+const int PLAY_BUTTON_HEIGHT = 100;
 
 //Car size
 const int CAR_WIDTH = 100;

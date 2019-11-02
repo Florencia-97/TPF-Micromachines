@@ -19,7 +19,7 @@ class Menu {
   LTexture wallpaper;
   LTexture connectButton;
   SDL_Renderer *gRenderer;
-  std::vector<Button> gButtons;
+  std::vector<Button *> gButtons;
 
   bool load_media();
 
