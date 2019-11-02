@@ -60,8 +60,8 @@ void Menu::init_as_leader() {
   mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
   wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
   LTexture msg;
-  msg.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  msg.render_with_size(1200, 720, 0, gRenderer, 400, 500);
+  msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
+  msg.render_with_size(720, 500, 0, gRenderer, 800, 500);
   for (auto &button : mapButtons) {
     button->render();
   }
