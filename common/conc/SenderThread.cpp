@@ -2,9 +2,10 @@
 
 void SenderThread::_run() {
     while (this->isAlive() && skt->isValid() && to_send.isOpen()){
-        InfoBlock send = to_send.pop();
-        if (to_send.isOpen())
+        if (to_send.isOpen()) {
+            InfoBlock send = to_send.pop();
             if (!Protocol::sendMsg(skt, send)) break;
+        }
     }
 }
 
