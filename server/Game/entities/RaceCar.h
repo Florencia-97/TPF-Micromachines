@@ -39,7 +39,7 @@ public:
 
     //POS parses the car's current status into an infoblock with keys
     // {x, y, r, hp}
-    InfoBlock stateAsInfoBlock();
+    void stateAsString(InfoBlock& ib);
 };
 
 #endif //MICROMACHINES_RACECAR_H
