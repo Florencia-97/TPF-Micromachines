@@ -22,13 +22,12 @@ int main (int argc, char** argv) {
 	p.close();
 	p.join();*/
 
-	GamesManagerThread* gamesManager = new GamesManagerThread(PORT);
-	gamesManager->run();
+	GamesManagerThread gamesManager(PORT);
+	gamesManager.run();
 	std::cout << "Game Manager running!\n";
     std::string input;
     // Server closes with a simple q
     while (input.compare("q") != 0) getline(std::cin, input);
-    gamesManager->close();
-    gamesManager->join();
-    delete(gamesManager);
+    gamesManager.close();
+    gamesManager.join();
 }

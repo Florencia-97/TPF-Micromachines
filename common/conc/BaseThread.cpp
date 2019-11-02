@@ -3,7 +3,7 @@
 #include "BaseThread.h"
 
 void BaseThread::close() {
-    this->keep_running.store(false);
+    this->alive.store(false);
 }
 
 void BaseThread::join() {
@@ -11,7 +11,7 @@ void BaseThread::join() {
 }
 
 bool BaseThread::isAlive() {
-    return keep_running.load();
+    return alive.load();
 }
 
 void BaseThread::run() {
@@ -19,7 +19,7 @@ void BaseThread::run() {
     this->t = std::thread(&BaseThread::_run, this);
 }
 
-BaseThread::BaseThread() : keep_running(true) {
+BaseThread::BaseThread() : alive(true) {
     running = false;
 }
 
@@ -28,13 +28,13 @@ bool BaseThread::isRunning() {
 }
 
 BaseThread::BaseThread(BaseThread&& other) {
-    this->keep_running.store(other.keep_running);
+    this->alive.store(other.alive);
     this->running = other.running;
     this->t= std::move(other.t);
 }
 
 BaseThread & BaseThread::operator=(BaseThread&& other) {
-    this->keep_running.store(other.keep_running);
+    this->alive.store(other.alive);
     this->running = other.running;
     this->t= std::move(other.t);
     return *this;

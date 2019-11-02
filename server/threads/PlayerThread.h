@@ -18,6 +18,7 @@ class PlayerThread : public BaseThread {
 public:
     std::string car_type;
     std::queue<InfoBlock> eventQ;
+
     SenderThread sender;
     PlayerThread(Socket &my_skt, InfoBlock& ib);
     void close() override;

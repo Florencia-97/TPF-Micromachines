@@ -18,6 +18,7 @@ void PlayerThread::_run() {
         else break;
     }
     std::cout << "Leaving here for good!\n";
+    close();
 }
 
 void PlayerThread::close(){
@@ -28,6 +29,6 @@ void PlayerThread::close(){
     BaseThread::close();
 }
 
-PlayerThread::~PlayerThread(){
+PlayerThread::~PlayerThread() {
     close();
 }

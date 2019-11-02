@@ -9,7 +9,7 @@
 
 class BaseThread {
     std::thread t;
-    std::atomic<bool> keep_running;
+    std::atomic<bool> alive;
     bool running;
 
 protected:
