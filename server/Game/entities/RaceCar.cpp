@@ -76,13 +76,11 @@ void RaceCar::step(float timestep){
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
 }
 
-InfoBlock RaceCar::stateAsInfoBlock() {
-    InfoBlock info("",false);
-    info.src_yaml["hp"] = health;
+void RaceCar::stateAsString(InfoBlock& ib) {
     auto pos = body->GetPosition();
-    info.src_yaml["x"] = pos.x ;
-    info.src_yaml["y"] = pos.y;
-    info.src_yaml["r"] = body->GetAngle();
-
-    return info;
+    std::string autoId = std::to_string(this->id);
+    ib["h" + autoId] = health;
+    ib["x" + autoId] = pos.x;
+    ib["y" + autoId] = pos.y;
+    ib["r" + autoId] = this->body->GetAngle();
 }
