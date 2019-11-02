@@ -7,5 +7,5 @@ ConnectButton::ConnectButton(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteS
                                                                                                buttonSpriteSheet) {
 }
 void ConnectButton::set_area(int x, int y) {
-  area = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
+  area = {x, y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT};
 }
