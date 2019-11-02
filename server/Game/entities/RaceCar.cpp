@@ -29,7 +29,7 @@ bool RaceCar::isDead() {
 
 
 RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
-            : Entity(newBody) , stats(std::move(stats)) {
+            : Entity(newBody) , stats(std::move(stats)), car_stats(stats) {
     this->health = stats.get<int>("health");
     this->id = carId;
 }

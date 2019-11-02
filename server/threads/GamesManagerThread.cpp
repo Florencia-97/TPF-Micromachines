@@ -48,8 +48,7 @@ void GamesManagerThread::_run(){
 
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, ib)){
-            //todo leave it in the heap
-
+            //todo leave it in the heap, or maybe not!
             this->games.emplace_back(client, ib);
             this->games.back().run();
         }
@@ -68,6 +67,6 @@ void GamesManagerThread::close(){
 }
 
 GamesManagerThread::~GamesManagerThread(){
-    _killGames(true); // Shoudlnt go here
+    _killGames(true); // Should not go here
     this->close();
 }

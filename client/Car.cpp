@@ -8,6 +8,7 @@ Car::Car(){
     mBox.w = w;
     mBox.h = h;
     rotation = 0;
+  id = 0;
 }
 
 void Car::addTexture(LTexture *my_texture) {
@@ -42,4 +43,11 @@ Car::~Car() {
 }
 SDL_Texture *Car::get_texture() {
   return this->texture->get_texture();
+}
+bool Car::compare_id(short i) {
+  return this->id == i;
+}
+void Car::set_id(short givenID) {
+  this->id = givenID;
+
 }
