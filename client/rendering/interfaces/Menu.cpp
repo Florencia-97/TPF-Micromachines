@@ -75,4 +75,11 @@ void Menu::close_first_menu() {
   }
 }
 
+void Menu::init_as_follower() {
+  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  SDL_RenderClear(gRenderer);
+  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0);
+  SDL_RenderPresent(gRenderer);
+}
 

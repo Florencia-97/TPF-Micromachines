@@ -34,6 +34,7 @@ class Menu {
   void close_first_menu();
   void init_as_leader();
 
+  void init_as_follower();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
