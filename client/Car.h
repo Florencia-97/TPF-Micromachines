@@ -12,9 +12,10 @@ class Car {
   const int h = 20;
   float rotation;
   LTexture* texture;
-
+  short id;
  public:
   explicit Car();
+  void set_id(short givenID);
   void addTexture(LTexture* my_texture);
   // Centers the camera over the car
   void setCamera(SDL_Rect &camera);
@@ -22,6 +23,7 @@ class Car {
   void move(int x, int y, float r);
   SDL_Texture *get_texture();
   ~Car();
+  bool compare_id(short i);
 };
 
 #endif
