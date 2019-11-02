@@ -36,6 +36,7 @@ set(SERVER_SOURCE_FILES
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h
+		server/Server.cpp server/Server.h
 		)
 
 set(CLIENT_SOURCE_FILES
