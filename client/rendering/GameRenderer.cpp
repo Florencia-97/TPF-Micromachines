@@ -31,8 +31,18 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock game_info) {
   map.loadMap("maps/"+game_info.getString("map_name"), gRenderer);
 }
 
-void GameRenderer::move_car(int id, int x, int y, float r) {
-    dumbCar.move(x, y, r);
+void GameRenderer::move_car(short id, int x, int y, float r) {
+  for (auto car : all_cars) {
+    if (car.compare_id(id)) {
+      car.move(x, y, r);
+    }
+  }
 }
-
+void GameRenderer::load_cars(InfoBlock block) {
+  int cantidad_de_autos = 3;
+  for (int i = 0; i < cantidad_de_autos; i++) {
+    this->all_cars.emplace_back();
+    all_cars.back().move(0, 0, 0);//todo ver como setear la posicion con el InfoBlock
+  }
+}
 

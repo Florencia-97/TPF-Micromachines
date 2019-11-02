@@ -38,8 +38,8 @@ public:
   void init(SDL_Renderer *gr, InfoBlock game_info);
 
   //pre must be init
-  void move_car(int id, int x, int y, float r);
-
+  void move_car(short id, int x, int y, float r);
+  void load_cars(InfoBlock block);
   //pre must be init
   void render();
 
