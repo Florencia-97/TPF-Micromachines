@@ -72,6 +72,13 @@ const int PLAY_BUTTON_Y = 600;
 const int PLAY_BUTTON_WIDTH = 400;
 const int PLAY_BUTTON_HEIGHT = 100;
 
+//MapButtons constants
+
+const int MAP_BUTTON_1_X = 100;
+const int MAP_BUTTON_1_Y = 100;
+const int MAP_BUTTON_WIDTH = 300;
+const int MAP_BUTTON_HEIGHT = 300;
+
 //Car size
 const int CAR_WIDTH = 150;
 const int CAR_HEIGHT = 170;

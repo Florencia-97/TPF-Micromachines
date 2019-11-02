@@ -2,6 +2,7 @@
 #include "../../../config/constants.h"
 #include "CarButton.h"
 #include "ConnectButton.h"
+#include "MapButton.h"
 bool Menu::load_media() {
   bool success = true;
   //TODO meter una excepcion por caso;
@@ -32,7 +33,7 @@ void Menu::init(SDL_Renderer *sdl_renderer) {
   gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
-void Menu::render() {
+void Menu::render_first_menu() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   wallpaper.render_with_size(0, 0, gRenderer);
@@ -40,6 +41,27 @@ void Menu::render() {
     button->render();
   }
   SDL_RenderPresent(gRenderer);
+}
+
+void Menu::init_as_leader() {
+  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  SDL_RenderClear(gRenderer);
+  LTexture leaderWallpaper;
+  leaderWallpaper.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  mapButtons.push_back(new MapButton(gRenderer, &leaderWallpaper));
+  mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);//Boton asociado al primer mapa
+  wallpaper.render_with_size(0, 0, gRenderer);
+  for (auto &button : mapButtons) {
+    button->render();
+  }
+  SDL_RenderPresent(gRenderer);
+}
+
+//Todo hay que poner esta funcion en el thread de cuando cambia de una pantalla a la otra
+void Menu::close_first_menu() {
+  for (auto &button : gButtons) {
+    button->free_texture();
+  }
 }
 
 

@@ -4,6 +4,13 @@
 
 #include "Button.h"
 
+Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
+  mPosition.x = 0;
+  mPosition.y = 0;
+  this->texture = buttonSpriteSheet;
+  this->gRenderer = sdl_renderer;
+}
+
 void Button::setPosition(int x, int y) {
   mPosition.x = x;
   mPosition.y = y;
@@ -64,11 +71,10 @@ void Button::render() {
 void Button::set_area(int x, int y) {
   this->area = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
 }
-Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
-  mPosition.x = 0;
-  mPosition.y = 0;
-  this->texture = buttonSpriteSheet;
-  this->gRenderer = sdl_renderer;
+
+void Button::free_texture() {
+  this->texture->free();
 }
+
 
 

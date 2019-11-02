@@ -17,8 +17,9 @@ void RenderThread::_run(){
 }
 
 void RenderThread::renderMenu(int frame_id) {
-    menu.render();
+  //menu.render_first_menu();
     sleep(1/60);
+  menu.init_as_leader();
 }
 
 void RenderThread::renderGame(int frame_id){
@@ -57,7 +58,7 @@ void RenderThread::renderLobby(int frame_id) {
             gameRenderer.init(starter.get_global_renderer(), info);
         }
     }
-    //lobby.render();
+  //lobby.render_first_menu();
     sleep(1/60);
 }
 

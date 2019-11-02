@@ -25,7 +25,7 @@ class GameRenderer {
 
 public:
 
-  //the map to render and the car to follow with the camera
+  //the map to render_first_menu and the car to follow with the camera
   explicit GameRenderer();
 
   //IMPORTANT

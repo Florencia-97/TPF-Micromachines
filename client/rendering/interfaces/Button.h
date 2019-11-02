@@ -32,6 +32,7 @@ class Button {
   virtual void render();
   virtual void set_area(int x,
                 int y);
+  virtual void free_texture();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_BUTTON_H_

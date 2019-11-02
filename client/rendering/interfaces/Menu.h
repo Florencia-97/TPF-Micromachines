@@ -20,6 +20,7 @@ class Menu {
   LTexture connectButton;
   SDL_Renderer *gRenderer;
   std::vector<Button *> gButtons;
+  std::vector<Button *> mapButtons;
 
   bool load_media();
 
@@ -29,7 +30,9 @@ class Menu {
     void init(SDL_Renderer *sdl_renderer);
 
     //PRE must be initialized
-    void render();
+    void render_first_menu();
+  void close_first_menu();
+  void init_as_leader();
 
 };
 
