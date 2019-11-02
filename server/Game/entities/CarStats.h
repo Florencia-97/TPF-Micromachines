@@ -12,8 +12,7 @@ public:
     float max_speed;
     //other
 
-    CarStats() = default;
-
+    explicit CarStats(InfoBlock ib);
     void step();
 };
 

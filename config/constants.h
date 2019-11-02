@@ -27,6 +27,9 @@
 #define MY_ID "MY_ID"
 #define PLAYERS_AMOUNT "PLAYERS_AMOUNT"
 
+// Status world
+#define OBJECTS_AMOUNT "OBJECTS_AMOUNT"
+
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
 
