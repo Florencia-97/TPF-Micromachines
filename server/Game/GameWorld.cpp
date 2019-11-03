@@ -87,21 +87,21 @@ InfoBlock GameWorld::status(){
     return ib;
 }
 
-void GameWorld::processEvent(InfoBlock event){
-    // TODO : process event in physic world
-    std::cout << event.srcString() << std::endl;
+void GameWorld::processEvent(int id, InfoBlock event){
+    auto car = cars[id];
+    car.drive(event);
 }
 
 void GameWorld::Step(float timestep) {
     for (auto & car : cars){
-        //car.step(timestep);
-        car.dummyMove();
+        car.step(timestep);
+        //car.dummyMove();
     }
 
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timestep, velocityIterations, positionIterations);
-    sleep(1/80);
+    std::this_thread::sleep_for(std::chrono::milliseconds((int)(1000*timestep)));
 }
 
 

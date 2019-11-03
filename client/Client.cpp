@@ -9,11 +9,11 @@ bool Client::connectionCheck(){
 
 bool Client::attempConnection() {
     skt.client(SERVICE, PORT);
-    if (!skt.isValid()) return false;
+    if (!skt.isValid()) throw  serverNotRunning();
     connection_state[ARENA_GAME] = "insert funny meme";
     connection_state[CAR_TYPE] = "car_name";
-    if (!Protocol::sendMsg(&skt, connection_state)) return false;
-    if (!Protocol::recvMsg(&skt, connection_state)) return false;
+    if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
     return connectionCheck();
 }
 
@@ -23,10 +23,18 @@ int Client::play() {
   UserInput userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue);
     renderThread.run();
     userInput.run();
-
-    while (!connectionCheck()){
-        attempConnection();
-        sleep(1/20); //todo remove
+    try {
+        while (!connectionCheck() && !attempConnection()){
+            sleep(1/20); //todo remove
+        }
+    } catch (const std::exception& e){
+        std::cout << e.what() << std::endl;
+        skt.closeSd();
+        userInput.close();
+        renderThread.close();
+        userInput.join();
+        renderThread.join();
+        return 1;
     }
     bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
     renderThread.proceedToLobby(is_leader);
@@ -43,7 +51,7 @@ int Client::play() {
             ib[RACE_ID] = "race_1";
             keyboard_e_queue.push(ib);
         }
-        sleep(150);
+        sleep(20);
     }
 
     skt.closeSd();
@@ -55,6 +63,5 @@ int Client::play() {
     sender.join();
     userInput.join();
     renderThread.join();
-
     return 0;
 }

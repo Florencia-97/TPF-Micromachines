@@ -25,7 +25,7 @@ void RenderThread::renderMenu(int frame_id) {
 }
 
 void RenderThread::renderGame(int frame_id){
-    InfoBlock inf;//get map state
+    InfoBlock inf;
     if (renderQueue->isEmpty()){
         //if no states to load use last
         inf = previous_game_state;
@@ -34,12 +34,12 @@ void RenderThread::renderGame(int frame_id){
             inf = renderQueue->pop();
             //get the very last event
         }
-        //process inf
     }
 
     if (!inf.exists("game_end")) {
-        gameRenderer.render(); //(inf); //TODO UPDATE STATE
+        gameRenderer.render(inf); //TODO UPDATE STATE
         sleep(1/60); //todo variable time on sleep
+        previous_game_state = inf;
     } else {
         state = -1;
         in_menu.store(true);

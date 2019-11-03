@@ -7,6 +7,8 @@
 #include "Game/entities/Entity.h"
 #include "Game/entities/RaceCar.h"
 #include "CollisionsManager.h"
+#include <chrono>
+#include <thread>
 
 
 class GameWorld {
@@ -24,7 +26,7 @@ public:
     //POS creates a world with no gravity for top-down action
     GameWorld();
     int createCar(InfoBlock carStats);
-    void processEvent(InfoBlock event);
+    void processEvent(int car_id, InfoBlock event);
     RaceCar& getCar(int id);
     void loadWorld(std::string);
     InfoBlock status();

@@ -19,8 +19,7 @@ class GameRenderer {
     TextureLoader tloader;//for map textures
 
     GameMap map;
-    int my_car_id;//position in vector
-    Car dumbCar; //todo remove and use the vector
+    short my_car_id;//position in vector
     std::vector<Car> all_cars;
 
     void loadCars(InfoBlock& inf);
@@ -39,10 +38,7 @@ public:
   void init(SDL_Renderer *gr, InfoBlock game_info);
 
   //pre must be init
-  void move_car(short id, int x, int y, float r);
-
-  //pre must be init
-  void render();
+  void render(InfoBlock inf);
 
 };
 
