@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
+#include <SDL2/SDL_ttf.h>
 
 bool SDLStarter::init() {
   bool success = true;
