@@ -16,7 +16,9 @@ class GameMap {
   TilesFactory tiles_factory;
 
 public:
-
+    int width;
+    int height;
+    
   void loadMap(const std::string &map, SDL_Renderer *gRenderer);
 
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
