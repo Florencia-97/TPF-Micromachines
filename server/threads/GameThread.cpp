@@ -3,10 +3,10 @@
 
 #include "GameThread.h"
 
-GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib)
-    : lobby_mode(true), sktOwner(std::move(lobby_owner)),
-    gameName(ib.getString(ARENA_GAME)) {
+GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
+    : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)) {
     this->ownerInfo = ib;
+    this->configs = configs;
 }
 
 bool GameThread::_anyPlayersAlive(){
@@ -75,11 +75,14 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
 void GameThread::_createCars(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        InfoBlock ibNewCar;
-        ibNewCar[HEALTH] = 100;
-        ibNewCar[MAX_SPEED] = 100;
-        ibNewCar[ACELERATION] = 20;
-        ibNewCar[ROTATION_MAX] = 15;
+        //InfoBlock ibNewCar;
+//        std::string carType = it->car_type;
+        std::string carType = "BLUE_CAR"; // Here goes the real player choice
+        InfoBlock ibNewCar = this->configs.getDataFromCar(carType);
+//        ibNewCar[HEALTH] = 100;
+//        ibNewCar[MAX_SPEED] = 100;
+//        ibNewCar[ACELERATION] = 20;
+//        ibNewCar[ROTATION_MAX] = 15;
         this->game.createCar(ibNewCar);
         ++it;
     }
@@ -124,14 +127,15 @@ void GameThread::_runGame() {
         }
 
         if (_anyPlayersAlive()){
-            // this->game.Step(1/120.0);  1/120 may be too much
+            this->game.Step(1/80.0);
             InfoBlock worldActualization = this->game.status();
+            auto a = worldActualization.srcString();
             _sendAll(worldActualization);
+            sleep(1);//todo remove
         } else {
             close();
         }
     }
-    // TODO: when putting q in server its not leaving here (Flor fixs it)
     std::cout << "Leaving game" << std::endl;
 }
 

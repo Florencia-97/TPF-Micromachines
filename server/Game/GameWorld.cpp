@@ -75,9 +75,8 @@ InfoBlock GameWorld::status(){
     ib[PLAYERS_AMOUNT] = this->cars.size();
     for (auto & car : cars){
         std::string car_id = std::to_string(car.id);
-        car.stateAsString(ib);
+        car.loadStateToInfoBlock(ib);
     }
-    std::cout << ib.srcString() << std::endl;
     ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
 /*    int cont = 0;
     for (auto & obj : objects){
@@ -91,18 +90,18 @@ InfoBlock GameWorld::status(){
 void GameWorld::processEvent(InfoBlock event){
     // TODO : process event in physic world
     std::cout << event.srcString() << std::endl;
-    return;
 }
 
-void GameWorld::Step() {
-    float32 timeStep = 1/60.0;//the length of time passed to simulate (seconds)
+void GameWorld::Step(float timestep) {
     for (auto & car : cars){
-        car.step(timeStep);
+        //car.step(timestep);
+        car.dummyMove();
     }
 
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
-    world.Step(timeStep, velocityIterations, positionIterations);
+    world.Step(timestep, velocityIterations, positionIterations);
+    sleep(1/80);
 }
 
 

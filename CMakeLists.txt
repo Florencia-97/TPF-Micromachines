@@ -35,7 +35,6 @@ set(SERVER_SOURCE_FILES
         server/threads/GamesManagerThread.cpp server/threads/GamesManagerThread.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
-		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h
 		server/Server.cpp server/Server.h
 		)
 
@@ -55,7 +54,6 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/LTexture.cpp client/rendering/LTexture.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
-		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h
 		client/tiles/Tile.cpp client/tiles/Tile.h
 		client/rendering/TEXTURE_ERROR.cpp client/rendering/TEXTURE_ERROR.h
 		client/RenderThread.cpp client/RenderThread.h
@@ -66,18 +64,18 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h
 		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h client/Client.cpp client/Client.h client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h)
 
-set(TEST_SOURCE_FILES
-        tests/tests.cpp
-		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-		server/threads/GameThread.cpp server/threads/GameThread.h
-		common/conc/BaseThread.cpp common/conc/BaseThread.h
-		server/threads/PlayerThread.cpp server/threads/PlayerThread.h
-		common/conc/SenderThread.cpp common/conc/SenderThread.h
-		common/conc/ReceiverThread.cpp common/conc/ReceiverThread.h)
+#set(TEST_SOURCE_FILES
+#        tests/tests.cpp
+#		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
+#		server/threads/GameThread.cpp server/threads/GameThread.h
+#		common/conc/BaseThread.cpp common/conc/BaseThread.h
+#		server/threads/PlayerThread.cpp server/threads/PlayerThread.h
+#		common/conc/SenderThread.cpp common/conc/SenderThread.h
+#		)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
-add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
+#add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp pthread Box2D)
 target_link_libraries(Client yaml-cpp pthread
@@ -85,4 +83,4 @@ target_link_libraries(Client yaml-cpp pthread
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2_TTF_LIBRARIES}
 		)
-target_link_libraries(Test yaml-cpp Box2D)
+#target_link_libraries(Test yaml-cpp Box2D)

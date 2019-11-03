@@ -19,7 +19,6 @@ bool Protocol::recvMsg(Socket* socket, InfoBlock& info){
         std::string msg(len, '\0');
         socket->receive(&msg[0], (size_t) len);
         info.Load(msg,false);
-      auto a = info.srcString();
         return true;
     } catch (socketDisconnected &e){
         std::cout << "Socket disconected\n";

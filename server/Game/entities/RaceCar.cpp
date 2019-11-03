@@ -76,11 +76,15 @@ void RaceCar::step(float timestep){
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
 }
 
-void RaceCar::stateAsString(InfoBlock& ib) {
+void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     auto pos = body->GetPosition();
     std::string autoId = std::to_string(this->id);
     ib["h" + autoId] = health;
     ib["x" + autoId] = pos.x;
     ib["y" + autoId] = pos.y;
     ib["r" + autoId] = this->body->GetAngle();
+}
+
+void RaceCar::dummyMove(){
+    this->body->ApplyLinearImpulse(b2Vec2(1,1), body->GetWorldPoint(b2Vec2(1,0)) , true);
 }

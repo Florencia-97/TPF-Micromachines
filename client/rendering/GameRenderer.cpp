@@ -23,7 +23,7 @@ void GameRenderer::render() {
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock game_info) {
     gRenderer = gr;
     loadCars(game_info);
-    map.loadMap("maps/" + game_info.getString(ARENA_GAME), gRenderer);
+    map.loadMap("maps/" + game_info.getString(RACE_ID)+".yaml", gRenderer);
 }
 
 void GameRenderer::move_car(short id, int x, int y, float r) {
