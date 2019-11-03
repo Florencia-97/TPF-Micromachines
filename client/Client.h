@@ -11,11 +11,17 @@
 #include "RenderThread.h"
 #include "../config/constants.h"
 
+class serverNotRunning : public std::exception {
+    virtual const char* what() const throw() {
+        return "Server was disconnected, maybe try running it first!\n";
+    }
+};
+
 class Client {
     Socket skt;
     SafeQueue<InfoBlock> keyboard_e_queue;
     SafeQueue<InfoBlock> mouse_e_queue;
-
+  std::queue<SDL_Event> text_queue;
     SafeQueue<InfoBlock> receiver_queue;
     SafeQueue<InfoBlock> sender_queue;
 

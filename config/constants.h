@@ -10,7 +10,7 @@
 
 
 // Selecting race
-#define RACE_ID "NUMBER_RACE"
+#define RACE_ID "RACE_ID"
 
 // Game connected
 #define CONNECTED_TO_GAME "CONNECTED_TO_GAME"

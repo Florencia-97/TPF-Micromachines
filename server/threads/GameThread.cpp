@@ -4,9 +4,9 @@
 #include "GameThread.h"
 
 GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
-    : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)) {
+    : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)),
+    configs(configs){
     this->ownerInfo = ib;
-    this->configs = configs;
 }
 
 bool GameThread::_anyPlayersAlive(){
@@ -45,16 +45,15 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
 std::string GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
     if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
-        std::cout << "Error when sending status to player\n"<< HERE;
+        std::cout << "Error when sending status to player\n"<< HERE << std::endl;
         _killPlayers(true);
         close();
         return "";
     }
     // Now i wait for the id of the race
     InfoBlock ib;
-    if (!Protocol::recvMsg(&this->sktOwner, ib) ||
-        !ib.exists(RACE_ID)){
-        std::cout << "Error when receiving race id\n"<< HERE;
+    if (!Protocol::recvMsg(&this->sktOwner, ib) || !ib.exists(RACE_ID)){
+        std::cout << "Error when receiving race id in: " << ib.srcString() << HERE << std::endl;
         _killPlayers(true);
         close();
         return "";
