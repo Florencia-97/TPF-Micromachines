@@ -18,6 +18,7 @@ void Button::setPosition(int x, int y) {
 }
 bool Button::handleEvent(SDL_Event *e) {
   //If mouse event happened
+
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
     //Get mouse position
     int x, y;
@@ -56,6 +57,7 @@ bool Button::handleEvent(SDL_Event *e) {
       //Mouse is inside button
     else {
       //Set mouse over sprite
+      printf("Estoy clickeando sobre este boton\n");
       switch (e->type) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
           return false;

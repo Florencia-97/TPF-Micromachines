@@ -37,7 +37,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     bool forServer = true;
 
     switch (e.type){
-      case SDL_MOUSEBUTTONDOWN:printf("Estoy pusheando un button down");
+      case SDL_MOUSEBUTTONDOWN:;
         local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_DOWN;

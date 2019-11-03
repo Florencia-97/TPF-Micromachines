@@ -46,6 +46,7 @@ void Menu::render_first_menu() {
     for (auto &button : gButtons) {
       button->handleEvent(&queue->front());
     }
+    queue->pop();
     Font *font = new Font("Hola", gRenderer);
     font->render(gRenderer);
     SDL_RenderPresent(gRenderer);
