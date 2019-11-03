@@ -1,14 +1,15 @@
 
+#include <iostream>
 #include "Car.h"
 #include "../config/constants.h"
 
-Car::Car(){
+Car::Car(short id){
     mBox.x = 0;
     mBox.y = 0;
     mBox.w = w;
     mBox.h = h;
     rotation = 0;
-  id = 0;
+    this->id = id;
 }
 
 void Car::addTexture(LTexture *my_texture) {
@@ -19,6 +20,9 @@ void Car::move(int x, int y, int r) {
   this->mBox.x = x;
   this->mBox.y = y;
   this->rotation = r;
+  if (x == 0 || y == 0){
+      std::cout<<"x,y == 0" <<std::endl;
+  }
 }
 
 void Car::setCamera( SDL_Rect& camera ){
@@ -48,8 +52,4 @@ SDL_Texture *Car::get_texture() {
 }
 bool Car::compare_id(short i) {
   return this->id == i;
-}
-void Car::set_id(short givenID) {
-  this->id = givenID;
-
 }

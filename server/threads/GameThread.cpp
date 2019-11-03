@@ -75,14 +75,14 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
 void GameThread::_createCars(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        //InfoBlock ibNewCar;
+        InfoBlock ibNewCar;
 //        std::string carType = it->car_type;
-        std::string carType = "BLUE_CAR"; // Here goes the real player choice
-        InfoBlock ibNewCar = this->configs.getDataFromCar(carType);
-//        ibNewCar[HEALTH] = 100;
-//        ibNewCar[MAX_SPEED] = 100;
-//        ibNewCar[ACELERATION] = 20;
-//        ibNewCar[ROTATION_MAX] = 15;
+        //std::string carType = "BLUE_CAR"; // Here goes the real player choice
+        //InfoBlock ibNewCar = this->configs.getDataFromCar(carType);
+       ibNewCar[HEALTH] = 100;
+        ibNewCar[MAX_SPEED] = 100;
+        ibNewCar[ACELERATION] = 20;
+        ibNewCar[ROTATION_MAX] = 15;
         this->game.createCar(ibNewCar);
         ++it;
     }
@@ -121,7 +121,7 @@ void GameThread::_runGame() {
             if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
                 InfoBlock event = itj->eventQ.front();
                 itj->eventQ.pop();
-                this->game.processEvent(event);
+                this->game.processEvent(j,event);
             }
             j = (++j)%plr_threads.size();
         }
@@ -131,7 +131,6 @@ void GameThread::_runGame() {
             InfoBlock worldActualization = this->game.status();
             auto a = worldActualization.srcString();
             _sendAll(worldActualization);
-            sleep(1);//todo remove
         } else {
             close();
         }

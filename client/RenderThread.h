@@ -23,7 +23,6 @@ class RenderThread : public BaseThread {
     std::atomic<bool> in_menu;
     InfoBlock previous_game_state; //game state
 
-    Car car;
     GameMap map;
     GameRenderer gameRenderer;
     Menu menu;

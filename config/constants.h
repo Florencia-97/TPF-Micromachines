@@ -87,12 +87,12 @@ const int CAR_HEIGHT = 170;
 
 
 // Events
-#define ACTION_TYPE "tipe_accion"
-#define QUIT "quit"
-#define UP "up"
-#define DOWN "down"
-#define LEFT "left"
-#define RIGHT "right"
+#define ACTION_TYPE "key"
+#define QUIT 'q'
+#define UP 'w'
+#define DOWN 's'
+#define LEFT 'a'
+#define RIGHT 'd'
 #define MOUSE_BUTTON_DOWN "button_down"
 #define MOUSE_BUTTON_UP "button_up"
 #define MOUSE_MOTION "mouse_motion"
