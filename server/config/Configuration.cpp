@@ -32,31 +32,32 @@ void Configuration::_loadCarsConfigs(std::string path){
     for (YAML::iterator it = carsConfigFile.begin(); it != carsConfigFile.end(); ++it) {
         std::string carName = it->first.as<std::string>();
         YAML::Node &list = it->second;
-        std::map<std::string, float> mapCar;
+        std::vector<int> vectorCar;
         //List
         for (YAML::iterator l = list.begin(); l != list.end(); ++l) {
-            int cont;
             const YAML::Node &list_value = *l;
-            float value = list_value.as<float>();
-            if (cont == 0) mapCar.insert({ HEALTH, value});
-            else if (cont == 1) mapCar.insert({ MAX_SPEED, value});
-            else if (cont == 2) mapCar.insert({ ACELERATION, value});
-            else if (cont == 3) mapCar.insert({ ROTATION_MAX, value});
-            cont++;
+            int value = list_value.as<int>();
+            vectorCar.push_back(value);
         }
-        this->carsConfigs.insert({carName, mapCar});
+        this->carsConfigs.insert({carName, vectorCar});
     }
     std::cout << "Cars configuration loaded correctly\n" << std::endl;
 }
 
-InfoBlock Configuration::getDataFromCar(std::string car){
+InfoBlock Configuration::getDataFromCar(std::string& car){
     InfoBlock ib;
-    std::map<std::string, float> carConfig =  this->carsConfigs[car];
-    for (auto const& it : carConfig){
-        ib[it.first] = it.second;
+    std::vector<int> carConfig =  this->carsConfigs[car];
+    for(std::size_t i=0; i<carConfig.size(); ++i){
+        if (i == 0) ib[HEALTH] = carConfig[i];
+        else if (i == 1) ib[MAX_SPEED] = carConfig[i];
+        else if (i == 2) ib[ACELERATION] = carConfig[i];
+        else if (i == 3) ib[ROTATION_MAX] = carConfig[i];
     }
+/*    ib[HEALTH] = 100;
+    ib[MAX_SPEED] = 100;
+    ib[ACELERATION] = 20;
+    ib[ROTATION_MAX] = 15;*/
     return ib;
-
 }
 
 float Configuration::getConfigurationData(std::string conf){
