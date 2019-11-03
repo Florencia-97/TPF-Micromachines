@@ -96,9 +96,9 @@ void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
 }
-void LTexture::loadFromRenderedText(const std::string &path, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer) {
+void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer) {
   free();
-  SDL_Surface *textSurface = TTF_RenderText_Solid(font, path.c_str(), color);
+  SDL_Surface *textSurface = TTF_RenderText_Solid(font, msg.c_str(), color);
   if (textSurface != nullptr) {
     texture = SDL_CreateTextureFromSurface(renderer, textSurface);
     if (texture == nullptr) {

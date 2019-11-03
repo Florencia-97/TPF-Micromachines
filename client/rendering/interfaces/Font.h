@@ -13,7 +13,7 @@ class Font {
   LTexture gPromptTextTexture;
   LTexture gInputTextTexture;
  public:
-  Font(const std::string &path, SDL_Renderer *renderer);
+  Font(const std::string &msg, SDL_Renderer *renderer);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_FONT_H_

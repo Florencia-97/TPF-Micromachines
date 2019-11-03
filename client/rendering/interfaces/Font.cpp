@@ -4,7 +4,10 @@
 
 #include "Font.h"
 
-Font::Font(const std::string &path, SDL_Renderer *renderer) {
+Font::Font(const std::string &msg, SDL_Renderer *renderer) {
   SDL_Color textColor = {0, 0, 0, 0xFF};
-  gInputTextTexture.loadFromRenderedText(path, textColor, font, renderer);
+  this->font = TTF_OpenFont("lazy.ttf", 28);
+  gInputTextTexture.loadFromRenderedText(msg, textColor, font, renderer);
+  SDL_StartTextInput();//Todo ver de cuando corta esto.
+
 }
