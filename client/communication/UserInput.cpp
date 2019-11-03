@@ -33,21 +33,16 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
         this->close();
         return;
     }
-
     std::string eventType;
     bool forServer = true;
 
     switch (e.type){
-        // I think we dont care about mouse motion
-//        case SDL_MOUSEMOTION:
-//            forServer = false;
-//            eventType = MOUSE_MOTION;
-//            break;
-        case SDL_MOUSEBUTTONDOWN:local_queue->push(e);
+      case SDL_MOUSEBUTTONDOWN:printf("Estoy pusheando un button down");
+        local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_DOWN;
             break;
-        case SDL_MOUSEBUTTONUP:local_queue->push(e);
+      case SDL_MOUSEBUTTONUP:local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_UP;
             break;
