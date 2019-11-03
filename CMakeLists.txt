@@ -8,7 +8,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2TTF REQUIRED)
 
+include_directories(${SDL2_TTF_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 include_directories(${SDL2_INCLUDE_DIR})
 
@@ -81,6 +83,6 @@ target_link_libraries(Server yaml-cpp pthread Box2D)
 target_link_libraries(Client yaml-cpp pthread
 		${SDL2_LIBRARY}
 		${SDL2_IMAGE_LIBRARIES}
-		${SDL2_TTF_LIBRARIES}
+		${SDL2TTF_LIBRARY}
 		)
 #target_link_libraries(Test yaml-cpp Box2D)

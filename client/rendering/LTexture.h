@@ -3,6 +3,7 @@
 
 #include <SDL_render.h>
 #include <string>
+#include <SDL_ttf.h>
 class LTexture {
  private:
   SDL_Texture *texture;
@@ -24,8 +25,7 @@ class LTexture {
   SDL_Texture *get_texture();
   void render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool is_interface);
   int getHeight();
-  void loadFromRenderedText(std::string path, SDL_Color color);
-
+  void loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer);
 };
 
 #endif //MICROMACHINES_CLIENT_LTEXTURE_H_

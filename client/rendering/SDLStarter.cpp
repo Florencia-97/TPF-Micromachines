@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
+#include <SDL2/SDL_ttf.h>
 
 bool SDLStarter::init() {
   bool success = true;
@@ -33,6 +34,10 @@ bool SDLStarter::init() {
         int imgFlags = IMG_INIT_PNG;
         if (!(IMG_Init(imgFlags) & imgFlags)) {
           printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+          success = false;
+        }
+        if (TTF_Init() == -1) {
+          printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
           success = false;
         }
       }

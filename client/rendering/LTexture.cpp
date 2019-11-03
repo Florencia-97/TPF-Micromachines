@@ -88,17 +88,33 @@ int LTexture::getWidth() {
 SDL_Texture *LTexture::get_texture() {
   return this->texture;
 }
-void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool is_interface) {
-  if (!is_interface) {
+void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool id) {
+  if (!id) {
     SDL_Rect area = {x, y, width, height};
     SDL_RenderCopyEx(renderer, texture, nullptr, &area, r, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
 }
-/*void LTexture::loadFromRenderedText(std::string path, SDL_Color color) {
-  texture.loadFromRenderedText(inputText.c_str(), textColor);
-}*/
+void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer) {
+  free();
+  SDL_Surface *textSurface = TTF_RenderText_Solid(font, msg.c_str(), color);
+  if (textSurface != nullptr) {
+    texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (texture == nullptr) {
+      printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+    } else {
+      //Get image dimensions
+      width = textSurface->w;
+      height = textSurface->h;
+    }
+    //Get rid of old surface
+    SDL_FreeSurface(textSurface);
+  } else {
+    printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+  }
+}
+
 
 
 

@@ -3,6 +3,7 @@
 #include "CarButton.h"
 #include "ConnectButton.h"
 #include "MapButton.h"
+#include "Font.h"
 bool Menu::load_media() {
   bool success = true;
   //TODO meter una excepcion por caso;
@@ -66,6 +67,7 @@ void Menu::init_as_leader() {
     button->render();
   }
   SDL_RenderPresent(gRenderer);
+  Font *font = new Font("Hola", gRenderer);
 }
 
 //Todo hay que poner esta funcion en el thread de cuando cambia de una pantalla a la otra
