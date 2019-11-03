@@ -17,10 +17,10 @@ void RenderThread::_run(){
 }
 
 void RenderThread::renderMenu(int frame_id) {
-  //menu.render_first_menu();
+  menu.render_first_menu();
     sleep(1/60);
-  //menu.init_as_leader();
-  menu.init_as_follower();
+  menu.init_as_leader();
+  //menu.init_as_follower();
 }
 
 void RenderThread::renderGame(int frame_id){
