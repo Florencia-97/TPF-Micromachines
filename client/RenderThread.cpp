@@ -61,16 +61,6 @@ void RenderThread::renderLobby(int frame_id) {
     sleep(1/60);
 }
 
-RenderThread::RenderThread(SafeQueue<InfoBlock>& rq) : starter(SCREEN_WIDTH, SCREEN_HEIGHT) {
-    current_frame = 0;
-    state = -1;
-    in_menu.store(true);
-    renderQueue = &rq;
-
-    starter.init();
-    menu.init(starter.get_global_renderer());
-}
-
 void RenderThread::proceedToLobby(bool is_leader) {
     if (is_leader){
         //lobby.setLeadership(); //display map options
@@ -80,4 +70,13 @@ void RenderThread::proceedToLobby(bool is_leader) {
 
 RenderThread::~RenderThread(){
     starter.close();
+}
+RenderThread::RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> queue) : starter(SCREEN_WIDTH,
+                                                                                            SCREEN_HEIGHT) {
+  current_frame = 0;
+  state = -1;
+  in_menu.store(true);
+  renderQueue = &rq;
+  starter.init();
+  menu.init(starter.get_global_renderer());
 }
