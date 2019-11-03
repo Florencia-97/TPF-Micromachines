@@ -7,6 +7,8 @@
 #include "Game/entities/Entity.h"
 #include "Game/entities/RaceCar.h"
 #include "CollisionsManager.h"
+#include <chrono>
+#include <thread>
 
 
 class GameWorld {

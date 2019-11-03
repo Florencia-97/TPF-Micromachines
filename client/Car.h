@@ -8,8 +8,6 @@
 
 class Car {
   SDL_Rect mBox;
-  const int w = 20;
-  const int h = 20;
   int rotation;
   LTexture* texture;
 

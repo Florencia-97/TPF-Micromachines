@@ -6,8 +6,8 @@
 Car::Car(short id){
     mBox.x = 0;
     mBox.y = 0;
-    mBox.w = w;
-    mBox.h = h;
+    mBox.w = CAR_WIDTH;
+    mBox.h = CAR_HEIGHT;
     rotation = 0;
     this->id = id;
 }
@@ -24,8 +24,8 @@ void Car::move(int x, int y, int r) {
 
 void Car::setCamera( SDL_Rect& camera, int level_width, int level_height ){
     std::cout<<"xcar: "<<this->mBox.x<<" xcam: "<< camera.x<<std::endl;
-  camera.x = (mBox.x + w / 2) - SCREEN_WIDTH / 2;
-  camera.y = (mBox.y + h / 2) - SCREEN_HEIGHT / 2;
+  camera.x = (mBox.x + mBox.w / 2);
+  camera.y = (mBox.y + mBox.h / 2);
     // Keep the camera in bounds
   if (camera.x < 0) camera.x = 0;
   if (camera.y < 0) camera.y = 0;
