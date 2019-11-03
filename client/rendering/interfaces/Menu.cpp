@@ -41,6 +41,8 @@ void Menu::render_first_menu() {
   for (auto &button : gButtons) {
     button->render();
   }
+  Font *font = new Font("Hola", gRenderer);
+  font->render(gRenderer);
   SDL_RenderPresent(gRenderer);
 }
 
@@ -67,7 +69,6 @@ void Menu::init_as_leader() {
     button->render();
   }
   SDL_RenderPresent(gRenderer);
-  Font *font = new Font("Hola", gRenderer);
 }
 
 //Todo hay que poner esta funcion en el thread de cuando cambia de una pantalla a la otra
