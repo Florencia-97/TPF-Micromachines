@@ -28,6 +28,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/CarStats.cpp
 		server/Game/GameWorld.cpp
 		common/infostream/InfoBlock.cpp
+		common/MapsLayer.cpp common/MapsLayer.h
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
 		server/threads/PlayerThread.cpp
 		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h
@@ -56,6 +57,7 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/LTexture.cpp client/rendering/LTexture.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
+		common/MapsLayer.cpp common/MapsLayer.h
 		client/tiles/Tile.cpp client/tiles/Tile.h
 		client/rendering/TEXTURE_ERROR.cpp client/rendering/TEXTURE_ERROR.h
 		client/RenderThread.cpp client/RenderThread.h
@@ -64,7 +66,12 @@ set(CLIENT_SOURCE_FILES
 		client/Client.cpp
 		client/tiles/TilesFactory.cpp client/tiles/TilesFactory.h
 		client/rendering/interfaces/Button.cpp client/rendering/interfaces/Button.h
-		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h client/Client.cpp client/Client.h client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h)
+		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h
+		client/Client.cpp client/Client.h
+		client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h
+		client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h
+		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
+		client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp
