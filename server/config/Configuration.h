@@ -18,10 +18,10 @@ class Configuration{
     void _loadServerConfigs(std::string path);
     void _loadCarsConfigs(std::string path);
     std::map<std::string, float> configs;
-    std::map<std::string, std::map<std::string, float>> carsConfigs;
+    std::map<std::string, std::vector<int>> carsConfigs;
 
     public:
-    InfoBlock getDataFromCar(std::string car);
+    InfoBlock getDataFromCar(std::string& car);
     float getConfigurationData(std::string conf);
     Configuration();
 };
