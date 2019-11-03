@@ -9,6 +9,7 @@ TilesFactory::TilesFactory() {
 
 std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
     std::string path;
+    //  TODO: should get it from yaml auch! es ist ok ein dafult
     int width = 512;
     int height = 512;
     switch (tyleType){
