@@ -38,6 +38,7 @@ void RenderThread::renderGame(int frame_id){
     if (!inf.exists("game_end")) {
         gameRenderer.render(inf); //TODO UPDATE STATE
         sleep(1/60); //todo variable time on sleep
+        previous_game_state = inf;
     } else {
         state = -1;
         in_menu.store(true);

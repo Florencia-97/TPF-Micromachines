@@ -116,7 +116,7 @@ void GameThread::_runGame() {
             if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
                 InfoBlock event = itj->eventQ.front();
                 itj->eventQ.pop();
-                this->game.processEvent(event);
+                this->game.processEvent(j, event);
             }
             j = (++j)%plr_threads.size();
         }
@@ -126,7 +126,6 @@ void GameThread::_runGame() {
             InfoBlock worldActualization = this->game.status();
             auto a = worldActualization.srcString();
             _sendAll(worldActualization);
-            sleep(1);//todo remove
         } else {
             close();
         }

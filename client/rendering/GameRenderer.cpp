@@ -14,13 +14,12 @@ void GameRenderer::render(InfoBlock world_state) {
   map.render(camera, gRenderer);
   std::cout<<world_state.srcString()<<std::endl;
   for (auto &car: all_cars) {
-      if (car.id == my_car_id){
-        car.setCamera(camera);
-      }
-      std::cout<<car.id<<std::endl;
       car.move(world_state.get<int>("x"+std::to_string(car.id)),
                world_state.get<int>("y"+std::to_string(car.id)),
                world_state.get<int>("r"+std::to_string(car.id)));
+      if (car.id == my_car_id){
+          car.setCamera(camera);
+      }
       car.render(camera, gRenderer);
   }
   SDL_RenderPresent(gRenderer);

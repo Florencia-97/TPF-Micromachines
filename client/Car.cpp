@@ -20,9 +20,6 @@ void Car::move(int x, int y, int r) {
   this->mBox.x = x;
   this->mBox.y = y;
   this->rotation = r;
-  if (x == 0 || y == 0){
-      std::cout<<"x,y == 0" <<std::endl;
-  }
 }
 
 void Car::setCamera( SDL_Rect& camera ){

@@ -67,8 +67,8 @@ void RaceCar::step(float timestep){
     float goalVelX = (accel.x > maxVel) ? maxVel : accel.x;
     float goalVelY = (accel.y > maxVel) ? maxVel : accel.y;
 
-    float impulseX = body->GetMass()* 1/20 + 0;//(goalVelX - vel.x);
-    float impulseY = body->GetMass()*1/20 + 0;//(goalVelY - vel.y);
+    float impulseX = body->GetMass()* 1/2;//(goalVelX - vel.x);
+    float impulseY = body->GetMass()* 1/2;//(goalVelY - vel.y);
     body->ApplyForce(b2Vec2(impulseX, impulseY), body->GetWorldPoint(b2Vec2(1,0)), true);
     float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : 0);
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
