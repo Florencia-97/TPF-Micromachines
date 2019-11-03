@@ -17,8 +17,7 @@
 #define FPS 60
 
 class RenderThread : public BaseThread {
-  RenderThread(SafeQueue<InfoBlock> &rq);
-  SDLStarter starter;
+    SDLStarter starter;
     int current_frame;
     int state; //thread state
     std::atomic<bool> in_menu;
@@ -39,7 +38,7 @@ class RenderThread : public BaseThread {
 public:
     SafeQueue<InfoBlock>* renderQueue;
 
-  RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> queue);
+    RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue);
 
     void proceedToLobby(bool is_leader);
 

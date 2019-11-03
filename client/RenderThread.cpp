@@ -72,7 +72,7 @@ void RenderThread::proceedToLobby(bool is_leader) {
 RenderThread::~RenderThread(){
     starter.close();
 }
-RenderThread::RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> queue) : starter(SCREEN_WIDTH,
+RenderThread::RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue) : starter(SCREEN_WIDTH,
                                                                                             SCREEN_HEIGHT) {
   current_frame = 0;
   state = -1;

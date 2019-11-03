@@ -64,8 +64,9 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
         case SDLK_RIGHT:
             eventType = RIGHT;
             break;
-        default:forServer = false;
-        local_queue->push(e);
+        default:
+            forServer = false;
+            local_queue->push(e);
     }
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
