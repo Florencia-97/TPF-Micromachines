@@ -18,7 +18,7 @@ void Button::setPosition(int x, int y) {
 }
 bool Button::handleEvent(SDL_Event *e) {
   //If mouse event happened
-  if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
+  if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
     //Get mouse position
     int x, y;
     SDL_GetMouseState(&x, &y);
@@ -28,18 +28,22 @@ bool Button::handleEvent(SDL_Event *e) {
 
     //Mouse is left of the button
     if (x < mPosition.x) {
+      printf("Estoy clickeando afuera de este boton\n");
       inside = false;
     }
       //Mouse is right of the button
     else if (x > mPosition.x + BUTTON_WIDTH) {
+      printf("Estoy clickeando afuera de este boton\n");
       inside = false;
     }
       //Mouse above the button
     else if (y < mPosition.y) {
+      printf("Estoy clickeando afuera de este boton\n");
       inside = false;
     }
       //Mouse below the button
     else if (y > mPosition.y + BUTTON_HEIGHT) {
+      printf("Estoy clickeando afuera de este boton\n");
       inside = false;
     }
 
@@ -47,6 +51,7 @@ bool Button::handleEvent(SDL_Event *e) {
     if (!inside) {
       //Pone el enum que representa que el mouse no esta encima;
       mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
+      printf("Estoy clickeando sobre este boton\n");
     }
       //Mouse is inside button
     else {

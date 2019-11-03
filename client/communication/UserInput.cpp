@@ -11,7 +11,7 @@ UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
     // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
-  this->text_queue = text_queue;
+  this->local_queue = text_queue;
 }
 
 void UserInput::_run(){
@@ -25,7 +25,6 @@ void UserInput::_run(){
 }
 
 void UserInput::_rcvKeyInput(SDL_Event &e){
-
     if ( e.type == SDL_QUIT){
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
@@ -44,11 +43,11 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
 //            forServer = false;
 //            eventType = MOUSE_MOTION;
 //            break;
-        case SDL_MOUSEBUTTONDOWN:
+        case SDL_MOUSEBUTTONDOWN:local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_DOWN;
             break;
-        case SDL_MOUSEBUTTONUP:
+        case SDL_MOUSEBUTTONUP:local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_UP;
             break;
@@ -75,7 +74,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             eventType = RIGHT;
             break;
         default:forServer = false;
-        text_queue->push(e);
+        local_queue->push(e);
     }
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;

@@ -32,7 +32,7 @@ class Menu {
     void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *queue);
 
     //PRE must be initialized
-    void render_first_menu(SDL_Event &event);
+    void render_first_menu();
   void close_first_menu();
   void init_as_leader();
 
