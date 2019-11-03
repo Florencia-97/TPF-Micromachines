@@ -36,7 +36,7 @@ void Menu::init(SDL_Renderer *sdl_renderer) {
 void Menu::render_first_menu() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
   for (auto &button : gButtons) {
     button->render();
   }
@@ -58,10 +58,10 @@ void Menu::init_as_leader() {
   mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
   mapButtons[1]->setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
   mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT,true);
   LTexture msg;
   msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
-  msg.render_with_size(720, 500, 0, gRenderer, 800, 500);
+  msg.render_with_size(720, 500, 0, gRenderer, 800, 500,false);
   for (auto &button : mapButtons) {
     button->render();
   }
@@ -79,7 +79,7 @@ void Menu::init_as_follower() {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0,true);
   SDL_RenderPresent(gRenderer);
 }
 
