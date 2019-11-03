@@ -26,6 +26,7 @@ class LTexture {
   int getHeight();
   void loadFromRenderedText(std::string path, SDL_Color color);
 
+  void render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height);
 };
 
 #endif //MICROMACHINES_CLIENT_LTEXTURE_H_
