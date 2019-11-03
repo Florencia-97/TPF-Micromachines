@@ -95,10 +95,10 @@ void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
-}
+}/*
 void LTexture::loadFromRenderedText(std::string path, SDL_Color color) {
   texture.loadFromRenderedText(inputText.c_str(), textColor);
-}
+}*/
 
 
 
