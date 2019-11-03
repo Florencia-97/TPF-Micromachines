@@ -95,10 +95,26 @@ void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
-}/*
-void LTexture::loadFromRenderedText(std::string path, SDL_Color color) {
-  texture.loadFromRenderedText(inputText.c_str(), textColor);
-}*/
+}
+void LTexture::loadFromRenderedText(const std::string &path, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer) {
+  free();
+  SDL_Surface *textSurface = TTF_RenderText_Solid(font, path.c_str(), color);
+  if (textSurface != nullptr) {
+    texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (texture == nullptr) {
+      printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+    } else {
+      //Get image dimensions
+      width = textSurface->w;
+      height = textSurface->h;
+    }
+    //Get rid of old surface
+    SDL_FreeSurface(textSurface);
+  } else {
+    printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+  }
+}
+
 
 
 

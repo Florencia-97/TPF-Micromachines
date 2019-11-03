@@ -3,6 +3,8 @@
 //
 
 #include "Font.h"
-Font::Font(std::string path) {
 
+Font::Font(const std::string &path, SDL_Renderer *renderer) {
+  SDL_Color textColor = {0, 0, 0, 0xFF};
+  gInputTextTexture.loadFromRenderedText(path, textColor, font, renderer);
 }
