@@ -41,7 +41,7 @@ int Client::play() {
         if (is_leader) {
             sleep(1);
             InfoBlock ib;
-            ib[RACE_ID] = "rainbow road";
+            ib[RACE_ID] = "race_1";
             keyboard_e_queue.push(ib);
         }
         sleep(150);

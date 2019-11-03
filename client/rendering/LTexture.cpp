@@ -88,13 +88,17 @@ int LTexture::getWidth() {
 SDL_Texture *LTexture::get_texture() {
   return this->texture;
 }
-void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height) {
-  if (x != 0) {
+void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool is_interface) {
+  if (!is_interface) {
     SDL_Rect area = {x, y, width, height};
     SDL_RenderCopyEx(renderer, texture, nullptr, &area, r, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
 }
+/*void LTexture::loadFromRenderedText(std::string path, SDL_Color color) {
+  texture.loadFromRenderedText(inputText.c_str(), textColor);
+}*/
+
 
 

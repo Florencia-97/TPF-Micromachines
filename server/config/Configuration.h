@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include <vector>
 #include <map>
+#include "../../common/infostream/InfoBlock.h"
 
 class fileConfigurationNotFound : public std::exception {
     virtual const char* what() const throw() {
@@ -20,7 +21,7 @@ class Configuration{
     std::map<std::string, std::map<std::string, float>> carsConfigs;
 
     public:
-    float getDataFromCar(std::string car, std::string field);
+    InfoBlock getDataFromCar(std::string car);
     float getConfigurationData(std::string conf);
     Configuration();
 };

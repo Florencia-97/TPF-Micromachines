@@ -49,8 +49,14 @@ void Configuration::_loadCarsConfigs(std::string path){
     std::cout << "Cars configuration loaded correctly\n" << std::endl;
 }
 
-float Configuration::getDataFromCar(std::string car, std::string field){
-    return this->carsConfigs[car][field];
+InfoBlock Configuration::getDataFromCar(std::string car){
+    InfoBlock ib;
+    std::map<std::string, float> carConfig =  this->carsConfigs[car];
+    for (auto const& it : carConfig){
+        ib[it.first] = it.second;
+    }
+    return ib;
+
 }
 
 float Configuration::getConfigurationData(std::string conf){

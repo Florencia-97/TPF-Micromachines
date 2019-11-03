@@ -11,10 +11,12 @@
 #include <queue>
 #include <list>
 #include <random>
+#include <config/Configuration.h>
 
 class GameThread : public BaseThread {
     Socket sktOwner;
     InfoBlock ownerInfo;
+    Configuration configs;
     void _run() override;
     void _killPlayers(bool all);
     std::string _runLobby();
@@ -35,7 +37,7 @@ public:
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game
-    GameThread(Socket &lobby_owner, InfoBlock& ib);
+    GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs);
 
     //PRE lobby_mode must be true
     //POS adds player to the lobby

@@ -50,7 +50,7 @@ void GamesManagerThread::_run(){
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, ib)){
             //todo leave it in the heap, or maybe not!
-            this->games.emplace_back(client, ib);
+            this->games.emplace_back(client, ib, this->configs);
             this->games.back().run();
         }
         _killGames(false);
