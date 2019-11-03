@@ -38,17 +38,14 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
   texture->render_with_size(mBox.x + x, mBox.y + y, rotation, renderer, CAR_WIDTH, CAR_HEIGHT, false);
 }
 
-Car::~Car() {
-    if (texture != nullptr){
-        texture->free();
-    }
-}
 SDL_Texture *Car::get_texture() {
   return this->texture->get_texture();
 }
+
 bool Car::compare_id(short i) {
   return this->id == i;
 }
+
 void Car::set_id(short givenID) {
   this->id = givenID;
 

@@ -29,7 +29,6 @@ int Client::play() {
             sleep(1/20); //todo remove
         }
     } catch (const std::exception& e){
-        // TODO: fix seg fault, i believe there is something closing wronng.
         std::cout << e.what() << std::endl;
         skt.closeSd();
         userInput.close();
@@ -65,6 +64,5 @@ int Client::play() {
     sender.join();
     userInput.join();
     renderThread.join();
-
     return 0;
 }

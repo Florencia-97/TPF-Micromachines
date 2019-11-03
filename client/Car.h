@@ -22,7 +22,6 @@ class Car {
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
   void move(int x, int y, int r);
   SDL_Texture *get_texture();
-  ~Car();
   bool compare_id(short i);
 };
 
