@@ -124,14 +124,15 @@ void GameThread::_runGame() {
         }
 
         if (_anyPlayersAlive()){
-            // this->game.Step(1/120.0);  1/120 may be too much
+            this->game.Step(1/80.0);
             InfoBlock worldActualization = this->game.status();
+            auto a = worldActualization.srcString();
             _sendAll(worldActualization);
+            sleep(1);//todo remove
         } else {
             close();
         }
     }
-    // TODO: when putting q in server its not leaving here (Flor fixs it)
     std::cout << "Leaving game" << std::endl;
 }
 
