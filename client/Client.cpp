@@ -46,7 +46,7 @@ int Client::play() {
 
     if (skt.isValid()) {
         if (is_leader) {
-            sleep(1);
+            sleep(100);
             InfoBlock ib;
             ib[RACE_ID] = "race_1";
             keyboard_e_queue.push(ib);

@@ -36,21 +36,24 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
 }
 
 void Menu::render_first_menu() {
-  //while (true) {
+    bool clicked = false;
+  while (!clicked) {
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : gButtons) {
       button->render();
     }
-    for (auto &button : gButtons) {
-      button->handleEvent(&queue->front());
+    while (!queue->empty()) {
+        for (auto &button : gButtons) {
+            clicked = button->handleEvent(&queue->front());
+        }
+        queue->pop();
     }
-    queue->pop();
     Font *font = new Font("Hola", gRenderer);
     font->render(gRenderer);
     SDL_RenderPresent(gRenderer);
-  //}
+  }
 }
 
 void Menu::init_as_leader() {
