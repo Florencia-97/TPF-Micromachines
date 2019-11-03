@@ -19,9 +19,8 @@ bool Client::attempConnection() {
 
 
 int Client::play() {
-    RenderThread renderThread(this->receiver_queue);
-    UserInput userInput(&keyboard_e_queue, &mouse_e_queue);
-
+  RenderThread renderThread(this->receiver_queue, text_queue);
+  UserInput userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue);
     renderThread.run();
     userInput.run();
 

@@ -5,13 +5,15 @@
 #include "../../config/constants.h"
 #include "../common/SafeQueue.h"
 
-UserInput::UserInput(SafeQueue<InfoBlock>* safeQueueServer, SafeQueue<InfoBlock>* safeQueueClient){
+UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
+                     SafeQueue<InfoBlock> *safeQueueClient,
+                     std::queue<SDL_Event> *text_queue) {
     // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
+  this->text_queue = text_queue;
 }
 
-// Why using sdl_WaitEvent? https://stackoverflow.com/questions/18860243/sdl-pollevent-vs-sdl-waitevent
 void UserInput::_run(){
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
@@ -72,8 +74,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             std::cout << "Key right was pressed!\n";
             eventType = RIGHT;
             break;
-        default:
-            break;
+        default:forServer = false;
+        text_queue->push(e);
     }
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
