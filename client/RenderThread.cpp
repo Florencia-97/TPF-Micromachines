@@ -78,5 +78,5 @@ RenderThread::RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> queue
   in_menu.store(true);
   renderQueue = &rq;
   starter.init();
-  menu.init(starter.get_global_renderer());
+  menu.init(starter.get_global_renderer(), &queue);
 }

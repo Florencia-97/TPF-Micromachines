@@ -16,7 +16,8 @@ bool Menu::load_media() {
   return success;
 }
 
-void Menu::init(SDL_Renderer *sdl_renderer) {
+void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
+  this->queue = gQueue;
   this->gRenderer = sdl_renderer;
   if (!load_media()) {
     printf("Failed to initialize!\n"); //todo exception here
@@ -34,7 +35,7 @@ void Menu::init(SDL_Renderer *sdl_renderer) {
   gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
-void Menu::render_first_menu() {
+void Menu::render_first_menu(SDL_Event &event) {
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
