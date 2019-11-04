@@ -1,30 +1,33 @@
 
 
-#include "RenderThread.h"
+#include "GameLoop.h"
 
-void RenderThread::_run(){
+void GameLoop::_run(){
     while (this->isAlive()) {
         if (state == GAME_STATE){
-            renderGame(current_frame);
+            runGame(current_frame);
         } else if (!in_menu.load()){ //if not in menu then in lobby
-            renderLobby(current_frame);
+            runLobby(current_frame);
         } else if (in_menu.load()){
-            renderMenu(current_frame);
+            runMenu(current_frame);
         }
         //todo check time and sleep
         this->current_frame = (current_frame+1) % FPS;
     }
 }
 
-void RenderThread::renderMenu(int frame_id) {
-
-  menu.render_first_menu();
+void GameLoop::runMenu(int frame_id) {
+    bool r = menu.processEvents();
+    menu.render_first_menu();
     sleep(1/60);
-  //menu.init_as_leader();
-  //menu.init_as_follower();
+    if (r && start_game_name == "\n" && !exit){// we are ready to try and connect!
+        printf("Easdasdon\n");
+        start_game_name = "race_1";
+        ready_to_play->notify_all();
+    }
 }
 
-void RenderThread::renderGame(int frame_id){
+void GameLoop::runGame(int frame_id){
     InfoBlock inf;
     if (renderQueue->isEmpty()){
         //if no states to load use last
@@ -46,7 +49,7 @@ void RenderThread::renderGame(int frame_id){
     }
 }
 
-void RenderThread::renderLobby(int frame_id) {
+void GameLoop::runLobby(int frame_id) {
 
     if (!renderQueue->isEmpty()){
         auto inf = renderQueue->pop();
@@ -58,26 +61,29 @@ void RenderThread::renderLobby(int frame_id) {
             gameRenderer.init(starter.get_global_renderer(), inf);
         }
     }
-  menu.render_first_menu();
+  menu.render_first_menu();//todo render lobby instead
     sleep(1/60);
 }
 
-void RenderThread::proceedToLobby(bool is_leader) {
+void GameLoop::proceedToLobby(bool is_leader) {
     if (is_leader){
         //lobby.setLeadership(); //display map options
     }
     in_menu.store(false);
 }
 
-RenderThread::~RenderThread(){
+GameLoop::~GameLoop(){
     starter.close();
 }
-RenderThread::RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue) : starter(SCREEN_WIDTH,
-                                                                                            SCREEN_HEIGHT) {
+GameLoop::GameLoop(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& r) :
+                            starter(SCREEN_WIDTH,SCREEN_HEIGHT) {
   current_frame = 0;
   state = -1;
   in_menu.store(true);
   renderQueue = &rq;
   starter.init();
   menu.init(starter.get_global_renderer(), &queue);
+  exit = false;
+  ready_to_play = &r;
+  start_game_name = "\n";
 }

@@ -4,6 +4,7 @@
 #include "ConnectButton.h"
 #include "MapButton.h"
 #include "Font.h"
+
 bool Menu::load_media() {
   bool success = true;
   //TODO meter una excepcion por caso;
@@ -13,6 +14,12 @@ bool Menu::load_media() {
   carWhite.load_from_file("client/rendering/assets/cars/white_car.png", gRenderer);
   wallpaper.load_from_file("client/rendering/assets/all_images/Decor/B.png", gRenderer);
   connectButton.load_from_file("client/rendering/assets/buttons/connect.png", gRenderer);
+
+    gButtons.push_back(new CarButton(gRenderer, &carBlue));
+    gButtons.push_back(new CarButton(gRenderer, &carWhite));
+    gButtons.push_back(new CarButton(gRenderer, &carRed));
+    gButtons.push_back(new CarButton(gRenderer, &carBlack));
+    gButtons.push_back(new ConnectButton(gRenderer, &connectButton));
   return success;
 }
 
@@ -22,11 +29,6 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
   if (!load_media()) {
     printf("Failed to initialize!\n"); //todo exception here
   }
-  gButtons.push_back(new CarButton(sdl_renderer, &carBlue));
-  gButtons.push_back(new CarButton(sdl_renderer, &carWhite));
-  gButtons.push_back(new CarButton(sdl_renderer, &carRed));
-  gButtons.push_back(new CarButton(sdl_renderer, &carBlack));
-  gButtons.emplace_back(new ConnectButton(sdl_renderer, &connectButton));
   //Set positions of the three buttons buttons
   gButtons[0]->setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);//Boton asociado al primer vehiculo.
   gButtons[1]->setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);//Boton asociado al segundo vehiculo.
@@ -35,28 +37,31 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
   gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
+bool Menu::processEvents(){
+    while (!queue->empty()) {
+        for (auto &button : gButtons) {
+            bool clicked = button->handleEvent(&queue->front());
+            if (clicked){
+                while (!queue->empty()) queue->pop();
+                return clicked;
+            }
+        }
+        queue->pop();
+    }
+}
+
 void Menu::render_first_menu() {
     bool clicked = false;
-  while (!clicked) {
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : gButtons) {
       button->render();
     }
-    while (!queue->empty()) {
-        for (auto &button : gButtons) {
-            clicked = button->handleEvent(&queue->front());
-        }
-        queue->pop();
-    }
-    Font *font = new Font("Hola", gRenderer);
-    font->render(gRenderer);
     SDL_RenderPresent(gRenderer);
-  }
 }
 
-void Menu::init_as_leader() {
+void Menu::dummy_init_as_leader() {//todo fix
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
   LTexture map1;

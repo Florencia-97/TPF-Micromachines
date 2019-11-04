@@ -7,7 +7,10 @@ void BaseThread::close() {
 }
 
 void BaseThread::join() {
-    this->t.join();
+    if (running){
+        this->t.join();
+        running = false;
+    }
 }
 
 bool BaseThread::isAlive() {

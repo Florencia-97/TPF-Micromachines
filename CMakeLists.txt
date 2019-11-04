@@ -46,7 +46,7 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
 		common/Event.cpp
-		client/RenderThread.cpp
+        client/GameLoop.cpp
 		client/rendering/SDLStarter.cpp
 		client/Car.cpp client/Car.h
 		client/communication/UserInput.cpp client/communication/UserInput.h
@@ -60,7 +60,7 @@ set(CLIENT_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
 		client/tiles/Tile.cpp client/tiles/Tile.h
 		client/rendering/TEXTURE_ERROR.cpp client/rendering/TEXTURE_ERROR.h
-		client/RenderThread.cpp client/RenderThread.h
+        client/GameLoop.cpp client/GameLoop.h
 		client/rendering/GameRenderer.cpp client/rendering/GameRenderer.h
 		client/GameMap.cpp client/GameMap.h
 		client/Client.cpp

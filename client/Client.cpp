@@ -17,51 +17,65 @@ bool Client::attempConnection() {
     return connectionCheck();
 }
 
+bool Client::waitForConnection(){
+    bool connection_successful = false;
+    while (!gameLoop.exit && !connection_successful) {
+        gameLoop.start_game_name = "\n"; //todo check possible race condition
+        std::mutex m;
+        std::unique_lock<std::mutex> l(m);
+        while (gameLoop.start_game_name == "\n" && !gameLoop.exit) {
+            ready_to_connect.wait(l);
+        }
+        connection_successful = attempConnection();
+    }
+}
 
 int Client::play() {
-  RenderThread renderThread(this->receiver_queue, text_queue);
-  UserInput userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue);
-    renderThread.run();
+    gameLoop.run();
     userInput.run();
+
     try {
-        while (!connectionCheck() && !attempConnection()){
-            sleep(1/20); //todo remove
-        }
+        waitForConnection();
     } catch (const std::exception& e){
         std::cout << e.what() << std::endl;
-        skt.closeSd();
-        userInput.close();
-        renderThread.close();
-        userInput.join();
-        renderThread.join();
+        release();
         return 1;
     }
     bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
-    renderThread.proceedToLobby(is_leader);
+    gameLoop.proceedToLobby(is_leader);
 
-    Receiver receiver(skt, &receiver_queue);
-    EventSender sender(skt, &keyboard_e_queue);
-    receiver.run();
-    sender.run();
+    if (!receiver.isRunning()) {
+        receiver.run();
+        sender.run();
+    }
 
-    if (skt.isValid()) {
+    if (skt.isValid() && gameLoop.start_game_name != "\n" && !gameLoop.exit) {
         if (is_leader) {
-            sleep(100);
+            sleep(5);
             InfoBlock ib;
-            ib[RACE_ID] = "race_1";
+            ib[RACE_ID] = gameLoop.start_game_name;
             keyboard_e_queue.push(ib);
         }
         sleep(20);
     }
 
+    release();
+    return 0;
+}
+
+Client::Client() : gameLoop(this->receiver_queue, text_queue, ready_to_connect),
+                   userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue),
+                   receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
+{}
+
+void Client::release(){
     skt.closeSd();
     userInput.close();
     sender.close();
     receiver.close();
-    renderThread.close();
+    gameLoop.close();
     receiver.join();
     sender.join();
     userInput.join();
-    renderThread.join();
-    return 0;
+    gameLoop.join();
 }

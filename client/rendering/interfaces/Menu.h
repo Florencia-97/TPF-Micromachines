@@ -10,6 +10,7 @@
 #include "../LTexture.h"
 #include "../../../config/constants.h"
 #include "Button.h"
+#include <condition_variable>
 
 class Menu {
  private:
@@ -34,9 +35,11 @@ class Menu {
     //PRE must be initialized
     void render_first_menu();
     void close_first_menu();
-    void init_as_leader();
+    void dummy_init_as_leader();
 
     void init_as_follower();
+
+    bool processEvents();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

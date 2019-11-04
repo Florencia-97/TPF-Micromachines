@@ -1,7 +1,7 @@
 
 
-#ifndef MICROMACHINES_RENDERTHREAD_H
-#define MICROMACHINES_RENDERTHREAD_H
+#ifndef MICROMACHINES_GAMELOOP_H
+#define MICROMACHINES_GAMELOOP_H
 
 #include "../common/conc/BaseThread.h"
 #include "../common/SafeQueue.h"
@@ -16,12 +16,13 @@
 #define GAME_STATE 2
 #define FPS 60
 
-class RenderThread : public BaseThread {
+class GameLoop : public BaseThread {
     SDLStarter starter;
     int current_frame;
     int state; //thread state
     std::atomic<bool> in_menu;
     InfoBlock previous_game_state; //game state
+    std::condition_variable* ready_to_play;
 
     GameMap map;
     GameRenderer gameRenderer;
@@ -29,21 +30,24 @@ class RenderThread : public BaseThread {
 
     void _run() override;
 
-    void renderMenu(int frame_id);
+    void runMenu(int frame_id);
 
-    void renderGame(int frame_id);
+    void runGame(int frame_id);
 
-    void renderLobby(int frame_id);
+    void runLobby(int frame_id);
 
 public:
+    std::string start_game_name;
+    std::condition_variable cv;
+    bool exit;
     SafeQueue<InfoBlock>* renderQueue;
 
-    RenderThread(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue);
+    GameLoop(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& ready);
 
     void proceedToLobby(bool is_leader);
 
-    ~RenderThread();
+    ~GameLoop();
 };
 
 
-#endif //MICROMACHINES_RENDERTHREAD_H
+#endif //MICROMACHINES_GAMELOOP_H
