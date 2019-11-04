@@ -73,16 +73,16 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             actionType = ACTION_TYPE_DOWN;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
-                    if (e.key.state == SDL_RELEASED) this->y_move = NONE;
+                    if (e.key.state == SDL_RELEASED) eventType = UP;
                     break;
                 case SDLK_DOWN:
-                    if (e.key.state == SDL_RELEASED) this->y_move = NONE;
+                    if (e.key.state == SDL_RELEASED) eventType = DOWN;
                     break;
                 case SDLK_LEFT:
-                    if (e.key.state == SDL_RELEASED) this->x_move = NONE;
+                    if (e.key.state == SDL_RELEASED) eventType = LEFT;
                     break;
                 case SDLK_RIGHT:
-                    if (e.key.state == SDL_RELEASED) this->x_move = NONE;
+                    if (e.key.state == SDL_RELEASED) eventType = RIGHT;
                     break;
                 default:
                     return;
@@ -97,6 +97,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;
+    keyboard_input->push(ib);
 }
 
 void UserInput::close() {

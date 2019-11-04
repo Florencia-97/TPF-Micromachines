@@ -37,9 +37,11 @@ RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
 }
 
 void RaceCar::drive(InfoBlock keys){
-    auto key1 =(keys.exists("key")) ? keys.get<char>("key") : '\n';
+    auto key1 =(keys.exists(ACTION_TYPE)) ? keys.get<char>(ACTION_TYPE) : '\n';
+    auto key2 =(keys.exists(ACTION_TYPE_DOWN)) ? keys.get<char>(ACTION_TYPE_DOWN) : '\n';
     b2Vec2 v1 = processKey(key1);
-    this->accelerate(v1);
+    b2Vec2 v2 = processKey(key2);
+    this->accelerate(v1 - v2);
 }
 
 b2Vec2 RaceCar::accelerate(b2Vec2 direction){

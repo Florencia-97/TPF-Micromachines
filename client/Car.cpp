@@ -30,7 +30,6 @@ void Car::setCamera( SDL_Rect& camera, int level_width, int level_height ){
   if (camera.y < 0) camera.y = 0;
   if (camera.x > level_width - camera.w) camera.x = level_width - camera.w;
   if (camera.y > level_height - camera.h) camera.y = level_height - camera.h;
-    std::cout<<"xcar: "<<this->mBox.x<<" xcam: "<< camera.x<<std::endl;
 }
 
 void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
