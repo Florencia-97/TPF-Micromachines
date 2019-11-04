@@ -45,7 +45,6 @@ set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
 		common/infostream/Protocol.cpp
 		common/infostream/InfoBlock.cpp
-		common/Event.cpp
         client/GameLoop.cpp
 		client/rendering/SDLStarter.cpp
 		client/Car.cpp client/Car.h

@@ -8,7 +8,6 @@ TilesFactory::TilesFactory() {
 }
 
 std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
-    //  TODO: should get it from yaml auch! es ist ok ein dafult
     std::string key = "";
     switch (tyleType){
         case GRASS_TILE:

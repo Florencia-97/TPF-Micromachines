@@ -9,7 +9,7 @@
 class GameMap {
   std::vector<std::vector<std::shared_ptr<Tile>>> map;
   TilesFactory tiles_factory;
-
+  void _loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer);
 public:
     int width;
     int height;
