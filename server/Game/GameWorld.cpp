@@ -89,8 +89,7 @@ InfoBlock GameWorld::status(){
 }
 
 void GameWorld::processEvent(int id, InfoBlock event){
-    auto car = cars[id];
-    car.drive(event);
+    cars[id].drive(event);
 }
 
 void GameWorld::Step(float timestep) {

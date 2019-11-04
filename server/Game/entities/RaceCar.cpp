@@ -9,11 +9,11 @@ namespace {
 
     b2Vec2 processKey(unsigned char key){
         switch (key) {
-            case UP : return b2Vec2(1,0);
-            case DOWN : return b2Vec2(-1,0);
-            case RIGHT : return b2Vec2(0,-1);
-            case LEFT : return b2Vec2(0,1);
-            default: return b2Vec2(0,0);
+            case UP : return {0,1};
+            case DOWN : return {0,-1};
+            case RIGHT : return {1,0};
+            case LEFT : return {-1,0};
+            default: return {0,0};
         }
     }
 
@@ -33,6 +33,7 @@ RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
             : Entity(newBody) , stats(std::move(stats)), car_stats(stats) {
     this->health = stats.get<int>(HEALTH);
     this->id = carId;
+    accel = b2Vec2(0,0);
 }
 
 void RaceCar::drive(InfoBlock keys){
@@ -42,7 +43,7 @@ void RaceCar::drive(InfoBlock keys){
 }
 
 b2Vec2 RaceCar::accelerate(b2Vec2 direction){
-    float accelRate = (stats.exists("accel_rate") ? stats.getFloat("accel_rate") : 100);
+    float accelRate = (stats.exists("accel_rate") ? stats.getFloat("accel_rate") : 20);
     direction = b2Vec2(direction.x*accelRate, direction.y*accelRate);
     accel = accel + direction;
 }
@@ -63,14 +64,14 @@ void RaceCar::step(float timestep){
 
 
     b2Vec2 vel = body->GetLinearVelocity();
-    float maxVel = (stats.exists("max_speed") ? stats.getFloat("max_speed") : 10);
-    float goalVelX = (accel.x > maxVel) ? maxVel : accel.x;
-    float goalVelY = (accel.y > maxVel) ? maxVel : accel.y;
+    float maxVel = (stats.exists("max_speed") ? stats.getFloat("max_speed") : 200);
+    float goalVelX = (std::abs(accel.x) > maxVel) ? maxVel : accel.x;
+    float goalVelY = (std::abs(accel.y) > maxVel) ? maxVel : accel.y;
 
-    float impulseX = body->GetMass()* 2;//(goalVelX - vel.x);
-    float impulseY = body->GetMass()* 2;//(goalVelY - vel.y);
-    body->ApplyForce(b2Vec2(impulseX, impulseY), body->GetWorldPoint(b2Vec2(1,0)), true);
-    float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : 0);
+    float impulseX = body->GetMass()* (goalVelX - vel.x);
+    float impulseY = body->GetMass()* (goalVelY - vel.y);
+    body->ApplyLinearImpulse(b2Vec2(impulseX, impulseY), body->GetWorldPoint(b2Vec2(0,0)), true);
+    float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : .95);
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
 }
 
@@ -80,6 +81,5 @@ void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     ib["h" + autoId] = std::round(health);
     ib["x" + autoId] = std::round(pos.x);
     ib["y" + autoId] = std::round(pos.y);
-    ib["r" + autoId] = std::round(this->body->GetAngle());
-    std::cout<<"x: "<<pos.x<< " y: "<<pos.y<<std::endl;
+    ib["r" + autoId] = std::round(- this->body->GetAngle());
 }

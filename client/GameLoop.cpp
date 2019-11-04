@@ -18,13 +18,12 @@ void GameLoop::_run(){
 
 void GameLoop::runMenu(int frame_id) {
     bool r = menu.processEvents();
-    menu.render_first_menu();
-    sleep(1/60);
     if (r && start_game_name == "\n" && !exit){// we are ready to try and connect!
-        printf("Easdasdon\n");
         start_game_name = "race_1";
         ready_to_play->notify_all();
     }
+    menu.render_first_menu();
+    sleep(1/60);
 }
 
 void GameLoop::runGame(int frame_id){
@@ -40,7 +39,7 @@ void GameLoop::runGame(int frame_id){
     }
 
     if (!inf.exists("game_end")) {
-        gameRenderer.render(inf); //TODO UPDATE STATE
+        gameRenderer.render(inf);
         sleep(1/60); //todo variable time on sleep
         previous_game_state = inf;
     } else {
@@ -69,6 +68,7 @@ void GameLoop::proceedToLobby(bool is_leader) {
     if (is_leader){
         //lobby.setLeadership(); //display map options
     }
+    std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);
 }
 

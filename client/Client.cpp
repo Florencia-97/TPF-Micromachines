@@ -44,18 +44,19 @@ int Client::play() {
     bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
     gameLoop.proceedToLobby(is_leader);
 
-    if (!receiver.isRunning()) {
-        receiver.run();
-        sender.run();
-    }
-
     if (skt.isValid() && gameLoop.start_game_name != "\n" && !gameLoop.exit) {
         if (is_leader) {
-            sleep(5);
+            sleep(1);
             InfoBlock ib;
             ib[RACE_ID] = gameLoop.start_game_name;
             keyboard_e_queue.push(ib);
         }
+
+        if (!receiver.isRunning()) {
+            receiver.run();
+            sender.run();
+        }
+        
       sleep(50);
     }
 
