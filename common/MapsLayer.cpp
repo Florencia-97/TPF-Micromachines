@@ -2,7 +2,7 @@
 #include "yaml-cpp/yaml.h"
 #include "MapsLayer.h"
 
-void _loadMap(const std::string &mapPath, std::string& key, std::vector<std::vector<int>>& matrix ) {
+void MapsLayer::_loadMap(const std::string &mapPath, std::string& key, std::vector<std::vector<int>>& matrix) {
     YAML::Node config = YAML::LoadFile(mapPath);
     YAML::Node mapYaml = config[key];
 
@@ -22,16 +22,23 @@ void _loadMap(const std::string &mapPath, std::string& key, std::vector<std::vec
     }
 }
 
-std::vector<std::vector<int>> MapsLayer::getLayerN(std::string& mapPath, int n){
-    std::vector<std::vector<int>> matrix;
-    std::string layer = "";
-    if (n == 0) layer = "Lower";
-    else if (n == 1) layer = "Map";
-    else if (n == 2) layer = "Upper";
-    else {
-        std::cout << "No layer with that number!" << std::endl;
-        return matrix;
-    }
-    _loadMap(mapPath, layer, matrix);
-    return matrix;
+void MapsLayer::_loadHW(const std::string &mapPath){
+    YAML::Node config = YAML::LoadFile(mapPath);
+    YAML::Node mapYaml = config["Config"];
+
+    YAML::Node h = mapYaml["h"];
+    YAML::Node w = mapYaml["w"];
+
+    this->width = w.as<int>();
+    this->height = h.as<int>();
+}
+
+MapsLayer::MapsLayer(const std::string& mapPath) {
+    std::string ground = "Ground";
+    std::string road = "Road";
+    std::string extras = "Extras";
+    _loadMap(mapPath, ground, this->ground);
+    _loadMap(mapPath, road,this->road);
+    _loadMap(mapPath, extras ,this->extras);
+    _loadHW(mapPath);
 }

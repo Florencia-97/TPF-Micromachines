@@ -35,9 +35,10 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 
 void GameWorld::loadWorld(std::string worldName){
     // TODO load box2D world with the mapNumber given
+    // TODO use MapsLayers!!
     worldName = "race_1"; //Change for real names afterwards!!
     YAML::Node config = YAML::LoadFile("maps/" + worldName + ".yaml");
-    YAML::Node mapYaml = config["Map"];
+    YAML::Node mapYaml = config["Road"];
     int y = 0;
     int x = 0;
     int rowTile = -1;
