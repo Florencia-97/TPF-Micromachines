@@ -51,7 +51,7 @@ int Client::play() {
             ib[RACE_ID] = "race_1";
             keyboard_e_queue.push(ib);
         }
-        sleep(20);
+      sleep(50);
     }
 
     skt.closeSd();
