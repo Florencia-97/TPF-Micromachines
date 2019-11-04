@@ -6,9 +6,11 @@
 #include "../common/SafeQueue.h"
 
 UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
+                     SafeQueue<InfoBlock> *safeQueueClient,
                      std::queue<SDL_Event> *text_queue) {
     // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
+    this->mouse_input = safeQueueClient;
   this->local_queue = text_queue;
 }
 
@@ -26,6 +28,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     if ( e.type == SDL_QUIT){
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
+        this->mouse_input->push(ib);
         this->keyboard_input->push(ib);
         this->close();
         return;
@@ -35,12 +38,11 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
 
     switch (e.type){
       case SDL_MOUSEBUTTONDOWN:;
-            local_queue->push(e);
+        local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_DOWN;
             break;
-      case SDL_MOUSEBUTTONUP:
-            local_queue->push(e);
+      case SDL_MOUSEBUTTONUP:local_queue->push(e);
             forServer = false;
             eventType = MOUSE_BUTTON_UP;
             break;
@@ -70,9 +72,11 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     InfoBlock ib;
     ib[ACTION_TYPE] = eventType;
     if (forServer) this->keyboard_input->push(ib);
+    else this->mouse_input->push(ib);
 }
 
 void UserInput::close() {
     this->keyboard_input->setOpen(false);
+    this->mouse_input->setOpen(false);
     BaseThread::close();
 }
