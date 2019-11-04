@@ -8,7 +8,6 @@
 #include <queue>
 #include <mutex>
 
-#include "Event.h"
 
 template <class T>
 class SafeQueue{
