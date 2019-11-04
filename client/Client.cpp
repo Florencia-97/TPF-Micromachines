@@ -19,8 +19,8 @@ bool Client::attempConnection() {
 
 
 int Client::play() {
-  RenderThread renderThread(this->receiver_queue, text_queue);
-  UserInput userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue);
+  RenderThread renderThread(receiver_queue, text_queue);
+  UserInput userInput(&keyboard_e_queue, &text_queue);
     renderThread.run();
     userInput.run();
     try {
@@ -46,7 +46,7 @@ int Client::play() {
 
     if (skt.isValid()) {
         if (is_leader) {
-            sleep(100);
+            sleep(2);
             InfoBlock ib;
             ib[RACE_ID] = "race_1";
             keyboard_e_queue.push(ib);

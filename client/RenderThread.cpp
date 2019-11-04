@@ -18,10 +18,8 @@ void RenderThread::_run(){
 
 void RenderThread::renderMenu(int frame_id) {
 
-  menu.render_first_menu();
-    sleep(1/60);
-  //menu.init_as_leader();
-  //menu.init_as_follower();
+   menu.render_first_menu();
+   sleep(1/60);
 }
 
 void RenderThread::renderGame(int frame_id){
@@ -59,12 +57,15 @@ void RenderThread::renderLobby(int frame_id) {
         }
     }
   menu.render_first_menu();
-    sleep(1/60);
+  sleep(1/60);
 }
 
 void RenderThread::proceedToLobby(bool is_leader) {
+    menu.close_first_menu();
     if (is_leader){
-        //lobby.setLeadership(); //display map options
+        menu.init_as_leader();
+    }  else {
+        menu.init_as_follower();
     }
     in_menu.store(false);
 }
