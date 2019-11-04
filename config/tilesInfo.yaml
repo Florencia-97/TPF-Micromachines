@@ -1,4 +1,4 @@
-# Just path for now, thinking always that we are drawing them with the same size
+# Add height adn width of this
 grass_tile: "map/grass.png"
 straight_road_tile: "map/road_straight.png"
 left_road_tile: "map/road_lower_turn.png"
