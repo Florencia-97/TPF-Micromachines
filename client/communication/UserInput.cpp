@@ -36,20 +36,19 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
         return;
     }
     std::string eventType;
-    bool forServer = true;
+    std::string actionType;
 
     switch (e.type){
-        case SDL_MOUSEBUTTONDOWN:;
+        case SDL_MOUSEBUTTONDOWN:
             local_queue->push(e);
-            forServer = false;
             eventType = MOUSE_BUTTON_DOWN;
             break;
         case SDL_MOUSEBUTTONUP:
             local_queue->push(e);
-            forServer = false;
             eventType = MOUSE_BUTTON_UP;
             break;
         case SDL_KEYDOWN:
+            actionType = ACTION_TYPE;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
                     eventType = UP;
@@ -68,11 +67,10 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                     this->x_move = "RIGHT";
                     break;
                 default:
-                    forServer = false;
-                    local_queue->push(e);
-                    break;
+                    return;
             }
         case SDL_KEYUP:
+            actionType = ACTION_TYPE_DOWN;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
                     if (e.key.state == SDL_RELEASED) this->y_move = NONE;
@@ -87,21 +85,18 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                     if (e.key.state == SDL_RELEASED) this->x_move = NONE;
                     break;
                 default:
-                    break;
+                    return;
             }
         default:
-            break;
+            return;
     }
 
-    if( e.type != SDL_KEYDOWN) return; // maybe get also keyup here
+    if( e.type != SDL_KEYDOWN && e.type != SDL_KEYUP) return;
 
     // For keys
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
-    ib[ACTION_TYPE] = eventType;
-    std::cout << this->x_move << " : " << this->y_move << std::endl;
-    if (forServer) this->keyboard_input->push(ib);
-    else this->mouse_input->push(ib);
+    ib[actionType] = eventType;
 }
 
 void UserInput::close() {

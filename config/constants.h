@@ -88,6 +88,7 @@ const int CAR_HEIGHT = 170;
 
 // Events
 #define ACTION_TYPE "key"
+#define ACTION_TYPE_DOWN "key_up"
 #define QUIT 'q'
 #define UP 'w'
 #define DOWN 's'
