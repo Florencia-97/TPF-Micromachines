@@ -22,11 +22,11 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
   if (!load_media()) {
     printf("Failed to initialize!\n"); //todo exception here
   }
-  gButtons.emplace_back(sdl_renderer, &carBlue);
-  gButtons.emplace_back(sdl_renderer, &carWhite);
-  gButtons.emplace_back(sdl_renderer, &carRed);
-  gButtons.emplace_back(sdl_renderer, &carBlack);
-  gButtons.emplace_back(sdl_renderer, &connectButton);
+  gButtons.push_back(new CarButton(sdl_renderer, &carBlue));
+  gButtons.push_back(new CarButton(sdl_renderer, &carWhite));
+  gButtons.push_back(new CarButton(sdl_renderer, &carRed));
+  gButtons.push_back(new CarButton(sdl_renderer, &carBlack));
+  gButtons.emplace_back(new ConnectButton(sdl_renderer, &connectButton));
   //Set positions of the three buttons buttons
   gButtons[0]->setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);//Boton asociado al primer vehiculo.
   gButtons[1]->setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);//Boton asociado al segundo vehiculo.
@@ -36,6 +36,8 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
 }
 
 void Menu::render_first_menu() {
+    bool clicked = false;
+  while (!clicked) {
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
@@ -44,15 +46,14 @@ void Menu::render_first_menu() {
     }
     while (!queue->empty()) {
         for (auto &button : gButtons) {
-            if (button->handleEvent(&queue->front())) {
-                //do smthing
-            }
+            clicked = button->handleEvent(&queue->front());
         }
         queue->pop();
     }
     Font *font = new Font("Hola", gRenderer);
     font->render(gRenderer);
     SDL_RenderPresent(gRenderer);
+  }
 }
 
 void Menu::init_as_leader() {
@@ -62,11 +63,11 @@ void Menu::init_as_leader() {
   LTexture map2;
   LTexture map3;
   map1.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.emplace_back(gRenderer, &map1);
+  mapButtons.push_back(new MapButton(gRenderer, &map1));
   map2.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.emplace_back(gRenderer, &map2);
+  mapButtons.push_back(new MapButton(gRenderer, &map2));
   map3.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.emplace_back(gRenderer, &map3);
+  mapButtons.push_back(new MapButton(gRenderer, &map3));
   mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
   mapButtons[1]->setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
   mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
