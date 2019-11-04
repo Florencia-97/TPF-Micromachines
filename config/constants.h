@@ -93,6 +93,7 @@ const int CAR_HEIGHT = 170;
 #define DOWN 's'
 #define LEFT 'a'
 #define RIGHT 'd'
+#define NONE "NONE"
 #define MOUSE_BUTTON_DOWN "button_down"
 #define MOUSE_BUTTON_UP "button_up"
 #define MOUSE_MOTION "mouse_motion"

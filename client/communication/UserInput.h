@@ -14,7 +14,9 @@
 class UserInput : public BaseThread {
     SafeQueue<InfoBlock>* keyboard_input;
     SafeQueue<InfoBlock>* mouse_input;
-  std::queue<SDL_Event> *local_queue;
+    std::queue<SDL_Event> *local_queue;
+    std::string x_move;
+    std::string y_move;
     void _run() override;
 public:
   UserInput(SafeQueue<InfoBlock> *q_keyboard, SafeQueue<InfoBlock> *q_mouse, std::queue<SDL_Event> *text_queue);
