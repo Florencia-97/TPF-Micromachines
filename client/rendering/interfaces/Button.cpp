@@ -56,8 +56,10 @@ bool Button::handleEvent(SDL_Event *e) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
           return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+          this->texture->set_color(22, 22, 22);
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
+          this->texture->set_color(22, 22, 50);
           return false;
       }
     }
