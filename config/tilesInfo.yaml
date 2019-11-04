@@ -1,9 +1,27 @@
-# Add height adn width of this
 grass_tile: "map/grass.png"
-straight_road_tile: "map/road_straight.png"
-left_road_tile: "map/road_lower_turn.png"
-right_road_tile: "map/road_upper_turn.png"
-straight_road_mud_tile: "map/road_straight.png"
-left_road_mud_tile: "map/road_lower_turn.png"
-right_road_mud_tile: "map/road_upper_turn.png"
+grass_tile_w: 512
+grass_tile_h: 512
 
+straight_road_tile: "map/road_straight.png"
+straight_road_tile_w: 512
+straight_road_tile_h: 688
+
+left_road_tile: "map/road_lower_turn.png"
+left_road_tile_w: 691
+left_road_tile_h: 691
+
+right_road_tile: "map/road_upper_turn.png"
+right_road_tile_w: 512
+right_road_tile_h: 512
+
+straight_road_mud_tile: "map/road_straight.png"
+straight_road_mud_tile_w: 512
+straight_road_mud_tile_h: 512
+
+left_road_mud_tile: "map/road_lower_turn.png"
+left_road_mud_tile_w: 512
+left_road_mud_tile_h: 512
+
+right_road_mud_tile: "map/road_upper_turn.png"
+right_road_mud_tile_w: 512
+right_road_mud_tile_h: 512

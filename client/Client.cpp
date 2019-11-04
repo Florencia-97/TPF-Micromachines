@@ -56,7 +56,7 @@ int Client::play() {
             ib[RACE_ID] = gameLoop.start_game_name;
             keyboard_e_queue.push(ib);
         }
-        sleep(20);
+      sleep(50);
     }
 
     release();
