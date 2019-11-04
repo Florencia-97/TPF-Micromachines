@@ -35,8 +35,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
         this->close();
         return;
     }
-    std::string eventType;
-    std::string actionType;
+    std::string eventType = "\n";
+    std::string actionType = "\n";
 
     switch (e.type){
         case SDL_MOUSEBUTTONDOWN:
@@ -70,6 +70,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                     return;
             }
         case SDL_KEYUP:
+            if (actionType != "\n") break;
             actionType = ACTION_TYPE_DOWN;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
@@ -91,7 +92,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             return;
     }
 
-    if( e.type != SDL_KEYDOWN && e.type != SDL_KEYUP) return;
+    if( actionType == "\n") return;
 
     // For keys
     //Creating infoblock to queue in EventsQueue
