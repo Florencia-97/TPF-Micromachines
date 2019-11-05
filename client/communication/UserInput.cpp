@@ -69,8 +69,8 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 default:
                     return;
             }
+            break;
         case SDL_KEYUP:
-            if (actionType != "\n") break;
             actionType = ACTION_TYPE_DOWN;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
@@ -89,7 +89,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                     return;
             }
         default:
-            return;
+            break;
     }
 
     if( actionType == "\n") return;
@@ -98,6 +98,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;
+    std::cout<<actionType<<" : "<<eventType<<std::endl;
     keyboard_input->push(ib);
 }
 
