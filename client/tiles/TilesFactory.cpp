@@ -17,13 +17,13 @@ std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Rend
             key = "straight_road_tile";
             break;
         case CURVE_ROAD_LEFT_TILE:
-            key = "left_road_tile";
+            key = "road_lower_turn_no_side";
             break;
-        case CURVE_ROAD_RIGHT_TILE:
-            key = "right_road_tile";
+        case CURVE_ROAD_LEFT_SIDE_TILE:
+            key = "road_lower_turn_side";
             break;
         case STRAIGHT_ROAD_MUD_TILE:
-            key = "straight_road_mud_tile";
+            key = "left_road_tile";
             break;
         case CURVE_ROAD_LEFT_MUD_TILE:
             key = "left_road_mud_tile";
