@@ -7,9 +7,9 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
     MapsLayer mapsLayer(mapPath);
     // You can access each layer as the attr is public.
     // Now it has height and width
-//    _loadLayer(mapsLayer.ground, gRenderer);
-//    _loadLayer(mapsLayer.road, gRenderer);
-//    _loadLayer(mapsLayer.extras, gRenderer);
+    _loadLayer(mapsLayer.ground, gRenderer,"ground");
+//    _loadLayer(mapsLayer.road, gRenderer, std::string mapName);
+//    _loadLayer(mapsLayer.extras, gRenderer, std::string mapName);
 
     YAML::Node config = YAML::LoadFile(mapPath);
     YAML::Node mapYaml = config["Road"];
@@ -51,13 +51,12 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
   }
 }
 
-void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer){
-    // TODO: Discuss if this is for the best
+void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, std::string mapName){
     int x = 0;
     int y = 0;
     for (std::size_t i = 0; i < layerMatrix.size(); ++i){
         std::vector<int> row = layerMatrix[i];
-        for (std::size_t j = 0; j < row.size(); ++i){
+        for (std::size_t j = 0; j < row.size(); ++j){
             int tileType = row[j];
             if (tileType == 0){
                 x += j * 512; // Maybe we need a check here, whether we are over height or width
@@ -65,7 +64,10 @@ void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer
                 continue;
             }
             auto tile = tiles_factory.getTile(tileType, x, y, gRenderer);
-            this->map.back().push_back(tile); // It goes in different maps
+            if (mapName == "ground") this->ground.back().push_back(tile);
+            else if (mapName == "road") this->road.back().push_back(tile);
+            else this->extras.back().push_back(tile);
+            //this->map.back().push_back(tile); // It goes in different maps
             SDL_Rect mBox = tile->getBox();
             x += j * (int) mBox.w;
             y += i * (int) mBox.y;

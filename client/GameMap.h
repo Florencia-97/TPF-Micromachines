@@ -7,9 +7,12 @@
 #include "tiles/TilesFactory.h"
 
 class GameMap {
-  std::vector<std::vector<std::shared_ptr<Tile>>> map;
-  TilesFactory tiles_factory;
-  void _loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer);
+    std::vector<std::vector<std::shared_ptr<Tile>>> map;
+    std::vector<std::vector<std::shared_ptr<Tile>>> ground;
+    std::vector<std::vector<std::shared_ptr<Tile>>> road;
+    std::vector<std::vector<std::shared_ptr<Tile>>> extras;
+    TilesFactory tiles_factory;
+    void _loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, std::string mapName);
 public:
     int width;
     int height;
