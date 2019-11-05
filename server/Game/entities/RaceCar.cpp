@@ -17,6 +17,14 @@ namespace {
         }
     }
 
+    float clamp_signed(float a, float absolute_limit){
+        if (a > 0){
+            return (a > absolute_limit) ? absolute_limit : a;
+        } else {
+            return (a < -absolute_limit) ? -absolute_limit : a;
+        }
+    }
+
 }
 
 bool RaceCar::takeDamage(int dmg) {
@@ -41,21 +49,29 @@ void RaceCar::drive(InfoBlock keys){
     auto key2 =(keys.exists(ACTION_TYPE_DOWN)) ? keys.get<char>(ACTION_TYPE_DOWN) : '\n';
     b2Vec2 v1 = processKey(key1);
     b2Vec2 v2 = processKey(key2);
-    this->accelerate(v1 - v2);
+    this->steer_dir = steer_dir + v1 - v2;
 }
 
-b2Vec2 RaceCar::accelerate(b2Vec2 direction){
+b2Vec2 RaceCar::calculateAccel(b2Vec2 currentSpeed) {
     float accelRate = (stats.exists("accel_rate") ? stats.getFloat("accel_rate") : 20);
-    direction = b2Vec2(direction.x*accelRate, direction.y*accelRate);
-    accel = accel + direction;
+    float maxVel = (stats.exists("max_speed") ? stats.getFloat("max_speed") : 200);
+    float ax = accel.x + accelRate*steer_dir.x;
+    float ay = accel.y + accelRate*steer_dir.y;
+    float vx = currentSpeed.x + ax;
+    float vy = currentSpeed.y + ay;
+
+    vy = clamp_signed(vx, maxVel);
+    vx = clamp_signed(vy, maxVel);
+    ax = clamp_signed(ax, maxVel);
+    ay = clamp_signed(ay, maxVel);
+    accel = b2Vec2(ax, ay);
+    return {vx, vy};
+
 }
 
-//Q:Why does the step() apply the LinearImpulse and not accelerate?
-//A:We still want to apply a linear impulse even when the car did not
-//accelerate to simulate the change of speed correctly
 void RaceCar::step(float timestep){
     car_stats.step();
-    for (auto status : status_effects){
+    for (auto &status : status_effects){
         if (status->delay > 0){
             status->delay -= timestep;
         } else if (status->duration > 0) {
@@ -64,15 +80,15 @@ void RaceCar::step(float timestep){
         }
     }
 
-
+    if (isDead())return;
     b2Vec2 vel = body->GetLinearVelocity();
-    float maxVel = (stats.exists("max_speed") ? stats.getFloat("max_speed") : 200);
-    float goalVelX = (std::abs(accel.x) > maxVel) ? maxVel : accel.x;
-    float goalVelY = (std::abs(accel.y) > maxVel) ? maxVel : accel.y;
+    b2Vec2 goalVel = calculateAccel(b2Vec2());
+    b2Vec2 impulse = body->GetMass()* (goalVel - vel);
 
-    float impulseX = body->GetMass()* (goalVelX - vel.x);
-    float impulseY = body->GetMass()* (goalVelY - vel.y);
-    body->ApplyLinearImpulse(b2Vec2(impulseX, impulseY), body->GetWorldPoint(b2Vec2(0,0)), true);
+    //find current speed in forward direction
+    b2Vec2 forwardNormal = body->GetWorldVector(b2Vec2(0,1));
+
+    body->ApplyLinearImpulse(impulse, body->GetWorldPoint(b2Vec2(0,0.5)), true);
     float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : .95);
     accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
 }

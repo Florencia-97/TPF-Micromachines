@@ -12,8 +12,10 @@ UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
     this->local_queue = text_queue;
-    this->x_move = NONE;
-    this->y_move = NONE;
+    key_pressings[UP] = false;
+    key_pressings[DOWN] = false;
+    key_pressings[LEFT] = false;
+    key_pressings[RIGHT] = false;
 }
 
 void UserInput::_run(){
@@ -35,8 +37,9 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
         this->close();
         return;
     }
-    std::string eventType = "\n";
+    char eventType = '\n';
     std::string actionType = "\n";
+    bool event_value = false;
 
     switch (e.type){
         case SDL_MOUSEBUTTONDOWN:
@@ -49,22 +52,19 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             break;
         case SDL_KEYDOWN:
             actionType = ACTION_TYPE;
+            event_value = true;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
                     eventType = UP;
-                    this->y_move = "UP";
                     break;
                 case SDLK_DOWN:
                     eventType = DOWN;
-                    this->y_move = "DOWN";
                     break;
                 case SDLK_LEFT:
                     eventType = LEFT;
-                    this->x_move = "LEFT";
                     break;
                 case SDLK_RIGHT:
                     eventType = RIGHT;
-                    this->x_move = "RIGHT";
                     break;
                 default:
                     return;
@@ -72,6 +72,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             break;
         case SDL_KEYUP:
             actionType = ACTION_TYPE_DOWN;
+            event_value = false;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
                     if (e.key.state == SDL_RELEASED) eventType = UP;
@@ -93,8 +94,10 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     }
 
     if( actionType == "\n") return;
+    if (key_pressings[eventType] == event_value) return;
+    key_pressings[eventType] = event_value;
 
-    // For keys
+    // For keys to send to server
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;

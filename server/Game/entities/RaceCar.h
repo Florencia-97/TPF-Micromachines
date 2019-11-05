@@ -12,6 +12,7 @@
 
 class RaceCar : public Entity {
     b2Vec2 accel;
+    b2Vec2 steer_dir;
     int health;
     CarStats car_stats;
 
@@ -25,11 +26,11 @@ public:
 
     //PRE x and y must be between [0-1]
     //POS accelerates the car in the specified direction
-    b2Vec2 accelerate(b2Vec2 direction);
+    b2Vec2 calculateAccel(b2Vec2 currentSpeed);
 
     //PRE info block must contain the user key inputs to convert into accel direction
     //under the names key1, key2
-    //POS interprets the keys and accelerate() in the given direction
+    //POS interprets the keys and calculateAccel() in the given direction
     void drive(InfoBlock keys);
 
     //POS the car takes damage and returns true if life went below 0
@@ -40,7 +41,7 @@ public:
     //POS parses the car's current status into an infoblock with keys
     // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
-    
+
 };
 
 #endif //MICROMACHINES_RACECAR_H
