@@ -23,6 +23,11 @@ void Tile::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                         0.0,nullptr,SDL_FLIP_NONE, renderer);
 }
 
+void Tile::renderWithSize(SDL_Rect &camera, SDL_Renderer *renderer) {
+    //If the tile is on screen
+    texture->render_with_size(mBox.x - camera.x, mBox.y - camera.y, 0, renderer, 512, 512, false);
+}
+
 int Tile::getType() {
   return mType;
 }

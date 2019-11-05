@@ -25,3 +25,11 @@ left_road_mud_tile_h: 512
 right_road_mud_tile: "map/road_upper_turn.png"
 right_road_mud_tile_w: 512
 right_road_mud_tile_h: 512
+
+road_lower_turn_no_side: "map/road_lower_turn_no_side.png"
+road_lower_turn_no_side_w: 555
+road_lower_turn_no_side_h: 555
+
+road_lower_turn_side: "map/road_lower_turn_side.png"
+road_lower_turn_side_w: 643
+road_lower_turn_side_h: 643
