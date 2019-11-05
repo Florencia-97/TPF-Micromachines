@@ -81,16 +81,16 @@ void RaceCar::step(float timestep){
     }
 
     if (isDead())return;
-    b2Vec2 vel = body->GetLinearVelocity();
-    b2Vec2 goalVel = calculateAccel(b2Vec2());
-    b2Vec2 impulse = body->GetMass()* (goalVel - vel);
+    b2Vec2 forwardNormal = body->GetWorldVector( b2Vec2(0,1) );
+    b2Vec2 lateralNormal = body->GetWorldVector( b2Vec2(1,0) );
+    float currentSpeed = b2Dot( getForwardVelocity(), forwardNormal );
 
-    //find current speed in forward direction
-    b2Vec2 forwardNormal = body->GetWorldVector(b2Vec2(0,1));
-
-    body->ApplyLinearImpulse(impulse, body->GetWorldPoint(b2Vec2(0,0.5)), true);
-    float drag_factor = (stats.exists("drag") ? stats.getFloat("drag") : .95);
-    accel = b2Vec2(accel.x  * drag_factor, accel.y * drag_factor);
+    //apply necessary force
+    float forceF = 100 * steer_dir.y;
+    float forceL = 1 * steer_dir.x;
+    float desiredTorque = 10;
+    body->ApplyLinearImpulse( forceF * forwardNormal + forceL * lateralNormal,\
+            body->GetWorldPoint(b2Vec2(0,-0.5)), true);
 }
 
 void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
@@ -100,4 +100,9 @@ void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     ib["x" + autoId] = std::round(pos.x);
     ib["y" + autoId] = std::round(pos.y);
     ib["r" + autoId] = std::round(- this->body->GetAngle());
+}
+
+b2Vec2 RaceCar::getForwardVelocity() {
+    b2Vec2 currentRightNormal = body->GetWorldVector( b2Vec2(0,1) );
+    return b2Dot( currentRightNormal, body->GetLinearVelocity() ) * currentRightNormal;
 }

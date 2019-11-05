@@ -42,6 +42,7 @@ public:
     // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
 
+    b2Vec2 getForwardVelocity();
 };
 
 #endif //MICROMACHINES_RACECAR_H

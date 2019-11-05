@@ -101,7 +101,6 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     //Creating infoblock to queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;
-    std::cout<<actionType<<" : "<<eventType<<std::endl;
     keyboard_input->push(ib);
 }
 
