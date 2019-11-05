@@ -114,12 +114,12 @@ void GameWorld::createBackgroundObject(int x, int y, int tileType) {
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,0,0);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000,1000);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),2/2,1/2,0,SENSOR, TILE, true);
+    createAndAddFixture(&(cars.back()),1,2,1,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),1/2,2/2,0,SENSOR, TILE, true);
 
     return carId;
 }
