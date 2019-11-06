@@ -58,7 +58,12 @@ void RaceCar::calculateForwardImpulse() {
         car_stats.forward_speed = 0;
         return;
     }
-    car_stats.forward_speed += car_stats.accel_rate;
+    if (car_stats.forward_speed > car_stats.max_speed){
+        car_stats.forward_speed = car_stats.max_speed;
+    } else {
+        car_stats.forward_speed += car_stats.accel_rate;
+    }
+
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //find current speed in forward direction

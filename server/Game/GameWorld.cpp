@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameWorld.h"
 #include "../../config/constants.h"
+#include "status_effects/SpeedStatusEffect.h"
 
 //local use namespace for local functions
 namespace {
@@ -120,7 +121,7 @@ int GameWorld::createCar(InfoBlock carStats) {
 
     createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),.5,1,0,SENSOR, TILE, true);
-
+    cars.back().status_effects.emplace_back(new SpeedStatusEffect(1,5,5,0.6f));
     return carId;
 }
 
