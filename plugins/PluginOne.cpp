@@ -1,4 +1,4 @@
-#include "Plugin.h"
+#include "../server/mods/Plugin.h"
 #include <cmath>
 #include <vector>
 #include <iostream>
