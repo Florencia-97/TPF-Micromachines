@@ -39,7 +39,7 @@ class Menu {
 
     void init_as_follower();
 
-    bool processEvents();
+  bool processEvents(Button_answer &button_answer);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

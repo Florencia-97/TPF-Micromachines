@@ -37,18 +37,20 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
   gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
-bool Menu::processEvents(){
-  Button_answer button_answer(false, "");
+bool Menu::processEvents(Button_answer &button_answer) {
     while (!queue->empty()) {
+
         for (auto &button : gButtons) {
           button->handleEvent(&queue->front(), &button_answer);
           if (button_answer.get_state()) {
-                while (!queue->empty()) queue->pop();
+
+            while (!queue->empty()) queue->pop();
             return button_answer.get_state();
             }
         }
         queue->pop();
     }
+  return button_answer.get_state();
 }
 
 void Menu::render_first_menu() {
