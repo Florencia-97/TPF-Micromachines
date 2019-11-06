@@ -9,12 +9,13 @@ class LTexture {
   SDL_Texture *texture;
   int width;
   int height;
+  std::string texture_name;
  public:
   LTexture();
   ~LTexture();
   bool load_from_file(const std::string &path, SDL_Renderer *renderer);
   void free();
-
+  std::string get_string_name();
   // RGB
   void set_color(Uint8 red, Uint8 green, Uint8 blue);
 

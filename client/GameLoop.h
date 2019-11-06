@@ -23,7 +23,6 @@ class GameLoop : public BaseThread {
     std::atomic<bool> in_menu;
     InfoBlock previous_game_state; //game state
     std::condition_variable* ready_to_play;
-
     GameMap map;
     GameRenderer gameRenderer;
     Menu menu;

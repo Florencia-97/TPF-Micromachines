@@ -37,6 +37,7 @@ bool LTexture::load_from_file(const std::string &path, SDL_Renderer *renderer) {
     SDL_FreeSurface(loadedSurface);
   }
   texture = newTexture;
+  texture_name = path;
   return texture != nullptr;
 }
 
@@ -112,6 +113,9 @@ void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color, TTF
   } else {
     printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
   }
+}
+std::string LTexture::get_string_name() {
+  return texture_name;
 }
 
 

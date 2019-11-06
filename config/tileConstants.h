@@ -4,12 +4,13 @@
 #define GRASS_TILE 1
 
 // Cement
-#define STRAIGHT_ROAD_TILE 2
-#define CURVE_ROAD_LEFT_TILE 3
-#define CURVE_ROAD_LEFT_SIDE_TILE 4
-#define CURVE_ROAD_RIGHT_TILE 5
+#define straight_road_tile 2
+#define down_left_road_tile 3
+#define down_right_road_tile 4
+#define straight_vertical_tile 5
+#define up_left_road_tile 6
+#define up_right_road_tile 7
+#define straight_vertical_aux_tile 8
+#define straight_horizontal_aux_tile 9
 
 // Muddy road
-#define STRAIGHT_ROAD_MUD_TILE 6
-#define CURVE_ROAD_LEFT_MUD_TILE 7
-#define CURVE_ROAD_RIGHT_MUD_TILE 8
