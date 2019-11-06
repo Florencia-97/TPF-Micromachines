@@ -4,13 +4,13 @@
 #include <iostream>
 
 // TODO: change names.
-// g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
+// g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginTwo.so ./PluginTwo.cpp
 
 class PluginOne : public Plugin {
 public:
-    virtual void modifyCars(std::vector<int>& cars) override {
-        for (size_t i = 0; i < cars.size(); ++i){
-            cars[i] += 1;
+    virtual void modifyWorld(std::vector<int>& world) override {
+        for (size_t i = 0; i < world.size(); ++i){
+            world[i] += 1;
         }
     }
 };

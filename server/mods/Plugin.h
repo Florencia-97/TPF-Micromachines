@@ -13,7 +13,13 @@ public:
         return;
     }
     //virtual void modifyCars(std::vector<int> cars);
-    virtual void modifyCars(std::vector<int>& cars) const = 0;
+    virtual void modifyCars(std::vector<int>& cars) {
+        return;
+    }
+
+    virtual void modifyWorld(std::vector<int>& world) {
+        return;
+    }
 };
 
 // the types of the class factories
