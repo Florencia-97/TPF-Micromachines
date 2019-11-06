@@ -22,7 +22,7 @@ void UserInput::_run(){
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
     while (this->isAlive()){
-        while( SDL_PollEvent(&e) != 0 && this->isAlive()) {
+        while( SDL_WaitEvent(&e)!= 0 && this->isAlive()) {
             _rcvKeyInput(e);
         }
     }
