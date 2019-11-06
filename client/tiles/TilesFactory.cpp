@@ -8,7 +8,7 @@ TilesFactory::TilesFactory() {
 }
 
 std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
-    std::string key = "";
+  std::string key;
     switch (tyleType){
         case GRASS_TILE:
             key = "grass_tile";

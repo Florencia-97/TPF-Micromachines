@@ -26,7 +26,6 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
     for (YAML::iterator it = mapYaml.begin(); it != mapYaml.end(); ++it) {
         rowTile += 1;
         x = 0;
-
         int columnTile = 0;
         const YAML::Node &row = *it;
         std::string numberRow = std::to_string(num);
@@ -51,7 +50,9 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
   }
 }
 
-void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, std::string mapName){
+void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix,
+                         SDL_Renderer *gRenderer,
+                         const std::string &mapName) {
     int x = 0;
     int y = 0;
     for (std::size_t i = 0; i < layerMatrix.size(); ++i){
