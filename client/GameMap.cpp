@@ -11,7 +11,7 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
     width = mapsLayer.width;
 }
 
-void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, std::string mapName){
+void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, const std::string& mapName){
     int x = 0;
     int y = 0;
     int wOld = 512;
