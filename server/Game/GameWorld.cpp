@@ -13,7 +13,7 @@ namespace {
         return world.CreateBody(&myBodyDef);
     }
 
-    void createAndAddFixture(Entity* obj, int hx, int hy, int density,
+    void createAndAddFixture(Entity* obj, float hx, float hy, float density,
                              uint16 catBits, uint16 maskBits, bool isSensor){
 
         b2PolygonShape boxShape;
@@ -114,12 +114,12 @@ void GameWorld::createBackgroundObject(int x, int y, int tileType) {
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,0,0);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000,1000);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),2,1,1,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),2/2,1/2,0,SENSOR, TILE, true);
+    createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),.5,1,0,SENSOR, TILE, true);
 
     return carId;
 }

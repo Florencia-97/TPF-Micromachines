@@ -15,6 +15,7 @@ class Tile{
 public:
     Tile(int x, int y, int tileType, LTexture* texture, float width, float height);
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
+    void renderWithSize(SDL_Rect &camera, SDL_Renderer *renderer);
     int getType();
     SDL_Rect getBox();
     // Why static?? TODO: method one collides with other one.checkCollision(other);

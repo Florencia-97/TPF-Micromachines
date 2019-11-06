@@ -5,14 +5,16 @@
 #include <utility>
 #include "../../../config/constants.h"
 
+#define DEGTORAD (M_PI*1/180)
+
 namespace {
 
     b2Vec2 processKey(unsigned char key){
         switch (key) {
-            case UP : return {0,1};
-            case DOWN : return {0,-1};
-            case RIGHT : return {1,0};
-            case LEFT : return {-1,0};
+            case UP : return {1,0};
+            case DOWN : return {-1,0};
+            case RIGHT : return {0,1};
+            case LEFT : return {0,-1};
             default: return {0,0};
         }
     }
@@ -28,20 +30,18 @@ namespace {
 }
 
 bool RaceCar::takeDamage(int dmg) {
-    this->health -= dmg;
+    car_stats.hp -= dmg;
     return isDead();
 }
 
 bool RaceCar::isDead() {
-    return health <= 0;
+    return car_stats.hp<= 0;
 }
 
 
 RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
             : Entity(newBody) , stats(std::move(stats)), car_stats(stats) {
-    this->health = stats.get<int>(HEALTH);
     this->id = carId;
-    accel = b2Vec2(0,0);
 }
 
 void RaceCar::drive(InfoBlock keys){
@@ -52,21 +52,24 @@ void RaceCar::drive(InfoBlock keys){
     this->steer_dir = steer_dir + v1 - v2;
 }
 
-b2Vec2 RaceCar::calculateAccel(b2Vec2 currentSpeed) {
-    float accelRate = (stats.exists("accel_rate") ? stats.getFloat("accel_rate") : 20);
-    float maxVel = (stats.exists("max_speed") ? stats.getFloat("max_speed") : 200);
-    float ax = accel.x + accelRate*steer_dir.x;
-    float ay = accel.y + accelRate*steer_dir.y;
-    float vx = currentSpeed.x + ax;
-    float vy = currentSpeed.y + ay;
+void RaceCar::calculateForwardImpulse() {
+    float desiredSpeed = 0;
+    if (steer_dir.x == 0) {
+        car_stats.forward_speed = 0;
+        return;
+    }
+    car_stats.forward_speed += car_stats.accel_rate;
+    desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
-    vy = clamp_signed(vx, maxVel);
-    vx = clamp_signed(vy, maxVel);
-    ax = clamp_signed(ax, maxVel);
-    ay = clamp_signed(ay, maxVel);
-    accel = b2Vec2(ax, ay);
-    return {vx, vy};
+    //find current speed in forward direction
+    b2Vec2 currentForwardNormal = body->GetWorldVector( b2Vec2(0,1) );
+    float currentSpeed = b2Dot( getForwardVelocity(), currentForwardNormal );
 
+    //apply necessary force
+    float force = 2000;
+    if ( desiredSpeed < currentSpeed )
+        force = -force/4;
+    body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
 }
 
 void RaceCar::step(float timestep){
@@ -81,28 +84,41 @@ void RaceCar::step(float timestep){
     }
 
     if (isDead())return;
-    b2Vec2 forwardNormal = body->GetWorldVector( b2Vec2(0,1) );
-    b2Vec2 lateralNormal = body->GetWorldVector( b2Vec2(1,0) );
-    float currentSpeed = b2Dot( getForwardVelocity(), forwardNormal );
+    updateFriction();
+    calculateForwardImpulse();
 
-    //apply necessary force
-    float forceF = 100 * steer_dir.y;
-    float forceL = 1 * steer_dir.x;
-    float desiredTorque = 10;
-    body->ApplyLinearImpulse( forceF * forwardNormal + forceL * lateralNormal,\
-            body->GetWorldPoint(b2Vec2(0,-0.5)), true);
+    float desiredTorque = car_stats.rot_force*steer_dir.y;
+    body->ApplyTorque( desiredTorque ,true);
+
 }
 
 void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     auto pos = body->GetPosition();
     std::string autoId = std::to_string(this->id);
-    ib["h" + autoId] = std::round(health);
+    ib["h" + autoId] = std::round(car_stats.hp);
     ib["x" + autoId] = std::round(pos.x);
     ib["y" + autoId] = std::round(pos.y);
-    ib["r" + autoId] = std::round(- this->body->GetAngle());
+    ib["r" + autoId] = std::round(this->body->GetAngle()/DEGTORAD);
 }
 
 b2Vec2 RaceCar::getForwardVelocity() {
     b2Vec2 currentRightNormal = body->GetWorldVector( b2Vec2(0,1) );
     return b2Dot( currentRightNormal, body->GetLinearVelocity() ) * currentRightNormal;
+}
+
+b2Vec2 RaceCar::getLateralVelocity() {
+    b2Vec2 currentRightNormal = body->GetWorldVector( b2Vec2(1,0) );
+    return b2Dot( currentRightNormal, body->GetLinearVelocity() ) * currentRightNormal;
+}
+
+void RaceCar::updateFriction() {
+    b2Vec2 impulse = body->GetMass() * -getLateralVelocity();
+    if ( impulse.Length() > 5 )
+        impulse *= 30 / impulse.Length();
+    body->ApplyLinearImpulse( impulse, body->GetWorldCenter() ,false);
+    body->ApplyAngularImpulse( 0.1f * body->GetInertia() * -body->GetAngularVelocity(),true);
+    b2Vec2 forwardNormal = getForwardVelocity();
+    float currentForwardSpeed = forwardNormal.Normalize();
+    float dragForceMagnitude = -2 * currentForwardSpeed;
+    body->ApplyForce( dragForceMagnitude * forwardNormal, body->GetWorldCenter() , true);
 }

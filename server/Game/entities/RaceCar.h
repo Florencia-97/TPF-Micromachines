@@ -11,10 +11,16 @@
 #include <pthread.h>
 
 class RaceCar : public Entity {
-    b2Vec2 accel;
     b2Vec2 steer_dir;
-    int health;
     CarStats car_stats;
+
+    b2Vec2 getForwardVelocity();
+
+    b2Vec2 getLateralVelocity();
+
+    void updateFriction();
+
+    void calculateForwardImpulse();
 
 public:
     int id;
@@ -23,10 +29,6 @@ public:
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
     //POS advances the car simulation one timestep
     void step(float timestep);
-
-    //PRE x and y must be between [0-1]
-    //POS accelerates the car in the specified direction
-    b2Vec2 calculateAccel(b2Vec2 currentSpeed);
 
     //PRE info block must contain the user key inputs to convert into accel direction
     //under the names key1, key2
@@ -41,8 +43,6 @@ public:
     //POS parses the car's current status into an infoblock with keys
     // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
-
-    b2Vec2 getForwardVelocity();
 };
 
 #endif //MICROMACHINES_RACECAR_H
