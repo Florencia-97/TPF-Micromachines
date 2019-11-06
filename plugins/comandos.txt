@@ -1,0 +1,2 @@
+g++ --std=c++11 -rdynamic PluginLoader.cpp main.cpp -o main -ldl
+g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
