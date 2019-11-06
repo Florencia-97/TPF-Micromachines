@@ -35,13 +35,14 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
   gButtons[2]->setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);//Boton asociado al tercero.
   gButtons[3]->setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);//Boton asociado al 4to.
   gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+  font.Font_init("Hola", gRenderer);
 }
 
 bool Menu::processEvents(Button_answer &button_answer) {
     while (!queue->empty()) {
-
         for (auto &button : gButtons) {
           button->handleEvent(&queue->front(), &button_answer);
+          font.receive_input(&queue->front());
           if (button_answer.get_state()) {
 
             while (!queue->empty()) queue->pop();
@@ -61,6 +62,7 @@ void Menu::render_first_menu() {
     for (auto &button : gButtons) {
       button->render();
     }
+  font.render();
     SDL_RenderPresent(gRenderer);
 }
 
