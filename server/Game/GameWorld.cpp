@@ -13,7 +13,7 @@ namespace {
         return world.CreateBody(&myBodyDef);
     }
 
-    void createAndAddFixture(Entity* obj, int hx, int hy, int density,
+    void createAndAddFixture(Entity* obj, float hx, float hy, float density,
                              uint16 catBits, uint16 maskBits, bool isSensor){
 
         b2PolygonShape boxShape;
@@ -118,8 +118,8 @@ int GameWorld::createCar(InfoBlock carStats) {
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),1,2,1,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),1/2,2/2,0,SENSOR, TILE, true);
+    createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),.5,1,0,SENSOR, TILE, true);
 
     return carId;
 }

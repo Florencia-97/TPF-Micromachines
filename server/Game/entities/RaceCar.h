@@ -11,10 +11,7 @@
 #include <pthread.h>
 
 class RaceCar : public Entity {
-    b2Vec2 accel;
     b2Vec2 steer_dir;
-    int rot_goal;
-    int health;
     CarStats car_stats;
 
     b2Vec2 getForwardVelocity();

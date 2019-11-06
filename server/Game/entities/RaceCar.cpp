@@ -30,21 +30,18 @@ namespace {
 }
 
 bool RaceCar::takeDamage(int dmg) {
-    this->health -= dmg;
+    car_stats.hp -= dmg;
     return isDead();
 }
 
 bool RaceCar::isDead() {
-    return health <= 0;
+    return car_stats.hp<= 0;
 }
 
 
 RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
             : Entity(newBody) , stats(std::move(stats)), car_stats(stats) {
-    this->health = stats.get<int>(HEALTH);
     this->id = carId;
-    accel = b2Vec2(0,0);
-    rot_goal = 0;
 }
 
 void RaceCar::drive(InfoBlock keys){
@@ -57,22 +54,22 @@ void RaceCar::drive(InfoBlock keys){
 
 void RaceCar::calculateForwardImpulse() {
     float desiredSpeed = 0;
-    if (steer_dir.x == 0) return;
-    desiredSpeed += steer_dir.x*100;
+    if (steer_dir.x == 0) {
+        car_stats.forward_speed = 0;
+        return;
+    }
+    car_stats.forward_speed += car_stats.accel_rate;
+    desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //find current speed in forward direction
     b2Vec2 currentForwardNormal = body->GetWorldVector( b2Vec2(0,1) );
     float currentSpeed = b2Dot( getForwardVelocity(), currentForwardNormal );
 
     //apply necessary force
-    float force = 0;
-    if ( desiredSpeed > currentSpeed )
-        force = 200;
-    else if ( desiredSpeed < currentSpeed )
-        force = -200;
-    else
-        return;
-    body->ApplyLinearImpulse( force * currentForwardNormal, body->GetWorldCenter(), true);
+    float force = 2000;
+    if ( desiredSpeed < currentSpeed )
+        force = -force/4;
+    body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
 }
 
 void RaceCar::step(float timestep){
@@ -88,10 +85,9 @@ void RaceCar::step(float timestep){
 
     if (isDead())return;
     updateFriction();
-
     calculateForwardImpulse();
 
-    float desiredTorque = 50*steer_dir.y;
+    float desiredTorque = car_stats.rot_force*steer_dir.y;
     body->ApplyTorque( desiredTorque ,true);
 
 }
@@ -99,7 +95,7 @@ void RaceCar::step(float timestep){
 void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     auto pos = body->GetPosition();
     std::string autoId = std::to_string(this->id);
-    ib["h" + autoId] = std::round(health);
+    ib["h" + autoId] = std::round(car_stats.hp);
     ib["x" + autoId] = std::round(pos.x);
     ib["y" + autoId] = std::round(pos.y);
     ib["r" + autoId] = std::round(this->body->GetAngle()/DEGTORAD);
@@ -117,6 +113,8 @@ b2Vec2 RaceCar::getLateralVelocity() {
 
 void RaceCar::updateFriction() {
     b2Vec2 impulse = body->GetMass() * -getLateralVelocity();
+    if ( impulse.Length() > 5 )
+        impulse *= 30 / impulse.Length();
     body->ApplyLinearImpulse( impulse, body->GetWorldCenter() ,false);
     body->ApplyAngularImpulse( 0.1f * body->GetInertia() * -body->GetAngularVelocity(),true);
     b2Vec2 forwardNormal = getForwardVelocity();

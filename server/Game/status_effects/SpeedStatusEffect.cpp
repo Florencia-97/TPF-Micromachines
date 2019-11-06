@@ -12,5 +12,5 @@ SpeedStatusEffect::SpeedStatusEffect(int id, double delay, double duration, floa
 }
 
 void SpeedStatusEffect::applyEffect(CarStats &entity) {
-    //
+    entity.max_speed = entity.max_speed*.6f;
 }

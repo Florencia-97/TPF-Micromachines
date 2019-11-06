@@ -8,8 +8,12 @@
 class CarStats {
 public:
     InfoBlock base;
-    float hp;
     float max_speed;
+    float rot_force;
+    float accel_rate;
+
+    int hp;
+    float forward_speed;
     //other
 
     explicit CarStats(InfoBlock ib);
