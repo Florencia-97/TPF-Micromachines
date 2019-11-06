@@ -3,6 +3,7 @@
 //
 
 #include "Button.h"
+#include "Button_answer.h"
 
 Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   mPosition.x = 0;
@@ -16,7 +17,7 @@ void Button::setPosition(int x, int y) {
   mPosition.y = y;
   set_area(x, y);
 }
-bool Button::handleEvent(SDL_Event *e) {
+bool Button::handleEvent(SDL_Event *e, Button_answer *answer) {
   //If mouse event happened
 
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
@@ -57,6 +58,8 @@ bool Button::handleEvent(SDL_Event *e) {
           return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
           this->texture->set_color(22, 22, 22);
+          answer->set_state(true);
+          answer->set_color(texture->get_string_name());
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
           this->texture->set_color(22, 22, 50);

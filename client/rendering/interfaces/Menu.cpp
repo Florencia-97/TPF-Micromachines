@@ -38,12 +38,13 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
 }
 
 bool Menu::processEvents(){
+  Button_answer button_answer(false, "");
     while (!queue->empty()) {
         for (auto &button : gButtons) {
-            bool clicked = button->handleEvent(&queue->front());
-            if (clicked){
+          button->handleEvent(&queue->front(), &button_answer);
+          if (button_answer.get_state()) {
                 while (!queue->empty()) queue->pop();
-                return clicked;
+            return button_answer.get_state();
             }
         }
         queue->pop();

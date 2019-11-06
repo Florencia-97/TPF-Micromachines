@@ -7,6 +7,7 @@
 
 #include "../../../config/constants.h"
 #include "../LTexture.h"
+#include "Button_answer.h"
 
 #include <SDL_events.h>
 #include <SDL_system.h>
@@ -27,7 +28,7 @@ class Button {
   virtual void setPosition(int x,
                            int y);
   //Handles mouse event. If the mouse is clicked, returns true
-  virtual bool handleEvent(SDL_Event *e);
+  virtual bool handleEvent(SDL_Event *e, Button_answer *answer);
   //Shows button sprite
   virtual void render();
   virtual void set_area(int x,
