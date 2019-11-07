@@ -4,7 +4,7 @@
 #define MICROMACHINES_COLLISIONSMANAGER_H
 
 #include "Box2D/Box2D.h"
-#include "Game/entities/RaceCar.h"
+#include "Game/entities/Entity.h"
 #include <map>
 
 enum _entityCategory {
@@ -16,7 +16,7 @@ enum _entityCategory {
 
 
 
-class CollisionsManager : b2ContactListener {
+class CollisionsManager : public b2ContactListener {
     //todo std::map<std::string, carMods> delayed_effects;
 public:
     void BeginContact(b2Contact* contact) override;

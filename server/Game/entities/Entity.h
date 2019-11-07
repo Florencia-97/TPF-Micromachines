@@ -3,14 +3,10 @@
 #ifndef MICROMACHINES_ENTITY_H
 #define MICROMACHINES_ENTITY_H
 
+#include <Game/status_effects/StatusEffect.h>
 #include "Box2D/Box2D.h"
+#include <list>
 
-struct statusEffect{
-    double delay; //in seconds
-    double duration; //in seconds
-    int stacks;
-    void (*f)(b2Fixture&);
-};
 
 //probably make this one a virtual class
 class Entity {
@@ -22,13 +18,16 @@ class Entity {
 protected:
     b2Body* body;
 public:
-
     //only supports making objects with a square bounding box
     Entity(b2Body* &newbody);
 
-    virtual void resolveCollision(b2Fixture &collidedWith);
+    virtual void resolveCollision(Entity *collidedWith){};
 
-    virtual void addEffects(){};
+    virtual void endContact(Entity *wasTouching){};
+
+    virtual void addEffect(std::shared_ptr<StatusEffect> &newStatusEffect){};
+
+    virtual void removeEffect(std::string effectId){};
 
     b2Vec2 getPosition();
 

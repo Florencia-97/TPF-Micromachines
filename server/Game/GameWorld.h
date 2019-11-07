@@ -7,17 +7,20 @@
 #include "Game/entities/Entity.h"
 #include "Game/entities/RaceCar.h"
 #include "CollisionsManager.h"
+#include "../common/MapsLayer.h"
+#include "../config/tileConstants.h"
 #include <chrono>
 #include <thread>
+#include <Game/entities/PhysicalRoad.h>
 
 
 class GameWorld {
     b2World world;
-    //CollisionDetector cd;
-    std::vector<RaceCar> cars; // should be a list
+    MapsLayer map;
+    CollisionsManager cl;
+    std::list<RaceCar> cars; // should be a list
 
-    //objects which are a static part of the map background
-    std::vector<Entity> background_objs;
+    std::list<PhysicalRoad> road_bodies;
 
     //Dynamic Instances are those which come and go from the field, (ie items)
     //std::vector<Entity> dynamic_objs;
@@ -30,14 +33,11 @@ public:
     RaceCar& getCar(int id);
     void loadWorld(std::string);
     InfoBlock status();
-    /*
-      &Entity createDynamicObject(yaml &stats?);
 
-     */
 
     //POS advances the simulation and all instances within one timestep
     void Step(float timestep);
-    void createBackgroundObject(int x, int y, int tileId); //yaml &stats?
+    void createRoad(int x, int y, int tileId); //yaml &stats?
 };
 
 

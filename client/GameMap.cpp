@@ -14,16 +14,15 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
 void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, const std::string& mapName){
     int x = 0;
     int y = 0;
-    int wOld = 512;
-    int hOld = 512;
+
     for (std::size_t i = 0; i < layerMatrix.size(); ++i){
         std::vector<int> row = layerMatrix[i];
         if (mapName == "ground") this->ground.emplace_back();
         else if (mapName == "road") this->road.emplace_back();
         else this->extras.emplace_back();
         for (std::size_t j = 0; j < row.size(); ++j){
-            x = j * wOld;
-            y = i * hOld;
+            x = j * TILE_SIZE;
+            y = i * TILE_SIZE;
             int tileType = row[j];
             if (tileType == 0){
                 continue;

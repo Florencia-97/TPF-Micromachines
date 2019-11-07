@@ -11,13 +11,16 @@ protected:
 public:
     double duration;
     double delay;
+    double after_effect;//duration after duration
     int n_stacks;
     bool absorb_stacks;
-    int id;
+    std::string id;
 
     virtual void applyEffect(CarStats &entity){};
 
     virtual void increaseStack(StatusEffect* other){n_stacks++;};
+
+    virtual void decreaseStack(){n_stacks--;};
 };
 
 

@@ -30,55 +30,29 @@ namespace {
 }
 
 GameWorld::GameWorld() : world(b2Vec2(0,0)) {
-    //CollisionListener cl;
-    //world.SetContactListener(&cl);
+    world.SetContactListener(&cl);
 }
 
 void GameWorld::loadWorld(std::string worldName){
-    // TODO load box2D world with the mapNumber given
-    // TODO use MapsLayers!!
-    worldName = "race_1"; //Change for real names afterwards!!
-    YAML::Node config = YAML::LoadFile("maps/" + worldName + ".yaml");
-    YAML::Node mapYaml = config["Road"];
-    int y = 0;
-    int x = 0;
-    int rowTile = -1;
-    int num = 1;
-
-    for (YAML::iterator it = mapYaml.begin(); it != mapYaml.end(); ++it) {
-        rowTile += 1;
-        x = 0;
-
-        int columnTile = 0;
-        const YAML::Node &row = *it;
-        std::string numberRow = std::to_string(num);
-        YAML::Node column = row[numberRow];
-        int colNum = 0;
-
-        for (YAML::iterator c = column.begin(); c != column.end(); ++c) {
-            y = rowTile * 512;
-            x = columnTile * 512;
-            const YAML::Node &col_value = *c;
-
-            int numberTile = col_value.as<int>();
-            this->createBackgroundObject(x, y, numberTile);
-
-            colNum++;
-            columnTile += 1;
+    map.load("maps/" + worldName+".yaml");
+    for (int j = 0; j<map.road.size(); j++){
+        auto row = map.road[j];
+        for (int i= 0; i<row.size();i++){
+            if (row[i] <= ROAD_END_TYPE || row[i] >= ROAD_START_TYPE){
+                createRoad(i * TILE_SIZE, j * TILE_SIZE, row[i]);
+            }
         }
-
-        num++;
     }
 }
 
 InfoBlock GameWorld::status(){
-    // TODO: create a real infoblock with the new world
     InfoBlock ib;
     ib[PLAYERS_AMOUNT] = this->cars.size();
     for (auto & car : cars){
         std::string car_id = std::to_string(car.id);
         car.loadStateToInfoBlock(ib);
     }
+    //todo finish sending objects
     ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
 /*    int cont = 0;
     for (auto & obj : objects){
@@ -90,7 +64,7 @@ InfoBlock GameWorld::status(){
 }
 
 void GameWorld::processEvent(int id, InfoBlock event){
-    cars[id].drive(event);
+    getCar(id).drive(event);
 }
 
 void GameWorld::Step(float timestep) {
@@ -106,12 +80,11 @@ void GameWorld::Step(float timestep) {
 }
 
 
-void GameWorld::createBackgroundObject(int x, int y, int tileType) {
-    // TODO: load proper tile depending in tileType given
+void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->background_objs.emplace_back(newBody);
+    this->road_bodies.emplace_back(newBody);
 
-    createAndAddFixture(&(this->background_objs.back()), 1, 1, 0, TILE, SENSOR, false);
+    createAndAddFixture(&(this->road_bodies.back()), TILE_SIZE, TILE_SIZE, 0, TILE, SENSOR, false);
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
@@ -121,10 +94,13 @@ int GameWorld::createCar(InfoBlock carStats) {
 
     createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),.5,1,0,SENSOR, TILE, true);
-    cars.back().status_effects.emplace_back(new SpeedStatusEffect(1,5,5,0.6f));
     return carId;
 }
 
 RaceCar &GameWorld::getCar(int id) {
-    return cars.at(id);
+    auto it = cars.begin();
+    for (int i = 0; i<id;i++){
+        it++;
+    }
+    return *it;
 }

@@ -13,6 +13,7 @@
 class RaceCar : public Entity {
     b2Vec2 steer_dir;
     CarStats car_stats;
+    std::list<std::shared_ptr<StatusEffect>> status_effects;
 
     b2Vec2 getForwardVelocity();
 
@@ -20,12 +21,10 @@ class RaceCar : public Entity {
 
     void updateFriction();
 
-    void calculateForwardImpulse();
+    float calculateForwardImpulse();
 
 public:
     int id;
-    InfoBlock stats;
-    std::list<std::shared_ptr<StatusEffect>> status_effects;
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
     //POS advances the car simulation one timestep
     void step(float timestep);
@@ -43,6 +42,12 @@ public:
     //POS parses the car's current status into an infoblock with keys
     // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
+
+    void addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) override;
+
+    void removeEffect(std::string effectId) override;
+
+    void stepEffects(float timestep);
 };
 
 #endif //MICROMACHINES_RACECAR_H

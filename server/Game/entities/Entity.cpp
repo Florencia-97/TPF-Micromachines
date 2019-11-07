@@ -16,10 +16,6 @@ void Entity::attachFixture(b2FixtureDef &boxFixtureDef){
     body->CreateFixture(&boxFixtureDef);
 }
 
-void Entity::resolveCollision(b2Fixture &collidedWith) {
-    //do nothing (for now)
-}
-
 b2Vec2 Entity::getPosition() {
     return this->body->GetPosition();
 }

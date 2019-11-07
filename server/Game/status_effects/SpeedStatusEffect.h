@@ -9,9 +9,13 @@ class SpeedStatusEffect : public StatusEffect {
 public:
     float speed_mod;
 
-    SpeedStatusEffect(int id, double delay, double duration, float speed_mod);
+    SpeedStatusEffect(std::string id, double delay, double duration, double after_effect, float speed_mod);
 
     void applyEffect(CarStats& entity) override;
+
+    void increaseStack(StatusEffect* other) override;
+
+    void decreaseStack() override;
 };
 
 

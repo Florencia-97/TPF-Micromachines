@@ -34,6 +34,10 @@ void MapsLayer::_loadHW(const std::string &mapPath){
 }
 
 MapsLayer::MapsLayer(const std::string& mapPath) {
+    load(mapPath);
+}
+
+void MapsLayer::load(const std::string &mapPath) {
     std::string ground = "Ground";
     std::string road = "Road";
     std::string extras = "Extras";

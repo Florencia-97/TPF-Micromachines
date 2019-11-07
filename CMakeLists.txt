@@ -39,7 +39,7 @@ set(SERVER_SOURCE_FILES
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		server/Server.cpp server/Server.h
-		)
+		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
