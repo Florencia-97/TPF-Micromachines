@@ -9,8 +9,9 @@
 class PhysicalRoad : public Entity {
 public:
     SpeedStatusEffect my_effect;
+    std::string id;
 
-    explicit PhysicalRoad(b2Body* &newBody);
+    explicit PhysicalRoad(std::string id, b2Body* &newBody);
 
     void resolveCollision(Entity *collidedWith) override;
 

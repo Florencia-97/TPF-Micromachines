@@ -42,7 +42,7 @@ void RaceCar::step(float timestep){
     if (isDead())return;
     updateFriction();
 
-     if (calculateForwardImpulse() > 5){
+     if (calculateForwardImpulse() > 20){
         float desiredTorque = car_stats.rot_force * steer_dir.y;
         body->ApplyTorque(desiredTorque, true);
     }
@@ -113,7 +113,7 @@ float RaceCar::calculateForwardImpulse() {
     float desiredSpeed = 0;
     if (steer_dir.x == 0) {
         car_stats.forward_speed = 0;
-        if (currentSpeed> -5 && currentSpeed< 5){
+        if (currentSpeed> -20 && currentSpeed< 20){
             body->SetLinearVelocity(b2Vec2(0,0));
         }
         return currentSpeed;
@@ -125,8 +125,6 @@ float RaceCar::calculateForwardImpulse() {
     }
 
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
-
-    //find current speed in forward direction
 
     //apply necessary force
     float force = 2000;
@@ -151,24 +149,19 @@ void RaceCar::updateFriction() {
 void RaceCar::stepEffects(float timestep) {
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
-        std::cout<<status->id<<std::endl;
+        //std::cout<<"n:stacks "<<status->n_stacks<<std::endl;
         if (status->delay > 0){
-            std::cout<<"delay "<<status->delay<<std::endl;
             status->delay -= timestep;
             i++;
         } else if (status->duration > 0) {
-            std::cout<<": "<<car_stats.max_speed<<std::endl;
             status->applyEffect(car_stats);
             status->duration -= timestep;
-            std::cout<<"| "<<car_stats.max_speed<<std::endl;
             i++;
         } else if (status->after_effect > 0){
-            std::cout<<"after "<<status->after_effect<<std::endl;
             status->applyEffect(car_stats);
             status->after_effect -= timestep;
             i++;
         } else {
-            std::cout<<"dec "<<status->n_stacks<<std::endl;
             status->decreaseStack();
             if (status->n_stacks == 0){
                 i = status_effects.erase(i);

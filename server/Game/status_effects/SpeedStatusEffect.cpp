@@ -29,6 +29,7 @@ void SpeedStatusEffect::increaseStack(StatusEffect *other) {
 }
 
 void SpeedStatusEffect::decreaseStack() {
+    if (n_stacks == 0) return;
     this->n_stacks--;
     if (n_stacks == 0){
         this->delay =0;

@@ -57,7 +57,7 @@ int Client::play() {
             sender.run();
         }
         
-      sleep(150);
+      sleep(500);
     }
 
     release();

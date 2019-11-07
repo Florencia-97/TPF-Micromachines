@@ -35,14 +35,17 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 
 void GameWorld::loadWorld(std::string worldName){
     map.load("maps/" + worldName+".yaml");
+    int r = 0;
     for (int j = 0; j<map.road.size(); j++){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
-            if (row[i] <= ROAD_END_TYPE || row[i] >= ROAD_START_TYPE){
-                createRoad(i * TILE_SIZE, j * TILE_SIZE, row[i]);
+            if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
+                createRoad((i + 1) * TILE_SIZE, (j + 1) * TILE_SIZE, row[i]);
+                r++;
             }
         }
     }
+    std::cout<<"r"<<r<<std::endl;
 }
 
 InfoBlock GameWorld::status(){
@@ -82,8 +85,7 @@ void GameWorld::Step(float timestep) {
 
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->road_bodies.emplace_back(newBody);
-
+    this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
     createAndAddFixture(&(this->road_bodies.back()), TILE_SIZE, TILE_SIZE, 0, TILE, SENSOR, false);
 }
 
