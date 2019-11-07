@@ -42,7 +42,8 @@ void RaceCar::step(float timestep){
     if (isDead())return;
     updateFriction();
 
-     if (calculateForwardImpulse() > 20){
+    auto spd = calculateForwardImpulse();
+     if (spd > 15 || spd < -15){
         float desiredTorque = car_stats.rot_force * steer_dir.y;
         body->ApplyTorque(desiredTorque, true);
     }
@@ -113,7 +114,7 @@ float RaceCar::calculateForwardImpulse() {
     float desiredSpeed = 0;
     if (steer_dir.x == 0) {
         car_stats.forward_speed = 0;
-        if (currentSpeed> -20 && currentSpeed< 20){
+        if (currentSpeed> -5 && currentSpeed< 15){
             body->SetLinearVelocity(b2Vec2(0,0));
         }
         return currentSpeed;
@@ -127,10 +128,11 @@ float RaceCar::calculateForwardImpulse() {
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //apply necessary force
-    float force = 2000;
+    float force = 5000 + 5000*(1 - currentSpeed/car_stats.max_speed);
     if ( desiredSpeed < currentSpeed )
         force = -force/4;
     body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
+    std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
     return currentSpeed;
 }
 
@@ -149,7 +151,7 @@ void RaceCar::updateFriction() {
 void RaceCar::stepEffects(float timestep) {
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
-        //std::cout<<"n:stacks "<<status->n_stacks<<std::endl;
+
         if (status->delay > 0){
             status->delay -= timestep;
             i++;

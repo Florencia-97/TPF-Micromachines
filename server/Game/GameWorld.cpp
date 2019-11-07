@@ -40,7 +40,7 @@ void GameWorld::loadWorld(std::string worldName){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
             if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
-                createRoad(i * TILE_SIZE, j  * TILE_SIZE, row[i]);
+                createRoad(i * TILE_SIZE + TILE_SIZE/2 , j*TILE_SIZE + TILE_SIZE/2, row[i]);
                 r++;
             }
         }
@@ -95,7 +95,7 @@ int GameWorld::createCar(InfoBlock carStats) {
     cars.emplace_back(carId, carStats, newBody);
 
     createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
-    createAndAddFixture(&(cars.back()),.5,1,0,SENSOR, TILE, true);
+    createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
 }
 

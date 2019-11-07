@@ -17,8 +17,8 @@ void Car::addTexture(LTexture *my_texture) {
 }
 
 void Car::move(int x, int y, int r) {
-  this->mBox.x = x;
-  this->mBox.y = y;
+  this->mBox.x = x -  CAR_WIDTH/2;
+  this->mBox.y = y - CAR_HEIGHT/2;
   this->rotation = r;
 }
 
