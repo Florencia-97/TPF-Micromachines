@@ -84,8 +84,8 @@ void GameLoop::proceedToLobby(bool is_leader) {
 GameLoop::~GameLoop(){
     starter.close();
 }
-GameLoop::GameLoop(std::queue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& r) :
-GameLoop::GameLoop(SafeQueue<InfoBlock> &rq,
+
+GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &queue,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r) :
