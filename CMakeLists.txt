@@ -39,7 +39,10 @@ set(SERVER_SOURCE_FILES
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		server/Server.cpp server/Server.h
-		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h)
+		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h
+		server/mods/Plugin.h
+		server/mods/PluginLoader.cpp server/mods/PluginLoader.h
+		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
@@ -70,7 +73,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h
 		client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h
 		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
-		client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h client/rendering/interfaces/Button_answer.cpp client/rendering/interfaces/Button_answer.h)
+		client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h
+		client/rendering/interfaces/Button_answer.cpp client/rendering/interfaces/Button_answer.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp
@@ -85,7 +89,7 @@ add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
 #add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
-target_link_libraries(Server yaml-cpp pthread Box2D)
+target_link_libraries(Server yaml-cpp pthread Box2D ${CMAKE_DL_LIBS})
 target_link_libraries(Client yaml-cpp pthread
 		${SDL2_LIBRARY}
 		${SDL2_IMAGE_LIBRARIES}

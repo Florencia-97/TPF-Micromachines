@@ -1,4 +1,6 @@
 #include "PluginLoader.h"
+#include <dlfcn.h>
+#include <string>
 
 PluginLoader::PluginLoader(const char* path) {
     this->pluginRef = dlopen(path, RTLD_LAZY);
