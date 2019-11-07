@@ -41,7 +41,10 @@ public:
     bool exit;
     std::queue<InfoBlock>* renderQueue;
 
-    GameLoop(std::queue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& ready);
+  GameLoop(SafeQueue<InfoBlock> &rq,
+           std::queue<SDL_Event> &textQueue,
+           std::queue<SDL_Event> &mouseQueue,
+           std::condition_variable &ready);
 
     void proceedToLobby(bool is_leader);
 

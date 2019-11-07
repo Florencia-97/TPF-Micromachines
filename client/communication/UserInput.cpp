@@ -7,11 +7,13 @@
 
 UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
                      SafeQueue<InfoBlock> *safeQueueClient,
+                     std::queue<SDL_Event> *mouse_queue,
                      std::queue<SDL_Event> *text_queue) {
     // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
-    this->local_queue = text_queue;
+  this->mouse_queue = mouse_queue;
+  this->writing_queue = text_queue;
     key_pressings[UP] = false;
     key_pressings[DOWN] = false;
     key_pressings[LEFT] = false;
@@ -31,7 +33,8 @@ void UserInput::_run(){
 }
 
 void UserInput::_rcvKeyInput(SDL_Event &e){
-    if ( e.type == SDL_QUIT){
+
+  if (e.type == SDL_QUIT) {
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
         this->mouse_input->push(ib);
@@ -42,18 +45,17 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     char eventType = '\n';
     std::string actionType = "\n";
     bool event_value = false;
-
-    switch (e.type){
-        case SDL_MOUSEBUTTONDOWN:
-            local_queue->push(e);
+  switch (e.type){
+    case SDL_MOUSEBUTTONDOWN:mouse_queue->push(e);
             eventType = MOUSE_BUTTON_DOWN;
             break;
-        case SDL_MOUSEBUTTONUP:
-            local_queue->push(e);
+    case SDL_MOUSEBUTTONUP:mouse_queue->push(e);
             eventType = MOUSE_BUTTON_UP;
             break;
-        case SDL_KEYDOWN:
-            actionType = ACTION_TYPE;
+    case SDL_TEXTINPUT:;
+      writing_queue->push(e);
+      break;
+    case SDL_KEYDOWN:actionType = ACTION_TYPE;
             event_value = true;
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
@@ -68,7 +70,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 case SDLK_RIGHT:
                     eventType = RIGHT;
                     break;
-                default:local_queue->push(e);
+              default:writing_queue->push(e);
                     return;
             }
             break;
@@ -100,7 +102,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     key_pressings[eventType] = event_value;
 
     // For keys to send to server
-    //Creating infoblock to queue in EventsQueue
+  //Creating infoblock to mouse_queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;
     keyboard_input->push(ib);

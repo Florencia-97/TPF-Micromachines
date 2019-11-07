@@ -17,6 +17,7 @@ class Font {
   SDL_Rect areaInput;
   SDL_Color color;
   SDL_Renderer *renderer;
+  std::string inputText = "TEAM DRAGON";
  public:
   void Font_init(const std::string &msg, SDL_Renderer *sdl_renderer);
   void render();

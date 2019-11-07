@@ -7,7 +7,7 @@ void Font::Font_init(const std::string &msg, SDL_Renderer *sdl_renderer) {
   color = {0, 0, 0, 0xFF};
   renderer = sdl_renderer;
   this->font = TTF_OpenFont("client/rendering/interfaces/lazy.ttf", 28);
-  promptTextTexture.loadFromRenderedText("Inserta el nombre de la partida y elige tu auto!!:",
+  promptTextTexture.loadFromRenderedText("Inserta el nombre de la partida y elige tu auto!!!!!!!!!!!!:",
                                          color,
                                          font,
                                          sdl_renderer);
@@ -15,11 +15,17 @@ void Font::Font_init(const std::string &msg, SDL_Renderer *sdl_renderer) {
   this->areaPromt = {(SCREEN_WIDTH - promptTextTexture.getWidth()) / 2, 0, promptTextTexture.getWidth(),
                      promptTextTexture.getHeight()};
   this->areaInput = {(SCREEN_WIDTH - inputTextTexture.getWidth()) / 2,
-                     40,
-                     inputTextTexture.getHeight(),
+                     120,
+                     inputTextTexture.getWidth(),
                      inputTextTexture.getHeight()};
 }
 void Font::render() {
+  this->areaPromt = {(SCREEN_WIDTH - promptTextTexture.getWidth()) / 2, 0, promptTextTexture.getWidth(),
+                     promptTextTexture.getHeight()};
+  this->areaInput = {(SCREEN_WIDTH - inputTextTexture.getWidth()) / 2,
+                     120,
+                     inputTextTexture.getWidth(),
+                     inputTextTexture.getHeight()};
   SDL_RenderCopy(renderer, promptTextTexture.get_texture(), nullptr, &areaPromt);
   SDL_RenderCopy(renderer, inputTextTexture.get_texture(), nullptr, &areaInput);
 
@@ -27,16 +33,13 @@ void Font::render() {
 
 void Font::receive_input(SDL_Event *e) {
   SDL_StartTextInput();
-  std::string inputText = "TEAM DRAGON";
   bool renderText = false;
   if (e->type == SDL_KEYDOWN) {
     //Handle backspace
-    printf("%s\n", e->text.text);
     if (e->key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0) {
       //lop off character
       inputText.pop_back();
       renderText = true;
-
     }
       //Handle copy
     else if (e->key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL) {
@@ -60,23 +63,15 @@ void Font::receive_input(SDL_Event *e) {
   }
   if (renderText) {
     //Text is not empty
-    if (inputText != "") {
+    if (!inputText.empty()) {
       //Render new text
-      inputTextTexture.loadFromRenderedText(inputText.c_str(), color, font, renderer);
-    }
+      inputTextTexture.loadFromRenderedText(inputText, color, font, renderer);
+    } else {
       //Text is empty
-    else {
       //Render space texture
       inputTextTexture.loadFromRenderedText(" ", color, font, renderer);
     }
   }
-
-  //Clear screen
-  SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderClear(renderer);
-
-  //Render text textures
-  render();
 }
 
 

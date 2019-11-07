@@ -19,15 +19,12 @@ bool LTexture::load_from_file(const std::string &path, SDL_Renderer *renderer) {
   SDL_Texture *newTexture = nullptr;
   SDL_Surface *loadedSurface = IMG_Load(path.c_str());
   if (loadedSurface == nullptr) {
-    //TODO ver si loaded surface tira excepcion
     printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
   } else {
     SDL_SetColorKey(loadedSurface,
                     SDL_TRUE,
                     SDL_MapRGB(loadedSurface->format,0, 0xFF,0xFF));
-
     newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-    //Todo ver si es necesaria excepcion
     if (newTexture == nullptr) {
       printf("Unable to create texture from %s! SDL_Error: %s\n", path.c_str(), SDL_GetError());
     } else {
@@ -84,9 +81,9 @@ int LTexture::getWidth() {
 SDL_Texture *LTexture::get_texture() {
   return this->texture;
 }
-void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool id) {
+void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int widthParam, int heightParam, bool id) {
   if (!id) {
-    SDL_Rect area = {x, y, width, height};
+    SDL_Rect area = {x, y, widthParam, heightParam};
     SDL_RenderCopyEx(renderer, texture, nullptr, &area, r, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
@@ -94,7 +91,6 @@ void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int
 }
 void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer) {
   free();
-
   //Render text surface
   SDL_Surface *textSurface = TTF_RenderText_Solid(font, msg.c_str(), color);
   if (textSurface != nullptr) {

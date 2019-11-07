@@ -64,8 +64,8 @@ int Client::play() {
     return 0;
 }
 
-Client::Client() : gameLoop(this->receiver_queue, text_queue, ready_to_connect),
-                   userInput(&keyboard_e_queue, &mouse_e_queue, &text_queue),
+Client::Client() : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect),
+                   userInput(&keyboard_e_queue, &mouse_e_queue, &mouse_queue, &text_queue),
                    receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
 {}
 

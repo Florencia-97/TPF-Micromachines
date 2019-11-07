@@ -24,7 +24,13 @@ class LTexture {
 
   int getWidth();
   SDL_Texture *get_texture();
-  void render_with_size(int x, int y, int r, SDL_Renderer *renderer, int width, int height, bool is_interface);
+  void render_with_size(int x,
+                        int y,
+                        int r,
+                        SDL_Renderer *renderer,
+                        int widthParam,
+                        int heightParam,
+                        bool is_interface);
   int getHeight();
   void loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer);
 };

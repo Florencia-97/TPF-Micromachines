@@ -21,10 +21,10 @@ class Client {
     Socket skt;
     SafeQueue<InfoBlock> keyboard_e_queue;
     SafeQueue<InfoBlock> mouse_e_queue;
+  std::queue<SDL_Event> mouse_queue;
     std::queue<SDL_Event> text_queue;
     std::queue<InfoBlock> receiver_queue;
     std::condition_variable ready_to_connect;
-
     GameLoop gameLoop;
     UserInput userInput;
     Receiver receiver;

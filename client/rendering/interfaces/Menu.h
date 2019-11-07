@@ -20,7 +20,8 @@ class Menu {
   LTexture carBlack;
   LTexture carWhite;
   LTexture wallpaper;
-  std::queue<SDL_Event> *queue;
+  std::queue<SDL_Event> *mouse_queue;
+  std::queue<SDL_Event> *text_queue;
   LTexture connectButton;
   SDL_Renderer *gRenderer;
   std::vector<Button *> gButtons;
@@ -28,20 +29,19 @@ class Menu {
   Font font;
 
   bool load_media();
-
+  void set_buttons_positions_first_menu();
  public:
 
     //POS initializes all the components of the menu
-    void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *queue);
-
-    //PRE must be initialized
-    void render_first_menu();
-    void close_first_menu();
-    void dummy_init_as_leader();
-
-    void init_as_follower();
-
-  bool processEvents(Button_answer &button_answer);
+    void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *queue, std::queue<SDL_Event> *textQueue);
+  void processEventsKeyboard();
+  //PRE must be initialized
+  void render_first_menu();
+  void close_first_menu();
+  void dummy_init_as_leader();
+  void set_buttons_as_leader();
+  void init_as_follower();
+  bool processEventsMouse(Button_answer &button_answer);
 
 };
 
