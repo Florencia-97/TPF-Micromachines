@@ -33,21 +33,22 @@ void GameLoop::runMenu(int frame_id) {
 }
 
 void GameLoop::runGame(int frame_id){
-    InfoBlock inf;
-    if (renderQueue->isEmpty()){
+    InfoBlock* gameState;
+    if (renderQueue->empty()){
         //if no states to load use last
-        inf = previous_game_state;
+        gameState = &previous_game_state;
     }else {
-        while (!renderQueue->isEmpty()){
-            inf = renderQueue->pop();
+        while (renderQueue->size()>1){
+            renderQueue->pop();
             //get the very last event
         }
+        gameState = &renderQueue->front();
     }
 
-    if (!inf.exists("game_end")) {
-        gameRenderer.render(inf);
+    if (!gameState->exists("game_end")) {
+        gameRenderer.render(*gameState);
         sleep(1/60); //todo variable time on sleep
-        previous_game_state = inf;
+        previous_game_state = *gameState;
     } else {
         state = -1;
         in_menu.store(true);
@@ -56,15 +57,15 @@ void GameLoop::runGame(int frame_id){
 
 void GameLoop::runLobby(int frame_id) {
 
-    if (!renderQueue->isEmpty()){
-        auto inf = renderQueue->pop();
-        if (inf.exists(RACE_ID)){
-            auto ri = inf.getString(RACE_ID);
-            previous_game_state = inf;
+    if (!renderQueue->empty()){
+        InfoBlock* gameState = &renderQueue->front();
+        if (gameState->exists(RACE_ID)){
+            auto ri = gameState->getString(RACE_ID);
+            previous_game_state = *gameState;
             state = GAME_STATE;
-            auto a = inf.srcString();
-            gameRenderer.init(starter.get_global_renderer(), inf);
+            gameRenderer.init(starter.get_global_renderer(), *gameState);
         }
+        renderQueue->pop();
     }
   menu.render_first_menu();//todo render lobby instead
     sleep(1/60);
@@ -81,7 +82,7 @@ void GameLoop::proceedToLobby(bool is_leader) {
 GameLoop::~GameLoop(){
     starter.close();
 }
-GameLoop::GameLoop(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& r) :
+GameLoop::GameLoop(std::queue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& r) :
                             starter(SCREEN_WIDTH,SCREEN_HEIGHT) {
   current_frame = 0;
   state = -1;

@@ -35,10 +35,10 @@ public:
   // and a list of n cars with their car types (for image loading) and positions
   //TODO GET FROM SERVER
 
-  void init(SDL_Renderer *gr, InfoBlock game_info);
+  void init(SDL_Renderer *gr, InfoBlock &game_info);
 
   //pre must be init
-  void render(InfoBlock inf);
+  void render(InfoBlock &inf);
 
 };
 

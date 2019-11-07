@@ -39,9 +39,9 @@ public:
     std::string start_game_name;
     std::condition_variable cv;
     bool exit;
-    SafeQueue<InfoBlock>* renderQueue;
+    std::queue<InfoBlock>* renderQueue;
 
-    GameLoop(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& ready);
+    GameLoop(std::queue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& ready);
 
     void proceedToLobby(bool is_leader);
 

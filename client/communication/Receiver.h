@@ -13,11 +13,11 @@
 
 class Receiver: public BaseThread {
     Socket& skt;
-    SafeQueue<InfoBlock>* queue;
+    std::queue<InfoBlock>* queue;
     void _run() override;
 
     public:
-    Receiver(Socket& skt, SafeQueue<InfoBlock>* queue);
+    Receiver(Socket& skt, std::queue<InfoBlock>* queue);
     ~Receiver();
 
 

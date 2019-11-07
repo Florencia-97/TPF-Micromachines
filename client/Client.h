@@ -22,8 +22,7 @@ class Client {
     SafeQueue<InfoBlock> keyboard_e_queue;
     SafeQueue<InfoBlock> mouse_e_queue;
     std::queue<SDL_Event> text_queue;
-    SafeQueue<InfoBlock> receiver_queue;
-    SafeQueue<InfoBlock> sender_queue;
+    std::queue<InfoBlock> receiver_queue;
     std::condition_variable ready_to_connect;
 
     GameLoop gameLoop;
