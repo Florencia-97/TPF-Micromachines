@@ -23,39 +23,40 @@ bool Menu::load_media() {
   return success;
 }
 
-void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue) {
-  this->queue = gQueue;
+void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue) {
+  this->text_queue = textQueue;
+  this->mouse_queue = gQueue;
   this->gRenderer = sdl_renderer;
   if (!load_media()) {
-    printf("Failed to initialize!\n"); //todo exception here
+    printf("Failed to initialize!\n");
   }
-  //Set positions of the three buttons buttons
-  gButtons[0]->setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);//Boton asociado al primer vehiculo.
-  gButtons[1]->setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);//Boton asociado al segundo vehiculo.
-  gButtons[2]->setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);//Boton asociado al tercero.
-  gButtons[3]->setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);//Boton asociado al 4to.
-  gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+  set_buttons_positions_first_menu();
   font.Font_init("Hola", gRenderer);
 }
 
-bool Menu::processEvents(Button_answer &button_answer) {
-    while (!queue->empty()) {
+bool Menu::processEventsMouse(Button_answer &button_answer) {
+  while (!mouse_queue->empty()) {
         for (auto &button : gButtons) {
-          button->handleEvent(&queue->front(), &button_answer);
-          font.receive_input(&queue->front());
+          button->handleEvent(&mouse_queue->front(), &button_answer);
           if (button_answer.get_state()) {
-
-            while (!queue->empty()) queue->pop();
+            while (!mouse_queue->empty()) mouse_queue->pop();
             return button_answer.get_state();
             }
         }
-        queue->pop();
+    mouse_queue->pop();
     }
   return button_answer.get_state();
 }
 
+void Menu::processEventsKeyboard() {
+  while (!text_queue->empty()) {
+    font.receive_input(&text_queue->front());
+    text_queue->pop();
+  }
+}
+
+
 void Menu::render_first_menu() {
-    bool clicked = false;
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
@@ -69,20 +70,9 @@ void Menu::render_first_menu() {
 void Menu::dummy_init_as_leader() {//todo fix
   SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(gRenderer);
-  LTexture map1;
-  LTexture map2;
-  LTexture map3;
-  map1.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.push_back(new MapButton(gRenderer, &map1));
-  map2.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.push_back(new MapButton(gRenderer, &map2));
-  map3.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
-  mapButtons.push_back(new MapButton(gRenderer, &map3));
-  mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
-  mapButtons[1]->setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
-  mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT,true);
+  set_buttons_as_leader();
   LTexture msg;
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT,true);
   msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
   msg.render_with_size(720, 500, 0, gRenderer, 800, 500,false);
   for (auto &button : mapButtons) {
@@ -91,7 +81,7 @@ void Menu::dummy_init_as_leader() {//todo fix
   SDL_RenderPresent(gRenderer);
 }
 
-//Todo hay que poner esta funcion en el thread de cuando cambia de una pantalla a la otra
+//Todo
 void Menu::close_first_menu() {
   for (auto &button : gButtons) {
     button->free_texture();
@@ -104,5 +94,26 @@ void Menu::init_as_follower() {
   wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
   wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0,true);
   SDL_RenderPresent(gRenderer);
+}
+void Menu::set_buttons_positions_first_menu() {
+  gButtons[0]->setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  gButtons[1]->setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
+  gButtons[2]->setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  gButtons[3]->setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
+  gButtons[4]->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+}
+void Menu::set_buttons_as_leader() {
+  LTexture map1;
+  LTexture map2;
+  LTexture map3;
+  map1.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  map2.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  map3.load_from_file("client/rendering/assets/all_images/Decor/dragon.png", gRenderer);
+  mapButtons.push_back(new MapButton(gRenderer, &map1));
+  mapButtons.push_back(new MapButton(gRenderer, &map2));
+  mapButtons.push_back(new MapButton(gRenderer, &map3));
+  mapButtons[0]->setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
+  mapButtons[1]->setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
+  mapButtons[2]->setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
 }
 

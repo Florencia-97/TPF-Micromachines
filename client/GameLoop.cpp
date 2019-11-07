@@ -18,7 +18,8 @@ void GameLoop::_run(){
 
 void GameLoop::runMenu(int frame_id) {
   Button_answer answer(false, "");
-  menu.processEvents(answer);
+  menu.processEventsMouse(answer);
+  menu.processEventsKeyboard();
 
   if (answer.get_state() && start_game_name == "\n" && !exit) {// we are ready to try and connect!
         start_game_name = "race_1";
@@ -81,14 +82,17 @@ void GameLoop::proceedToLobby(bool is_leader) {
 GameLoop::~GameLoop(){
     starter.close();
 }
-GameLoop::GameLoop(SafeQueue<InfoBlock> &rq, std::queue<SDL_Event> &queue, std::condition_variable& r) :
+GameLoop::GameLoop(SafeQueue<InfoBlock> &rq,
+                   std::queue<SDL_Event> &queue,
+                   std::queue<SDL_Event> &mouseQueue,
+                   std::condition_variable &r) :
                             starter(SCREEN_WIDTH,SCREEN_HEIGHT) {
   current_frame = 0;
   state = -1;
   in_menu.store(true);
   renderQueue = &rq;
   starter.init();
-  menu.init(starter.get_global_renderer(), &queue);
+  menu.init(starter.get_global_renderer(), &mouseQueue, &queue);
   exit = false;
   ready_to_play = &r;
   start_game_name = "\n";
