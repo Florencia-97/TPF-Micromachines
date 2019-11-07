@@ -17,9 +17,15 @@ void GameLoop::_run(){
 }
 
 void GameLoop::runMenu(int frame_id) {
-    bool r = menu.processEvents();
-    if (r && start_game_name == "\n" && !exit){// we are ready to try and connect!
+  Button_answer answer(false, "");
+  menu.processEvents(answer);
+
+  if (answer.get_state() && start_game_name == "\n" && !exit) {// we are ready to try and connect!
         start_game_name = "race_1";
+//        InfoBlock ib;
+//        ib[CAR_TYPE] = name-of-the-car;
+//        keyboard_e_queue.push(ib);
+    //todo enviar answer.texture_name
         ready_to_play->notify_all();
     }
     menu.render_first_menu();

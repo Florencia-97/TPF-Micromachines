@@ -10,6 +10,7 @@
 #include "../LTexture.h"
 #include "../../../config/constants.h"
 #include "Button.h"
+#include "Font.h"
 #include <condition_variable>
 
 class Menu {
@@ -24,6 +25,7 @@ class Menu {
   SDL_Renderer *gRenderer;
   std::vector<Button *> gButtons;
   std::vector<Button *> mapButtons;
+  Font font;
 
   bool load_media();
 
@@ -39,7 +41,8 @@ class Menu {
 
     void init_as_follower();
 
-    bool processEvents();
+  bool processEvents(Button_answer &button_answer);
+
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

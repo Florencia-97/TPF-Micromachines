@@ -19,13 +19,15 @@ UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
 }
 
 void UserInput::_run(){
+  SDL_StartTextInput();
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
     while (this->isAlive()){
-        while( SDL_PollEvent(&e) != 0 && this->isAlive()) {
+        while( SDL_WaitEvent(&e)!= 0 && this->isAlive()) {
             _rcvKeyInput(e);
         }
     }
+  SDL_StopTextInput();
 }
 
 void UserInput::_rcvKeyInput(SDL_Event &e){
@@ -66,7 +68,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 case SDLK_RIGHT:
                     eventType = RIGHT;
                     break;
-                default:
+                default:local_queue->push(e);
                     return;
             }
             break;

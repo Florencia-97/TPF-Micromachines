@@ -8,29 +8,28 @@ TilesFactory::TilesFactory() {
 }
 
 std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Renderer *gRenderer){
-    std::string key = "";
+  std::string key;
     switch (tyleType){
         case GRASS_TILE:
             key = "grass_tile";
             break;
-        case STRAIGHT_ROAD_TILE:
+      case straight_road_tile:
             key = "straight_road_tile";
             break;
-        case CURVE_ROAD_LEFT_TILE:
-            key = "road_lower_turn_no_side";
+      case down_left_road_tile:key = "down_left_road_tile";
             break;
-        case CURVE_ROAD_LEFT_SIDE_TILE:
-            key = "road_lower_turn_side";
+      case down_right_road_tile:key = "down_right_road_tile";
             break;
-        case STRAIGHT_ROAD_MUD_TILE:
-            key = "left_road_tile";
+      case straight_vertical_tile:key = "straight_vertical_tile";
             break;
-        case CURVE_ROAD_LEFT_MUD_TILE:
-            key = "left_road_mud_tile";
+      case up_left_road_tile:key = "up_left_road_tile";
             break;
-        case CURVE_ROAD_RIGHT_MUD_TILE:
-            key = "right_road_mud_tile";
+      case up_right_road_tile:key = "up_right_road_tile";
             break;
+      case straight_vertical_aux_tile:key = "straight_vertical_aux_tile";
+        break;
+      case straight_horizontal_aux_tile:key = "straight_horizontal_aux_tile";
+        break;
         default:
             key = "grass_tile";
             break;

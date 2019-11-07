@@ -15,21 +15,16 @@ LTexture::~LTexture() {
 
 /*Loads a texture from the path, using the renderer*/
 bool LTexture::load_from_file(const std::string &path, SDL_Renderer *renderer) {
-  //Primero, hay que limpiar el Texture.
   free();
-  //SDL Exige que sea null
   SDL_Texture *newTexture = nullptr;
-  //Carga real de la imagen
   SDL_Surface *loadedSurface = IMG_Load(path.c_str());
   if (loadedSurface == nullptr) {
     //TODO ver si loaded surface tira excepcion
     printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
   } else {
-    //Elige el color que se va a borrar de la imagen. Es decir, setea la capa de color que se va a borrar para que quede png
     SDL_SetColorKey(loadedSurface,
                     SDL_TRUE,
                     SDL_MapRGB(loadedSurface->format,0, 0xFF,0xFF));
-    //Textura final
 
     newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     //Todo ver si es necesaria excepcion
@@ -42,6 +37,7 @@ bool LTexture::load_from_file(const std::string &path, SDL_Renderer *renderer) {
     SDL_FreeSurface(loadedSurface);
   }
   texture = newTexture;
+  texture_name = path;
   return texture != nullptr;
 }
 
@@ -117,6 +113,9 @@ void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color, TTF
   } else {
     printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
   }
+}
+std::string LTexture::get_string_name() {
+  return texture_name;
 }
 
 

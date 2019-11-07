@@ -43,6 +43,7 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
                 cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
                 cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
         all_cars.back().addTexture(tloader.load_texture("cars/blue_car.png", gRenderer));
+      //todo enviar la textura que captura el boton
     }
 }
 

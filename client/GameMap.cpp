@@ -11,7 +11,7 @@ void GameMap::loadMap(const std::string &mapPath, SDL_Renderer *gRenderer) {
     width = mapsLayer.width;
 }
 
-void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, std::string mapName){
+void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer *gRenderer, const std::string& mapName){
     int x = 0;
     int y = 0;
     int wOld = 512;
@@ -26,17 +26,12 @@ void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer
             y = i * hOld;
             int tileType = row[j];
             if (tileType == 0){
-                x = j * 512; // Maybe we need a check here, whether we are over height or width
-                y = i * 512; // Same
                 continue;
             }
             auto tile = tiles_factory.getTile(tileType, x, y, gRenderer);
             if (mapName == "ground") this->ground.back().push_back(tile);
             else if (mapName == "road") this->road.back().push_back(tile);
             else this->extras.back().push_back(tile);
-//            SDL_Rect mBox = tile->getBox();
-//            wOld = mBox.w;
-//            hOld = mBox.h;
         }
     }
 }

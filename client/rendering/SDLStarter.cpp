@@ -20,7 +20,7 @@ bool SDLStarter::init() {
                               SDL_WINDOWPOS_UNDEFINED,
                               this->screenWidth,
                               this->screenHeight,
-                              SDL_WINDOW_SHOWN);
+                              SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (window == nullptr) {
       printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
       success = false;

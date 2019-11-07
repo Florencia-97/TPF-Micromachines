@@ -2,34 +2,34 @@ grass_tile: "map/grass.png"
 grass_tile_w: 512
 grass_tile_h: 512
 
-straight_road_tile: "map/road_straight.png"
+straight_road_tile: "map/straight_horizontal.png"
 straight_road_tile_w: 512
-straight_road_tile_h: 688
+straight_road_tile_h: 512
 
-left_road_tile: "map/road_lower_turn.png"
-left_road_tile_w: 691
-left_road_tile_h: 691
+down_left_road_tile: "map/down_left.png"
+down_left_road_tile_w: 512
+down_left_road_tile_h: 512
 
-right_road_tile: "map/road_upper_turn.png"
-right_road_tile_w: 512
-right_road_tile_h: 512
+down_right_road_tile: "map/down_right.png"
+down_right_road_tile_w: 512
+down_right_road_tile_h: 512
 
-straight_road_mud_tile: "map/road_straight.png"
-straight_road_mud_tile_w: 512
-straight_road_mud_tile_h: 512
+straight_vertical_tile: "map/straight_vertical.png"
+straight_vertical_tile_w: 512
+straight_vertical_tile_h: 512
 
-left_road_mud_tile: "map/road_lower_turn.png"
-left_road_mud_tile_w: 512
-left_road_mud_tile_h: 512
+straight_vertical_aux_tile: "map/straight_vertical_aux.png"
+straight_vertical_aux_tile_w: 512
+straight_vertical_aux_tile_h: 512
 
-right_road_mud_tile: "map/road_upper_turn.png"
-right_road_mud_tile_w: 512
-right_road_mud_tile_h: 512
+straight_horizontal_aux_tile: "map/straight_horizontal_aux.png"
+straight_horizontal_aux_tile_w: 512
+straight_horizontal_aux_tile_h: 512
 
-road_lower_turn_no_side: "map/road_lower_turn_no_side.png"
-road_lower_turn_no_side_w: 555
-road_lower_turn_no_side_h: 555
+up_left_road_tile: "map/up_left_curve.png"
+up_left_road_tile_w: 512
+up_left_road_tile_h: 512
 
-road_lower_turn_side: "map/road_lower_turn_side.png"
-road_lower_turn_side_w: 643
-road_lower_turn_side_h: 643
+up_right_road_tile: "map/up_right.png"
+up_right_road_tile_w: 512
+up_right_road_tile_h: 512
