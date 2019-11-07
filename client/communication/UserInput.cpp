@@ -52,7 +52,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     case SDL_MOUSEBUTTONUP:mouse_queue->push(e);
             eventType = MOUSE_BUTTON_UP;
             break;
-    case SDL_TEXTINPUT:printf("Estoy encolando: %s\n", e.text.text);
+    case SDL_TEXTINPUT:;
       writing_queue->push(e);
       break;
     case SDL_KEYDOWN:actionType = ACTION_TYPE;
@@ -70,7 +70,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 case SDLK_RIGHT:
                     eventType = RIGHT;
                     break;
-              default:
+              default:writing_queue->push(e);
                     return;
             }
             break;
