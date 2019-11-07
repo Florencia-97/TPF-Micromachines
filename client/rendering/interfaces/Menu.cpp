@@ -7,19 +7,19 @@
 
 bool Menu::load_media() {
   bool success = true;
-  //TODO meter una excepcion por caso;
-  carBlue.load_from_file("client/rendering/assets/cars/blue_car.png", gRenderer);
-  carBlack.load_from_file("client/rendering/assets/cars/black_car.png", gRenderer);
-  carRed.load_from_file("client/rendering/assets/cars/red_car.png", gRenderer);
-  carWhite.load_from_file("client/rendering/assets/cars/white_car.png", gRenderer);
-  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/B.png", gRenderer);
-  connectButton.load_from_file("client/rendering/assets/buttons/connect.png", gRenderer);
-
+  success *= carBlue.load_from_file("client/rendering/assets/cars/blue_car.png", gRenderer);
+  success *= carBlack.load_from_file("client/rendering/assets/cars/black_car.png", gRenderer);
+  success *= carRed.load_from_file("client/rendering/assets/cars/red_car.png", gRenderer);
+  success *= carWhite.load_from_file("client/rendering/assets/cars/white_car.png", gRenderer);
+  success *= wallpaper.load_from_file("client/rendering/assets/all_images/Decor/B.png", gRenderer);
+  success *= connectButton.load_from_file("client/rendering/assets/buttons/connect.png", gRenderer);
+  if (success) {
     gButtons.push_back(new CarButton(gRenderer, &carBlue));
     gButtons.push_back(new CarButton(gRenderer, &carWhite));
     gButtons.push_back(new CarButton(gRenderer, &carRed));
     gButtons.push_back(new CarButton(gRenderer, &carBlack));
     gButtons.push_back(new ConnectButton(gRenderer, &connectButton));
+  }
   return success;
 }
 

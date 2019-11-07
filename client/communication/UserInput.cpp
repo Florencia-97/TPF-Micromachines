@@ -31,6 +31,7 @@ void UserInput::_run(){
 }
 
 void UserInput::_rcvKeyInput(SDL_Event &e){
+  printf("Recibi un evento con el texto %s\n", e.text.text);
     if ( e.type == SDL_QUIT){
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
@@ -43,7 +44,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     std::string actionType = "\n";
     bool event_value = false;
 
-    switch (e.type){
+  switch (e.type){
         case SDL_MOUSEBUTTONDOWN:
             local_queue->push(e);
             eventType = MOUSE_BUTTON_DOWN;
