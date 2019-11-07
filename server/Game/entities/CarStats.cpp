@@ -3,7 +3,7 @@
 CarStats::CarStats(InfoBlock ib){
     this->base = ib;
     max_speed = 500;
-    this->rot_force = 50;
+    this->rot_force = 5;
     this->forward_speed = 0;
     this->hp = 100;
     this->accel_rate = 10;
@@ -11,7 +11,7 @@ CarStats::CarStats(InfoBlock ib){
 
 void CarStats::step() {
     max_speed = 500;
-    this->rot_force = 50;
+    this->rot_force = 5;
     this->hp = 100;
     this->accel_rate = 10;
 }

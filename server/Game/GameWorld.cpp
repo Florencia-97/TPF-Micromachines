@@ -18,7 +18,7 @@ namespace {
                              uint16 catBits, uint16 maskBits, bool isSensor){
 
         b2PolygonShape boxShape;
-        boxShape.SetAsBox(hx, hy);
+        boxShape.SetAsBox(hx/2, hy/2);
         b2FixtureDef boxFixtureDef;
         boxFixtureDef.shape = &boxShape;
         boxFixtureDef.density = density;
@@ -40,7 +40,7 @@ void GameWorld::loadWorld(std::string worldName){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
             if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
-                createRoad((i + 1) * TILE_SIZE, (j + 1) * TILE_SIZE, row[i]);
+                createRoad(i * TILE_SIZE, j  * TILE_SIZE, row[i]);
                 r++;
             }
         }
