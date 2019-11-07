@@ -9,6 +9,7 @@
 #include "CollisionsManager.h"
 #include <chrono>
 #include <thread>
+#include <string>
 
 
 class GameWorld {
@@ -28,7 +29,7 @@ public:
     int createCar(InfoBlock carStats);
     void processEvent(int car_id, InfoBlock event);
     RaceCar& getCar(int id);
-    void loadWorld(std::string);
+    void loadWorld(std::string& gameWorld);
     InfoBlock status();
     /*
       &Entity createDynamicObject(yaml &stats?);

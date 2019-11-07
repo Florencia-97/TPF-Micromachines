@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GameWorld.h"
 #include "../../config/constants.h"
+#include "../../common/MapsLayer.h"
 
 //local use namespace for local functions
 namespace {
@@ -33,9 +34,26 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
     //world.SetContactListener(&cl);
 }
 
-void GameWorld::loadWorld(std::string worldName){
-    // TODO load box2D world with the mapNumber given
-    // TODO use MapsLayers!!
+void GameWorld::loadWorld(std::string& worldName){
+        // TODO use MapsLayers!!
+/*    std::string namePath = "maps/race_1.yaml";
+    MapsLayer mapsLayer(namePath);
+    for (size_t i = 0; i < mapsLayer.road.size(); i++){
+        std::vector<int> row = mapsLayer.road[i];
+        for (size_t j=0; j < row.size(); j++){
+            int tileNumber = row[j]; // if you need tile , i believe they aare now all 512, 512,
+            // if not, we basically need another many ifs/switch as tile factory.
+        }
+    }
+
+    // Loading extras. Maybe, as sizes are the same, we can join for
+    for (size_t i = 0; i < mapsLayer.extras.size(); i++){
+        std::vector<int> row = mapsLayer.extras[i];
+        for (size_t j=0; j < row.size(); j++){
+            int tileNumber = row[j]; // if you need tile , i believe they aare now all 512, 512,
+            // if not, we basically need another many ifs/switch as tile factory.
+        }
+    }*/
     worldName = "race_1"; //Change for real names afterwards!!
     YAML::Node config = YAML::LoadFile("maps/" + worldName + ".yaml");
     YAML::Node mapYaml = config["Road"];
