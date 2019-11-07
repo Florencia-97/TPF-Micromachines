@@ -27,6 +27,7 @@ void GameLoop::runMenu(int frame_id) {
 //        ib[CAR_TYPE] = name-of-the-car;
 //        keyboard_e_queue.push(ib);
     //todo enviar answer.texture_name
+    SDL_StopTextInput();
         ready_to_play->notify_all();
     }
     menu.render_first_menu();
