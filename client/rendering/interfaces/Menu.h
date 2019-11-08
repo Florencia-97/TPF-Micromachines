@@ -41,7 +41,7 @@ class Menu {
   void dummy_init_as_leader();
   void set_buttons_as_leader();
   void init_as_follower();
-  bool processEventsMouse(Button_answer &button_answer);
+  bool processEventsMouse(ButtonAnswer &button_answer);
 
 };
 

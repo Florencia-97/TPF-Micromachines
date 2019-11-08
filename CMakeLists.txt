@@ -56,6 +56,7 @@ set(CLIENT_SOURCE_FILES
 		client/communication/Receiver.cpp client/communication/Receiver.h
 		client/rendering/TextureLoader.cpp client/rendering/TextureLoader.h
 		client/rendering/SDLStarter.h
+		common/Stopwatch.cpp
 		client/rendering/LTexture.cpp client/rendering/LTexture.h
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
@@ -74,7 +75,7 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h
 		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
 		client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h
-		client/rendering/interfaces/Button_answer.cpp client/rendering/interfaces/Button_answer.h)
+		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

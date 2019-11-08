@@ -82,7 +82,7 @@ void GameThread::_createCars(){
     }
 }
 
-void GameThread::_sendAll(InfoBlock& ib) {
+void GameThread::_sendAll(InfoBlock ib) {
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         (it)->sender.to_send.push(ib);
@@ -105,29 +105,35 @@ void GameThread::_sendStartMsg(std::string raceId){
     int b=1;
 }
 
-void GameThread::_runGame() {
-    auto it = this->plr_threads.begin();
-    while (this->isAlive()) {
-
-        int j = rand() % plr_threads.size(); // Rand between 0 and size of plr_threads
-        for (int i = 0 ; i < this->plr_threads.size(); i++){
-            auto itj = std::next(plr_threads.begin(), j);
-            if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
-                InfoBlock event = itj->eventQ.front();
-                itj->eventQ.pop();
-                this->game.processEvent(j, event);
-            }
-            j = (++j)%plr_threads.size();
+void GameThread::_processPlayerActions(){
+    int j = rand()%plr_threads.size(); // Rand between 0 and size of plr_threads
+    for (int i = 0 ; i < this->plr_threads.size(); i++){
+        auto itj = std::next(plr_threads.begin(), j);
+        if (!itj->eventQ.empty()){ // No race condition here we are te only ones removing
+            InfoBlock event = itj->eventQ.front();
+            itj->eventQ.pop();
+            this->game.processEvent(j, event);
         }
+        j = (++j)%plr_threads.size();
+    }
+}
 
+void GameThread::_runGame() {
+    Stopwatch c;
+    float timestep_goal = 1.0/80;
+    float timestep = timestep_goal;
+
+    while (this->isAlive()) {
+        _processPlayerActions();
         if (_anyPlayersAlive()){
-            this->game.Step(1/80.0);
-            InfoBlock worldActualization = this->game.status();
-            auto a = worldActualization.srcString();
-            _sendAll(worldActualization);
+            this->game.Step(timestep_goal);
+            _sendAll(this->game.status());
+            this->sleep(timestep);
         } else {
             close();
         }
+        timestep = std::max(0.0f,timestep_goal-c.diff());
+        c.reset();
     }
     std::cout << "Leaving game" << std::endl;
 }

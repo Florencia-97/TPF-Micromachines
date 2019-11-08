@@ -3,7 +3,7 @@
 //
 
 #include "Button.h"
-#include "Button_answer.h"
+#include "ButtonAnswer.h"
 
 Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   mPosition.x = 0;
@@ -17,7 +17,7 @@ void Button::setPosition(int x, int y) {
   mPosition.y = y;
   set_area(x, y);
 }
-bool Button::handleEvent(SDL_Event *e, Button_answer *answer) {
+bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
   //If mouse event happened
 
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {

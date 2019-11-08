@@ -6,6 +6,7 @@
 #include "../Game/GameWorld.h"
 #include "../../common/infostream/Socket.h"
 #include "../../common/conc/BaseThread.h"
+#include "../../common/Stopwatch.h"
 #include "PlayerThread.h"
 #include <string>
 #include <queue>
@@ -24,11 +25,13 @@ class GameThread : public BaseThread {
     std::string _runLobby();
     void _runGame();
     void _sendStartMsg(std::string raceId);
-    void _sendAll(InfoBlock& ib);
+    void _sendAll(InfoBlock ib);
     void _createCars();
 
     //POS returns true if there is at least 1 player still connected
     bool _anyPlayersAlive();
+
+    void _processPlayerActions();
 
 public:
     std::string gameName;

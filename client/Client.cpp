@@ -46,7 +46,7 @@ int Client::play() {
 
     if (skt.isValid() && gameLoop.start_game_name != "\n" && !gameLoop.exit) {
         if (is_leader) {
-            sleep(1);
+            sleep(10);
             InfoBlock ib;
             ib[RACE_ID] = gameLoop.start_game_name;
             keyboard_e_queue.push(ib);

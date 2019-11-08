@@ -79,7 +79,6 @@ void GameWorld::Step(float timestep) {
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timestep, velocityIterations, positionIterations);
-    std::this_thread::sleep_for(std::chrono::milliseconds((int)(1000*timestep)));
 }
 
 

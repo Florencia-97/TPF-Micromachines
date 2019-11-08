@@ -7,11 +7,11 @@
 
 #include <string>
 #include <utility>
-class Button_answer {
+class ButtonAnswer {
   bool clicked;
   std::string car_color;
  public:
-  Button_answer(bool cliecked, std::string color) : clicked(cliecked), car_color(std::move(color)) {}
+  ButtonAnswer(bool cliecked, std::string color) : clicked(cliecked), car_color(std::move(color)) {}
   bool get_state();
   std::string get_color();
   void set_state(bool state);

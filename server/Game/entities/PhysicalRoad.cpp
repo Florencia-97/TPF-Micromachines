@@ -4,7 +4,7 @@
 #define ROAD_SPEED_BOOST "ROAD_SPEED_BOOST"
 
 PhysicalRoad::PhysicalRoad(std::string id, b2Body *&newBody) : Entity(newBody),
-            my_effect(ROAD_SPEED_BOOST,0,10000,.5,4){
+            my_effect(ROAD_SPEED_BOOST,0,10000,.5,2.5){
     body->SetUserData(this);
     this->id = id;
 }

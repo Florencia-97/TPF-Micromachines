@@ -42,3 +42,7 @@ BaseThread & BaseThread::operator=(BaseThread&& other) {
     this->t= std::move(other.t);
     return *this;
 }
+
+void BaseThread::sleep(float timestep) {
+    std::this_thread::sleep_for(std::chrono::milliseconds((int)(1000*timestep)));
+}

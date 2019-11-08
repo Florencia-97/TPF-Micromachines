@@ -34,7 +34,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
   font.Font_init("Hola", gRenderer);
 }
 
-bool Menu::processEventsMouse(Button_answer &button_answer) {
+bool Menu::processEventsMouse(ButtonAnswer &button_answer) {
   while (!mouse_queue->empty()) {
         for (auto &button : gButtons) {
           button->handleEvent(&mouse_queue->front(), &button_answer);

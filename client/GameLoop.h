@@ -5,6 +5,7 @@
 
 #include "../common/conc/BaseThread.h"
 #include "../common/SafeQueue.h"
+#include "../common/Stopwatch.h"
 #include "../common/infostream/InfoBlock.h"
 #include "rendering/interfaces/Menu.h"
 #include "rendering/GameRenderer.h"
@@ -21,11 +22,13 @@ class GameLoop : public BaseThread {
     int current_frame;
     int state; //thread state
     std::atomic<bool> in_menu;
-    InfoBlock previous_game_state; //game state
+    InfoBlock previous_game_state;
     std::condition_variable* ready_to_play;
     GameMap map;
     GameRenderer gameRenderer;
     Menu menu;
+
+    void _runProgram();
 
     void _run() override;
 

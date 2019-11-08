@@ -13,6 +13,7 @@
 class Stopwatch {
     clock_t t1;
 public:
+    float current_t;
 
     //creates a stopwatch set at t1 = now
     Stopwatch();
@@ -21,7 +22,7 @@ public:
     void reset();
 
     //POS returns the difference between now and t1 in seconds
-    double diff();
+    float diff();
 
 
 

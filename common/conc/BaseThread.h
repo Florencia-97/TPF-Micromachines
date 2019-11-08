@@ -28,6 +28,8 @@ public:
     //isAlive returns false
     virtual void close();
 
+    void sleep(float seconds);
+
     void join();
 
     BaseThread(BaseThread&& other);

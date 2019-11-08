@@ -8,9 +8,12 @@ Stopwatch::Stopwatch() {
 
 void Stopwatch::reset() {
     t1 = clock();
+    current_t = 0;
 }
 
-double Stopwatch::diff() {
+float Stopwatch::diff() {
     clock_t t2 = clock();
-    return double(t2-t1)/(double)CLOCKS_PER_SEC;
+    float t = float(t2-t1)/CLOCKS_PER_SEC;
+    current_t +=t;
+    return t;
 }
