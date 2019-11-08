@@ -45,7 +45,7 @@ void RaceCar::step(float timestep){
     auto spd = calculateForwardImpulse();
      if (spd > 15 || spd < -15){
         float desiredTorque = car_stats.rot_force * steer_dir.y * this->body->GetMass();
-        body->ApplyTorque(desiredTorque*200, true);
+        body->ApplyTorque(desiredTorque, true);
     }
 }
 
@@ -114,7 +114,7 @@ float RaceCar::calculateForwardImpulse() {
     float desiredSpeed = 0;
     if (steer_dir.x == 0) {
         car_stats.forward_speed = 0;
-        if (currentSpeed> -5 && currentSpeed< 5){
+        if (currentSpeed> -5 && currentSpeed< 15){
             body->SetLinearVelocity(b2Vec2(0,0));
         }
         return currentSpeed;
@@ -128,9 +128,9 @@ float RaceCar::calculateForwardImpulse() {
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //apply necessary force
-    float force = 5000 + 15000*(1 - currentSpeed/(car_stats.max_speed*2));
+    float force = 12000 + 5000*(1 - currentSpeed/car_stats.max_speed);
     if ( desiredSpeed < currentSpeed )
-        force = -force/4;
+        force = -force/4;//reverse
     body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
     std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
     return currentSpeed;
@@ -138,15 +138,14 @@ float RaceCar::calculateForwardImpulse() {
 
 void RaceCar::updateFriction() {
     b2Vec2 impulse = body->GetMass() * -getLateralVelocity();
-    if ( impulse.Length() > 10 )
-        impulse *= 800 / impulse.Length();
+    if ( impulse.Length() > 5 )
+        impulse *= 30 / impulse.Length();
     body->ApplyLinearImpulse( impulse, body->GetWorldCenter() ,false);
-
     body->ApplyAngularImpulse( 0.1f * body->GetInertia() * -body->GetAngularVelocity(),true);
     b2Vec2 forwardNormal = getForwardVelocity();
     float currentForwardSpeed = forwardNormal.Normalize();
-    float dragForceMagnitude = -2 * currentForwardSpeed;
-    body->ApplyForce(body->GetMass() *dragForceMagnitude * forwardNormal, body->GetWorldCenter() , true);
+    float dragForceMagnitude = -1.5f * currentForwardSpeed;
+    body->ApplyForce( dragForceMagnitude * forwardNormal, body->GetWorldCenter() , true);
 }
 
 void RaceCar::stepEffects(float timestep) {

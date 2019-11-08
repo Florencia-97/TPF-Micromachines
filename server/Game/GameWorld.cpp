@@ -90,7 +90,7 @@ int GameWorld::createCar(InfoBlock carStats) {
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),10,20,.5,PLAYER, 0, false);
+    createAndAddFixture(&(cars.back()),1,2,.1,PLAYER, 0, false);
     createAndAddFixture(&(cars.back()),CAR_WIDTH,CAR_HEIGHT,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
