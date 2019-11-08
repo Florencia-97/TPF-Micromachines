@@ -167,6 +167,7 @@ void RaceCar::stepEffects(float timestep) {
         } else {
             status->decreaseStack();
             if (status->n_stacks == 0){
+                if (status->apply_on_remove) status->applyEffect(car_stats);
                 i = status_effects.erase(i);
             }
         }

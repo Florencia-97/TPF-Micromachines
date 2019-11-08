@@ -13,6 +13,7 @@ public:
     float accel_rate;
 
     int hp;
+    int laps{0};
     float forward_speed;
     //other
 

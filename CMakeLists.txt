@@ -42,7 +42,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h
 		server/mods/Plugin.h
 		server/mods/PluginLoader.cpp server/mods/PluginLoader.h
-		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h server/Game/status_effects/RedlineCooldown.h)
+		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h server/Game/status_effects/LapCooldown.h server/Game/entities/FinishingLine.cpp server/Game/entities/FinishingLine.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp

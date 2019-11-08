@@ -7,7 +7,6 @@
 SpeedStatusEffect::SpeedStatusEffect(std::string id, double delay, double duration, double after_effect, float speed_mod) {
     this->speed_mod = speed_mod;
     this->id = std::move(id);
-    this->absorb_stacks = true;
     this->n_stacks = 1;
     this->delay = delay;
     this->duration = duration;

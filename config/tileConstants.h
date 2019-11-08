@@ -14,10 +14,16 @@
 #define up_right_road_tile 7
 #define straight_vertical_aux_tile 8
 #define straight_horizontal_aux_tile 9
+
+#define ROAD_END_TYPE 9
+
+// extras
+
 #define tree_spikes_tile 10
 #define tree_round_tile 11
 #define pavilion_blue_tile 12
+#define FINISHING_LINE 13
+#define FINISH_LINE_HEIGHT 67
 
-#define ROAD_END_TYPE 9
 
 // Muddy road

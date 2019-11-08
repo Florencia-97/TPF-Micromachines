@@ -1,8 +1,8 @@
 #include <iostream>
-#include <time.h>
+#include <memory>
 #include "GameWorld.h"
 #include "../../config/constants.h"
-#include "status_effects/SpeedStatusEffect.h"
+
 
 #define PTM_TILE (float)TILE_SIZE/PTM
 
@@ -33,6 +33,7 @@ namespace {
 
 GameWorld::GameWorld() : world(b2Vec2(0,0)) {
     world.SetContactListener(&cl);
+    finishingLine = nullptr;
 }
 
 void GameWorld::loadWorld(std::string worldName){
@@ -49,6 +50,9 @@ void GameWorld::loadWorld(std::string worldName){
     for (size_t j = 0; j < map.extras.size(); j++){
         auto row = map.extras[j];
         for (size_t i= 0; i < row.size(); i++){
+            if (row[i] == FINISHING_LINE){
+                createFinishingLine(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2);
+            }
             //createExtras(i* TILE_SIZE, j* TILE_SIZE, row[i]);
         }
     }
@@ -83,7 +87,6 @@ void GameWorld::Step(float timestep) {
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timestep, velocityIterations, positionIterations);
     this->timeModifiers += timestep;
-    srand (time(NULL));
 
     // TODO: make this random maybe a little better, Flor task
     // We create random items
@@ -93,6 +96,14 @@ void GameWorld::Step(float timestep) {
         _createItem();
         this->timeModifiers = 0;
     } else if (this->timeModifiers > TIME_TO_ITEMS) this->timeModifiers = 0;
+}
+
+RaceCar &GameWorld::getCar(int id) {
+    auto it = cars.begin();
+    for (int i = 0; i<id;i++){
+        it++;
+    }
+    return *it;
 }
 
 void GameWorld::_createItem(){
@@ -121,16 +132,14 @@ int GameWorld::createCar(InfoBlock carStats) {
     cars.emplace_back(carId, carStats, newBody);
     newBody->SetBullet(true);
 
-    createAndAddFixture(&(cars.back()),1,2,.1,PLAYER, 0, false);
+    createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
     createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
 }
 
-RaceCar &GameWorld::getCar(int id) {
-    auto it = cars.begin();
-    for (int i = 0; i<id;i++){
-        it++;
-    }
-    return *it;
+void GameWorld::createFinishingLine(int x, int y) {
+    b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
+    finishingLine = std::make_shared<FinishingLine>(newBody);
+    createAndAddFixture(finishingLine.get(),PTM_TILE,(float)FINISH_LINE_HEIGHT/PTM,0,TILE, SENSOR, false);
 }
