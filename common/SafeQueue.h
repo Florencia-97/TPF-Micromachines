@@ -29,12 +29,17 @@ public:
 
     bool isEmpty();
 
+    std::queue<T>* getInternalQueue();
+
 };
 
 template<class T>
+std::queue<T>* SafeQueue<T>::getInternalQueue() {
+    return &q;
+}
+
+template<class T>
 void SafeQueue<T>::push(T &event) {
-    //std::unique_lock<std::mutex> lock(this->m);
-    //we dont want this to be locked, only when its empty
     this->q.push(event);
     this->cv.notify_one();
 }

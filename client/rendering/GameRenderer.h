@@ -20,7 +20,7 @@ class GameRenderer {
 
     GameMap map;
     short my_car_id;//position in vector
-    std::vector<Car> all_cars;
+    std::list<Car> all_cars;
 
     void loadCars(InfoBlock& inf);
 public:

@@ -89,11 +89,11 @@ void GameWorld::createRoad(int x, int y, int tileType) {
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000,1000);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000 + cars.size()*20,1000+cars.size()*20);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),1,2,.2,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),10,20,.01,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
 }

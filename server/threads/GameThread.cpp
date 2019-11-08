@@ -97,7 +97,7 @@ void GameThread::_sendStartMsg(std::string raceId){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = cont;
-        (it)->sender.to_send.push(ib);
+        (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
         cont++;
         it++;
     }
