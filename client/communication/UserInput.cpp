@@ -8,12 +8,14 @@
 UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
                      SafeQueue<InfoBlock> *safeQueueClient,
                      std::queue<SDL_Event> *mouse_queue,
-                     std::queue<SDL_Event> *text_queue) {
+                     std::queue<SDL_Event> *text_queue,
+                     std::queue<std::string> *sound_queue) {
     // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = safeQueueServer;
     this->mouse_input = safeQueueClient;
-  this->mouse_queue = mouse_queue;
-  this->writing_queue = text_queue;
+    this->mouse_queue = mouse_queue;
+    this->writing_queue = text_queue;
+    this->sound_queue = sound_queue;
     key_pressings[UP] = false;
     key_pressings[DOWN] = false;
     key_pressings[LEFT] = false;
@@ -60,6 +62,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             switch (e.key.keysym.sym) {
                 case SDLK_UP:
                     eventType = UP;
+                    sound_queue->push(SOUND_CAR_RUN);
                     break;
                 case SDLK_DOWN:
                     eventType = DOWN;
@@ -78,8 +81,15 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             actionType = ACTION_TYPE_DOWN;
             event_value = false;
             switch (e.key.keysym.sym) {
+                case SDLK_0: // we can change the key later on!
+                    sound_queue->push(SOUND_ON_OFF);
+                    std::cout << "sound play\n";
+                    return;
                 case SDLK_UP:
-                    if (e.key.state == SDL_RELEASED) eventType = UP;
+                    if (e.key.state == SDL_RELEASED) {
+                        eventType = UP;
+                        sound_queue->push(SOUND_CAR_STOP);
+                    }
                     break;
                 case SDLK_DOWN:
                     if (e.key.state == SDL_RELEASED) eventType = DOWN;
@@ -102,7 +112,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
     key_pressings[eventType] = event_value;
 
     // For keys to send to server
-  //Creating infoblock to mouse_queue in EventsQueue
+    //Creating infoblock to mouse_queue in EventsQueue
     InfoBlock ib;
     ib[actionType] = eventType;
     keyboard_input->push(ib);
