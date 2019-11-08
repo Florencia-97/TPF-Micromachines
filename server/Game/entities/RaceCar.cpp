@@ -83,8 +83,8 @@ void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     auto pos = body->GetPosition();
     std::string autoId = std::to_string(this->id);
     ib["h" + autoId] = (int)std::round(car_stats.hp);
-    ib["x" + autoId] = (int)std::round(pos.x);
-    ib["y" + autoId] = (int)std::round(pos.y);
+    ib["x" + autoId] = (int)std::round(pos.x*PTM);
+    ib["y" + autoId] = (int)std::round(pos.y*PTM);
     ib["r" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);
 }
 
@@ -114,7 +114,7 @@ float RaceCar::calculateForwardImpulse() {
     float desiredSpeed = 0;
     if (steer_dir.x == 0) {
         car_stats.forward_speed = 0;
-        if (currentSpeed> -5 && currentSpeed< 15){
+        if (currentSpeed> -5 && currentSpeed< 5){
             body->SetLinearVelocity(b2Vec2(0,0));
         }
         return currentSpeed;
@@ -128,9 +128,9 @@ float RaceCar::calculateForwardImpulse() {
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //apply necessary force
-    float force = 12000 + 5000*(1 - currentSpeed/car_stats.max_speed);
+    float force = 20 + 450*(0.2f + std::abs(currentSpeed)/car_stats.max_speed);
     if ( desiredSpeed < currentSpeed )
-        force = -force/4;//reverse
+        force = -force/1.5f;//reverse
     body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
     std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
     return currentSpeed;
@@ -138,10 +138,11 @@ float RaceCar::calculateForwardImpulse() {
 
 void RaceCar::updateFriction() {
     b2Vec2 impulse = body->GetMass() * -getLateralVelocity();
-    if ( impulse.Length() > 5 )
-        impulse *= 30 / impulse.Length();
+    if ( impulse.Length() > 1 )
+        impulse *= 5 / impulse.Length();
     body->ApplyLinearImpulse( impulse, body->GetWorldCenter() ,false);
-    body->ApplyAngularImpulse( 0.1f * body->GetInertia() * -body->GetAngularVelocity(),true);
+
+    body->ApplyAngularImpulse( 0.05f * body->GetInertia() * -body->GetAngularVelocity(),true);
     b2Vec2 forwardNormal = getForwardVelocity();
     float currentForwardSpeed = forwardNormal.Normalize();
     float dragForceMagnitude = -1.5f * currentForwardSpeed;

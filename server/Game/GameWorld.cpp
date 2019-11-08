@@ -4,6 +4,8 @@
 #include "../../config/constants.h"
 #include "status_effects/SpeedStatusEffect.h"
 
+#define PTM_TILE (float)TILE_SIZE/PTM
+
 //local use namespace for local functions
 namespace {
     b2Body* makeNewBody(b2World &world, b2BodyType bodyType, float32 x, float32 y){
@@ -39,7 +41,7 @@ void GameWorld::loadWorld(std::string worldName){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
             if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
-                createRoad(i * TILE_SIZE + TILE_SIZE/2 , j*TILE_SIZE + TILE_SIZE/2, row[i]);
+                createRoad(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
             }
         }
     }
@@ -82,16 +84,17 @@ void GameWorld::Step(float timestep) {
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
-    createAndAddFixture(&(this->road_bodies.back()), TILE_SIZE, TILE_SIZE, 0, TILE, SENSOR, false);
+    createAndAddFixture(&(this->road_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000 + cars.size()*150,1000+cars.size()*150);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,50 + cars.size()*150,50+cars.size()*150);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
+    newBody->SetBullet(true);
 
     createAndAddFixture(&(cars.back()),1,2,.1,PLAYER, 0, false);
-    createAndAddFixture(&(cars.back()),CAR_WIDTH,CAR_HEIGHT,0,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
 }

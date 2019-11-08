@@ -84,6 +84,7 @@ const int MAP_BUTTON_HEIGHT = 300;
 //Car size
 const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
+#define PTM 20
 
 
 // Events

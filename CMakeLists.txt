@@ -31,7 +31,7 @@ set(SERVER_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
 		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
 		server/threads/PlayerThread.cpp
-		server/Game/status_effects/StatusEffect.cpp server/Game/status_effects/StatusEffect.h
+		server/Game/status_effects/StatusEffect.h
 		server/Game/status_effects/SpeedStatusEffect.cpp server/Game/status_effects/SpeedStatusEffect.h
 		common/Stopwatch.cpp common/Stopwatch.h
 		server/threads/GameThread.cpp server/threads/GameThread.h
@@ -42,7 +42,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h
 		server/mods/Plugin.h
 		server/mods/PluginLoader.cpp server/mods/PluginLoader.h
-		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h)
+		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h server/Game/status_effects/RedlineCooldown.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
