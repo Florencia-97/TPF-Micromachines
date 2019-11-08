@@ -5,7 +5,7 @@
 
 GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
     : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)),
-    configs(configs){
+    configs(configs), pluginLibrary("plugins"){
     this->ownerInfo = ib;
 }
 
@@ -140,7 +140,7 @@ void GameThread::_run() {
         this->lobby_mode = false; // Atomic?
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
         this->plr_threads.front().run();
-        // TODO: Clean queues
+        // TODO: Clean queues: idea, send an event that breaks lobby mode?
         _createCars();
         this->game.loadWorld(mapName);
         _sendStartMsg(mapName);

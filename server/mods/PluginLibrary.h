@@ -9,7 +9,7 @@
 class PluginLibrary {
     std::vector<PluginLoader*> plugins;
 public:
-    explicit PluginLibrary(std::string& path);
+    explicit PluginLibrary(const char* path);
     void runPlugins();
     ~PluginLibrary();
 };

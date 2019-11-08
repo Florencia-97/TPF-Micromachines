@@ -12,11 +12,13 @@
 #include <list>
 #include <random>
 #include <config/Configuration.h>
+#include <mods/PluginLibrary.h>
 
 class GameThread : public BaseThread {
     Socket sktOwner;
     InfoBlock ownerInfo;
     Configuration& configs;
+    PluginLibrary pluginLibrary;
     void _run() override;
     void _killPlayers(bool all);
     std::string _runLobby();

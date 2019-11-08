@@ -1,14 +1,16 @@
 #include "PluginLibrary.h"
 #include <string>
 
-PluginLibrary::PluginLibrary(std::string& path) {
-    // Loadgin all plugins .so in plugins foldier
-    if (auto dir = opendir(path.c_str())) {
+PluginLibrary::PluginLibrary(const char* path) {
+    // Loads all plugins .so in plugins folder
+    // TODO: leaking memory when created in gameThread, why??
+    if (auto dir = opendir(path)) {
         while (auto f = readdir(dir)) {
             if (f->d_name[0] == '.') continue;
             std::string fileName = f->d_name;
+            std::string pathName = path;
             if (fileName.find(".so") != std::string::npos){
-                fileName =  path + "/" + fileName;
+                fileName =  pathName + "/" + fileName;
                 auto plugin = new PluginLoader(fileName.c_str());
                 this->plugins.push_back(plugin);
             }
