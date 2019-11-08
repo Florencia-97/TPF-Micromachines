@@ -38,6 +38,7 @@ public:
     //POS advances the simulation and all instances within one timestep
     void Step(float timestep);
     void createRoad(int x, int y, int tileId); //yaml &stats?
+    void createExtras(int x, int y, int tileId);
 };
 
 
