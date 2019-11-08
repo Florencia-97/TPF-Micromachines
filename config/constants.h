@@ -102,4 +102,8 @@ const int TIME_TO_ITEMS = 5;
 #define MOUSE_BUTTON_UP 'W'
 #define MOUSE_MOTION "mouse_motion"
 
+#define SOUND_ON_OFF "SOUND_ON_OFF"
+#define SOUND_CAR_STOP "SOUND_CAR_STOP"
+#define SOUND_CAR_RUN "SOUND_CAR_RUN"
+
 #endif

@@ -43,11 +43,13 @@ public:
     std::condition_variable cv;
     bool exit;
     std::queue<InfoBlock>* renderQueue;
+    std::queue<std::string>* soundQueue;
 
   GameLoop(std::queue<InfoBlock> &rq,
            std::queue<SDL_Event> &textQueue,
            std::queue<SDL_Event> &mouseQueue,
-           std::condition_variable &ready);
+           std::condition_variable &ready,
+           std::queue<std::string> &sq);
 
     void proceedToLobby(bool is_leader);
 

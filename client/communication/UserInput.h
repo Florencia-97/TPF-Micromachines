@@ -14,8 +14,9 @@
 class UserInput : public BaseThread {
     SafeQueue<InfoBlock>* keyboard_input;
     SafeQueue<InfoBlock>* mouse_input;
-  std::queue<SDL_Event> *mouse_queue;
-  std::queue<SDL_Event> *writing_queue;
+    std::queue<SDL_Event> *mouse_queue;
+    std::queue<SDL_Event> *writing_queue;
+    std::queue<std::string> *sound_queue;
     void _run() override;
     std::map<char, bool> key_pressings;
 
@@ -23,7 +24,8 @@ public:
   UserInput(SafeQueue<InfoBlock> *q_keyboard,
             SafeQueue<InfoBlock> *q_mouse,
             std::queue<SDL_Event> *mouse_queue,
-            std::queue<SDL_Event> *text_queue);
+            std::queue<SDL_Event> *text_queue,
+            std::queue<std::string> *sound_queue);
     void _rcvKeyInput(SDL_Event &e);
     void close() override;
 

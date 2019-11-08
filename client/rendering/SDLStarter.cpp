@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include "SDLStarter.h"
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 
 bool SDLStarter::init() {
   bool success = true;
@@ -40,6 +41,11 @@ bool SDLStarter::init() {
           printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
           success = false;
         }
+        // TODO: continue with sound system
+        if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
+              printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+              success = false;
+        }
       }
     }
   }
@@ -58,6 +64,7 @@ void SDLStarter::close() {
   renderer = nullptr;
 
   //Quit SDL subsystems
+  Mix_Quit();
   IMG_Quit();
   SDL_Quit();
 }
