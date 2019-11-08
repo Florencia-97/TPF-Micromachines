@@ -132,7 +132,7 @@ float RaceCar::calculateForwardImpulse() {
     if ( desiredSpeed < currentSpeed )
         force = -force/1.5f;//reverse
     body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
-    std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
+    //std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
     return currentSpeed;
 }
 

@@ -86,6 +86,9 @@ const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
 #define PTM 20
 
+// Range between random seed use for item generation
+const int TIME_FROM_ITEMS = 3;
+const int TIME_TO_ITEMS = 5;
 
 // Events
 #define ACTION_TYPE "key"

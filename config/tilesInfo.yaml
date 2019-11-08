@@ -33,3 +33,15 @@ up_left_road_tile_h: 512
 up_right_road_tile: "map/up_right.png"
 up_right_road_tile_w: 512
 up_right_road_tile_h: 512
+
+tree_spikes_tile: "decoration/tree_spikes.png"
+tree_spikes_tile_w: 512
+tree_spikes_tile_h: 512
+
+tree_round_tile: "decoration/tree_round.png"
+tree_round_tile_w: 512
+tree_round_tile_h: 512
+
+pavilion_blue_tile: "decoration/pavilion_blue.png"
+pavilion_blue_tile_w: 512
+pavilion_blue_tile_h: 512

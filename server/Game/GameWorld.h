@@ -18,12 +18,13 @@ class GameWorld {
     b2World world;
     MapsLayer map;
     CollisionsManager cl;
-    std::list<RaceCar> cars; // should be a list
-
+    std::list<RaceCar> cars;
     std::list<PhysicalRoad> road_bodies;
+    float timeModifiers;
 
     //Dynamic Instances are those which come and go from the field, (ie items)
-    //std::vector<Entity> dynamic_objs;
+    std::list<Entity> dynamic_objs;
+    void _createItem();
 
 public:
     //POS creates a world with no gravity for top-down action
@@ -34,10 +35,10 @@ public:
     void loadWorld(std::string);
     InfoBlock status();
 
-
     //POS advances the simulation and all instances within one timestep
     void Step(float timestep);
     void createRoad(int x, int y, int tileId); //yaml &stats?
+    void createExtras(int x, int y, int tileId);
 };
 
 
