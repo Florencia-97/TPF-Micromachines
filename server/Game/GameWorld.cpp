@@ -35,17 +35,14 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 
 void GameWorld::loadWorld(std::string worldName){
     map.load("maps/" + worldName+".yaml");
-    int r = 0;
     for (int j = 0; j<map.road.size(); j++){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
             if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
                 createRoad(i * TILE_SIZE + TILE_SIZE/2 , j*TILE_SIZE + TILE_SIZE/2, row[i]);
-                r++;
             }
         }
     }
-    std::cout<<"r"<<r<<std::endl;
 }
 
 InfoBlock GameWorld::status(){
@@ -89,11 +86,12 @@ void GameWorld::createRoad(int x, int y, int tileType) {
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000 + cars.size()*20,1000+cars.size()*20);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,1000 + cars.size()*150,1000+cars.size()*150);
     int carId = cars.size();
     cars.emplace_back(carId, carStats, newBody);
 
-    createAndAddFixture(&(cars.back()),10,20,.01,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()),10,20,.5,PLAYER, 0, false);
+    createAndAddFixture(&(cars.back()),CAR_WIDTH,CAR_HEIGHT,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
     return carId;
 }
