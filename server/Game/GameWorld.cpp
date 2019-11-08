@@ -1,5 +1,5 @@
-
 #include <iostream>
+#include <time.h>
 #include "GameWorld.h"
 #include "../../config/constants.h"
 #include "status_effects/SpeedStatusEffect.h"
@@ -52,14 +52,13 @@ InfoBlock GameWorld::status(){
         std::string car_id = std::to_string(car.id);
         car.loadStateToInfoBlock(ib);
     }
-    //todo finish sending objects
     ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
-/*    int cont = 0;
-    for (auto & obj : objects){
+    int cont = 0;
+    for (auto & item : dynamic_objs){
         std::string obj_id = std::to_string(cont);
-        ib["O" + obj_id] = obj.stateAsInfoBlock();
+        item.loadPosToInfoBlock(ib, cont);
         cont++;
-    }*/
+    }
     return ib;
 }
 
@@ -70,12 +69,28 @@ void GameWorld::processEvent(int id, InfoBlock event){
 void GameWorld::Step(float timestep) {
     for (auto & car : cars){
         car.step(timestep);
-        //car.dummyMove();
     }
-
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timestep, velocityIterations, positionIterations);
+    this->timeModifiers += timestep;
+    srand (time(NULL));
+
+    // TODO: make this random maybe a little better, Flor task
+    // We create random items
+    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS; // Use Constants
+    if ( (int) this->timeModifiers > randomTime){
+        std::cout << "We generate random item\n";
+        _createItem();
+        this->timeModifiers = 0;
+    } else if (this->timeModifiers > TIME_TO_ITEMS) this->timeModifiers = 0;
+}
+
+void GameWorld::_createItem(){
+    // TODO: we pass to body the tipe of entity we want?
+    //b2Body* body = new b2Body();
+    //this->dynamic_objs.emplace_back(body);
+    return;
 }
 
 

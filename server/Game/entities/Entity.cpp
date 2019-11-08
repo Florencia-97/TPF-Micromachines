@@ -27,3 +27,11 @@ b2Vec2 Entity::getSize() {
 float32 Entity::getAngle(){
     return body->GetAngle();
 }
+
+void Entity::loadPosToInfoBlock(InfoBlock& ib, int cont){
+    auto pos = body->GetPosition();
+    std::string itemId = std::to_string(cont);
+    ib["Ox" + itemId] = (int)std::round(pos.x);
+    ib["Oy" + itemId] = (int)std::round(pos.y);
+    //ib["Or" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);
+}

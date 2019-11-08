@@ -35,6 +35,8 @@ public:
 
     float32 getAngle();
 
+    void loadPosToInfoBlock(InfoBlock& ib, int cont);
+
     void attachFixture(b2FixtureDef &boxFixtureDef);
 };
 
