@@ -47,7 +47,6 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
         auto cartype = cars_info.getString(CAR_TYPE+id);
         std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);
         all_cars.back().addTexture(tloader.load_texture("cars/"+cartype+".png", gRenderer));
-      //todo enviar la textura que captura el boton
     }
 }
 

@@ -50,7 +50,7 @@ void GameWorld::loadWorld(std::string worldName){
     for (size_t j = 0; j < map.extras.size(); j++){
         auto row = map.extras[j];
         for (size_t i= 0; i < row.size(); i++){
-            if (row[i] == FINISHING_LINE){
+            if (row[i] == finish_line){
                 createFinishingLine(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2);
             }
             //createExtras(i* TILE_SIZE, j* TILE_SIZE, row[i]);
