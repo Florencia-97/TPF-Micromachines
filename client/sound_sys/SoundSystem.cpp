@@ -20,6 +20,7 @@ void SoundSystem::init(){
         printf( "Failed to load car starting sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
         // Again, should i raise error?
     }
+    this->musicEffects.insert({SOUND_CAR_RUN, carsStarting});
     std::cout << "Finished loading sounds\n";
 }
 
@@ -27,7 +28,6 @@ void SoundSystem::play(){
     if (this->sound_queue->empty()) return; //check this
     std::string event = this->sound_queue->front();
     this->sound_queue->pop();
-    std::cout << event << std::endl;
     if (_controlSound(event)) return;
     if (Mix_PausedMusic() == 1) return;
     Mix_PlayChannel( -1, this->musicEffects[event], 0 );

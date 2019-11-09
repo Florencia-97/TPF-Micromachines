@@ -83,7 +83,6 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             switch (e.key.keysym.sym) {
                 case SDLK_0: // we can change the key later on!
                     sound_queue->push(SOUND_ON_OFF);
-                    std::cout << "sound play\n";
                     return;
                 case SDLK_UP:
                     if (e.key.state == SDL_RELEASED) {
