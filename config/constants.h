@@ -68,8 +68,8 @@ const int WHITE_CAR_BUTTON_Y = 220;
 
 const int PLAY_BUTTON_X = 701 / 2 + 80;
 const int PLAY_BUTTON_Y = 600;
-const int PLAY_BUTTON_WIDTH = 400;
-const int PLAY_BUTTON_HEIGHT = 100;
+const int PLAY_BUTTON_WIDTH = 1084;
+const int PLAY_BUTTON_HEIGHT = 281;
 
 //MapButtons constants
 

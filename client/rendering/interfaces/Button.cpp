@@ -65,6 +65,7 @@ bool Button::handleEvent(SDL_Event *e) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
           return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+          this->changeColor(100, 100, 100, 200);
           callCallbackFunctions();
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
