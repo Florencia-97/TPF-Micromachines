@@ -47,6 +47,7 @@ void RaceCar::step(float timestep){
         float desiredTorque = car_stats.rot_force * steer_dir.y * this->body->GetMass();
         body->ApplyTorque(desiredTorque, true);
     }
+     std::cout<<std::to_string(car_stats.laps)<<std::endl;
 }
 
 bool RaceCar::takeDamage(int dmg) {
@@ -59,14 +60,15 @@ bool RaceCar::isDead() {
 }
 
 
-void RaceCar::addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) {
+bool RaceCar::addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) {
     for (const auto& status : status_effects) {
         if (status->id == newStatusEffect->id) {
             status->increaseStack(newStatusEffect.get());
-            return;
+            return false;
         }
     }
     status_effects.push_back(newStatusEffect);
+    return true;
 }
 
 void RaceCar::removeEffect(std::string effectId) {
@@ -153,7 +155,9 @@ void RaceCar::stepEffects(float timestep) {
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
 
-        if (status->delay > 0){
+        if (status->apply_on_acquire && !status->applied){
+            status->applyEffect(car_stats);
+        } else if (status->delay > 0){
             status->delay -= timestep;
             i++;
         } else if (status->duration > 0) {

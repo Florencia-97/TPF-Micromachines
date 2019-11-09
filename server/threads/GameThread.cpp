@@ -150,8 +150,8 @@ void GameThread::_run() {
         this->plr_threads.front().car_type = ownerInfo.getString(CAR_TYPE);
         this->plr_threads.front().run();
         // TODO: Clean queues: idea, send an event that breaks lobby mode?
-        _createCars();
         this->game.loadWorld(mapName);
+        _createCars();
         _sendStartMsg(mapName);
         _runGame();
     }

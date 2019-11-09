@@ -43,7 +43,7 @@ public:
     // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
 
-    void addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) override;
+    bool addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) override;
 
     void removeEffect(std::string effectId) override;
 
