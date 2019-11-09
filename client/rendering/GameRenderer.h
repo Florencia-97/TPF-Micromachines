@@ -13,6 +13,7 @@
 #include "../common/infostream/InfoBlock.h"
 #include "../config/constants.h"
 #include "interfaces/Explosion.h"
+#include "interfaces/StainAnimation.h"
 
 class GameRenderer {
     SDL_Rect camera;
@@ -22,6 +23,7 @@ class GameRenderer {
     GameMap map;
     short my_car_id;//position in vector
     std::list<Car> all_cars;
+  StainAnimation stain;
 
     void loadCars(InfoBlock& inf);
 public:
