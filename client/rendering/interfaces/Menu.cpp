@@ -97,11 +97,11 @@ void Menu::init_as_follower() {
 }
 
 void Menu::set_buttons_positions() {
-    carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-    carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
-    carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
-    carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
-    connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+    carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y+100);
+    carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y+100);
+    carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y+100);
+    carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y+100);
+    connectButton->setPosition(PLAY_BUTTON_X/2 + 80, PLAY_BUTTON_Y+100);
 }
 
 void Menu::set_buttons_as_leader() {
