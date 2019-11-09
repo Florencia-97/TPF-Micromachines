@@ -5,12 +5,22 @@
 SoundSystem::SoundSystem(std::queue<std::string> *sound_queue)
     : playSounds(true) {
     this->sound_queue = sound_queue;
-    _loadSounds();
 }
 
-void SoundSystem::_loadSounds(){
+void SoundSystem::init(){
     // TODO: yaml file of sounds!
-    std::cout << "Loading sounds\n";
+    this->backgroundMusic = Mix_LoadMUS( "client/sound_sys/sounds/background_song.mp3" );
+    if (this->backgroundMusic == nullptr){
+        printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+        // Should raise an error?
+    }
+    Mix_PlayMusic(this->backgroundMusic, 1);
+    Mix_Chunk* carsStarting = Mix_LoadWAV( "client/sound_sys/sounds/car_start.wav" );
+    if( carsStarting == nullptr ) {
+        printf( "Failed to load car starting sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        // Again, should i raise error?
+    }
+    std::cout << "Finished loading sounds\n";
 }
 
 void SoundSystem::play(){
@@ -22,6 +32,7 @@ void SoundSystem::play(){
 }
 
 bool SoundSystem::_controlSound(std::string& event){
+    // TODO: use what sdl mix gives me for this!
     if (event == SOUND_ON_OFF){
         this->playSounds = !this->playSounds;
         return true;
