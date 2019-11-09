@@ -34,6 +34,8 @@ std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Rend
         break;
       case pavilion_blue_tile: key = "pavilion_blue_tile";
         break;
+      case finish_line: key = "finish_line";
+        break;
       default: key = "grass_tile";
         break;
     }

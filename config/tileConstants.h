@@ -24,6 +24,6 @@
 #define pavilion_blue_tile 12
 #define FINISHING_LINE 13
 #define FINISH_LINE_HEIGHT 67
-
+#define finish_line 14
 
 // Muddy road
