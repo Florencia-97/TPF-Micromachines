@@ -15,8 +15,8 @@ class SoundSystem {
     bool _controlSound(std::string& event);
     bool _controlCarSound(std::string& event);
 public:
-    SoundSystem(std::queue<std::string> *sq);
-    void play();
+    explicit SoundSystem(std::queue<std::string> *sq);
+    void play(bool inRace);
     void init();
     ~SoundSystem();
 };

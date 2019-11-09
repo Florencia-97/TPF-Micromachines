@@ -14,7 +14,7 @@ void SoundSystem::init(){
     Mix_Music* backgroundMusic = Mix_LoadMUS("client/sound_sys/sounds/background_song.mp3");
     if (backgroundMusic == nullptr){
         printf( "Failed to load background music! SDL_mixer Error: %s\n", Mix_GetError() );
-        // Should raise an error?
+            // TODO: raise error
     }
     // Starting to play music!
     Mix_PlayMusic(backgroundMusic, -1);
@@ -33,14 +33,14 @@ void SoundSystem::init(){
     std::cout << "Finished loading sounds\n";
 }
 
-void SoundSystem::play(){
+void SoundSystem::play(bool inRace){
     if (this->sound_queue->empty()) return; //check this
     std::string event = this->sound_queue->front();
     this->sound_queue->pop();
     if (_controlSound(event)) return;
     if (Mix_PausedMusic() == 1) return;
-    if (_controlCarSound(event)) return;
-    if (event!= SOUND_ON_OFF && event != this->lastSound){
+    if (inRace && _controlCarSound(event)) return;
+    if (inRace  && event!= SOUND_ON_OFF && event != this->lastSound){
         Mix_PlayChannel( 1, this->musicEffects[event], 0);
         this->lastSound = event;
     }
