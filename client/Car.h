@@ -11,6 +11,8 @@ class Car {
   SDL_Rect mBox;
   int rotation;
   LTexture* texture;
+  int health;
+  Animation *explosion;
 
  public:
     short id;
