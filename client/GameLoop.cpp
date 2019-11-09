@@ -26,22 +26,12 @@ void GameLoop::_run(){
         this->current_frame = (current_frame+ std::max(1,(int)(FPS*t_elapsed))) % FPS;
         //std::cout<<"t: "<<timestep<<" f: "<<current_frame<<std::endl;
     }
+    close();
 }
 
 void GameLoop::runMenu(int frame_id) {
-    ButtonAnswer answer(false, "");
-    menu.processEventsMouse(answer);
+    menu.processEventsMouse();
     menu.processEventsKeyboard();
-
-    if (answer.get_clicked() && start_game_name == "\n" && !exit) {// we are ready to try and connect!
-        start_game_name = "race_1";
-        //      InfoBlock ib;
-        //      ib[CAR_TYPE] = name-of-the-car;
-        //      keyboard_e_queue.push(ib);
-        //todo enviar answer.texture_name
-        SDL_StopTextInput();
-        ready_to_play->notify_all();
-    }
     menu.render_first_menu();
 }
 
@@ -83,6 +73,7 @@ void GameLoop::runLobby(int frame_id) {
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
+    SDL_StopTextInput();
     if (is_leader){
         //lobby.setLeadership(); //display map options
     }
@@ -100,15 +91,14 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::condition_variable &r,
                    std::queue<std::string> &sq) :
                             starter(SCREEN_WIDTH,SCREEN_HEIGHT) {
-  current_frame = 0;
-  state = -1;
-  in_menu.store(true);
-  renderQueue = &rq;
-  soundQueue = &sq;
-  starter.init();
-  menu.init(starter.get_global_renderer(), &mouseQueue, &queue);
-  menu.setMainMenuMode();
-  exit = false;
-  ready_to_play = &r;
-  start_game_name = "\n";
+    current_frame = 0;
+    state = -1;
+    in_menu.store(true);
+    renderQueue = &rq;
+    soundQueue = &sq;
+    starter.init();
+    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r);
+    menu.setMainMenuMode();
+    exit = false;
+    ready_to_play = &r;
 }

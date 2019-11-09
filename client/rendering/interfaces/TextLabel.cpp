@@ -18,7 +18,7 @@ void TextLabel::render() {
 }
 
 void TextLabel::updateBounds() {
-    this->textArea = {(x - textTexture.getWidth()) / 2, y, textTexture.getWidth(),
+    this->textArea = {x - textTexture.getWidth()/ 2, y, textTexture.getWidth(),
                       textTexture.getHeight()};
 }
 

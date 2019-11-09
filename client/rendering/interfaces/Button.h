@@ -38,7 +38,7 @@ public:
     virtual void setPosition(int x, int y);
 
     //Handles mouse event. If the button is clicked, returns true
-    virtual bool handleEvent(SDL_Event *e, ButtonAnswer *answer);
+    virtual bool handleEvent(SDL_Event *e);
 
     virtual void render();
 

@@ -25,7 +25,6 @@ class GameLoop : public BaseThread {
     std::condition_variable* ready_to_play;
     GameMap map;
     GameRenderer gameRenderer;
-    Menu menu;
 
     void _runProgram();
 
@@ -38,7 +37,8 @@ class GameLoop : public BaseThread {
     void runLobby(int frame_id);
 
 public:
-    std::string start_game_name;
+    Menu menu;
+
     std::condition_variable cv;
     bool exit;
     std::queue<InfoBlock>* renderQueue;

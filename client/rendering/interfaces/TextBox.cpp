@@ -8,7 +8,7 @@ void TextBox::init(const std::string &msg, int x, int y, SDL_Color c, SDL_Render
 }
 
 void TextBox::receiveInput(SDL_Event *e) {
-    SDL_StartTextInput();
+
     bool renderText = false;
     if (e->type == SDL_KEYDOWN) {
         //Handle backspace

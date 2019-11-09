@@ -25,7 +25,7 @@ void Button::changeColor(int r, int g, int b, int duration){
     colorChangeDuration = duration;
 }
 
-bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
+bool Button::handleEvent(SDL_Event *e) {
   //If mouse event happened
 
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
@@ -65,12 +65,9 @@ bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
           return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-              answer->set_clicked(true);
-              answer->set_msg(this->getId());
           callCallbackFunctions();
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-          this->texture->set_color(22, 22, 50);
           return false;
       }
     }
