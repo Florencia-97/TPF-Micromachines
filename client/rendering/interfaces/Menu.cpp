@@ -3,7 +3,7 @@
 #include "CarButton.h"
 #include "ConnectButton.h"
 #include "MapButton.h"
-#include "Font.h"
+#include "TextLabel.h"
 
 bool Menu::load_media() {
   bool success = true;
@@ -11,7 +11,7 @@ bool Menu::load_media() {
   success *= carBlack.load_from_file("client/rendering/assets/cars/black_car.png", gRenderer);
   success *= carRed.load_from_file("client/rendering/assets/cars/red_car.png", gRenderer);
   success *= carWhite.load_from_file("client/rendering/assets/cars/white_car.png", gRenderer);
-  success *= wallpaper.load_from_file("client/rendering/assets/all_images/Decor/B.png", gRenderer);
+  success *= wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png", gRenderer);
   success *= connectButton.load_from_file("client/rendering/assets/buttons/connect.png", gRenderer);
   if (success) {
     gButtons.push_back(new CarButton(gRenderer, &carBlue));
@@ -24,14 +24,16 @@ bool Menu::load_media() {
 }
 
 void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue) {
-  this->text_queue = textQueue;
-  this->mouse_queue = gQueue;
-  this->gRenderer = sdl_renderer;
-  if (!load_media()) {
-    printf("Failed to initialize!\n");
-  }
-  set_buttons_positions_first_menu();
-  font.Font_init("Hola", gRenderer);
+    this->text_queue = textQueue;
+    this->mouse_queue = gQueue;
+    this->gRenderer = sdl_renderer;
+    if (!load_media()) {
+        throw std::runtime_error("Failed to initialize textures!\n");
+    }
+    set_buttons_positions_first_menu();
+    SDL_Color gold{255, 189, 27, 0xFF};
+    label_choose_car.init("CLICK TO SELECT YOUR CAR", SCREEN_WIDTH, 200, gold, gRenderer);
+    textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH, 450, gold, gRenderer);
 }
 
 bool Menu::processEventsMouse(ButtonAnswer &button_answer) {
@@ -50,9 +52,10 @@ bool Menu::processEventsMouse(ButtonAnswer &button_answer) {
 
 void Menu::processEventsKeyboard() {
   while (!text_queue->empty()) {
-    font.receive_input(&text_queue->front());
+    textbox_lobby_name.receiveInput(&text_queue->front());
     text_queue->pop();
   }
+  textbox_lobby_name.updateBounds();
 }
 
 
@@ -63,7 +66,8 @@ void Menu::render_first_menu() {
     for (auto &button : gButtons) {
       button->render();
     }
-  font.render();
+    label_choose_car.render();
+    textbox_lobby_name.render();
     SDL_RenderPresent(gRenderer);
 }
 

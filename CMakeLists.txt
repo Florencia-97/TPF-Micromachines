@@ -76,8 +76,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h
 		client/rendering/interfaces/CarButton.cpp client/rendering/interfaces/CarButton.h
 		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
-		client/rendering/interfaces/Font.cpp client/rendering/interfaces/Font.h
-		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h)
+		client/rendering/interfaces/TextLabel.cpp client/rendering/interfaces/TextLabel.h
+		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h client/rendering/interfaces/TextBox.cpp client/rendering/interfaces/TextBox.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

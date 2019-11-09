@@ -10,7 +10,8 @@
 #include "../LTexture.h"
 #include "../../../config/constants.h"
 #include "Button.h"
-#include "Font.h"
+#include "TextLabel.h"
+#include "TextBox.h"
 #include <condition_variable>
 
 class Menu {
@@ -26,7 +27,9 @@ class Menu {
   SDL_Renderer *gRenderer;
   std::vector<Button *> gButtons;
   std::vector<Button *> mapButtons;
-  Font font;
+
+  TextLabel label_choose_car;
+  TextBox textbox_lobby_name;
 
   bool load_media();
   void set_buttons_positions_first_menu();
