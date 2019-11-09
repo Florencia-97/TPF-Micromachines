@@ -8,7 +8,7 @@
 #include "Animation.h"
 class StainAnimation : public Animation {
  private:
-  LTexture *texture;
+  LTexture texture;
   Uint8 fading;
  public:
   StainAnimation();

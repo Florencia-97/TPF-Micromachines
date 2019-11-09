@@ -3,6 +3,7 @@
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
 #include "../../config/constants.h"
+#include "interfaces/StainAnimation.h"
 
 GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -21,12 +22,16 @@ void GameRenderer::render(InfoBlock &world_state) {
       }
       car.render(camera, gRenderer);
   }
+  //explosion.play(gRenderer,0,0);
+  stain.play(gRenderer, 0, 0);
   SDL_RenderPresent(gRenderer);
+
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     gRenderer = gr;
   explosion.load_frames(gRenderer);
+  stain.load_frames(gRenderer);
     loadCars(game_info);
     map.loadMap("maps/" + game_info.getString(RACE_ID)+".yaml", gRenderer);
 }
