@@ -32,8 +32,8 @@
 #define OBJECTS_AMOUNT "OBJECTS_AMOUNT"
 #define HEALTH "HEALTH"
 #define MAX_SPEED "MAX_SPEED"
-#define ACELERATION "ACELERATION"
-#define ROTATION_MAX "ROTATION_MAX"
+#define ACCELERATION "ACELERATION"
+#define ROTATION_FORCE "ROTATION_MAX"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
@@ -86,6 +86,11 @@ const int MAP_BUTTON_HEIGHT = 300;
 const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
 #define PTM 20
+
+//Explosion
+const int EXPLOSION_FRAMES_ROW = 5;
+const int EXPLOSION_FRAMES_COLUMN = 8;
+const int TOTAL_FRAMES = EXPLOSION_FRAMES_COLUMN * EXPLOSION_FRAMES_ROW;
 
 // Range between random seed use for item generation
 const int TIME_FROM_ITEMS = 3;

@@ -55,20 +55,18 @@ bool Button::handleEvent(SDL_Event *e) {
 
     //Mouse is outside button
     if (!inside) {
-      //Pone el enum que representa que el mouse no esta encima;
-      mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     }
       //Mouse is inside button
     else {
       //Set mouse over sprite
       switch (e->type) {
-        case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
+        case SDL_MOUSEMOTION:;
           return false;
-        case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+        case SDL_MOUSEBUTTONDOWN:;
           this->changeColor(100, 100, 100, 200);
           callCallbackFunctions();
           return true;
-        case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
+        case SDL_MOUSEBUTTONUP:;
           return false;
       }
     }
@@ -97,6 +95,15 @@ void Button::addCallbackFunction(std::function<void(std::string)> cf) {
 
 std::string Button::getId(){
     return this->id;
+}
+
+Button::Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
+    mPosition.x = 0;
+    mPosition.y = 0;
+    colorChangeDuration = -1;
+    this->texture = buttonSpriteSheet;
+    this->gRenderer = sdl_renderer;
+    this->id = id; 
 }
 
 

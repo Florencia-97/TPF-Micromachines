@@ -50,13 +50,10 @@ InfoBlock Configuration::getDataFromCar(std::string& car){
     for(std::size_t i=0; i<carConfig.size(); ++i){
         if (i == 0) ib[HEALTH] = carConfig[i];
         else if (i == 1) ib[MAX_SPEED] = carConfig[i];
-        else if (i == 2) ib[ACELERATION] = carConfig[i];
-        else if (i == 3) ib[ROTATION_MAX] = carConfig[i];
+        else if (i == 2) ib[ACCELERATION] = carConfig[i];
+        else if (i == 3) ib[ROTATION_FORCE] = carConfig[i];
     }
-/*    ib[HEALTH] = 100;
-    ib[MAX_SPEED] = 100;
-    ib[ACELERATION] = 20;
-    ib[ROTATION_MAX] = 15;*/
+    ib[CAR_TYPE] = car;
     return ib;
 }
 

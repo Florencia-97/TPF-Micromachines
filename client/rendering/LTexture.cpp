@@ -114,4 +114,8 @@ std::string LTexture::get_string_name() {
   return texture_name;
 }
 
+void LTexture::setAlpha(Uint8 alpha) {
+  //Modulate texture alpha
+  SDL_SetTextureAlphaMod(texture, alpha);
+}
 

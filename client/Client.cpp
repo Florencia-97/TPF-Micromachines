@@ -11,8 +11,8 @@ bool Client::connectionCheck(){
 bool Client::attempConnection() {
     skt.client(SERVICE, PORT);
     if (!skt.isValid()) throw  serverNotRunning();
-    connection_state[ARENA_GAME] = "insert funny meme";
-    connection_state[CAR_TYPE] = "car_name";
+    connection_state[ARENA_GAME] = gameLoop.menu.map_selected;
+    connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
     if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
     if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
     return connectionCheck();

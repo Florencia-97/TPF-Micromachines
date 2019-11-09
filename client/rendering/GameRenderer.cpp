@@ -3,6 +3,7 @@
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
 #include "../../config/constants.h"
+#include "interfaces/StainAnimation.h"
 
 GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -21,12 +22,16 @@ void GameRenderer::render(InfoBlock &world_state) {
       }
       car.render(camera, gRenderer);
   }
+  //explosion.play(gRenderer,0,0);
+  stain.play(gRenderer, 0, 0);
   SDL_RenderPresent(gRenderer);
+
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     gRenderer = gr;
   explosion.load_frames(gRenderer);
+  stain.load_frames(gRenderer);
     loadCars(game_info);
     map.loadMap("maps/" + game_info.getString(RACE_ID)+".yaml", gRenderer);
 }
@@ -42,8 +47,10 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
                 cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
                 cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
 
-        all_cars.back().addTexture(tloader.load_texture("cars/blue_car.png", gRenderer));
-      //todo enviar la textura que captura el boton
+        
+        auto cartype = cars_info.getString(CAR_TYPE+id);
+        std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);
+        all_cars.back().addTexture(tloader.load_texture("cars/"+cartype+".png", gRenderer));
     }
 }
 

@@ -22,7 +22,7 @@
 #define tree_spikes_tile 10
 #define tree_round_tile 11
 #define pavilion_blue_tile 12
-#define FINISHING_LINE 13
+
 #define FINISH_LINE_HEIGHT 67
 #define finish_line 14
 
