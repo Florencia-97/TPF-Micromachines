@@ -99,4 +99,13 @@ std::string Button::getId(){
     return this->id;
 }
 
+Button::Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
+    mPosition.x = 0;
+    mPosition.y = 0;
+    colorChangeDuration = -1;
+    this->texture = buttonSpriteSheet;
+    this->gRenderer = sdl_renderer;
+    this->id = id; 
+}
+
 
