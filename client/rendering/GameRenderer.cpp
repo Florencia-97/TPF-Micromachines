@@ -21,11 +21,13 @@ void GameRenderer::render(InfoBlock &world_state) {
       }
       car.render(camera, gRenderer);
   }
+  explosion.play(gRenderer);
   SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     gRenderer = gr;
+  explosion.load_frames(gRenderer);
     loadCars(game_info);
     map.loadMap("maps/" + game_info.getString(RACE_ID)+".yaml", gRenderer);
 }
