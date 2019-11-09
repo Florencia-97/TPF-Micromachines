@@ -21,8 +21,7 @@ class Button {
     SDL_Renderer *gRenderer = nullptr;
     LTexture *texture;
     SDL_Point mPosition;
-    ButtonSprite mCurrentSprite;
-    SDL_Rect area;
+  SDL_Rect area;
 
     std::list<std::function<void(std::string)>> callbacks;
 

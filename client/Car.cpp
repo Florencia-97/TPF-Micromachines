@@ -10,6 +10,8 @@ Car::Car(short id){
     mBox.h = CAR_HEIGHT;
     rotation = 0;
     this->id = id;
+  health = 100;
+  explosion = new Explosion();
 }
 
 void Car::addTexture(LTexture *my_texture) {
@@ -43,6 +45,9 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                             CAR_WIDTH,
                             CAR_HEIGHT,
                             false);
+  if (health == 0) {
+    this->explosion->play(renderer, mBox.x, mBox.y);
+  }
 }
 
 Car::~Car() {
@@ -50,9 +55,11 @@ Car::~Car() {
         texture->free();
     }
 }
+
 SDL_Texture *Car::get_texture() {
   return this->texture->get_texture();
 }
+
 bool Car::compare_id(short i) {
   return this->id == i;
 }

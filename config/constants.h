@@ -66,10 +66,10 @@ const int RED_CAR_BUTTON_Y = 220;
 const int WHITE_CAR_BUTTON_X = 1280 - 150;
 const int WHITE_CAR_BUTTON_Y = 220;
 
-const int PLAY_BUTTON_X = 1280 / 4;
+const int PLAY_BUTTON_X = 1280 / 2 - 300 / 2;
 const int PLAY_BUTTON_Y = 600;
 const int PLAY_BUTTON_WIDTH = 300;
-const int PLAY_BUTTON_HEIGHT = 200;
+const int PLAY_BUTTON_HEIGHT = 120;
 
 //MapButtons constants
 
@@ -86,6 +86,11 @@ const int MAP_BUTTON_HEIGHT = 300;
 const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
 #define PTM 20
+
+//Explosion
+const int EXPLOSION_FRAMES_ROW = 5;
+const int EXPLOSION_FRAMES_COLUMN = 8;
+const int TOTAL_FRAMES = EXPLOSION_FRAMES_COLUMN * EXPLOSION_FRAMES_ROW;
 
 // Range between random seed use for item generation
 const int TIME_FROM_ITEMS = 3;
