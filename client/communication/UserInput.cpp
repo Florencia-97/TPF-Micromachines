@@ -87,7 +87,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 case SDLK_UP:
                     if (e.key.state == SDL_RELEASED) {
                         eventType = UP;
-                        sound_queue->push(SOUND_CAR_STOP);
+                        sound_queue->push(SOUND_STOP_CAR_RUN);
                     }
                     break;
                 case SDLK_DOWN:
