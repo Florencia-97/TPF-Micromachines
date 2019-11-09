@@ -17,7 +17,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
 
 void Menu::setMainMenuMode(){
     try {
-        if (!carButtons.empty()) return;;
+      if (!carButtons.empty()) return;
         load_media();
         set_buttons_positions();
     } catch(...) {
@@ -97,11 +97,11 @@ void Menu::init_as_follower() {
 }
 
 void Menu::set_buttons_positions() {
-    carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y+100);
-    carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y+100);
-    carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y+100);
-    carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y+100);
-    connectButton->setPosition(PLAY_BUTTON_X/2 + 80, PLAY_BUTTON_Y+100);
+  carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
+  carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
+  connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
 void Menu::set_buttons_as_leader() {
@@ -111,12 +111,12 @@ void Menu::set_buttons_as_leader() {
 void Menu::load_media() {
     wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png", gRenderer);
 
-    auto callback_start_game = [&](std::string clickedId){
+  auto callback_start_game = [&](const std::string &clickedId) {
         map_selected = "race_1";
         this->game_ready_cv->notify_all();
     };
     //car buttons
-    auto callback = [&](std::string clickedId) {
+  auto callback = [&](const std::string &clickedId) {
         std::cout<<clickedId<<std::endl;
         for (auto &b : carButtons){
             if (b.id == clickedId){
@@ -140,9 +140,9 @@ void Menu::load_media() {
                             textureLoader.load_texture("buttons/connect.png", gRenderer));
     connectButton->addCallbackFunction(callback_start_game);
 
-    for (auto &b : carButtons){
-        b.addCallbackFunction(callback);
-        b.changeColor(80,80,80,-1);
+  for (auto &button : carButtons) {
+    button.addCallbackFunction(callback);
+    button.changeColor(80, 80, 80, -1);
     }
 
     //map buttons
