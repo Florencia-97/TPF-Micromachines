@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(Micromachines)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS -pthread)
+set(CMAKE_CXX_FLAGS -std=c++0x)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 

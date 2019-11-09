@@ -128,24 +128,24 @@ float RaceCar::calculateForwardImpulse() {
     desiredSpeed += steer_dir.x*car_stats.forward_speed;
 
     //apply necessary force
-    float force = 20 + 450*(0.2f + std::abs(currentSpeed)/car_stats.max_speed);
+    float force = 20 + 320*(0.05f + std::abs(currentSpeed)/car_stats.max_speed);
     if ( desiredSpeed < currentSpeed )
         force = -force/1.5f;//reverse
     body->ApplyForce( body->GetMass() * force * currentForwardNormal, body->GetWorldCenter(), true);
-    //std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
+    std::cout<<currentSpeed<<" | "<<desiredSpeed<<std::endl;
     return currentSpeed;
 }
 
 void RaceCar::updateFriction() {
     b2Vec2 impulse = body->GetMass() * -getLateralVelocity();
     if ( impulse.Length() > 1 )
-        impulse *= 5 / impulse.Length();
+        impulse *= 7 / impulse.Length();
     body->ApplyLinearImpulse( impulse, body->GetWorldCenter() ,false);
 
     body->ApplyAngularImpulse( 0.05f * body->GetInertia() * -body->GetAngularVelocity(),true);
     b2Vec2 forwardNormal = getForwardVelocity();
     float currentForwardSpeed = forwardNormal.Normalize();
-    float dragForceMagnitude = -1.5f * currentForwardSpeed;
+    float dragForceMagnitude = -1.6f * currentForwardSpeed;
     body->ApplyForce( dragForceMagnitude * forwardNormal, body->GetWorldCenter() , true);
 }
 

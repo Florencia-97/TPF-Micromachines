@@ -8,8 +8,10 @@
 Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   mPosition.x = 0;
   mPosition.y = 0;
+  colorChangeDuration = -1;
   this->texture = buttonSpriteSheet;
   this->gRenderer = sdl_renderer;
+  this->id = texture->get_string_name();
 }
 
 void Button::setPosition(int x, int y) {
@@ -17,6 +19,12 @@ void Button::setPosition(int x, int y) {
   mPosition.y = y;
   set_area(x, y);
 }
+
+void Button::changeColor(int r, int g, int b, int duration){
+    this->texture->set_color(r, g, b);
+    colorChangeDuration = duration;
+}
+
 bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
   //If mouse event happened
 
@@ -57,9 +65,8 @@ bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
         case SDL_MOUSEMOTION:mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
           return false;
         case SDL_MOUSEBUTTONDOWN:mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-          this->texture->set_color(22, 22, 22);
-          answer->set_state(true);
-          answer->set_color(texture->get_string_name());
+              answer->set_clicked(true);
+              answer->set_msg(this->getId());
           callCallbackFunctions();
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
@@ -71,7 +78,8 @@ bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
   return  false;
 }
 void Button::render() {
-  //for gSpriteClips we access the pointer, get the current sprite, and then we pass the address to said sprite
+  if (colorChangeDuration > -1) colorChangeDuration--;
+  if (colorChangeDuration == 0) changeColor(255,255,255,-1);
   SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
 }
 
@@ -79,19 +87,18 @@ void Button::set_area(int x, int y) {
   this->area = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
 }
 
-void Button::free_texture() {
-  this->texture->free();
-}
-
 void Button::callCallbackFunctions() {
     for (auto &f : callbacks){
-        f();
+        f(this->id);
     }
 }
 
-void Button::addCallbackFunction(void (*cf)()) {
+void Button::addCallbackFunction(std::function<void(std::string)> cf) {
     callbacks.push_back(cf);
 }
 
+std::string Button::getId(){
+    return this->id;
+}
 
 

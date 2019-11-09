@@ -8,14 +8,23 @@
 #include <string>
 #include <utility>
 class ButtonAnswer {
+
   bool clicked;
-  std::string car_color;
+
+  std::string msg;
+
  public:
-  ButtonAnswer(bool cliecked, std::string color) : clicked(cliecked), car_color(std::move(color)) {}
-  bool get_state();
-  std::string get_color();
-  void set_state(bool state);
-  void set_color(std::string nameOfTexture);
+
+  ButtonAnswer(bool clicked, std::string color) : clicked(clicked), msg(std::move(color)) {};
+
+  bool get_clicked();
+
+  std::string get_msg();
+
+  void set_clicked(bool state);
+
+  void set_msg(std::string nameOfTexture);
+
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_BUTTON_ANSWER_H_

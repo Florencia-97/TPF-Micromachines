@@ -12,36 +12,44 @@
 #include <SDL_events.h>
 #include <SDL_system.h>
 #include <list>
+#include <functional>
 
 class Button {
     void callCallbackFunctions();
- protected:
-  SDL_Renderer *gRenderer = nullptr;
-  LTexture *texture;
-  SDL_Point mPosition;
-  ButtonSprite mCurrentSprite;
-  SDL_Rect area;
+    int colorChangeDuration;
 
-  std::list<void (*)()> callbacks;
+protected:
+    SDL_Renderer *gRenderer = nullptr;
+    LTexture *texture;
+    SDL_Point mPosition;
+    ButtonSprite mCurrentSprite;
+    SDL_Rect area;
 
- public:
+    std::list<std::function<void(std::string)>> callbacks;
 
-  Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
-  //Sets top left position
+public:
+    std::string id;
 
-  void addCallbackFunction(void (*cf)());
+    Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
 
-  virtual void setPosition(int x, int y);
+    //POS adds a function that will be called when the button is clicked;
+    void addCallbackFunction(std::function<void(std::string)> cf);
 
-  //Handles mouse event. If the mouse is clicked, returns true
-  virtual bool handleEvent(SDL_Event *e, ButtonAnswer *answer);
-  //Shows button sprite
+    virtual void setPosition(int x, int y);
 
-  virtual void render();
+    //Handles mouse event. If the button is clicked, returns true
+    virtual bool handleEvent(SDL_Event *e, ButtonAnswer *answer);
 
-  virtual void set_area(int x, int y);
+    virtual void render();
 
-  virtual void free_texture();
+    virtual void set_area(int x, int y);
+
+
+    //POS apply a color(r,g,b) change to the button for duration frames
+    //if duration is negative then the change persists until called again
+    void changeColor(int r, int g, int b, int duration);
+
+    std::string getId();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_BUTTON_H_

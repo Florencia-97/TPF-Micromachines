@@ -15,7 +15,6 @@
 
 #define LOBBY_STATE 1
 #define GAME_STATE 2
-#define FPS 60
 
 class GameLoop : public BaseThread {
     SDLStarter starter;

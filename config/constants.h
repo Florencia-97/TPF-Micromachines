@@ -3,6 +3,7 @@
 
 #define SERVICE "localhost"
 #define PORT "8080"
+#define FPS 40
 
 // First msg
 #define ARENA_GAME "GAME_ARENA"

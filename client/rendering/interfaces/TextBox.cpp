@@ -4,6 +4,7 @@
 
 void TextBox::init(const std::string &msg, int x, int y, SDL_Color c, SDL_Renderer *sdl_renderer) {
     TextLabel::init(msg, x, y, c, sdl_renderer);
+    text = "";
 }
 
 void TextBox::receiveInput(SDL_Event *e) {

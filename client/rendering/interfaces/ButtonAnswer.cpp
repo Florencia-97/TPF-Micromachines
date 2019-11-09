@@ -5,15 +5,15 @@
 #include "ButtonAnswer.h"
 
 #include <utility>
-bool ButtonAnswer::get_state() {
+bool ButtonAnswer::get_clicked() {
   return clicked;
 }
-std::string ButtonAnswer::get_color() {
-  return car_color;
+std::string ButtonAnswer::get_msg() {
+  return msg;
 }
-void ButtonAnswer::set_state(bool state) {
+void ButtonAnswer::set_clicked(bool state) {
   this->clicked = state;
 }
-void ButtonAnswer::set_color(std::string name) {
-  this->car_color = std::move(name);
+void ButtonAnswer::set_msg(std::string nameOfTexture) {
+  this->msg = std::move(nameOfTexture);
 }

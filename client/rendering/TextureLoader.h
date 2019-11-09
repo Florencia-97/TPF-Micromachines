@@ -22,6 +22,7 @@ class TextureLoader {
     TextureLoader() = default;
 
     LTexture* load_texture(std::string name, SDL_Renderer *renderer);
+
 };
 
 #endif //MICROMACHINES_CLIENT_TEXTURELOADER_H_

@@ -33,7 +33,7 @@ void GameLoop::runMenu(int frame_id) {
     menu.processEventsMouse(answer);
     menu.processEventsKeyboard();
 
-    if (answer.get_state() && start_game_name == "\n" && !exit) {// we are ready to try and connect!
+    if (answer.get_clicked() && start_game_name == "\n" && !exit) {// we are ready to try and connect!
         start_game_name = "race_1";
         //      InfoBlock ib;
         //      ib[CAR_TYPE] = name-of-the-car;
@@ -107,6 +107,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
   soundQueue = &sq;
   starter.init();
   menu.init(starter.get_global_renderer(), &mouseQueue, &queue);
+  menu.setMainMenuMode();
   exit = false;
   ready_to_play = &r;
   start_game_name = "\n";
