@@ -21,7 +21,7 @@ void Menu::setMainMenuMode(){
         throw std::runtime_error("Failed to initialize textures!\n");
     }
     SDL_Color gold{255, 189, 27, 0xFF};
-    label_choose_car.init("CLICK TO SELECT YOUR CAR", SCREEN_WIDTH, 200, gold, gRenderer);
+    label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH, 200, gold, gRenderer);
     textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH, 450, gold, gRenderer);
     active_buttons = &carButtons;
 }
