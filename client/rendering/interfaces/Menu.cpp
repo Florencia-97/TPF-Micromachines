@@ -13,6 +13,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     this->gRenderer = sdl_renderer;
     this->game_ready_cv = attempConnectionCV;
     map_selected = "\n";
+    car_selected = "RED_CAR";
 }
 
 void Menu::setMainMenuMode(){
@@ -128,13 +129,13 @@ void Menu::load_media() {
         }
     };
 
-    carButtons.emplace_back(gRenderer,
+    carButtons.emplace_back("BLUE_CAR", gRenderer,
                             textureLoader.load_texture("cars/blue_car.png", gRenderer));
-    carButtons.emplace_back(gRenderer,
+    carButtons.emplace_back("BLACK_CAR", gRenderer,
                             textureLoader.load_texture("cars/black_car.png", gRenderer));
-    carButtons.emplace_back(gRenderer,
+    carButtons.emplace_back("RED_CAR", gRenderer,
                             textureLoader.load_texture("cars/red_car.png", gRenderer));
-    carButtons.emplace_back(gRenderer,
+    carButtons.emplace_back("WHITE_CAR", gRenderer,
                             textureLoader.load_texture("cars/white_car.png", gRenderer));
     connectButton = std::make_shared<ConnectButton>(gRenderer,
                             textureLoader.load_texture("buttons/connect.png", gRenderer));

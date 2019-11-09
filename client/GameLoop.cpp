@@ -10,6 +10,7 @@ void GameLoop::_runProgram(){
     } else if (in_menu.load()){
         runMenu(current_frame);
     }
+    soundSystem.play(state == GAME_STATE);
 }
 
 void GameLoop::_run(){
@@ -19,7 +20,6 @@ void GameLoop::_run(){
 
     while (this->isAlive()) {
         _runProgram();
-        soundSystem.play();
         this->sleep(timestep);
         float t_elapsed = c.diff();
         timestep = std::max(0.0f,timestep_goal - t_elapsed);

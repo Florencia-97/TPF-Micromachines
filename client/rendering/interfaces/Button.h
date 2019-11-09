@@ -29,7 +29,9 @@ class Button {
  public:
     std::string id;
 
-    Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
+    explicit Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
+
+    explicit Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
 
     //POS adds a function that will be called when the button is clicked;
     void addCallbackFunction(std::function<void(std::string)> cf);

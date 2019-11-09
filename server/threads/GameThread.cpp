@@ -50,7 +50,7 @@ std::string GameThread::_runLobby() {
         close();
         return "";
     }
-    // Now i wait for the id of the race
+
     InfoBlock ib;
     if (!Protocol::recvMsg(&this->sktOwner, ib) || !ib.exists(RACE_ID)){
         std::cout << "Error when receiving race id in: " << ib.srcString() << HERE << std::endl;
@@ -67,6 +67,7 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
     if ( Protocol::sendMsg(&plr_socket, ib) && lobby_mode ) {
         this->plr_threads.emplace_back(plr_socket, playerInfo);
+        this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();
     }
 }
@@ -74,8 +75,7 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
 void GameThread::_createCars(){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-//        std::string carType = it->car_type;
-        std::string carType = "BLUE_CAR"; // Here goes the real player choice
+        std::string carType = (!it->car_type.empty()) ? it->car_type : "RED_CAR";
         InfoBlock ib = this->configs.getDataFromCar(carType);
         this->game.createCar(ib);
         ++it;
@@ -97,6 +97,8 @@ void GameThread::_sendStartMsg(std::string raceId){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = cont;
+        std::string carType = (!it->car_type.empty()) ? it->car_type : "RED_CAR";
+        ib[CAR_TYPE + std::to_string(cont)] = carType;
         (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
         cont++;
         it++;
@@ -145,6 +147,7 @@ void GameThread::_run() {
         std::cout << "Race chosen is: " << mapName << std::endl;
         this->lobby_mode = false; // Atomic?
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
+        this->plr_threads.front().car_type = ownerInfo.getString(CAR_TYPE);
         this->plr_threads.front().run();
         // TODO: Clean queues: idea, send an event that breaks lobby mode?
         _createCars();

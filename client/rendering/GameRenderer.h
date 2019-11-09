@@ -31,13 +31,6 @@ public:
   //the map to render_first_menu and the car to follow with the camera
   explicit GameRenderer();
 
-  //IMPORTANT
-  //PRE gameInfo should have the following keys:
-  // [map_name] = std::string to get the config to load the map
-  // [my_car_id] = int identificate my car
-  // and a list of n cars with their car types (for image loading) and positions
-  //TODO GET FROM SERVER
-
   void init(SDL_Renderer *gr, InfoBlock &game_info);
 
   //pre must be init

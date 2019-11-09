@@ -46,6 +46,6 @@ pavilion_blue_tile: "decoration/pavilion_blue.png"
 pavilion_blue_tile_w: 512
 pavilion_blue_tile_h: 512
 
-finish_line: "decoration/Finish.png"
+finish_line: "decoration/finish_straight_vertical.png"
 finish_line_w: 512
 finish_line_h: 512
