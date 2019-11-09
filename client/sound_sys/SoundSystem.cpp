@@ -24,20 +24,23 @@ void SoundSystem::init(){
 }
 
 void SoundSystem::play(){
-    if ( !this->playSounds || this->sound_queue->empty()) return;
+    if (this->sound_queue->empty()) return; //check this
     std::string event = this->sound_queue->front();
     this->sound_queue->pop();
+    std::cout << event << std::endl;
     if (_controlSound(event)) return;
+    if (Mix_PausedMusic() == 1) return;
     Mix_PlayChannel( -1, this->musicEffects[event], 0 );
 }
 
 bool SoundSystem::_controlSound(std::string& event){
-    // TODO: use what sdl mix gives me for this!
-    if (event == SOUND_ON_OFF){
-        this->playSounds = !this->playSounds;
-        return true;
+    if (event != SOUND_ON_OFF) return false;
+    if( Mix_PausedMusic() == 1 ){
+        Mix_ResumeMusic();
+    } else {
+        Mix_PauseMusic();
     }
-    return false;
+    return true;
 }
 
 SoundSystem::~SoundSystem(){
