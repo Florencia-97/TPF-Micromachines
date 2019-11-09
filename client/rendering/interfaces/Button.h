@@ -16,9 +16,8 @@
 
 class Button {
     void callCallbackFunctions();
-    int colorChangeDuration;
 
-protected:
+ protected:
     SDL_Renderer *gRenderer = nullptr;
     LTexture *texture;
     SDL_Point mPosition;
@@ -27,7 +26,8 @@ protected:
 
     std::list<std::function<void(std::string)>> callbacks;
 
-public:
+  int colorChangeDuration;
+ public:
     std::string id;
 
     Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);

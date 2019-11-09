@@ -85,8 +85,8 @@ void Button::set_area(int x, int y) {
 }
 
 void Button::callCallbackFunctions() {
-    for (auto &f : callbacks){
-        f(this->id);
+  for (auto &function : callbacks) {
+    function(this->id);
     }
 }
 
