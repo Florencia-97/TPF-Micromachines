@@ -87,6 +87,11 @@ const int CAR_WIDTH = 100;
 const int CAR_HEIGHT = 170;
 #define PTM 20
 
+//Explosion
+const int EXPLOSION_FRAMES_ROW = 5;
+const int EXPLOSION_FRAMES_COLUMN = 8;
+const int TOTAL_FRAMES = EXPLOSION_FRAMES_COLUMN * EXPLOSION_FRAMES_ROW;
+
 // Range between random seed use for item generation
 const int TIME_FROM_ITEMS = 3;
 const int TIME_TO_ITEMS = 5;

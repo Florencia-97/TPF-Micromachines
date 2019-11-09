@@ -5,14 +5,14 @@
 #include <SDL_events.h>
 #include "rendering/LTexture.h"
 #include "tiles/Tile.h"
-#include "rendering/interfaces/Animation.h"
+#include "rendering/interfaces/Explosion.h"
 
 class Car {
   SDL_Rect mBox;
   int rotation;
   LTexture* texture;
   int health;
-  Animation *explosion;
+  Explosion *explosion;
 
  public:
     short id;
@@ -27,7 +27,7 @@ class Car {
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
 
     void move(int x, int y, int r);
-  void explode(Animation animation, SDL_Renderer *renderer);
+  void explode(Explosion animation, SDL_Renderer *renderer);
     SDL_Texture *get_texture();
 
     ~Car();

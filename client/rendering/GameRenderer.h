@@ -12,13 +12,13 @@
 #include <map>
 #include "../common/infostream/InfoBlock.h"
 #include "../config/constants.h"
-#include "interfaces/Animation.h"
+#include "interfaces/Explosion.h"
 
 class GameRenderer {
     SDL_Rect camera;
     SDL_Renderer *gRenderer;
     TextureLoader tloader;//for map textures
-  Animation explosion;
+  Explosion explosion;
     GameMap map;
     short my_car_id;//position in vector
     std::list<Car> all_cars;

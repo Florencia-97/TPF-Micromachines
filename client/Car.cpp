@@ -11,7 +11,7 @@ Car::Car(short id){
     rotation = 0;
     this->id = id;
   health = 100;
-  explosion = new Animation();
+  explosion = new Explosion();
 }
 
 void Car::addTexture(LTexture *my_texture) {
