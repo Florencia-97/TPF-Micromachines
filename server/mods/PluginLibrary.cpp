@@ -20,7 +20,7 @@ PluginLibrary::PluginLibrary(const char* path) {
 }
 
 void PluginLibrary::runPlugins(){
-    std::vector<int> cars = {12,23,3,2};
+    std::vector<CarStats> cars;
     std::cout << "run plugins\n";
     for (size_t i=0; i< plugins.size(); ++i){
         plugins[i]->plugin->modifyCars(cars);

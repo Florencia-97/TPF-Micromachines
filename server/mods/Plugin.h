@@ -2,6 +2,7 @@
 #define PLUGIN_H
 
 #include <vector>
+#include "../Game/entities/CarStats.h"
 
 class Plugin {
 protected:
@@ -13,11 +14,11 @@ public:
         return;
     }
     //virtual void modifyCars(std::vector<int> cars);
-    virtual void modifyCars(std::vector<int>& cars) {
+    virtual void modifyCars(std::vector<CarStats>& cars) {
         return;
     }
 
-    virtual void modifyWorld(std::vector<int>& world) {
+    virtual void modifyWorld(std::vector<CarStats>& world) {
         return;
     }
 };
