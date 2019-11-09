@@ -5,6 +5,7 @@
 #include <SDL_events.h>
 #include "rendering/LTexture.h"
 #include "tiles/Tile.h"
+#include "rendering/interfaces/Animation.h"
 
 class Car {
   SDL_Rect mBox;
@@ -24,7 +25,7 @@ class Car {
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
 
     void move(int x, int y, int r);
-
+  void explode(Animation animation, SDL_Renderer *renderer);
     SDL_Texture *get_texture();
 
     ~Car();

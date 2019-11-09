@@ -20,7 +20,7 @@ class Animation {
   Animation();
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *gRenderer);
   void load_frames(SDL_Renderer *gRenderer);
-  void play(SDL_Renderer *gRenderer);
+  void play(SDL_Renderer *gRenderer, int x, int y);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_ANIMATION_H_
