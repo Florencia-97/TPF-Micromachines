@@ -69,7 +69,7 @@ InfoBlock GameWorld::status(){
     int cont = 0;
     for (auto & item : dynamic_objs){
         std::string obj_id = std::to_string(cont);
-        item.loadPosToInfoBlock(ib, cont);
+        item->loadPosToInfoBlock(ib, cont);
         cont++;
     }
     return ib;

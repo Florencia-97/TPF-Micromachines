@@ -60,6 +60,7 @@ bool Button::handleEvent(SDL_Event *e, ButtonAnswer *answer) {
           this->texture->set_color(22, 22, 22);
           answer->set_state(true);
           answer->set_color(texture->get_string_name());
+          callCallbackFunctions();
           return true;
         case SDL_MOUSEBUTTONUP:mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
           this->texture->set_color(22, 22, 50);
@@ -80,6 +81,16 @@ void Button::set_area(int x, int y) {
 
 void Button::free_texture() {
   this->texture->free();
+}
+
+void Button::callCallbackFunctions() {
+    for (auto &f : callbacks){
+        f();
+    }
+}
+
+void Button::addCallbackFunction(void (*cf)()) {
+    callbacks.push_back(cf);
 }
 
 

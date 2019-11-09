@@ -11,9 +11,10 @@
 
 #include <SDL_events.h>
 #include <SDL_system.h>
-#include <vector>
+#include <list>
 
 class Button {
+    void callCallbackFunctions();
  protected:
   SDL_Renderer *gRenderer = nullptr;
   LTexture *texture;
@@ -21,11 +22,14 @@ class Button {
   ButtonSprite mCurrentSprite;
   SDL_Rect area;
 
+  std::list<void (*)()> callbacks;
 
  public:
 
   Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
   //Sets top left position
+
+  void addCallbackFunction(void (*cf)());
 
   virtual void setPosition(int x, int y);
 
