@@ -9,6 +9,7 @@
 #include "../common/infostream/InfoBlock.h"
 #include "rendering/interfaces/Menu.h"
 #include "rendering/GameRenderer.h"
+#include "sound_sys/SoundSystem.h"
 #include <SDL2/SDL.h>
 #include <queue>
 #include <atomic>
@@ -18,6 +19,7 @@
 
 class GameLoop : public BaseThread {
     SDLStarter starter;
+    SoundSystem soundSystem;
     int current_frame;
     int state; //thread state
     std::atomic<bool> in_menu;

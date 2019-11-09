@@ -19,6 +19,7 @@ void GameLoop::_run(){
 
     while (this->isAlive()) {
         _runProgram();
+        soundSystem.play();
         this->sleep(timestep);
         float t_elapsed = c.diff();
         timestep = std::max(0.0f,timestep_goal - t_elapsed);
@@ -89,14 +90,16 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &queue,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r,
-                   std::queue<std::string> &sq) :
-                            starter(SCREEN_WIDTH,SCREEN_HEIGHT) {
+                   std::queue<std::string> &sq)
+                   : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
+                     soundSystem(&sq){
     current_frame = 0;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
     soundQueue = &sq;
     starter.init();
+    soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r);
     menu.setMainMenuMode();
     exit = false;

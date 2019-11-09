@@ -12,10 +12,10 @@ class SoundSystem {
     Mix_Music* backgroundMusic;
     std::queue<std::string>* sound_queue;
     bool _controlSound(std::string& event);
-    void _loadSounds();
 public:
     SoundSystem(std::queue<std::string> *sq);
     void play();
+    void init();
     ~SoundSystem();
 };
 
