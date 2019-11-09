@@ -10,7 +10,7 @@ StainAnimation::StainAnimation() {
   this->fading = 255;
 }
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
-  if (!this->texture->load_from_file("client/rendering/assets/decoration/explosion.png", gRenderer)) {
+  if (!this->texture->load_from_file("client/rendering/assets/decoration/stain.png", gRenderer)) {
     printf("Failed to load stain texture!\n");
   }
 }
