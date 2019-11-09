@@ -1,10 +1,5 @@
-//
-// Created by brian on 11/9/19.
-//
-
-#include <zconf.h>
 #include "Animation.h"
-#include "../../../config/constants.h"
+
 void Animation::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) {
   this->actualSprite.render(x, y, clip, 0, nullptr, SDL_FLIP_NONE, renderer);
 }
@@ -23,14 +18,13 @@ void Animation::load_frames(SDL_Renderer *renderer) {
     }
   }
 }
-void Animation::play(SDL_Renderer *gRenderer) {
-  SDL_Rect *currentClip = &totalSprites[frame / TOTAL_FRAMES];
-  this->render((SCREEN_WIDTH - currentClip->w) / 2, (SCREEN_HEIGHT - currentClip->h) / 2, currentClip, gRenderer);
+void Animation::play(SDL_Renderer *gRenderer, int x, int y) {
+  SDL_Rect *currentClip = &totalSprites[frame / 10];
+  this->render(x, y, currentClip, gRenderer);
   ++frame;
   if (frame / TOTAL_FRAMES >= TOTAL_FRAMES) {
     frame = 0;
   }
-  sleep(1 / 60);
 }
 Animation::Animation() {
   frame = 0;

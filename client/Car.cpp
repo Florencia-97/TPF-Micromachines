@@ -50,9 +50,17 @@ Car::~Car() {
         texture->free();
     }
 }
+
 SDL_Texture *Car::get_texture() {
   return this->texture->get_texture();
 }
+
 bool Car::compare_id(short i) {
   return this->id == i;
+}
+
+void Car::explode(Animation animation, SDL_Renderer *renderer) {
+  animation.load_frames(renderer);
+  animation.play(renderer, mBox.x, mBox.y);
+
 }

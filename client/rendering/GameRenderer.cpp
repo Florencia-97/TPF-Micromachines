@@ -21,7 +21,6 @@ void GameRenderer::render(InfoBlock &world_state) {
       }
       car.render(camera, gRenderer);
   }
-  explosion.play(gRenderer);
   SDL_RenderPresent(gRenderer);
 }
 
