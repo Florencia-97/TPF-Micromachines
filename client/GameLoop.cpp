@@ -3,6 +3,7 @@
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){
+    SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE){
         runGame(current_frame);
     } else if (!in_menu.load()){ //if not in menu then in lobby
@@ -25,7 +26,6 @@ void GameLoop::_run(){
         timestep = std::max(0.0f,timestep_goal - t_elapsed);
         c.reset();
         this->current_frame = (current_frame+ std::max(1,(int)(FPS*t_elapsed))) % FPS;
-        //std::cout<<"t: "<<timestep<<" f: "<<current_frame<<std::endl;
     }
     close();
 }
@@ -51,10 +51,11 @@ void GameLoop::runGame(int frame_id){
     }
 
     if (!gameState->exists(GAME_END)) {
-        gameRenderer.render(*gameState);
+        gameRenderer.render(*gameState, frame_id);
         previous_game_state = *gameState;
     } else {
-        std::cout<<gameState->srcString()<<std::endl;
+        menu.displayNotification("RACE OVER!  you came out " +
+                gameState->getString("p"+std::to_string(gameRenderer.my_car_id)));
         state = -1;
         in_menu.store(true);
     }
@@ -105,6 +106,5 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
-    exit = false;
     ready_to_play = &r;
 }

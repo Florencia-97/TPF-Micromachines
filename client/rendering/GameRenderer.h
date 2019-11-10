@@ -21,7 +21,7 @@ class GameRenderer {
     TextureLoader tloader;//for map textures
     Explosion explosion;
     GameMap map;
-    short my_car_id;//position in vector
+    //position in vector
     std::list<Car> all_cars;
     std::list<Item> all_items;
     StainAnimation stain;
@@ -40,8 +40,11 @@ public:
   void init(SDL_Renderer *gr, InfoBlock &game_info);
 
   //pre must be init
-  void render(InfoBlock &inf);
+  void render(InfoBlock &world_state, int frame);
 
+    void updatePlayers(InfoBlock &world_state, int frame);
+
+    short my_car_id;
 };
 
 

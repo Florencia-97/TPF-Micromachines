@@ -12,6 +12,8 @@ std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x, int y, SDL_Rend
     switch (tyleType){
       case GRASS_TILE: key = "grass_tile";
         break;
+      case MUD_TILE: key = "mud_tile";
+        break;
       case straight_road_tile: key = "straight_road_tile";
         break;
       case down_left_road_tile: key = "down_left_road_tile";

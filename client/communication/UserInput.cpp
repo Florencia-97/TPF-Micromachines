@@ -5,17 +5,16 @@
 #include "../../config/constants.h"
 #include "../common/SafeQueue.h"
 
-UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
-                     SafeQueue<InfoBlock> *safeQueueClient,
-                     std::queue<SDL_Event> *mouse_queue,
-                     std::queue<SDL_Event> *text_queue,
-                     std::queue<std::string> *sound_queue) {
+UserInput::UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
+                     std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
+                     std::condition_variable *close_window) {
     // TODO assign to class safeQueue a way of being past without pointer
-    this->keyboard_input = safeQueueServer;
-    this->mouse_input = safeQueueClient;
+    this->keyboard_input = q_keyboard;
     this->mouse_queue = mouse_queue;
     this->writing_queue = text_queue;
     this->sound_queue = sound_queue;
+    this->close_window = close_window;
+    this->exit = false;
     key_pressings[UP] = false;
     key_pressings[DOWN] = false;
     key_pressings[LEFT] = false;
@@ -23,6 +22,7 @@ UserInput::UserInput(SafeQueue<InfoBlock> *safeQueueServer,
 }
 
 void UserInput::_run(){
+    keyboard_input->setOpen(true);
   SDL_StartTextInput();
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";
@@ -37,11 +37,13 @@ void UserInput::_run(){
 void UserInput::_rcvKeyInput(SDL_Event &e){
 
   if (e.type == SDL_QUIT) {
+        exit = true;
         InfoBlock ib;
         ib[ACTION_TYPE] = QUIT;
-        this->mouse_input->push(ib);
+        mouse_queue->push(e);
         this->keyboard_input->push(ib);
         this->close();
+        this->close_window->notify_all();
         return;
     }
     char eventType = '\n';
@@ -123,6 +125,5 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
 
 void UserInput::close() {
     this->keyboard_input->setOpen(false);
-    this->mouse_input->setOpen(false);
     BaseThread::close();
 }

@@ -11,7 +11,7 @@
 #include "../config/tileConstants.h"
 #include <chrono>
 #include <thread>
-#include <Game/entities/PhysicalRoad.h>
+#include <Game/entities/OffRoad.h>
 #include "Game/entities/FinishingLine.h"
 
 
@@ -22,7 +22,7 @@ class GameWorld {
     std::shared_ptr<FinishingLine> finishingLine;
 
     std::list<RaceCar> cars;
-    std::list<PhysicalRoad> road_bodies;
+    std::list<OffRoad> road_bodies;
 
     //static instances are those which  will remain in place
     std::list<std::shared_ptr<Entity>> static_objs;

@@ -1,17 +1,17 @@
 
 
-#ifndef MICROMACHINES_PHYSICALROAD_H
-#define MICROMACHINES_PHYSICALROAD_H
+#ifndef MICROMACHINES_OFFROAD_H
+#define MICROMACHINES_OFFROAD_H
 
 #include "Entity.h"
 #include "../status_effects/SpeedStatusEffect.h"
 
-class PhysicalRoad : public Entity {
+class OffRoad : public Entity {
 public:
     SpeedStatusEffect my_effect;
     std::string id;
 
-    explicit PhysicalRoad(std::string id, b2Body* &newBody);
+    explicit OffRoad(std::string id, b2Body* &newBody);
 
     void resolveCollision(Entity *collidedWith) override;
 
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //MICROMACHINES_PHYSICALROAD_H
+#endif //MICROMACHINES_OFFROAD_H

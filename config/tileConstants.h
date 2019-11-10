@@ -4,7 +4,6 @@
 #define GRASS_TILE 1
 
 // Cement
-#define ROAD_START_TYPE 2
 
 #define straight_road_tile 2
 #define down_left_road_tile 3
@@ -14,7 +13,6 @@
 #define up_right_road_tile 7
 #define straight_vertical_aux_tile 8
 #define straight_horizontal_aux_tile 9
-#define ROAD_END_TYPE 9
 
 // extras
 
@@ -24,5 +22,6 @@
 #define flashy 13
 #define FINISH_LINE_HEIGHT 67
 #define finish_line 14
+#define MUD_TILE 15
 
 // Muddy road

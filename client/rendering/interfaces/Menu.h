@@ -33,6 +33,7 @@ class Menu {
 
   TextLabel label_choose_car;
   TextLabel flavor_text;
+  TextLabel notification;
   TextBox textbox_lobby_name;
 
   void load_media();
@@ -41,6 +42,7 @@ class Menu {
  public:
     std::string car_selected;
     std::string map_selected;
+    bool ready;
 
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
             std::condition_variable *attempConnectionCV, std::queue<std::string> *sq);
@@ -58,8 +60,9 @@ class Menu {
 
   bool processEventsMouse();
 
-    void setMainMenuMode();
+  void setMainMenuMode();
 
+    void displayNotification(std::string msg);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

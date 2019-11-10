@@ -4,7 +4,7 @@
 #define SERVICE "localhost"
 #define PORT "8080"
 #define FPS 40
-#define GAME_DURATION_S 180 //3mins
+#define GAME_DURATION_S 25 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 
@@ -125,7 +125,7 @@ const int ITEM_HEALTH = 4;
 #define MOUSE_MOTION "mouse_motion"
 
 #define MAX_VOLUME_BACKGROUND_SOUND 6
-#define MAX_VOLUME_EFFECTS_SOUND 15
+#define MAX_VOLUME_EFFECTS_SOUND 6
 
 #define SOUND_BACKGROUND "SOUND_BACKGROUND"
 #define SOUND_ON_OFF "SOUND_ON_OFF"

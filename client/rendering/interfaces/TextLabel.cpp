@@ -62,6 +62,7 @@ void TextLabel::_update() {
     if (needed) {
         textTexture.free();
         textTexture.loadFromRenderedText(text, color, font, renderer);
+        updateBounds();
     }
 }
 

@@ -152,6 +152,7 @@ void RaceCar::updateFriction() {
 }
 
 void RaceCar::stepEffects(float timestep) {
+    bool wasAlive = this->car_stats.hp > 0;
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
 
@@ -175,6 +176,9 @@ void RaceCar::stepEffects(float timestep) {
                 i = status_effects.erase(i);
             }
         }
+    }
+    if (this->car_stats.hp < 0 && wasAlive){
+        //boom kill car kaboom
     }
 }
 

@@ -31,6 +31,7 @@ public:
 
     std::queue<T>* getInternalQueue();
 
+    void clean();
 };
 
 template<class T>
@@ -48,8 +49,8 @@ template<class T>
 T SafeQueue<T>::pop() {
     std::unique_lock<std::mutex> lock(this->m);
     while (this->q.empty()){
-        this->cv.wait(lock);
         if (!open) return T();
+        this->cv.wait(lock);
     }
     T comp = this->q.front();
     this->q.pop();
@@ -76,6 +77,11 @@ void SafeQueue<T>::setOpen(bool v) {
 template<class T>
 bool SafeQueue<T>::isEmpty() {
     return this->q.empty();
+}
+
+template<class T>
+void SafeQueue<T>::clean() {
+    while (!q.empty()) q.pop();
 }
 
 #endif //MICROMACHINES_SAFEQUEUE_H
