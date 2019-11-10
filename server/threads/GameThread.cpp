@@ -21,8 +21,10 @@ bool GameThread::_anyPlayersAlive(){
 void GameThread::_killPlayers(bool all){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        if (all || !(it)->isAlive()){
-            if ((it)->isAlive()) (it)->close();
+        if (all || (it)->isAlive()){
+            if ((it)->isAlive()) {
+                (it)->close();
+            }
             it->join();
             it = this->plr_threads.erase(it);
         } else {
@@ -104,24 +106,28 @@ void GameThread::_sendStartMsg(std::string raceId){
         cont++;
         it++;
     }
-    auto i = ib.srcString();
-    int b=1;
 }
 
 void GameThread::_announceWinners() {
-    plr_threads.sort([&](PlayerThread &p1, PlayerThread &p2){
-        return (game.getCar(p1.id).getLaps() > game.getCar(p2.id).getLaps());
+    std::list<int> plrs;
+    for (auto &p : plr_threads){
+        plrs.push_back(p.id);
+    }
+
+    plrs.sort([&](int &p1, int &p2){
+        return (game.getCar(p1).getLaps() > game.getCar(p2).getLaps());
     });
     InfoBlock gameEndStatus;
     gameEndStatus[GAME_END] = 1;
     std::string suffix[3] = {"st","nd","rd"};
     short n = 0;
-    for (auto &p : plr_threads){
+    for (auto &pid : plrs){
         std::string pos = std::to_string(n+1) + ((n > 2) ? "th" : suffix[n]);
-        gameEndStatus["p"+std::to_string(p.id)] = pos;
+        gameEndStatus["p"+std::to_string(pid)] = pos;
         n++;
     }
     _sendAll(gameEndStatus);
+    this->sleep(5);
 }
 
 
@@ -142,7 +148,7 @@ void GameThread::_runGame() {
     Stopwatch c;
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
-    float time_left = GAME_DURATION_S/10.0;
+    float time_left = GAME_DURATION_S/18;
 
     while (this->isAlive()) {
         _processPlayerActions();
@@ -161,12 +167,10 @@ void GameThread::_runGame() {
         auto time_elapsed = c.diff();
         c.reset();
         timestep = std::max(0.0f,timestep_goal- time_elapsed);
-        time_left -= time_elapsed;
-        std::cout<<time_left<<std::endl;
+        time_left -= timestep_goal;
     }
 
-
-    std::cout << "Leaving game" << std::endl;
+    std::cout << "Game end" << std::endl;
 }
 
 void GameThread::_run() {

@@ -34,6 +34,7 @@ namespace {
 GameWorld::GameWorld() : world(b2Vec2(0,0)) {
     world.SetContactListener(&cl);
     finishingLine = nullptr;
+    timeModifiers = 0;
 }
 
 void GameWorld::loadWorld(std::string worldName){
@@ -136,7 +137,7 @@ void GameWorld::createExtras(int x, int y, int tileType) {
 int GameWorld::createCar(InfoBlock carStats) {
     auto fpos = finishingLine->getPosition();
     int size = cars.size();
-    int y = fpos.y - (1 + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
+    int y = fpos.y - (0.25f + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
     int x = fpos.x - CAR_WIDTH/PTM + (2*CAR_WIDTH/PTM)*(size%2);
     b2Body* newBody = makeNewBody(world, b2_dynamicBody,x,y);
     int carId = size;

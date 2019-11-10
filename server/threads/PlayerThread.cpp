@@ -10,8 +10,8 @@ PlayerThread::PlayerThread(Socket &my_skt, InfoBlock& ib) :
 void PlayerThread::_run() {
     std::cout << "New player running\n";
     this->sender.run();
-    bool socketWorking = true;
-    while (this->isAlive() && socketWorking && skt.isValid()){
+    bool socketWorking;
+    while (this->isAlive() && skt.isValid()){
         InfoBlock info;
         socketWorking = Protocol::recvMsg(&skt, info);
         if (socketWorking) this->eventQ.push(info);
@@ -23,8 +23,8 @@ void PlayerThread::_run() {
 
 void PlayerThread::close(){
     if (!this->isAlive()) return;
+    BaseThread::close();
     skt.closeSd();
     sender.close();
     sender.join();
-    BaseThread::close();
 }

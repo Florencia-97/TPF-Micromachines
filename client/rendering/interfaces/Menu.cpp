@@ -63,8 +63,6 @@ void Menu::processEventsKeyboard() {
 
 
 void Menu::render_first_menu() {
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : carButtons) {
       button.render();

@@ -8,8 +8,6 @@ GameRenderer::GameRenderer(){
 }
 
 void GameRenderer::render(InfoBlock &world_state) {
-  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderClear(gRenderer);
   map.render(camera, gRenderer);
   for (auto &car: all_cars) {
       car.move(world_state.get<int>("x"+std::to_string(car.id)),

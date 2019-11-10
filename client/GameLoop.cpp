@@ -3,6 +3,7 @@
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){
+    SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE){
         runGame(current_frame);
     } else if (!in_menu.load()){ //if not in menu then in lobby
@@ -105,4 +106,5 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     menu.setMainMenuMode();
     exit = false;
     ready_to_play = &r;
+    SDL_SetRenderDrawColor(starter.get_global_renderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 }
