@@ -74,10 +74,20 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
   }
   return  false;
 }
-void Button::render() {
+void Button::render(float screenWidth, float screenHeight) {
   if (colorChangeDuration > -1) colorChangeDuration--;
   if (colorChangeDuration == 0) changeColor(255,255,255,-1);
-  SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
+  float widthFactor = float(screenWidth) / oldWidth;
+  float heightFactor = float(screenHeight) / oldHeight;
+  if (widthFactor != 1) {
+    this->area.x *= widthFactor;
+    this->area.y *= heightFactor;
+    this->mPosition.x = this->area.x;
+    this->mPosition.y = this->area.y;
+    oldWidth = screenWidth;
+    oldHeight = screenHeight;
+  }
+  texture->render_with_size(area.x, area.y, 0, gRenderer, area.w, area.h, false);
 }
 
 void Button::set_area(int x, int y) {
@@ -104,7 +114,9 @@ Button::Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSprit
     colorChangeDuration = -1;
     this->texture = buttonSpriteSheet;
     this->gRenderer = sdl_renderer;
-    this->id = id; 
+  this->id = id;
+  oldWidth = SCREEN_WIDTH;
+  oldHeight = SCREEN_HEIGHT;
 }
 
 

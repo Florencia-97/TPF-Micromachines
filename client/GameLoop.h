@@ -27,7 +27,8 @@ class GameLoop : public BaseThread {
     std::condition_variable* ready_to_play;
     GameMap map;
     GameRenderer gameRenderer;
-
+  int screenWidth;
+  int screenHeight;
     void _runProgram();
 
     void _run() override;

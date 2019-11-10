@@ -10,7 +10,7 @@ void ConnectButton::set_area(int x, int y) {
   area = {x, y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT};
 }
 
-void ConnectButton::render() {
+void ConnectButton::render(float screenWidth, float screenHeight) {
   if (colorChangeDuration > -1) colorChangeDuration--;
   if (colorChangeDuration == 0) changeColor(255, 255, 255, -1);
   SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);

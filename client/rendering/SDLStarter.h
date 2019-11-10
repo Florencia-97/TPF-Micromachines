@@ -22,6 +22,7 @@ class SDLStarter {
       renderer(nullptr) {};
   bool init();
   SDL_Renderer *get_global_renderer();
+  void get_screen_dimensions(int *width, int *height);
   void close();
 
 };

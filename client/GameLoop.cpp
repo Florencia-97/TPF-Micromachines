@@ -33,7 +33,8 @@ void GameLoop::_run(){
 void GameLoop::runMenu(int frame_id) {
     menu.processEventsMouse();
     menu.processEventsKeyboard();
-    menu.render_first_menu();
+  starter.get_screen_dimensions(&screenWidth, &screenHeight);
+  menu.render_first_menu(screenWidth, screenHeight);
 }
 
 void GameLoop::runGame(int frame_id){
@@ -71,7 +72,8 @@ void GameLoop::runLobby(int frame_id) {
         }
         renderQueue->pop();
     }
-  menu.render_first_menu();//todo render lobby instead
+  starter.get_screen_dimensions(&screenWidth, &screenHeight);
+  menu.render_first_menu(screenWidth, screenHeight);//todo render lobby instead
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {

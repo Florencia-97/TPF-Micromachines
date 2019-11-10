@@ -24,7 +24,8 @@ class Button {
     SDL_Point mPosition;
     SDL_Rect area;
     std::list<std::function<void(std::string)>> callbacks;
-
+  float oldWidth;
+  float oldHeight;
   int colorChangeDuration;
  public:
     std::string id;
@@ -41,7 +42,7 @@ class Button {
     //Handles mouse event. If the button is clicked, returns true
     virtual bool handleEvent(SDL_Event *e, std::queue<std::string>* soundQueue);
 
-    virtual void render();
+  virtual void render(float screenWidth, float screenHeight);
 
     virtual void set_area(int x, int y);
 
