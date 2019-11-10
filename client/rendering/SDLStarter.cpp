@@ -26,6 +26,8 @@ bool SDLStarter::init() {
       printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
       success = false;
     } else {
+        icon = IMG_Load("client/rendering/assets/decoration/icon.png");
+        SDL_SetWindowIcon(window, icon);
       renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
       if (renderer == nullptr) {
         printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
@@ -58,6 +60,7 @@ SDL_Renderer *SDLStarter::get_global_renderer() {
 
 void SDLStarter::close() {
   //Destroy window
+  if (icon != nullptr) SDL_FreeSurface(icon);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   window = nullptr;
