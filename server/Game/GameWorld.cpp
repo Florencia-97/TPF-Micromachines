@@ -127,14 +127,21 @@ void GameWorld::createExtras(int x, int y, int tileType) {
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,50 + cars.size()*150,50+cars.size()*150);
-    int carId = cars.size();
+    auto fpos = finishingLine->getPosition();
+    int size = cars.size();
+    int y = fpos.y - cars.size()*CAR_HEIGHT/PTM;
+    int x = fpos.x - CAR_WIDTH/PTM + (2*CAR_WIDTH/PTM)*(size%2);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,x,y);
+    int carId = size;
     cars.emplace_back(carId, carStats, newBody);
     newBody->SetBullet(true);
 
     createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
     createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
+
+    auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(10));
+    cars.back().addEffect(ptr);
     return carId;
 }
 
