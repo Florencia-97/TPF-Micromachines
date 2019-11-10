@@ -14,6 +14,8 @@ public:
     double after_effect{0};//duration after duration
     int n_stacks{0};
     bool apply_on_remove{false};
+    bool apply_on_acquire{false};
+    bool applied{false};
     std::string id;
 
     virtual void applyEffect(CarStats &entity){};

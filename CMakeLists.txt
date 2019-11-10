@@ -44,7 +44,12 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h
 		server/mods/Plugin.h
 		server/mods/PluginLoader.cpp server/mods/PluginLoader.h
-		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h server/Game/status_effects/LapCooldown.h server/Game/entities/FinishingLine.cpp server/Game/entities/FinishingLine.h)
+		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h
+		server/Game/status_effects/LapCooldown.h
+		server/Game/entities/FinishingLine.cpp server/Game/entities/FinishingLine.h
+		server/Game/entities/items/ItemBoost.cpp server/Game/entities/items/ItemBoost.h
+		server/Game/entities/items/ItemCreator.cpp server/Game/entities/items/ItemCreator.h
+		server/Game/entities/items/ItemRock.cpp server/Game/entities/items/ItemRock.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
@@ -79,7 +84,11 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/TextLabel.cpp client/rendering/interfaces/TextLabel.h
 		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h
 		client/rendering/interfaces/TextBox.cpp client/rendering/interfaces/TextBox.h
-		client/sound_sys/SoundSystem.cpp client/sound_sys/SoundSystem.h client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h)
+		client/sound_sys/SoundSystem.cpp client/sound_sys/SoundSystem.h
+		client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h
+		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
+		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
+		client/Item.cpp client/Item.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

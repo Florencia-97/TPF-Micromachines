@@ -25,7 +25,7 @@ public:
 
     virtual void endContact(Entity *wasTouching){};
 
-    virtual void addEffect(std::shared_ptr<StatusEffect> &newStatusEffect){};
+    virtual bool addEffect(std::shared_ptr<StatusEffect> &newStatusEffect){return false;};
 
     virtual void removeEffect(std::string effectId){};
 
@@ -35,7 +35,7 @@ public:
 
     float32 getAngle();
 
-    void loadPosToInfoBlock(InfoBlock& ib, int cont);
+    void loadPosToInfoBlock(InfoBlock& ib);
 
     void attachFixture(b2FixtureDef &boxFixtureDef);
 };

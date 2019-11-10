@@ -1,5 +1,3 @@
-
-
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
 #include "../../config/constants.h"
@@ -22,18 +20,32 @@ void GameRenderer::render(InfoBlock &world_state) {
       }
       car.render(camera, gRenderer);
   }
+  // TODO: We have to load items as they come! (dont really know were that should go)
+  for (auto &item: all_items){
+      item.render(camera, gRenderer);
+  }
   //explosion.play(gRenderer,0,0);
-  stain.play(gRenderer, 0, 0);
+  //stain.play(gRenderer, 0, 0);
   SDL_RenderPresent(gRenderer);
 
+  laps.render();
+  timer.render();
+  health.render();
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     gRenderer = gr;
-  explosion.load_frames(gRenderer);
-  stain.load_frames(gRenderer);
+    explosion.load_frames(gRenderer);
+    stain.load_frames(gRenderer);
     loadCars(game_info);
     map.loadMap("maps/" + game_info.getString(RACE_ID)+".yaml", gRenderer);
+
+    SDL_Color w = {255, 255, 255, 0xFF};
+
+    laps.init("0 LAPS", SCREEN_WIDTH - 100, 200, 28, w, gRenderer);
+    timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 150, 35, w, gRenderer);
+    auto text = "HP " + game_info.getString("h"+std::to_string(my_car_id));
+    health.init(text, 100, 200, 28, w, gRenderer);
 }
 
 void GameRenderer::loadCars(InfoBlock &cars_info) {
@@ -46,7 +58,6 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
                 cars_info.exists("x" + id) ? cars_info.get<int>("x" + id) : 0,
                 cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
                 cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
-
         
         auto cartype = cars_info.getString(CAR_TYPE+id);
         std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);

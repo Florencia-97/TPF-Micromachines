@@ -28,9 +28,10 @@ float32 Entity::getAngle(){
     return body->GetAngle();
 }
 
-void Entity::loadPosToInfoBlock(InfoBlock& ib, int cont){
+void Entity::loadPosToInfoBlock(InfoBlock& ib){
+    // TODO: for items we need the id, for client to know what to draw!
     auto pos = body->GetPosition();
-    std::string itemId = std::to_string(cont);
+    std::string itemId = "1"; // hardcoded for now
     ib["Ox" + itemId] = (int)std::round(pos.x);
     ib["Oy" + itemId] = (int)std::round(pos.y);
     //ib["Or" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);

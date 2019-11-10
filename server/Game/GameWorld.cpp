@@ -53,7 +53,9 @@ void GameWorld::loadWorld(std::string worldName){
             if (row[i] == finish_line){
                 createFinishingLine(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2);
             }
-            //createExtras(i* TILE_SIZE, j* TILE_SIZE, row[i]);
+            else if (row[i] == pavilion_blue_tile) {
+                createExtras(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
+            }
         }
     }
 }
@@ -65,32 +67,29 @@ InfoBlock GameWorld::status(){
         std::string car_id = std::to_string(car.id);
         car.loadStateToInfoBlock(ib);
     }
-    ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
-    int cont = 0;
+    ib[OBJECTS_AMOUNT] = this->dynamic_objs.size();
     for (auto & item : dynamic_objs){
-        std::string obj_id = std::to_string(cont);
-        item->loadPosToInfoBlock(ib, cont);
-        cont++;
+        item->loadPosToInfoBlock(ib);
     }
     return ib;
 }
 
-void GameWorld::processEvent(int id, InfoBlock event){
+void GameWorld::processEvent(int id, InfoBlock &event){
     getCar(id).drive(event);
 }
 
-void GameWorld::Step(float timestep) {
+void GameWorld::Step(float timeStep) {
     for (auto & car : cars){
-        car.step(timestep);
+        car.step(timeStep);
     }
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
-    world.Step(timestep, velocityIterations, positionIterations);
-    this->timeModifiers += timestep;
+    world.Step(timeStep, velocityIterations, positionIterations);
+    this->timeModifiers += timeStep;
 
     // TODO: make this random maybe a little better, Flor task
     // We create random items
-    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS; // Use Constants
+    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS;
     if ( (int) this->timeModifiers > randomTime){
         std::cout << "We generate random item\n";
         _createItem();
@@ -107,34 +106,49 @@ RaceCar &GameWorld::getCar(int id) {
 }
 
 void GameWorld::_createItem(){
-    // TODO: we pass to body the tipe of entity we want?
-    //b2Body* body = new b2Body();
-    //this->dynamic_objs.emplace_back(body);
-    return;
+    // TODO: Super hardcoded, x and y should be random but inside the road
+    int x = 50;
+    int y = 30;
+    b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
+    auto ptr = std::make_shared<Entity>(newBody);
+    // auto ptr = itemCreator.createItem(newBody);
+    this->dynamic_objs.push_back(ptr);
+    createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
+    if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
+        this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
+    }
 }
 
-
+// TODO: If we dont use them, remove tileType as parameter
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
+    this->road_bodies.emplace_back("road",newBody);
     createAndAddFixture(&(this->road_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
 }
 
 void GameWorld::createExtras(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    //this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
-    //createAndAddFixture(&(this->road_bodies.back()), TILE_SIZE, TILE_SIZE, 0, TILE, SENSOR, false);
+    auto ptr = std::make_shared<Entity>(newBody);
+    this->static_objs.push_back(ptr);
+    createAndAddFixture(this->static_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, PLAYER, false);
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
-    b2Body* newBody = makeNewBody(world, b2_dynamicBody,50 + cars.size()*150,50+cars.size()*150);
-    int carId = cars.size();
+    auto fpos = finishingLine->getPosition();
+    int size = cars.size();
+    int y = fpos.y - (1 + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
+    int x = fpos.x - CAR_WIDTH/PTM + (2*CAR_WIDTH/PTM)*(size%2);
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody,x,y);
+    int carId = size;
     cars.emplace_back(carId, carStats, newBody);
     newBody->SetBullet(true);
 
     createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
     createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
+
+    auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(10));
+    cars.back().addEffect(ptr);
     return carId;
 }
 

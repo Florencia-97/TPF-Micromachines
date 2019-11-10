@@ -82,7 +82,7 @@ void GameThread::_createCars(){
     }
 }
 
-void GameThread::_sendAll(InfoBlock ib) {
+void GameThread::_sendAll(InfoBlock &ib) {
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         (it)->sender.to_send.push(ib);
@@ -97,6 +97,7 @@ void GameThread::_sendStartMsg(std::string raceId){
     auto it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = cont;
+        it->id = cont;
         std::string carType = (!it->car_type.empty()) ? it->car_type : "RED_CAR";
         ib[CAR_TYPE + std::to_string(cont)] = carType;
         (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
@@ -106,6 +107,23 @@ void GameThread::_sendStartMsg(std::string raceId){
     auto i = ib.srcString();
     int b=1;
 }
+
+void GameThread::_announceWinners() {
+    plr_threads.sort([&](PlayerThread &p1, PlayerThread &p2){
+        return (game.getCar(p1.id).getLaps() > game.getCar(p2.id).getLaps());
+    });
+    InfoBlock gameEndStatus;
+    gameEndStatus[GAME_END] = 1;
+    std::string suffix[3] = {"st","nd","rd"};
+    short n = 0;
+    for (auto &p : plr_threads){
+        std::string pos = std::to_string(n+1) + ((n > 2) ? "th" : suffix[n]);
+        gameEndStatus["p"+std::to_string(p.id)] = pos;
+        n++;
+    }
+    _sendAll(gameEndStatus);
+}
+
 
 void GameThread::_processPlayerActions(){
     int j = rand()%plr_threads.size(); // Rand between 0 and size of plr_threads
@@ -124,19 +142,30 @@ void GameThread::_runGame() {
     Stopwatch c;
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
+    float time_left = GAME_DURATION_S/10.0;
 
     while (this->isAlive()) {
         _processPlayerActions();
-        if (_anyPlayersAlive()){
+        if (_anyPlayersAlive() && time_left > 0){
+
             this->game.Step(timestep_goal);
-            _sendAll(this->game.status());
+            auto gameStatus = this->game.status();
+            gameStatus[TIME_LEFT] = (int)time_left;
+            _sendAll(gameStatus);
             this->sleep(timestep);
+
         } else {
+            if (time_left <= 0) _announceWinners();
             close();
         }
-        timestep = std::max(0.0f,timestep_goal-c.diff());
+        auto time_elapsed = c.diff();
         c.reset();
+        timestep = std::max(0.0f,timestep_goal- time_elapsed);
+        time_left -= time_elapsed;
+        std::cout<<time_left<<std::endl;
     }
+
+
     std::cout << "Leaving game" << std::endl;
 }
 
@@ -150,8 +179,8 @@ void GameThread::_run() {
         this->plr_threads.front().car_type = ownerInfo.getString(CAR_TYPE);
         this->plr_threads.front().run();
         // TODO: Clean queues: idea, send an event that breaks lobby mode?
-        _createCars();
         this->game.loadWorld(mapName);
+        _createCars();
         _sendStartMsg(mapName);
         _runGame();
     }

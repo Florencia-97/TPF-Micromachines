@@ -12,6 +12,6 @@ void ConnectButton::set_area(int x, int y) {
 
 void ConnectButton::render() {
   if (colorChangeDuration > -1) colorChangeDuration--;
-  if (colorChangeDuration == 0) changeColor(255, 2, 255, -1);
+  if (colorChangeDuration == 0) changeColor(255, 255, 255, -1);
   SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
 }

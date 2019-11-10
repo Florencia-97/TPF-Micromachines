@@ -49,10 +49,11 @@ void GameLoop::runGame(int frame_id){
         gameState = &renderQueue->front();
     }
 
-    if (!gameState->exists("game_end")) {
+    if (!gameState->exists(GAME_END)) {
         gameRenderer.render(*gameState);
         previous_game_state = *gameState;
     } else {
+        std::cout<<gameState->srcString()<<std::endl;
         state = -1;
         in_menu.store(true);
     }
@@ -100,7 +101,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     soundQueue = &sq;
     starter.init();
     soundSystem.init();
-    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r);
+    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
     exit = false;
     ready_to_play = &r;

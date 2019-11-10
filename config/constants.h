@@ -4,14 +4,17 @@
 #define SERVICE "localhost"
 #define PORT "8080"
 #define FPS 40
+#define GAME_DURATION_S 180 //3mins
+#define TIME_LEFT "tl"
+#define GAME_END "GG"
 
 // First msg
-#define ARENA_GAME "GAME_ARENA"
-#define CAR_TYPE "CAR_TYPE"
+#define ARENA_GAME "GA"
+#define CAR_TYPE "CT"
 
 
 // Selecting race
-#define RACE_ID "RACE_ID"
+#define RACE_ID "RI"
 
 // Game connected
 #define CONNECTED_TO_GAME "CONNECTED_TO_GAME"
@@ -19,21 +22,21 @@
 #define CONNECTED_TO_GAME_YES "CONNECTED"
 
 // Game owner
-#define OWNER "OWNER"
-#define OWNER_YES "YES"
-#define OWNER_NO "NO"
+#define OWNER "O"
+#define OWNER_YES "Y"
+#define OWNER_NO "N"
 
 // Msg starting race!
 // race_id already defined
-#define MY_ID "MY_ID"
-#define PLAYERS_AMOUNT "PLAYERS_AMOUNT"
+#define MY_ID "MID"
+#define PLAYERS_AMOUNT "PAM"
 
 // Status world
-#define OBJECTS_AMOUNT "OBJECTS_AMOUNT"
-#define HEALTH "HEALTH"
-#define MAX_SPEED "MAX_SPEED"
-#define ACCELERATION "ACELERATION"
-#define ROTATION_FORCE "ROTATION_MAX"
+#define OBJECTS_AMOUNT "OAM"
+#define HEALTH "HE"
+#define MAX_SPEED "MS"
+#define ACCELERATION "ACC"
+#define ROTATION_FORCE "ROT"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
@@ -93,8 +96,20 @@ const int EXPLOSION_FRAMES_COLUMN = 8;
 const int TOTAL_FRAMES = EXPLOSION_FRAMES_COLUMN * EXPLOSION_FRAMES_ROW;
 
 // Range between random seed use for item generation
-const int TIME_FROM_ITEMS = 3;
-const int TIME_TO_ITEMS = 5;
+const int TIME_FROM_ITEMS = 5;
+const int TIME_TO_ITEMS = 8;
+const int MAX_AMOUNT_OBJECTS = 5;
+
+// Items
+const int ITEM_HEIGHT = 60;
+const int ITEM_WIDTH = 60;
+const int ITEMS_AMOUNT = 5;
+const int ITEM_BOOST = 0;
+const int ITEM_ROCK = 1;
+const int ITEM_OIL = 2;
+const int ITEM_MUD = 3;
+const int ITEM_HEALTH = 4;
+
 
 // Events
 #define ACTION_TYPE "key"
@@ -115,8 +130,10 @@ const int TIME_TO_ITEMS = 5;
 #define SOUND_BACKGROUND "SOUND_BACKGROUND"
 #define SOUND_ON_OFF "SOUND_ON_OFF"
 #define SOUND_CAR_STOP "SOUND_CAR_STOP"
+#define SOUND_CAR_STOP_NO "SOUND_CAR_STOP_NO"
 #define SOUND_CAR_RUN "SOUND_CAR_RUN"
 #define SOUND_STOP_CAR_RUN "SOUND_STOP_CAR_RUN"
+#define SOUND_CAR_GEAR "SOUND_CAR_GEAR"
 #define SOUND_CAR_START "SOUND_CAR_START"
 #define SOUND_CAR_HORN "SOUND_CAR_HORN"
 

@@ -35,13 +35,13 @@ public:
     //POS creates a world with no gravity for top-down action
     GameWorld();
     int createCar(InfoBlock carStats);
-    void processEvent(int car_id, InfoBlock event);
+    void processEvent(int id, InfoBlock &event);
     RaceCar& getCar(int id);
     void loadWorld(std::string);
     InfoBlock status();
 
     //POS advances the simulation and all instances within one timestep
-    void Step(float timestep);
+    void Step(float timeStep);
     void createRoad(int x, int y, int tileId); //yaml &stats?
     void createExtras(int x, int y, int tileId);
 

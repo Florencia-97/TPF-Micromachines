@@ -13,6 +13,7 @@
 #include <SDL_system.h>
 #include <list>
 #include <functional>
+#include <queue>
 
 class Button {
     void callCallbackFunctions();
@@ -21,14 +22,13 @@ class Button {
     SDL_Renderer *gRenderer = nullptr;
     LTexture *texture;
     SDL_Point mPosition;
-  SDL_Rect area;
-
+    SDL_Rect area;
     std::list<std::function<void(std::string)>> callbacks;
 
   int colorChangeDuration;
  public:
     std::string id;
-
+    std::string soundWhenPressed;
     explicit Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
 
     explicit Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
@@ -39,7 +39,7 @@ class Button {
     virtual void setPosition(int x, int y);
 
     //Handles mouse event. If the button is clicked, returns true
-    virtual bool handleEvent(SDL_Event *e);
+    virtual bool handleEvent(SDL_Event *e, std::queue<std::string>* soundQueue);
 
     virtual void render();
 
