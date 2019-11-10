@@ -1,5 +1,3 @@
-
-
 #ifndef MICROMACHINES_GAMERENDERER_H
 #define MICROMACHINES_GAMERENDERER_H
 
@@ -15,6 +13,7 @@
 #include "interfaces/Explosion.h"
 #include "interfaces/StainAnimation.h"
 #include "interfaces/TextLabel.h"
+#include "../Item.h"
 
 class GameRenderer {
     SDL_Rect camera;
@@ -24,6 +23,7 @@ class GameRenderer {
     GameMap map;
     short my_car_id;//position in vector
     std::list<Car> all_cars;
+    std::list<Item> all_items;
     StainAnimation stain;
 
     TextLabel timer;

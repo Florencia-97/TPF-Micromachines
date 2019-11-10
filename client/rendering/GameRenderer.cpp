@@ -1,5 +1,3 @@
-
-
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
 #include "../../config/constants.h"
@@ -21,6 +19,10 @@ void GameRenderer::render(InfoBlock &world_state) {
           car.setCamera(camera, map.width, map.height);
       }
       car.render(camera, gRenderer);
+  }
+  // TODO: We have to load items as they come! (dont really know were that should go)
+  for (auto &item: all_items){
+      item.render(camera, gRenderer);
   }
   //explosion.play(gRenderer,0,0);
   //stain.play(gRenderer, 0, 0);
@@ -56,7 +58,6 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
                 cars_info.exists("x" + id) ? cars_info.get<int>("x" + id) : 0,
                 cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
                 cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
-
         
         auto cartype = cars_info.getString(CAR_TYPE+id);
         std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);

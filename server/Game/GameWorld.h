@@ -41,7 +41,7 @@ public:
     InfoBlock status();
 
     //POS advances the simulation and all instances within one timestep
-    void Step(float timestep);
+    void Step(float timeStep);
     void createRoad(int x, int y, int tileId); //yaml &stats?
     void createExtras(int x, int y, int tileId);
 

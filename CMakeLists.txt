@@ -87,7 +87,8 @@ set(CLIENT_SOURCE_FILES
 		client/sound_sys/SoundSystem.cpp client/sound_sys/SoundSystem.h
 		client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h
 		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
-		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h)
+		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
+		client/Item.cpp client/Item.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

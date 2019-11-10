@@ -78,14 +78,14 @@ void GameWorld::processEvent(int id, InfoBlock &event){
     getCar(id).drive(event);
 }
 
-void GameWorld::Step(float timestep) {
+void GameWorld::Step(float timeStep) {
     for (auto & car : cars){
-        car.step(timestep);
+        car.step(timeStep);
     }
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
-    world.Step(timestep, velocityIterations, positionIterations);
-    this->timeModifiers += timestep;
+    world.Step(timeStep, velocityIterations, positionIterations);
+    this->timeModifiers += timeStep;
 
     // TODO: make this random maybe a little better, Flor task
     // We create random items
@@ -119,7 +119,7 @@ void GameWorld::_createItem(){
     }
 }
 
-
+// TODO: If we dont use them, remove tileType as parameter
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     this->road_bodies.emplace_back("road",newBody);

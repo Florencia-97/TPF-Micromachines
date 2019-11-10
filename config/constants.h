@@ -101,6 +101,8 @@ const int TIME_TO_ITEMS = 8;
 const int MAX_AMOUNT_OBJECTS = 5;
 
 // Items
+const int ITEM_HEIGHT = 60;
+const int ITEM_WIDTH = 60;
 const int ITEMS_AMOUNT = 5;
 const int ITEM_BOOST = 0;
 const int ITEM_ROCK = 1;
