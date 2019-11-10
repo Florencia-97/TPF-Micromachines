@@ -71,7 +71,7 @@ void Menu::render_first_menu(int screenWidth, int screenHeight) {
     label_choose_car.render();
     textbox_lobby_name.render();
     flavor_text.render();
-  connectButton->render(screenHeight, screenHeight);
+  connectButton->render(screenWidth, screenHeight);
     SDL_RenderPresent(gRenderer);
 }
 
