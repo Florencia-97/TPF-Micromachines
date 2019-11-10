@@ -4,14 +4,17 @@
 #define SERVICE "localhost"
 #define PORT "8080"
 #define FPS 40
+#define GAME_DURATION_S 180 //3mins
+#define TIME_LEFT "tl"
+#define GAME_END "GG"
 
 // First msg
-#define ARENA_GAME "GAME_ARENA"
-#define CAR_TYPE "CAR_TYPE"
+#define ARENA_GAME "GA"
+#define CAR_TYPE "CT"
 
 
 // Selecting race
-#define RACE_ID "RACE_ID"
+#define RACE_ID "RI"
 
 // Game connected
 #define CONNECTED_TO_GAME "CONNECTED_TO_GAME"
@@ -19,21 +22,21 @@
 #define CONNECTED_TO_GAME_YES "CONNECTED"
 
 // Game owner
-#define OWNER "OWNER"
-#define OWNER_YES "YES"
-#define OWNER_NO "NO"
+#define OWNER "O"
+#define OWNER_YES "Y"
+#define OWNER_NO "N"
 
 // Msg starting race!
 // race_id already defined
-#define MY_ID "MY_ID"
-#define PLAYERS_AMOUNT "PLAYERS_AMOUNT"
+#define MY_ID "MID"
+#define PLAYERS_AMOUNT "PAM"
 
 // Status world
-#define OBJECTS_AMOUNT "OBJECTS_AMOUNT"
-#define HEALTH "HEALTH"
-#define MAX_SPEED "MAX_SPEED"
-#define ACCELERATION "ACELERATION"
-#define ROTATION_FORCE "ROTATION_MAX"
+#define OBJECTS_AMOUNT "OAM"
+#define HEALTH "HE"
+#define MAX_SPEED "MS"
+#define ACCELERATION "ACC"
+#define ROTATION_FORCE "ROT"
 
 // Error tipe
 #define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"

@@ -32,12 +32,14 @@ public:
     //PRE info block must contain the user key inputs to convert into accel direction
     //under the names key1, key2
     //POS interprets the keys and calculateAccel() in the given direction
-    void drive(InfoBlock keys);
+    void drive(InfoBlock &keys);
 
     //POS the car takes damage and returns true if life went below 0
     bool takeDamage(int dmg);
 
     bool isDead();
+
+    int getLaps();
 
     //POS parses the car's current status into an infoblock with keys
     // {x, y, r, hp}

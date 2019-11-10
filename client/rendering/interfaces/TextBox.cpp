@@ -39,6 +39,7 @@ void TextBox::receiveInput(SDL_Event *e) {
     }
     if (renderText) {
         //Text is not empty
+        textTexture.free();
         if (!text.empty()) {
             //Render new text
             textTexture.loadFromRenderedText(text, color, font, renderer);

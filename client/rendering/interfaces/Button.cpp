@@ -64,7 +64,6 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
         case SDL_MOUSEMOTION:;
           return false;
         case SDL_MOUSEBUTTONDOWN:;
-          this->changeColor(100, 100, 100, 200);
           sq->push(this->soundWhenPressed);
           callCallbackFunctions();
           return true;

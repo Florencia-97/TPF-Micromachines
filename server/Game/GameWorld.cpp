@@ -77,7 +77,7 @@ InfoBlock GameWorld::status(){
     return ib;
 }
 
-void GameWorld::processEvent(int id, InfoBlock event){
+void GameWorld::processEvent(int id, InfoBlock &event){
     getCar(id).drive(event);
 }
 
@@ -118,7 +118,7 @@ void GameWorld::_createItem(){
 
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
+    this->road_bodies.emplace_back("road",newBody);
     createAndAddFixture(&(this->road_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
 }
 
@@ -132,7 +132,7 @@ void GameWorld::createExtras(int x, int y, int tileType) {
 int GameWorld::createCar(InfoBlock carStats) {
     auto fpos = finishingLine->getPosition();
     int size = cars.size();
-    int y = fpos.y - cars.size()*CAR_HEIGHT/PTM;
+    int y = fpos.y - (1 + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
     int x = fpos.x - CAR_WIDTH/PTM + (2*CAR_WIDTH/PTM)*(size%2);
     b2Body* newBody = makeNewBody(world, b2_dynamicBody,x,y);
     int carId = size;

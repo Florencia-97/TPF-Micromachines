@@ -35,7 +35,7 @@ public:
     //POS creates a world with no gravity for top-down action
     GameWorld();
     int createCar(InfoBlock carStats);
-    void processEvent(int car_id, InfoBlock event);
+    void processEvent(int id, InfoBlock &event);
     RaceCar& getCar(int id);
     void loadWorld(std::string);
     InfoBlock status();

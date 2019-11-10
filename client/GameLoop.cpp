@@ -49,7 +49,7 @@ void GameLoop::runGame(int frame_id){
         gameState = &renderQueue->front();
     }
 
-    if (!gameState->exists("game_end")) {
+    if (!gameState->exists(GAME_END)) {
         gameRenderer.render(*gameState);
         previous_game_state = *gameState;
     } else {

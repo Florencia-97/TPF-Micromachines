@@ -39,9 +39,9 @@ void RaceCar::step(float timestep){
     car_stats.step();
     stepEffects(timestep);
 
-    if (isDead())return;
     updateFriction();
 
+    if (isDead())return;
     auto spd = calculateForwardImpulse();
      if (spd > 15 || spd < -15){
         float desiredTorque = car_stats.rot_force * steer_dir.y * this->body->GetMass();
@@ -88,9 +88,10 @@ void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     ib["x" + autoId] = (int)std::round(pos.x*PTM);
     ib["y" + autoId] = (int)std::round(pos.y*PTM);
     ib["r" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);
+    ib["l" + autoId] = car_stats.laps;
 }
 
-void RaceCar::drive(InfoBlock keys){
+void RaceCar::drive(InfoBlock &keys){
     auto key1 =(keys.exists(ACTION_TYPE)) ? keys.get<char>(ACTION_TYPE) : '\n';
     auto key2 =(keys.exists(ACTION_TYPE_DOWN)) ? keys.get<char>(ACTION_TYPE_DOWN) : '\n';
     b2Vec2 v1 = processKey(key1);
@@ -176,4 +177,8 @@ void RaceCar::stepEffects(float timestep) {
             }
         }
     }
+}
+
+int RaceCar::getLaps() {
+    return this->car_stats.laps;
 }

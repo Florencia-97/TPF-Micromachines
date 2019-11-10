@@ -25,13 +25,15 @@ class GameThread : public BaseThread {
     std::string _runLobby();
     void _runGame();
     void _sendStartMsg(std::string raceId);
-    void _sendAll(InfoBlock ib);
+    void _sendAll(InfoBlock &ib);
     void _createCars();
 
     //POS returns true if there is at least 1 player still connected
     bool _anyPlayersAlive();
 
     void _processPlayerActions();
+
+    void _announceWinners();
 
 public:
     std::string gameName;
@@ -49,6 +51,7 @@ public:
     void addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
 
     ~GameThread();
+
 };
 
 
