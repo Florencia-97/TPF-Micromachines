@@ -9,7 +9,7 @@ class ConnectButton : public Button {
  public:
   ConnectButton(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
   void set_area(int x, int y) override;
-  void render() override;
+  void render(float screenWidth, float screenHeight) override;
 
 };
 

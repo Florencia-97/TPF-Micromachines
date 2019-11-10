@@ -26,6 +26,8 @@ class GameLoop : public BaseThread {
     std::condition_variable* ready_to_play;
     GameMap map;
     GameRenderer gameRenderer;
+    int screenWidth;
+    int screenHeight;
     bool ready;
 
     void _runProgram();

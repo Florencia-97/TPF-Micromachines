@@ -71,3 +71,7 @@ void SDLStarter::close() {
   IMG_Quit();
   SDL_Quit();
 }
+
+void SDLStarter::get_screen_dimensions(int *width, int *height) {
+  SDL_GetWindowSize(window, width, height);
+}

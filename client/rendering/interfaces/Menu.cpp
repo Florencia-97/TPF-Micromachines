@@ -69,17 +69,18 @@ void Menu::processEventsKeyboard() {
   textbox_lobby_name.updateBounds();
 }
 
-
-void Menu::render_first_menu() {
+void Menu::render_first_menu(int screenWidth, int screenHeight) {
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : carButtons) {
-      button.render();
+      button.render(screenWidth, screenHeight);
     }
     label_choose_car.render();
     textbox_lobby_name.render();
     flavor_text.render();
     notification.render();
-    connectButton->render();
+    connectButton->render(screenHeight, screenHeight);
     SDL_RenderPresent(gRenderer);
 }
 
@@ -92,7 +93,7 @@ void Menu::dummy_init_as_leader() {
   msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
   msg.render_with_size(720, 500, 0, gRenderer, 800, 500,false);
   for (auto &button : mapButtons) {
-    button.render();
+    //button.render();
   }
   SDL_RenderPresent(gRenderer);
 }

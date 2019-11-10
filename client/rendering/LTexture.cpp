@@ -81,9 +81,15 @@ int LTexture::getWidth() {
 SDL_Texture *LTexture::get_texture() {
   return this->texture;
 }
-void LTexture::render_with_size(int x, int y, int r, SDL_Renderer *renderer, int widthParam, int heightParam, bool id) {
+void LTexture::render_with_size(float x,
+                                float y,
+                                int r,
+                                SDL_Renderer *renderer,
+                                int widthParam,
+                                int heightParam,
+                                bool id) {
   if (!id) {
-    SDL_Rect area = {x, y, widthParam, heightParam};
+    SDL_Rect area = {static_cast<int>(x), static_cast<int>(y), widthParam, heightParam};
     SDL_RenderCopyEx(renderer, texture, nullptr, &area, r, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
