@@ -42,7 +42,7 @@ void GameWorld::loadWorld(std::string worldName){
     for (int j = 0; j < map.road.size(); j++){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
-            if (row[i] <= ROAD_END_TYPE && row[i] >= ROAD_START_TYPE){
+            if (row[i] == 0){ //not road
                 createRoad(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
             }
         }

@@ -41,7 +41,7 @@ set(SERVER_SOURCE_FILES
 		common/conc/BaseThread.cpp common/conc/BaseThread.h
 		common/conc/SenderThread.cpp common/conc/SenderThread.h
 		server/Server.cpp server/Server.h
-		server/Game/entities/PhysicalRoad.cpp server/Game/entities/PhysicalRoad.h
+		server/Game/entities/OffRoad.cpp server/Game/entities/OffRoad.h
 		server/mods/Plugin.h
 		server/mods/PluginLoader.cpp server/mods/PluginLoader.h
 		server/mods/PluginLibrary.cpp server/mods/PluginLibrary.h
