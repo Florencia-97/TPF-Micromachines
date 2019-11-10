@@ -20,14 +20,13 @@ void SoundSystem::init(){
     Mix_PlayMusic(backgroundMusic, -1);
     Mix_VolumeMusic( MAX_VOLUME_BACKGROUND_SOUND);
     this->backgroundEffects.insert({SOUND_BACKGROUND, backgroundMusic});
-
     for (auto it=sounds.begin(); it!=sounds.end(); ++it) {
-        Mix_Chunk* soundN = Mix_LoadWAV( it->second.as<std::string>().c_str() );
-        Mix_VolumeChunk(soundN, MAX_VOLUME_EFFECTS_SOUND);
+        Mix_Chunk* soundN = Mix_LoadWAV(it->second.as<std::string>().c_str());
         if( soundN == nullptr ) {
             printf( "Failed to load car wav sound sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
             // TODO: raise error
         }
+        Mix_VolumeChunk(soundN, MAX_VOLUME_EFFECTS_SOUND);
         this->musicEffects.insert({it->first.as<std::string>(), soundN});
     }
     std::cout << "Finished loading sounds\n";
@@ -57,11 +56,12 @@ bool SoundSystem::_controlSound(std::string& event){
 }
 
 bool SoundSystem::_controlCarSound(std::string& event){
-    if (event != SOUND_CAR_RUN && event != SOUND_STOP_CAR_RUN) return false;
-    if ( event == SOUND_CAR_RUN){
+    if (event == SOUND_CAR_RUN || event == SOUND_CAR_STOP){
         Mix_PlayChannel( 1, this->musicEffects[event], -1);
-    } else {
+    } else if (event == SOUND_STOP_CAR_RUN || event == SOUND_CAR_STOP_NO){
         Mix_HaltChannel(1);
+    } else {
+        return false;
     }
     return true;
 }
