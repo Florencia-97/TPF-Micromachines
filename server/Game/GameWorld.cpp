@@ -53,7 +53,9 @@ void GameWorld::loadWorld(std::string worldName){
             if (row[i] == finish_line){
                 createFinishingLine(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2);
             }
-            //createExtras(i* TILE_SIZE, j* TILE_SIZE, row[i]);
+            else if (row[i] == pavilion_blue_tile) {
+                createExtras(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
+            }
         }
     }
 }
@@ -122,8 +124,9 @@ void GameWorld::createRoad(int x, int y, int tileType) {
 
 void GameWorld::createExtras(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    //this->road_bodies.emplace_back(std::to_string(tileType)+"x: "+ std::to_string(x/512) + " y: "+std::to_string(y/512),newBody);
-    //createAndAddFixture(&(this->road_bodies.back()), TILE_SIZE, TILE_SIZE, 0, TILE, SENSOR, false);
+    auto ptr = std::make_shared<Entity>(newBody);
+    this->static_objs.push_back(ptr);
+    createAndAddFixture(this->static_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, PLAYER, false);
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
