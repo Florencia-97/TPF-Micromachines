@@ -26,11 +26,10 @@ void GameRenderer::render(InfoBlock &world_state) {
   }
   //explosion.play(gRenderer,0,0);
   //stain.play(gRenderer, 0, 0);
-  SDL_RenderPresent(gRenderer);
-
   laps.render();
   timer.render();
   health.render();
+  SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
