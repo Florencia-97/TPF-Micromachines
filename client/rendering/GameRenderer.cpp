@@ -7,23 +7,32 @@ GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 }
 
-void GameRenderer::render(InfoBlock &world_state) {
+void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
+    auto my_id = std::to_string(my_car_id);
+    for (auto &car: all_cars) {
+        car.move(world_state.get<int>("x"+std::to_string(car.id)),
+                 world_state.get<int>("y"+std::to_string(car.id)),
+                 world_state.get<int>("r"+std::to_string(car.id)));
+        if (car.id == my_car_id){
+            car.setCamera(camera, map.width, map.height);
+        }
+        car.render(camera, gRenderer);
+    }
+    health.stageTextChange( "HP " + world_state.getString("h"+my_id));
+    laps.stageTextChange(world_state.getString("l"+my_id) + "   laps");
+    timer.stageTextChange(world_state.getString(TIME_LEFT));
+}
+
+void GameRenderer::render(InfoBlock &world_state, int frame) {
   map.render(camera, gRenderer);
-  for (auto &car: all_cars) {
-      car.move(world_state.get<int>("x"+std::to_string(car.id)),
-               world_state.get<int>("y"+std::to_string(car.id)),
-               world_state.get<int>("r"+std::to_string(car.id)));
-      if (car.id == my_car_id){
-          car.setCamera(camera, map.width, map.height);
-      }
-      car.render(camera, gRenderer);
-  }
+  updatePlayers(world_state, frame);
   // TODO: We have to load items as they come! (dont really know were that should go)
   for (auto &item: all_items){
       item.render(camera, gRenderer);
   }
   //explosion.play(gRenderer,0,0);
   //stain.play(gRenderer, 0, 0);
+
   laps.render();
   timer.render();
   health.render();
@@ -39,10 +48,10 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
 
     SDL_Color w = {255, 255, 255, 0xFF};
 
-    laps.init("0 LAPS", SCREEN_WIDTH - 100, 200, 28, w, gRenderer);
-    timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 150, 35, w, gRenderer);
+    laps.init("0 LAPS", SCREEN_WIDTH - 100, 25, 35, w, gRenderer);
+    timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 25, 60, w, gRenderer);
     auto text = "HP " + game_info.getString("h"+std::to_string(my_car_id));
-    health.init(text, 100, 200, 28, w, gRenderer);
+    health.init(text, 100, 25, 35, w, gRenderer);
 }
 
 void GameRenderer::loadCars(InfoBlock &cars_info) {

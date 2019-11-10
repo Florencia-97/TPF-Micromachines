@@ -2,6 +2,10 @@ grass_tile: "map/grass.png"
 grass_tile_w: 512
 grass_tile_h: 512
 
+mud_tile: "map/soil.png"
+mud_tile_w: 512
+mud_tile_h: 512
+
 flashy_tile: "map/flashy.png"
 flashy_tile_w: 512
 flashy_tile_h: 1024

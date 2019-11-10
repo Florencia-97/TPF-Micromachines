@@ -24,5 +24,6 @@
 #define flashy 13
 #define FINISH_LINE_HEIGHT 67
 #define finish_line 14
+#define MUD_TILE 15
 
 // Muddy road

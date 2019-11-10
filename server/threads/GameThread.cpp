@@ -148,7 +148,7 @@ void GameThread::_runGame() {
     Stopwatch c;
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
-    float time_left = GAME_DURATION_S/18;
+    float time_left = GAME_DURATION_S;
 
     while (this->isAlive()) {
         _processPlayerActions();

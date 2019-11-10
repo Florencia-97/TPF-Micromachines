@@ -51,7 +51,7 @@ void GameLoop::runGame(int frame_id){
     }
 
     if (!gameState->exists(GAME_END)) {
-        gameRenderer.render(*gameState);
+        gameRenderer.render(*gameState, frame_id);
         previous_game_state = *gameState;
     } else {
         std::cout<<gameState->srcString()<<std::endl;
@@ -106,5 +106,4 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     menu.setMainMenuMode();
     exit = false;
     ready_to_play = &r;
-    SDL_SetRenderDrawColor(starter.get_global_renderer(), 0xFF, 0xFF, 0xFF, 0xFF);
 }
