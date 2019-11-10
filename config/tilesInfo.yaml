@@ -2,6 +2,10 @@ grass_tile: "map/grass.png"
 grass_tile_w: 512
 grass_tile_h: 512
 
+flashy_tile: "map/flashy.png"
+flashy_tile_w: 512
+flashy_tile_h: 1024
+
 straight_road_tile: "map/horizontal_down.png"
 straight_road_tile_w: 512
 straight_road_tile_h: 512
