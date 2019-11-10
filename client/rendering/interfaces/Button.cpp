@@ -42,7 +42,7 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
       inside = false;
     }
       //Mouse is right of the button
-    else if (x > mPosition.x + BUTTON_WIDTH) {
+    else if (x > mPosition.x + this->area.w) {
       inside = false;
     }
       //Mouse above the button
@@ -50,7 +50,7 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
       inside = false;
     }
       //Mouse below the button
-    else if (y > mPosition.y + BUTTON_HEIGHT) {
+    else if (y > mPosition.y + this->area.h) {
       inside = false;
     }
 
