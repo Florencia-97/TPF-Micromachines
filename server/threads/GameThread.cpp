@@ -54,13 +54,13 @@ std::string GameThread::_runLobby() {
     }
 
     InfoBlock ib;
-    if (!Protocol::recvMsg(&this->sktOwner, ib) || !ib.exists(RACE_ID)){
+    if (!Protocol::recvMsg(&this->sktOwner, ib)){
         std::cout << "Error when receiving race id in: " << ib.srcString() << HERE << std::endl;
         _killPlayers(true);
         close();
         return "";
     }
-    return ib.get<std::string>(RACE_ID);
+    return (ib.exists(RACE_ID)) ? ib.get<std::string>(RACE_ID) : "race_1.yaml";
 }
 
 void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {

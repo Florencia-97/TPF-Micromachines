@@ -20,7 +20,6 @@ class serverNotRunning : public std::exception {
 class Client {
     Socket skt;
     SafeQueue<InfoBlock> keyboard_e_queue;
-    SafeQueue<InfoBlock> mouse_e_queue;
     std::queue<SDL_Event> mouse_queue;
     std::queue<SDL_Event> text_queue;
     std::queue<std::string> sound_queue;
@@ -47,6 +46,10 @@ public:
     void release();
 
     bool waitForConnection();
+
+    void waitGameEnd();
+
+    void waitReadyButton();
 };
 
 

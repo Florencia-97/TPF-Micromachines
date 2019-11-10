@@ -15,6 +15,11 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     this->game_ready_cv = attempConnectionCV;
     map_selected = "\n";
     car_selected = "RED_CAR";
+    ready = false;
+}
+
+void Menu::displayNotification(std::string msg){
+    notification.stageTextChange(msg);
 }
 
 void Menu::setMainMenuMode(){
@@ -31,22 +36,25 @@ void Menu::setMainMenuMode(){
     label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH / 2, 200, 28, gold, gRenderer);
     label_choose_car.init_intermitent_anim(FPS*2/3);
     textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH / 2, 450, 30, gold, gRenderer);
-    flavor_text.init("fiuba 2019 all rights reserved",
+    notification.init(" ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, 35, white, gRenderer);
+    flavor_text.init("fiuba 2019    all rights reserved",
                      SCREEN_WIDTH / 2, SCREEN_HEIGHT - 30, 25, white, gRenderer);
     active_buttons = &carButtons;
 }
 
 bool Menu::processEventsMouse() {
   while (!mouse_queue->empty()) {
+      auto event = &mouse_queue->front();
+      if (event->type == SDL_QUIT) return true;
        for (auto &button : *active_buttons) {
-          if (button.handleEvent(&mouse_queue->front(), sound_queue)){
-            while (!mouse_queue->empty()) mouse_queue->pop();
-            return true;
+          if (button.handleEvent(event, sound_queue)){
+              while (!mouse_queue->empty()) mouse_queue->pop();
+              return  false;
             }
         }
-      if (connectButton->handleEvent(&mouse_queue->front(), sound_queue)){
+      if (connectButton->handleEvent(event, sound_queue)){
           while (!mouse_queue->empty()) mouse_queue->pop();
-          return true;
+          return false;
       }
       mouse_queue->pop();
     }
@@ -70,6 +78,7 @@ void Menu::render_first_menu() {
     label_choose_car.render();
     textbox_lobby_name.render();
     flavor_text.render();
+    notification.render();
     connectButton->render();
     SDL_RenderPresent(gRenderer);
 }
@@ -114,6 +123,7 @@ void Menu::load_media() {
 
   auto callback_start_game = [&](const std::string &clickedId) {
         map_selected = "race_1";
+        ready = true;
         connectButton->changeColor(80, 80, 80, FPS*3);
         this->game_ready_cv->notify_all();
     };

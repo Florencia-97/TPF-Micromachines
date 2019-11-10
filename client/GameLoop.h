@@ -22,11 +22,11 @@ class GameLoop : public BaseThread {
     SoundSystem soundSystem;
     int current_frame;
     int state; //thread state
-    std::atomic<bool> in_menu;
     InfoBlock previous_game_state;
     std::condition_variable* ready_to_play;
     GameMap map;
     GameRenderer gameRenderer;
+    bool ready;
 
     void _runProgram();
 
@@ -40,9 +40,7 @@ class GameLoop : public BaseThread {
 
 public:
     Menu menu;
-
-    std::condition_variable cv;
-    bool exit;
+    std::atomic<bool> in_menu;
     std::queue<InfoBlock>* renderQueue;
     std::queue<std::string>* soundQueue;
 
@@ -55,6 +53,7 @@ public:
     void proceedToLobby(bool is_leader);
 
     ~GameLoop();
+
 };
 
 

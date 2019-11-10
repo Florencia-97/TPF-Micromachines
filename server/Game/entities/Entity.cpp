@@ -36,3 +36,7 @@ void Entity::loadPosToInfoBlock(InfoBlock& ib){
     ib["Oy" + itemId] = (int)std::round(pos.y);
     //ib["Or" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);
 }
+
+b2Body *Entity::getBody() {
+    return this->body;
+}

@@ -116,6 +116,7 @@ void GameWorld::_createItem(){
     this->dynamic_objs.push_back(ptr);
     createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
     if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
+        world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
     }
 }
@@ -123,7 +124,7 @@ void GameWorld::_createItem(){
 // TODO: If we dont use them, remove tileType as parameter
 void GameWorld::createRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->road_bodies.emplace_back("road",newBody);
+    this->road_bodies.emplace_back("offroad",newBody);
     createAndAddFixture(&(this->road_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
 }
 
@@ -131,7 +132,7 @@ void GameWorld::createExtras(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     auto ptr = std::make_shared<Entity>(newBody);
     this->static_objs.push_back(ptr);
-    createAndAddFixture(this->static_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, PLAYER, false);
+    createAndAddFixture(this->static_objs.back().get(), PTM_TILE, PTM_TILE, 0, OBSTACLE, PLAYER, false);
 }
 
 int GameWorld::createCar(InfoBlock carStats) {
@@ -145,7 +146,7 @@ int GameWorld::createCar(InfoBlock carStats) {
     newBody->SetBullet(true);
 
     createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
-    createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER, false);
+    createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER|OBSTACLE, false);
     createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
 
     auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(10));

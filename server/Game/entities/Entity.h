@@ -38,6 +38,8 @@ public:
     void loadPosToInfoBlock(InfoBlock& ib);
 
     void attachFixture(b2FixtureDef &boxFixtureDef);
+
+    b2Body *getBody();
 };
 
 
