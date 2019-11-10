@@ -67,12 +67,9 @@ InfoBlock GameWorld::status(){
         std::string car_id = std::to_string(car.id);
         car.loadStateToInfoBlock(ib);
     }
-    ib[OBJECTS_AMOUNT] = 0; // here goes something like this->objects.size();
-    int cont = 0;
+    ib[OBJECTS_AMOUNT] = this->dynamic_objs.size();
     for (auto & item : dynamic_objs){
-        std::string obj_id = std::to_string(cont);
-        item->loadPosToInfoBlock(ib, cont);
-        cont++;
+        item->loadPosToInfoBlock(ib);
     }
     return ib;
 }
@@ -92,7 +89,7 @@ void GameWorld::Step(float timestep) {
 
     // TODO: make this random maybe a little better, Flor task
     // We create random items
-    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS; // Use Constants
+    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS;
     if ( (int) this->timeModifiers > randomTime){
         std::cout << "We generate random item\n";
         _createItem();
@@ -109,10 +106,17 @@ RaceCar &GameWorld::getCar(int id) {
 }
 
 void GameWorld::_createItem(){
-    // TODO: we pass to body the tipe of entity we want?
-    //b2Body* body = new b2Body();
-    //this->dynamic_objs.emplace_back(body);
-    return;
+    // TODO: Super hardcoded, x and y should be random but inside the road
+    int x = 50;
+    int y = 30;
+    b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
+    auto ptr = std::make_shared<Entity>(newBody);
+    // auto ptr = itemCreator.createItem(newBody);
+    this->dynamic_objs.push_back(ptr);
+    createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
+    if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
+        this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
+    }
 }
 
 
