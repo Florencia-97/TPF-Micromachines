@@ -8,13 +8,15 @@
 
 class SoundSystem {
     bool playSounds;
-    std::map<std::string, Mix_Chunk *> musicEffects;
-    Mix_Music* backgroundMusic;
+    std::string lastSound;
+    std::map<std::string, Mix_Chunk*> musicEffects;
+    std::map<std::string, Mix_Music*> backgroundEffects;
     std::queue<std::string>* sound_queue;
     bool _controlSound(std::string& event);
+    bool _controlCarSound(std::string& event);
 public:
-    SoundSystem(std::queue<std::string> *sq);
-    void play();
+    explicit SoundSystem(std::queue<std::string> *sq);
+    void play(bool inRace);
     void init();
     ~SoundSystem();
 };
