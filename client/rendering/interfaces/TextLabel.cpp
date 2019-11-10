@@ -3,7 +3,7 @@
 //
 
 #include "TextLabel.h"
-void TextLabel::init(const std::string &msg, int x, int y, SDL_Color c, SDL_Renderer *sdl_renderer) {
+void TextLabel::init(const std::string &msg, int x, int y, int size, SDL_Color c, SDL_Renderer *sdl_renderer) {
   color = c;
   rate = 0;
   current_frame = 0;
@@ -12,7 +12,7 @@ void TextLabel::init(const std::string &msg, int x, int y, SDL_Color c, SDL_Rend
   text = msg;
   this->x = x;
   this->y = y;
-  this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", 28);
+  this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", size);
   textTexture.loadFromRenderedText(text, color, font, sdl_renderer);
   updateBounds();
 }

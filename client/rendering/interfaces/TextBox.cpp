@@ -2,8 +2,8 @@
 
 #include "TextBox.h"
 
-void TextBox::init(const std::string &msg, int x, int y, SDL_Color c, SDL_Renderer *sdl_renderer) {
-    TextLabel::init(msg, x, y, c, sdl_renderer);
+void TextBox::init(const std::string &msg, int x, int y, int size, SDL_Color c, SDL_Renderer *sdl_renderer) {
+    TextLabel::init(msg, x, y, size, c, sdl_renderer);
     text = "";
 }
 

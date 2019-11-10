@@ -142,7 +142,7 @@ void GameThread::_runGame() {
     Stopwatch c;
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
-    float time_left = GAME_DURATION_S;
+    float time_left = GAME_DURATION_S/10.0;
 
     while (this->isAlive()) {
         _processPlayerActions();
@@ -162,6 +162,7 @@ void GameThread::_runGame() {
         c.reset();
         timestep = std::max(0.0f,timestep_goal- time_elapsed);
         time_left -= time_elapsed;
+        std::cout<<time_left<<std::endl;
     }
 
 

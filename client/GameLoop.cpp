@@ -53,6 +53,7 @@ void GameLoop::runGame(int frame_id){
         gameRenderer.render(*gameState);
         previous_game_state = *gameState;
     } else {
+        std::cout<<gameState->srcString()<<std::endl;
         state = -1;
         in_menu.store(true);
     }

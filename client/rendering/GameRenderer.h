@@ -14,16 +14,22 @@
 #include "../config/constants.h"
 #include "interfaces/Explosion.h"
 #include "interfaces/StainAnimation.h"
+#include "interfaces/TextLabel.h"
 
 class GameRenderer {
     SDL_Rect camera;
     SDL_Renderer *gRenderer;
     TextureLoader tloader;//for map textures
-  Explosion explosion;
+    Explosion explosion;
     GameMap map;
     short my_car_id;//position in vector
     std::list<Car> all_cars;
-  StainAnimation stain;
+    StainAnimation stain;
+
+    TextLabel timer;
+    TextLabel health;
+    TextLabel laps;
+
 
     void loadCars(InfoBlock& inf);
 public:

@@ -47,7 +47,6 @@ void RaceCar::step(float timestep){
         float desiredTorque = car_stats.rot_force * steer_dir.y * this->body->GetMass();
         body->ApplyTorque(desiredTorque, true);
     }
-     std::cout<<std::to_string(car_stats.laps)<<std::endl;
 }
 
 bool RaceCar::takeDamage(int dmg) {

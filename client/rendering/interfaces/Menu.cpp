@@ -28,11 +28,11 @@ void Menu::setMainMenuMode(){
     SDL_StartTextInput();
     SDL_Color gold{255, 189, 27, 0xFF};
     SDL_Color white{255, 255, 255, 0xFF};
-    label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH/2, 200, gold, gRenderer);
+    label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH / 2, 200, 28, gold, gRenderer);
     label_choose_car.init_intermitent_anim(FPS*2/3);
-    textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH/2, 450, gold, gRenderer);
+    textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH / 2, 450, 30, gold, gRenderer);
     flavor_text.init("fiuba 2019 all rights reserved",
-            SCREEN_WIDTH/2, SCREEN_HEIGHT-30, white, gRenderer);
+                     SCREEN_WIDTH / 2, SCREEN_HEIGHT - 30, 25, white, gRenderer);
     active_buttons = &carButtons;
 }
 
@@ -116,6 +116,7 @@ void Menu::load_media() {
 
   auto callback_start_game = [&](const std::string &clickedId) {
         map_selected = "race_1";
+        connectButton->changeColor(80, 80, 80, FPS*3);
         this->game_ready_cv->notify_all();
     };
     //car buttons
