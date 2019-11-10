@@ -93,8 +93,8 @@ const int EXPLOSION_FRAMES_COLUMN = 8;
 const int TOTAL_FRAMES = EXPLOSION_FRAMES_COLUMN * EXPLOSION_FRAMES_ROW;
 
 // Range between random seed use for item generation
-const int TIME_FROM_ITEMS = 3;
-const int TIME_TO_ITEMS = 5;
+const int TIME_FROM_ITEMS = 5;
+const int TIME_TO_ITEMS = 8;
 
 // Events
 #define ACTION_TYPE "key"
