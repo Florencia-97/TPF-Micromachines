@@ -12,6 +12,7 @@ Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   this->texture = buttonSpriteSheet;
   this->gRenderer = sdl_renderer;
   this->id = texture->get_string_name();
+  this->soundWhenPressed = ""; // no sound
 }
 
 void Button::setPosition(int x, int y) {
@@ -25,7 +26,7 @@ void Button::changeColor(int r, int g, int b, int duration){
     colorChangeDuration = duration;
 }
 
-bool Button::handleEvent(SDL_Event *e) {
+bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
   //If mouse event happened
 
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
@@ -64,6 +65,7 @@ bool Button::handleEvent(SDL_Event *e) {
           return false;
         case SDL_MOUSEBUTTONDOWN:;
           this->changeColor(100, 100, 100, 200);
+          sq->push(this->soundWhenPressed);
           callCallbackFunctions();
           return true;
         case SDL_MOUSEBUTTONUP:;

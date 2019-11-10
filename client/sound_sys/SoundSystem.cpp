@@ -39,7 +39,11 @@ void SoundSystem::play(bool inRace){
     if (_controlSound(event)) return;
     if (Mix_PausedMusic() == 1) return;
     if (inRace && _controlCarSound(event)) return;
-    if (inRace  && event!= SOUND_ON_OFF && event != this->lastSound){
+    if ( event == SOUND_CAR_GEAR || (inRace && event!= SOUND_ON_OFF && event != this->lastSound)){
+        if (event == SOUND_CAR_GEAR ){
+            Mix_PlayChannelTimed(1, this->musicEffects[event], 0, 580);
+            return;
+        }
         Mix_PlayChannel( 1, this->musicEffects[event], 0);
         this->lastSound = event;
     }

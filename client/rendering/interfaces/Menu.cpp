@@ -7,9 +7,10 @@
 #include "TextLabel.h"
 
 void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
-                std::condition_variable *attempConnectionCV) {
+                std::condition_variable *attempConnectionCV, std::queue<std::string> *sq) {
     this->text_queue = textQueue;
     this->mouse_queue = gQueue;
+    this->sound_queue = sq;
     this->gRenderer = sdl_renderer;
     this->game_ready_cv = attempConnectionCV;
     map_selected = "\n";
@@ -37,12 +38,12 @@ void Menu::setMainMenuMode(){
 bool Menu::processEventsMouse() {
   while (!mouse_queue->empty()) {
        for (auto &button : *active_buttons) {
-          if (button.handleEvent(&mouse_queue->front())){
+          if (button.handleEvent(&mouse_queue->front(), sound_queue)){
             while (!mouse_queue->empty()) mouse_queue->pop();
             return true;
             }
         }
-      if (connectButton->handleEvent(&mouse_queue->front())){
+      if (connectButton->handleEvent(&mouse_queue->front(), sound_queue)){
           while (!mouse_queue->empty()) mouse_queue->pop();
           return true;
       }
@@ -144,6 +145,7 @@ void Menu::load_media() {
   for (auto &button : carButtons) {
     button.addCallbackFunction(callback);
     button.changeColor(80, 80, 80, -1);
+    button.soundWhenPressed = SOUND_CAR_GEAR;
     }
 
     //map buttons

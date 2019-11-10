@@ -100,7 +100,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     soundQueue = &sq;
     starter.init();
     soundSystem.init();
-    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r);
+    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
     exit = false;
     ready_to_play = &r;

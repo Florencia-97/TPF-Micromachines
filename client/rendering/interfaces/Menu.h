@@ -21,6 +21,7 @@ class Menu {
   TextureLoader textureLoader;
   std::queue<SDL_Event> *mouse_queue;
   std::queue<SDL_Event> *text_queue;
+  std::queue<std::string> *sound_queue;
   std::shared_ptr<Button> connectButton;
   SDL_Renderer *gRenderer;
 
@@ -42,7 +43,7 @@ class Menu {
     std::string map_selected;
 
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
-            std::condition_variable *attempConnectionCV);
+            std::condition_variable *attempConnectionCV, std::queue<std::string> *sq);
 
   void processEventsKeyboard();
 
