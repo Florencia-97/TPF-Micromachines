@@ -24,19 +24,21 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
 }
 
 void GameRenderer::render(InfoBlock &world_state, int frame) {
-  map.render(camera, gRenderer);
-  updatePlayers(world_state, frame);
+    map.render(camera, gRenderer);
+    updatePlayers(world_state, frame);
   // TODO: We have to load items as they come! (dont really know were that should go)
-  for (auto &item: all_items){
+    loadItems(world_state);
+    for (auto &item: all_items){
       item.render(camera, gRenderer);
-  }
+    }
+
   //explosion.play(gRenderer,0,0);
   //stain.play(gRenderer, 0, 0);
 
-  laps.render();
-  timer.render();
-  health.render();
-  SDL_RenderPresent(gRenderer);
+    laps.render();
+    timer.render();
+    health.render();
+    SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
@@ -70,4 +72,28 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
         all_cars.back().addTexture(tloader.load_texture("cars/"+cartype+".png", gRenderer));
     }
 }
+
+bool GameRenderer::_itemInStock(std::string itemId){
+    for (auto &item: all_items){
+        if (std::to_string(item.id) == itemId) return true;
+    }
+    return false;
+}
+
+void GameRenderer::loadItems(InfoBlock &event) {
+    int n_items = event.exists(OBJECTS_AMOUNT) ? event.get<int>(OBJECTS_AMOUNT) : 0;
+    // Watch out case 0 items but we have in our list!
+    for (int i = 0; i < n_items; i++) {
+        auto num = std::to_string(i);
+        auto itemId = event.getString("OId"+ num);
+        if (_itemInStock(itemId)) continue;
+        std::cout << event.srcString() << std::endl;
+        int x = event.getInt("Ox" + itemId);
+        int y = event.getInt("Oy" + itemId);
+        int tileNum = event.getInt("Ot" + itemId);
+        this->all_items.emplace_back(event.getInt("OId"+num), x, y);
+        all_items.back().addTexture(tloader, gRenderer, tileNum);
+    }
+}
+
 

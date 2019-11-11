@@ -35,6 +35,7 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
     world.SetContactListener(&cl);
     finishingLine = nullptr;
     timeModifiers = 0;
+    itemsId = 0;
 }
 
 void GameWorld::loadWorld(std::string worldName){
@@ -68,9 +69,11 @@ InfoBlock GameWorld::status(){
         std::string car_id = std::to_string(car.id);
         car.loadStateToInfoBlock(ib);
     }
+    int cont = 0;
     ib[OBJECTS_AMOUNT] = this->dynamic_objs.size();
     for (auto & item : dynamic_objs){
-        item->loadPosToInfoBlock(ib);
+        item->loadPosToInfoBlock(ib, cont);
+        cont++;
     }
     return ib;
 }
@@ -108,11 +111,12 @@ RaceCar &GameWorld::getCar(int id) {
 
 void GameWorld::_createItem(){
     // TODO: Super hardcoded, x and y should be random but inside the road
-    int x = 50;
-    int y = 30;
+    int x = 200 * itemsId;
+    int y = 200 * itemsId;
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    auto ptr = std::make_shared<Entity>(newBody);
     // auto ptr = itemCreator.createItem(newBody);
+    auto ptr = std::make_shared<Entity>(newBody, itemsId);
+    itemsId+=1;
     this->dynamic_objs.push_back(ptr);
     createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
     if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
