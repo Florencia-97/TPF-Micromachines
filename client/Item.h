@@ -12,11 +12,11 @@ class Item {
     SDL_Rect mBox;
     int rotation;
     LTexture* texture;
-    int id;
 public:
-    Item(short id, int x, int y);
+    int id;
+    Item(int id, int x, int y);
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
-    void addTexture(TextureLoader tloader, SDL_Renderer *renderer);
+    void addTexture(TextureLoader& tLoader, SDL_Renderer *renderer, int pngNum);
 };
 
 

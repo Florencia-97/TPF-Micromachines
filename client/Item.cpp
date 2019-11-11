@@ -1,7 +1,7 @@
 #include "Item.h"
 #include "../config/constants.h"
 
-Item::Item(short id, int x, int y){
+Item::Item(int id, int x, int y){
     mBox.x = x;
     mBox.y = y;
     mBox.w = ITEM_WIDTH;
@@ -22,9 +22,9 @@ void Item::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                               false);
 }
 
-void Item::addTexture(TextureLoader tloader, SDL_Renderer *gRenderer ) {
+void Item::addTexture(TextureLoader& tLoader, SDL_Renderer *gRenderer, int pngNum) {
     std::string nameItem = "speed_boost";
-    switch(this->id){
+    switch (pngNum){
         case ITEM_BOOST:
             break;
         case ITEM_ROCK:
@@ -42,5 +42,5 @@ void Item::addTexture(TextureLoader tloader, SDL_Renderer *gRenderer ) {
         default:
             break;
     }
-    this->texture = tloader.load_texture("modifiers/" + nameItem + ".png", gRenderer);
+    this->texture = tLoader.load_texture("modifiers/" + nameItem + ".png", gRenderer);
 }

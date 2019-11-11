@@ -5,10 +5,10 @@
 #include "../Entity.h"
 
 // Reduces life and speed
-class ItemRock : Entity {
+class ItemRock : public Entity {
 public:
     SpeedStatusEffect my_effect;
-    explicit ItemRock(b2Body* &newBody);
+    ItemRock(b2Body* &newBody, int itemId);
     void resolveCollision(Entity *collidedWith) override;
     void endContact(Entity *wasTouching) override;
 };

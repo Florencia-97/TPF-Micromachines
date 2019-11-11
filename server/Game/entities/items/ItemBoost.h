@@ -4,11 +4,11 @@
 #include <Game/status_effects/SpeedStatusEffect.h>
 #include "../Entity.h"
 
-// Increase in car speed
-class ItemBoost : Entity{
+// Boost in car speed
+class ItemBoost : public Entity{
 public:
     SpeedStatusEffect my_effect;
-    explicit ItemBoost(b2Body* &newBody);
+    ItemBoost(b2Body* &newBody, int itemId);
     void resolveCollision(Entity *collidedWith) override;
     void endContact(Entity *wasTouching) override;
 };

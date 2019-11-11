@@ -30,8 +30,9 @@ class GameRenderer {
     TextLabel health;
     TextLabel laps;
 
-
+    bool _itemInStock(std::string itemId);
     void loadCars(InfoBlock& inf);
+    void loadItems(InfoBlock &event);
 public:
 
   //the map to render_first_menu and the car to follow with the camera

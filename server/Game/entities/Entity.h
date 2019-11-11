@@ -13,6 +13,8 @@ class Entity {
     bool enabled;
     int y_size;
     int x_size;
+    int id;
+    int tileId;
     //std::string stats;
 
 protected:
@@ -20,6 +22,8 @@ protected:
 public:
     //only supports making objects with a square bounding box
     Entity(b2Body* &newbody);
+
+    Entity(b2Body* &newbody, int id, const int tile);
 
     virtual void resolveCollision(Entity *collidedWith){};
 
@@ -35,7 +39,7 @@ public:
 
     float32 getAngle();
 
-    void loadPosToInfoBlock(InfoBlock& ib);
+    void loadPosToInfoBlock(InfoBlock& ib, int cont);
 
     void attachFixture(b2FixtureDef &boxFixtureDef);
 

@@ -30,6 +30,7 @@ class GameWorld {
     std::list<std::shared_ptr<Entity>> dynamic_objs;
     void _createItem();
     float timeModifiers;
+    int itemsId;
 
 public:
     //POS creates a world with no gravity for top-down action
