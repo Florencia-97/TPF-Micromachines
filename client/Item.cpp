@@ -24,7 +24,7 @@ void Item::render(SDL_Rect &camera, SDL_Renderer *renderer) {
 
 void Item::addTexture(TextureLoader& tLoader, SDL_Renderer *gRenderer, int pngNum) {
     std::string nameItem = "speed_boost";
-    switch(pngNum){
+    switch (pngNum){
         case ITEM_BOOST:
             break;
         case ITEM_ROCK:

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <Game/entities/items/ItemCreator.h>
 #include "GameWorld.h"
 #include "../../config/constants.h"
 
@@ -111,11 +112,10 @@ RaceCar &GameWorld::getCar(int id) {
 
 void GameWorld::_createItem(){
     // TODO: Super hardcoded, x and y should be random but inside the road
-    int x = 200 * itemsId;
-    int y = 200 * itemsId;
+    int x = 500 * itemsId;
+    int y = 500 * itemsId;
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    // auto ptr = itemCreator.createItem(newBody);
-    auto ptr = std::make_shared<Entity>(newBody, itemsId);
+    auto ptr = ItemCreator::createItem(newBody, itemsId);
     itemsId+=1;
     this->dynamic_objs.push_back(ptr);
     createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);

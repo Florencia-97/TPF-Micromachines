@@ -87,7 +87,6 @@ void GameRenderer::loadItems(InfoBlock &event) {
         auto num = std::to_string(i);
         auto itemId = event.getString("OId"+ num);
         if (_itemInStock(itemId)) continue;
-        std::cout << event.srcString() << std::endl;
         int x = event.getInt("Ox" + itemId);
         int y = event.getInt("Oy" + itemId);
         int tileNum = event.getInt("Ot" + itemId);

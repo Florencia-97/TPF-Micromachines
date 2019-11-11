@@ -14,6 +14,7 @@ class Entity {
     int y_size;
     int x_size;
     int id;
+    int tileId;
     //std::string stats;
 
 protected:
@@ -22,7 +23,7 @@ public:
     //only supports making objects with a square bounding box
     Entity(b2Body* &newbody);
 
-    Entity(b2Body* &newbody, int id);
+    Entity(b2Body* &newbody, int id, const int tile);
 
     virtual void resolveCollision(Entity *collidedWith){};
 
