@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <random>
 #include <Game/entities/items/ItemCreator.h>
 #include "GameWorld.h"
 #include "../../config/constants.h"
@@ -111,9 +112,9 @@ RaceCar &GameWorld::getCar(int id) {
 }
 
 void GameWorld::_createItem(){
-    // TODO: Super hardcoded, x and y should be random but inside the road
-    int x = 500 * itemsId;
-    int y = 500 * itemsId;
+    int x = 0;
+    int y = 0;
+    _loadXYInRoad(x, y);
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     auto ptr = ItemCreator::createItem(newBody, itemsId);
     itemsId+=1;
@@ -123,6 +124,22 @@ void GameWorld::_createItem(){
         world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
     }
+}
+
+void GameWorld::_loadXYInRoad(int& x, int& y){
+    int tilesRoad = this->road_bodies.size();
+    //Random
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, tilesRoad - 1);
+    int pos = dis(gen);
+
+    auto it1 = std::next(this->road_bodies.begin(), pos);
+    x = (int) std::round(it1->getPosition().x) * PTM_TILE; // Remove hardcoded
+    y = (int) std::round(it1->getPosition().y) * PTM_TILE;
+    std::cout << "x: " << x << std::endl;
+    std::cout << "y: " << y << std::endl;
+
 }
 
 // TODO: If we dont use them, remove tileType as parameter
