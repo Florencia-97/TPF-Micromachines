@@ -60,7 +60,7 @@ std::string GameThread::_runLobby() {
         close();
         return "";
     }
-    return (ib.exists(RACE_ID)) ? ib.get<std::string>(RACE_ID) : "race_1.yaml";
+    return (ib.exists(RACE_ID)) ? ib.get<std::string>(RACE_ID) : "race_1";
 }
 
 void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
@@ -127,7 +127,7 @@ void GameThread::_announceWinners() {
         n++;
     }
     _sendAll(gameEndStatus);
-    this->sleep(5);
+    this->sleep(2);
 }
 
 
@@ -149,6 +149,7 @@ void GameThread::_runGame() {
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
     float time_left = GAME_DURATION_S;
+    float over_time = 5;
 
     while (this->isAlive()) {
         _processPlayerActions();
@@ -156,13 +157,15 @@ void GameThread::_runGame() {
 
             this->game.Step(timestep_goal);
             auto gameStatus = this->game.status();
-            gameStatus[TIME_LEFT] = (int)time_left;
+            gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
             this->sleep(timestep);
 
         } else {
-            if (time_left <= 0) _announceWinners();
-            close();
+            if (time_left <= 0) {
+                if (over_time <= 0) {_announceWinners(); close();}
+                else {time_left += over_time; over_time = 0;}
+            }
         }
         auto time_elapsed = c.diff();
         c.reset();

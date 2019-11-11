@@ -19,6 +19,7 @@ bool BaseThread::isAlive() {
 
 void BaseThread::run() {
     running = true;
+    this->alive.store(true);
     this->t = std::thread(&BaseThread::_run, this);
 }
 

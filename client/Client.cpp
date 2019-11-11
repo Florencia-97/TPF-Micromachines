@@ -13,6 +13,10 @@ void Client::waitGameEnd(){
     while (!gameLoop.in_menu.load() && !userInput.exit) {
         ready_to_connect.wait(l);
     }
+    receiver.close();
+    sender.close();
+    receiver.join();
+    sender.join();
 }
 
 void Client::waitReadyButton() {

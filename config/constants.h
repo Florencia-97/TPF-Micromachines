@@ -4,7 +4,7 @@
 #define SERVICE "localhost"
 #define PORT "8080"
 #define FPS 40
-#define GAME_DURATION_S 25 //2mins
+#define GAME_DURATION_S 5 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 

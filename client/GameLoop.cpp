@@ -58,6 +58,7 @@ void GameLoop::runGame(int frame_id){
                 gameState->getString("p"+std::to_string(gameRenderer.my_car_id)));
         state = -1;
         in_menu.store(true);
+        ready_to_play->notify_all();
     }
 }
 

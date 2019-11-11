@@ -22,7 +22,7 @@ UserInput::UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mo
 }
 
 void UserInput::_run(){
-    keyboard_input->setOpen(true);
+  keyboard_input->setOpen(true);
   SDL_StartTextInput();
     SDL_Event e;
     std::cout << "Starting to read input keys from client\n";

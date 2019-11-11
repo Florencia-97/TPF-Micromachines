@@ -23,5 +23,6 @@
 #define FINISH_LINE_HEIGHT 67
 #define finish_line 14
 #define MUD_TILE 15
+#define padding_tile 16
 
 // Muddy road

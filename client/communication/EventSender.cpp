@@ -15,6 +15,7 @@ bool _isFinalEvent(InfoBlock& ib){
 }
 
 void EventSender::_run() {
+    this->safeQueue->setOpen(true);
     while (this->isAlive()){
         InfoBlock ib = this->safeQueue->pop();
         if (_isFinalEvent(ib)){
@@ -28,6 +29,7 @@ void EventSender::_run() {
 }
 
 void EventSender::close() {
+    this->safeQueue->setOpen(false);
     BaseThread::close();
 }
 
