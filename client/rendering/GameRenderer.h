@@ -31,6 +31,7 @@ class GameRenderer {
     TextLabel laps;
 
     bool _itemInStock(std::string itemId);
+    void _removeOld(std::vector<int>& ids);
     void loadCars(InfoBlock& inf);
     void loadItems(InfoBlock &event);
 public:

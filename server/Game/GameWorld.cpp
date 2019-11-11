@@ -137,9 +137,6 @@ void GameWorld::_loadXYInRoad(int& x, int& y){
     auto it1 = std::next(this->road_bodies.begin(), pos);
     x = (int) std::round(it1->getPosition().x) * PTM_TILE; // Remove hardcoded
     y = (int) std::round(it1->getPosition().y) * PTM_TILE;
-    std::cout << "x: " << x << std::endl;
-    std::cout << "y: " << y << std::endl;
-
 }
 
 // TODO: If we dont use them, remove tileType as parameter

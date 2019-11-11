@@ -2,6 +2,7 @@
 #include "../tiles/TilesFactory.h"
 #include "../../config/constants.h"
 #include "interfaces/StainAnimation.h"
+#include <algorithm>
 
 GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
@@ -80,16 +81,33 @@ bool GameRenderer::_itemInStock(std::string itemId){
 
 void GameRenderer::loadItems(InfoBlock &event) {
     int n_items = event.exists(OBJECTS_AMOUNT) ? event.get<int>(OBJECTS_AMOUNT) : 0;
+    std::vector<int> ids;
     // Watch out case 0 items but we have in our list!
     for (int i = 0; i < n_items; i++) {
         auto num = std::to_string(i);
         auto itemId = event.getString("OId"+ num);
+        int itemIdNum = event.getInt("OId"+ num);
+        ids.push_back(itemIdNum);
         if (_itemInStock(itemId)) continue;
         int x = event.getInt("Ox" + itemId);
         int y = event.getInt("Oy" + itemId);
         int tileNum = event.getInt("Ot" + itemId);
-        this->all_items.emplace_back(event.getInt("OId"+num), x, y);
+        this->all_items.emplace_back(itemIdNum, x, y);
         all_items.back().addTexture(tloader, gRenderer, tileNum);
+    }
+    this->_removeOld(ids);
+}
+
+//21314
+void GameRenderer::_removeOld(std::vector<int>& ids){
+    auto it = this->all_items.begin();
+    while (it != this->all_items.end()){
+        auto found = std::find(ids.begin(), ids.end(), (it)->id);
+        if (found != ids.end()) {
+            ++it;
+        } else{
+            it = this->all_items.erase(it);
+        }
     }
 }
 
