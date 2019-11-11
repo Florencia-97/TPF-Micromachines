@@ -25,16 +25,14 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
 
 void GameRenderer::render(InfoBlock &world_state, int frame) {
     map.render(camera, gRenderer);
-    updatePlayers(world_state, frame);
-  // TODO: We have to load items as they come! (dont really know were that should go)
     loadItems(world_state);
     for (auto &item: all_items){
-      item.render(camera, gRenderer);
+        item.render(camera, gRenderer);
     }
-
-  //explosion.play(gRenderer,0,0);
-  //stain.play(gRenderer, 0, 0);
-
+    updatePlayers(world_state, frame);
+    map.renderDeco(camera, gRenderer);
+    //explosion.play(gRenderer,0,0);
+    //stain.play(gRenderer, 0, 0);
     laps.render();
     timer.render();
     health.render();
