@@ -84,7 +84,7 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
             actionType = ACTION_TYPE_DOWN;
             event_value = false;
             switch (e.key.keysym.sym) {
-                case SDLK_0: // we can change the key later on!
+                case SDLK_F1:
                     sound_queue->push(SOUND_ON_OFF);
                     return;
                 case SDLK_UP:
