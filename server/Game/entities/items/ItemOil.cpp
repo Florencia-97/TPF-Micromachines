@@ -1,0 +1,18 @@
+#include "ItemOil.h"
+#include "../../../../config/constants.h"
+#define ITEM_SPEED_DROP "ITEM_SPEED_DROP"
+
+ItemOil::ItemOil(b2Body *&newBody, int itemId) :
+        Entity(newBody, itemId, ITEM_OIL), my_effect(ITEM_SPEED_DROP,0,4,0,0.5){
+}
+
+void ItemOil::resolveCollision(Entity *other) {
+    std::cout << "colision with boost\n" << std::endl;
+    auto ptr = std::shared_ptr<StatusEffect>(new SpeedStatusEffect(ITEM_SPEED_DROP,my_effect.delay,
+                                                                   my_effect.duration, my_effect.after_effect, my_effect.speed_mod));
+    other->addEffect(ptr);
+}
+
+void ItemOil::endContact(Entity *wasTouching) {
+    wasTouching->removeEffect(ITEM_SPEED_DROP);
+}
