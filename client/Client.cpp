@@ -66,7 +66,7 @@ int Client::play() {
         if (skt.isValid() && !userInput.exit) {
             bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
             gameLoop.proceedToLobby(is_leader);
-            gameLoop.menu.displayNotification("connected   proceeding   to   lobby!");
+            gameLoop.menu.displayNotification("connected   proceeding   to   game!");
             if (is_leader) {
                 //todo waitReadyButton()
                 sleep(5);
