@@ -26,12 +26,14 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
 
 void GameRenderer::render(InfoBlock &world_state, int frame) {
     map.render(camera, gRenderer);
+    int x = camera.x;
+    int y = camera.y;
     loadItems(world_state);
     for (auto &item: all_items){
         item.render(camera, gRenderer);
     }
     updatePlayers(world_state, frame);
-    map.renderDeco(camera, gRenderer);
+    map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
     //explosion.play(gRenderer,0,0);
     //stain.play(gRenderer, 0, 0);
     laps.render();
