@@ -8,12 +8,11 @@
 
 class CarStats {
     InfoBlock base;
+public:
     int base_hp;
     int base_rot_force;
     int base_max_speed;
     int base_accel_rate;
-    
-public:
     float max_speed;
     float rot_force;
     float accel_rate;

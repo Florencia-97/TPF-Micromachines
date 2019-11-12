@@ -48,6 +48,8 @@ public:
     void createExtras(int x, int y, int tileId);
 
     void createFinishingLine(int x, int y);
+
+    void respawnCar(RaceCar &car);
 };
 
 

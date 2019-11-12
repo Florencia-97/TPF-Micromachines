@@ -12,7 +12,6 @@
 
 class RaceCar : public Entity {
     b2Vec2 steer_dir;
-    CarStats car_stats;
     std::list<std::shared_ptr<StatusEffect>> status_effects;
 
     b2Vec2 getForwardVelocity();
@@ -24,7 +23,9 @@ class RaceCar : public Entity {
     float calculateForwardImpulse();
 
 public:
+    CarStats car_stats;
     int id;
+    
     RaceCar(int carId, InfoBlock stats, b2Body* &newBody);
     //POS advances the car simulation one timestep
     void step(float timestep);

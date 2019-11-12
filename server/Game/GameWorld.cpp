@@ -2,6 +2,7 @@
 #include <memory>
 #include <random>
 #include <Game/entities/items/ItemCreator.h>
+#include <Game/status_effects/CallbackStatusEffect.h>
 #include "GameWorld.h"
 #include "../../config/constants.h"
 
@@ -85,9 +86,16 @@ void GameWorld::processEvent(int id, InfoBlock &event){
 }
 
 void GameWorld::Step(float timeStep) {
-    for (auto & car : cars){
+    for (auto & car : cars) {
+        bool wasAlive = car.car_stats.hp > 0;
+        std::cout << "stepped cars\n";
         car.step(timeStep);
+        std::cout << "steppffed cars\n";
+        if (car.car_stats.hp <= 0 && wasAlive) {
+            respawnCar(car);
+        }
     }
+
     int32 velocityIterations = 8;//how strongly to correct velocity
     int32 positionIterations = 3;//how strongly to correct position
     world.Step(timeStep, velocityIterations, positionIterations);
@@ -156,7 +164,7 @@ void GameWorld::createExtras(int x, int y, int tileType) {
 int GameWorld::createCar(InfoBlock carStats) {
     auto fpos = finishingLine->getPosition();
     int size = cars.size();
-    int y = fpos.y - (0.25f + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
+    int y = fpos.y - (0.1f + (int)(1+cars.size()/2))*CAR_HEIGHT/PTM;
     int x = fpos.x - CAR_WIDTH/PTM + (2*CAR_WIDTH/PTM)*(size%2);
     b2Body* newBody = makeNewBody(world, b2_dynamicBody,x,y);
     int carId = size;
@@ -176,4 +184,20 @@ void GameWorld::createFinishingLine(int x, int y) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     finishingLine = std::make_shared<FinishingLine>(newBody);
     createAndAddFixture(finishingLine.get(),PTM_TILE,(float)FINISH_LINE_HEIGHT/PTM,0,TILE, SENSOR, false);
+}
+
+void GameWorld::respawnCar(RaceCar &car) {
+    auto f = [&](){
+        std::cout<<"a car is respawning"<<std::endl;
+        car.car_stats.hp = car.car_stats.base_hp;
+        auto fpos = finishingLine->getPosition();
+        int y = fpos.y - 1.1f *CAR_HEIGHT/PTM;
+        int x = fpos.x;
+        car.getBody()->SetTransform(b2Vec2(x,y),0);
+        auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(5));
+        car.addEffect(ptr);
+    };
+    auto ptr = std::shared_ptr<StatusEffect>(new CallbackStatusEffect("RESPAWN", f, 5));
+    car.addEffect(ptr);
+    std::cout<<"a car died"<<std::endl;
 }

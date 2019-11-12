@@ -7,7 +7,16 @@
 
 class StatusEffect {
 protected:
-    StatusEffect() = default;
+    StatusEffect(){
+        duration = 0;
+        delay = 0;
+        after_effect = 0;
+        n_stacks = 0;
+        apply_on_remove = false;
+        apply_on_acquire = false;
+        applied = false;
+    };
+    
 public:
     double duration{0};
     double delay{0};

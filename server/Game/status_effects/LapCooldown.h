@@ -21,7 +21,9 @@ public:
         entity.laps++;
     };
 
-    void increaseStack(StatusEffect* other) override {};
+    void increaseStack(StatusEffect* other) override {
+        delay = other->duration;//refresh
+    };
 
     void decreaseStack() override {};
 };

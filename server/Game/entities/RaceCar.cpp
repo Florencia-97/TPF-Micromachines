@@ -37,9 +37,11 @@ RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
 
 void RaceCar::step(float timestep){
     car_stats.step();
+    std::cout << "stepped ffff\n";
     stepEffects(timestep);
 
     updateFriction();
+    std::cout << "stepp2222ed cars\n";
 
     if (isDead())return;
     auto spd = calculateForwardImpulse();
@@ -152,7 +154,6 @@ void RaceCar::updateFriction() {
 }
 
 void RaceCar::stepEffects(float timestep) {
-    bool wasAlive = this->car_stats.hp > 0;
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
         if (status->apply_on_acquire && !status->applied){
@@ -175,10 +176,6 @@ void RaceCar::stepEffects(float timestep) {
                 i = status_effects.erase(i);
             }
         }
-    }
-    if (this->car_stats.hp < 0 && wasAlive){
-        //todo boom kill car kaboom
-        std::cout<<" CAR DIED KABOOM "<<std::endl;
     }
 }
 

@@ -4,7 +4,7 @@
 
 void HealthEffect::applyEffect(CarStats &entity) {
     if (current_tick == 0){
-        entity.hp += power;
+        entity.hp = std::max(0, entity.hp + power);
     }
     current_tick = (++current_tick)%interval;
 }

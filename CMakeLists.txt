@@ -49,7 +49,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/FinishingLine.cpp server/Game/entities/FinishingLine.h
 		server/Game/entities/items/ItemBoost.cpp server/Game/entities/items/ItemBoost.h
 		server/Game/entities/items/ItemRock.cpp server/Game/entities/items/ItemRock.h
-		server/Game/entities/items/ItemCreator.cpp server/Game/entities/items/ItemCreator.h server/Game/status_effects/HealthEffect.cpp server/Game/status_effects/HealthEffect.h)
+		server/Game/entities/items/ItemCreator.cpp server/Game/entities/items/ItemCreator.h server/Game/status_effects/HealthEffect.cpp server/Game/status_effects/HealthEffect.h server/Game/status_effects/CallbackStatusEffect.cpp server/Game/status_effects/CallbackStatusEffect.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
