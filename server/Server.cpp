@@ -1,17 +1,13 @@
 #include <threads/GamesManagerThread.h>
-#include <mods/PluginLibrary.h>
-#include "../config/constants.h"
 
+#include <iostream>
 #include "Server.h"
 
 
-int Server::play() {
+int Server::play(std::string& port) {
     std::cout << "Server running!\n";
-//    Example of plugins library
-//    std::string path = "plugins";
-//    PluginLibrary pluginLibrary(path);
-//    pluginLibrary.runPlugins();
-    GamesManagerThread gamesManager(PORT);
+    // TODO: check if port is right
+    GamesManagerThread gamesManager(port);
     gamesManager.run();
     std::cout << "Game Manager running!\n";
     std::string input;

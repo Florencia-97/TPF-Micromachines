@@ -18,8 +18,8 @@ class serverNotRunning : public std::exception {
 };
 
 class Client {
-  //todo check passing of gRenderer
-  Socket skt;
+    //todo check passing of gRenderer
+    Socket skt;
     SafeQueue<InfoBlock> keyboard_e_queue;
     std::queue<SDL_Event> mouse_queue;
     std::queue<SDL_Event> text_queue;
@@ -30,6 +30,8 @@ class Client {
     UserInput userInput;
     Receiver receiver;
     EventSender sender;
+    std::string port;
+    std::string service;
 
     //attemps to connect to client
     bool attempConnection();
@@ -40,7 +42,7 @@ class Client {
     InfoBlock connection_state;
 
 public:
-    Client();
+    Client(std::string& s, std::string& p);
 
     int play();
 
