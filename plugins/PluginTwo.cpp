@@ -11,7 +11,7 @@ class PluginTwo : public Plugin {
 public:
     virtual void modifyCars(std::vector<CarStats*>& cars) override {
         for (size_t i = 0; i < cars.size(); ++i){
-            cars[i]->max_speed += 50;
+            cars[i]->max_speed += 5;
         }
     }
 };
