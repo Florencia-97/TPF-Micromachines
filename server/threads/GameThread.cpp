@@ -100,16 +100,14 @@ void GameThread::_sendStartMsg(std::string raceId){
     while (it != this->plr_threads.end()){
         std::string carType = (!it->car_type.empty()) ? it->car_type : "RED_CAR";
         ib[CAR_TYPE + std::to_string(cont)] = carType;
+        it->id = cont;
         it++;
         cont++;
     }
-    cont = 0;
     it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
-        ib[MY_ID] = cont;
-        it->id = cont;
+        ib[MY_ID] = it->id;
         (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
-        cont++;
         it++;
     }
 }
