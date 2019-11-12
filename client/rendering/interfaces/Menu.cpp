@@ -80,8 +80,7 @@ void Menu::render_first_menu(int screenWidth, int screenHeight) {
     textbox_lobby_name.render();
     flavor_text.render();
     notification.render();
-    connectButton->render(screenHeight, screenHeight);
-  connectButton->render(screenWidth, screenHeight);
+    connectButton->render(screenWidth, screenHeight);
     SDL_RenderPresent(gRenderer);
 }
 

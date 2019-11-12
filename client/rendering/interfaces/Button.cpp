@@ -77,8 +77,8 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string>* sq) {
 void Button::render(float screenWidth, float screenHeight) {
   if (colorChangeDuration > -1) colorChangeDuration--;
   if (colorChangeDuration == 0) changeColor(255,255,255,-1);
-  float widthFactor = float(screenWidth) / oldWidth;
-  float heightFactor = float(screenHeight) / oldHeight;
+  float widthFactor = float(screenWidth / oldWidth);
+  float heightFactor = float(screenHeight / oldHeight);
   if (widthFactor != 1) {
     this->area.x *= widthFactor;
     this->area.y *= heightFactor;
