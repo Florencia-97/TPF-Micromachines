@@ -37,11 +37,9 @@ RaceCar::RaceCar(int carId, InfoBlock stats, b2Body* &newBody) \
 
 void RaceCar::step(float timestep){
     car_stats.step();
-    std::cout << "stepped ffff\n";
     stepEffects(timestep);
 
     updateFriction();
-    std::cout << "stepp2222ed cars\n";
 
     if (isDead())return;
     auto spd = calculateForwardImpulse();

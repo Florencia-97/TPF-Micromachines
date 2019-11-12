@@ -43,7 +43,10 @@ bool Client::waitForConnection(){
     while (!userInput.exit && !connection_successful) {
         waitReadyButton();
         if (!userInput.exit) {
-            connection_successful = attempConnection();
+            try { connection_successful = attempConnection();}
+            catch (serverNotRunning &e) {
+                gameLoop.menu.displayNotification("server is not running!");
+            }
         }
     }
 }
@@ -63,6 +66,7 @@ int Client::play() {
         if (skt.isValid() && !userInput.exit) {
             bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
             gameLoop.proceedToLobby(is_leader);
+            gameLoop.menu.displayNotification("connected, proceeding to lobby!");
             if (is_leader) {
                 //todo waitReadyButton()
                 sleep(5);

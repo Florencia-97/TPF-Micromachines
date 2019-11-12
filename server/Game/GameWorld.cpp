@@ -88,9 +88,7 @@ void GameWorld::processEvent(int id, InfoBlock &event){
 void GameWorld::Step(float timeStep) {
     for (auto & car : cars) {
         bool wasAlive = car.car_stats.hp > 0;
-        std::cout << "stepped cars\n";
         car.step(timeStep);
-        std::cout << "steppffed cars\n";
         if (car.car_stats.hp <= 0 && wasAlive) {
             respawnCar(car);
         }
