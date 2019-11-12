@@ -15,9 +15,22 @@ void TextLabel::init(const std::string &msg, int x, int y, int size, SDL_Color c
   this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", size);
   textTexture.loadFromRenderedText(text, color, font, sdl_renderer);
   updateBounds();
+  oldWidth = SCREEN_WIDTH;
+  oldHeight = SCREEN_HEIGHT;
+
 }
-void TextLabel::render() {
+void TextLabel::render(float screenWidth, float screenHeight) {
   _update();
+  auto widthFactor = float(screenWidth / oldWidth);
+  auto heightFactor = float(screenHeight / oldHeight);
+  if (widthFactor != 1) {
+    this->textArea.x *= widthFactor;
+    this->textArea.y *= heightFactor;
+    this->x = this->textArea.x;
+    this->y = this->textArea.y;
+    oldWidth = screenWidth;
+    oldHeight = screenHeight;
+  }
   if (current_frame == 1) renderText = !renderText;
   if (renderText)
   SDL_RenderCopy(renderer, textTexture.get_texture(), nullptr, &textArea);

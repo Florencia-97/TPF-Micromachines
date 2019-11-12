@@ -50,3 +50,17 @@ void TextBox::receiveInput(SDL_Event *e) {
         }
     }
 }
+void TextBox::render(float screenWidth, float screenHeight) {
+  _update();
+  float widthFactor = screenWidth / oldWidth;
+  float heightFactor = screenHeight / oldHeight;
+  if (widthFactor != 1 || heightFactor != 1) {
+    this->x *= widthFactor;
+    this->y *= heightFactor;
+    oldWidth = screenWidth;
+    oldHeight = screenHeight;
+  }
+  if (current_frame == 1) renderText = !renderText;
+  if (renderText)
+    SDL_RenderCopy(renderer, textTexture.get_texture(), nullptr, &textArea);
+}

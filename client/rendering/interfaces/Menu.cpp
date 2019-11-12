@@ -69,17 +69,17 @@ void Menu::processEventsKeyboard() {
   textbox_lobby_name.updateBounds();
 }
 
-void Menu::render_first_menu(int screenWidth, int screenHeight) {
+void Menu::render_first_menu(float screenWidth, float screenHeight) {
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : carButtons) {
       button.render(screenWidth, screenHeight);
     }
-    label_choose_car.render();
-    textbox_lobby_name.render();
-    flavor_text.render();
-    notification.render();
+  label_choose_car.render(screenWidth, screenHeight);
+  textbox_lobby_name.render(screenWidth, screenHeight);
+  flavor_text.render(screenWidth, screenHeight);
+  notification.render(screenWidth, screenHeight);
     connectButton->render(screenWidth, screenHeight);
     SDL_RenderPresent(gRenderer);
 }
