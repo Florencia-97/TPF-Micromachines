@@ -33,7 +33,7 @@ int Tile::getType() {
   return mType;
 }
 
-SDL_Rect Tile::getBox() {
+SDL_Rect& Tile::getBox() {
   return mBox;
 }
 bool Tile::checkCollision(SDL_Rect a, SDL_Rect b) {
