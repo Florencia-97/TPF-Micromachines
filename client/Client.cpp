@@ -69,7 +69,7 @@ int Client::play() {
             gameLoop.menu.displayNotification("connected   proceeding   to   game!");
             if (is_leader) {
                 //todo waitReadyButton()
-                sleep(5);
+                sleep(LOBBY_TIME);
                 InfoBlock ib;
                 ib[RACE_ID] = gameLoop.menu.map_selected;
                 keyboard_e_queue.push(ib);
