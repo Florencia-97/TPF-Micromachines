@@ -49,7 +49,8 @@ public:
         try {
             return this->src_yaml[key].as<T>();
         } catch (...){
-            throw std::runtime_error("InfoBlock get error key: "+key);
+            auto a = this->srcString();
+            throw std::runtime_error(a + " InfoBlock get error key: "+key);
         }
     }
 };
