@@ -5,13 +5,15 @@
 #include <dirent.h>
 #include <string>
 #include "PluginLoader.h"
+#include "../../common/conc/BaseThread.h"
 
-class PluginLibrary {
-    std::vector<PluginLoader*> plugins;
+class PluginLibrary : public BaseThread{
+    const char* path;
+    void _run() override;
 public:
-    explicit PluginLibrary(const char* path);
-    void runPlugins();
-    ~PluginLibrary();
+    explicit PluginLibrary(const char* p);
+    void runPlugins(std::vector<PluginLoader*>& plugins);
+    void loadPlugins(std::vector<PluginLoader*>& plugins);
 };
 
 
