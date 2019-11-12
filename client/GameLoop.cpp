@@ -51,7 +51,10 @@ void GameLoop::runGame(int frame_id){
     }
 
     if (!gameState->exists(GAME_END)) {
-        gameRenderer.render(*gameState, frame_id);
+      int height;
+      int width;
+      starter.get_screen_dimensions(&width, &height);
+      gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
     } else {
         menu.displayNotification("RACE OVER!  you came out " +

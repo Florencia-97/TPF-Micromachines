@@ -13,10 +13,8 @@
 class TextLabel {
     std::queue<std::string> stagedText;
     std::queue<SDL_Color> stagedColors;
-    int current_frame;
-    int rate;
-
-    protected:
+  int rate;
+ protected:
     TTF_Font *font;
     LTexture textTexture;
 
@@ -26,7 +24,10 @@ class TextLabel {
 
     void _update();
 
-    public:
+  float oldWidth;
+  float oldHeight;
+  int current_frame;
+ public:
     std::string text = "";
     int x;
     int y;
@@ -39,7 +40,7 @@ class TextLabel {
 
     void stageColorChange(SDL_Color c);
 
-    void render();
+  virtual void render(float screenWidth, float screenHeight);
 
     virtual void receiveInput(SDL_Event *e){};
 

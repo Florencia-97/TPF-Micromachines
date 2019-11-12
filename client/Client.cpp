@@ -29,7 +29,7 @@ void Client::waitReadyButton() {
 }
 
 bool Client::attempConnection() {
-    skt.client(SERVICE, PORT);
+    skt.client(this->service, this->port);
     if (!skt.isValid()) throw  serverNotRunning();
     connection_state[ARENA_GAME] = gameLoop.menu.map_selected;
     connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
@@ -88,10 +88,13 @@ int Client::play() {
     return 0;
 }
 
-Client::Client() : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue),
+Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue),
                    userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue, &ready_to_connect),
                    receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
-{}
+{
+    this->service = s;
+    this->port = p;
+}
 
 void Client::release(){
     skt.closeSd();

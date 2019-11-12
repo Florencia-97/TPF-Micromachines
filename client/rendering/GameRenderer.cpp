@@ -24,7 +24,7 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
     timer.stageTextChange(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame) {
+void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {
     map.render(camera, gRenderer);
     int x = camera.x;
     int y = camera.y;
@@ -36,9 +36,10 @@ void GameRenderer::render(InfoBlock &world_state, int frame) {
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
     //explosion.play(gRenderer,0,0);
     //stain.play(gRenderer, 0, 0);
-    laps.render();
-    timer.render();
-    health.render();
+
+  laps.render(width, height);
+  timer.render(width, height);
+  health.render(width, height);
     SDL_RenderPresent(gRenderer);
 }
 

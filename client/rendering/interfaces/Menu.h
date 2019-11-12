@@ -50,7 +50,7 @@ class Menu {
   void processEventsKeyboard();
 
   //PRE must be initialized
-  void render_first_menu(int screenWidth, int screenHeight);
+  void render_first_menu(float screenWidth, float screenHeight);
 
   void dummy_init_as_leader();
 

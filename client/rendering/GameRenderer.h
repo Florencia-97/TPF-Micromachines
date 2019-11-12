@@ -42,7 +42,7 @@ public:
   void init(SDL_Renderer *gr, InfoBlock &game_info);
 
   //pre must be init
-  void render(InfoBlock &world_state, int frame);
+  void render(InfoBlock &world_state, int frame, float width, float height);
 
     void updatePlayers(InfoBlock &world_state, int frame);
 
