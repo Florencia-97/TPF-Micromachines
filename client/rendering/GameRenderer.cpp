@@ -19,7 +19,7 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
         car.render(camera, gRenderer);
     }
     health.stageTextChange( "HP " + world_state.getString("h"+my_id));
-    laps.stageTextChange(world_state.getString("l"+my_id) + "   laps");
+    laps.stageTextChange("laps  " + world_state.getString("l"+my_id));
     timer.stageTextChange(world_state.getString(TIME_LEFT));
 }
 

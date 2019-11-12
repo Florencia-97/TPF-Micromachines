@@ -5,6 +5,7 @@
 
 #include "Entity.h"
 #include "../status_effects/SpeedStatusEffect.h"
+#include "../status_effects/HealthEffect.h"
 
 class OffRoad : public Entity {
 public:

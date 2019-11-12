@@ -43,7 +43,7 @@ void RaceCar::step(float timestep){
 
     if (isDead())return;
     auto spd = calculateForwardImpulse();
-     if (spd > 15 || spd < -15){
+     if (spd > 3 || spd < -3){
         float desiredTorque = car_stats.rot_force * steer_dir.y * this->body->GetMass();
         body->ApplyTorque(desiredTorque, true);
     }
@@ -155,7 +155,6 @@ void RaceCar::stepEffects(float timestep) {
     bool wasAlive = this->car_stats.hp > 0;
     for (auto i = status_effects.begin(); i!= status_effects.end();){
         auto status = i->get();
-
         if (status->apply_on_acquire && !status->applied){
             status->applyEffect(car_stats);
         } else if (status->delay > 0){
@@ -178,7 +177,8 @@ void RaceCar::stepEffects(float timestep) {
         }
     }
     if (this->car_stats.hp < 0 && wasAlive){
-        //boom kill car kaboom
+        //todo boom kill car kaboom
+        std::cout<<" CAR DIED KABOOM "<<std::endl;
     }
 }
 

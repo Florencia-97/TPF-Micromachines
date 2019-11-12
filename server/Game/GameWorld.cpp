@@ -118,7 +118,7 @@ void GameWorld::_createItem(){
     auto ptr = ItemCreator::createItem(newBody, itemsId);
     itemsId+=1;
     this->dynamic_objs.push_back(ptr);
-    createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
+    createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE/PTM, PTM_TILE/PTM, 0, TILE, SENSOR, false);
     if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
         world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.

@@ -13,6 +13,7 @@ public:
         apply_on_remove = false;
         apply_on_acquire = true;
         applied = false;
+        id = "";
     };
 
     void applyEffect(CarStats &entity) override{

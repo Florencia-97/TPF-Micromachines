@@ -3,8 +3,7 @@
 #define ITEM_SPEED_BOOST "ROAD_SPEED_BOOST"
 
 ItemBoost::ItemBoost(b2Body *&newBody, int itemId) :
-    Entity(newBody, itemId, ITEM_BOOST), my_effect(ITEM_SPEED_BOOST,0,10000,.5,2){
-    body->SetUserData(this); // Do i need this?
+    Entity(newBody, itemId, ITEM_BOOST), my_effect(ITEM_SPEED_BOOST,0,4,0,2){
 }
 
 void ItemBoost::resolveCollision(Entity *other) {
