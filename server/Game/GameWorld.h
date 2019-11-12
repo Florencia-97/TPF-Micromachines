@@ -21,7 +21,7 @@ class GameWorld {
     CollisionsManager cl;
     std::shared_ptr<FinishingLine> finishingLine;
 
-    std::list<RaceCar> cars;
+    //std::list<RaceCar> cars;
     std::list<OffRoad> road_bodies;
 
     //static instances are those which  will remain in place
@@ -35,6 +35,7 @@ class GameWorld {
 
 public:
     //POS creates a world with no gravity for top-down action
+    std::list<RaceCar> cars;
     GameWorld();
     int createCar(InfoBlock carStats);
     void processEvent(int id, InfoBlock &event);

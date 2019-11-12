@@ -4,6 +4,8 @@
 #include "../../../../config/constants.h"
 #include "ItemBoost.h"
 #include "ItemRock.h"
+#include "ItemHealth.h"
+#include "ItemOil.h"
 
 std::shared_ptr<Entity> ItemCreator::createItem(b2Body* newBody, int itemsId){
     //Random id between 0 and the amount of items.
@@ -20,11 +22,11 @@ std::shared_ptr<Entity> ItemCreator::createItem(b2Body* newBody, int itemsId){
         case ITEM_ROCK:
             return std::make_shared<ItemRock>(newBody, itemsId);
         case ITEM_OIL:
-            return std::make_shared<ItemBoost>(newBody, itemsId);
+            return std::make_shared<ItemOil>(newBody, itemsId);
         case ITEM_MUD:
             return std::make_shared<ItemRock>(newBody, itemsId);
         case ITEM_HEALTH:
-            return std::make_shared<ItemBoost>(newBody, itemsId);
+            return std::make_shared<ItemHealth>(newBody, itemsId);
         default:
             return std::make_shared<ItemRock>(newBody, itemsId);
     }

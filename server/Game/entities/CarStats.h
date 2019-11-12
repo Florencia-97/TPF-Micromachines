@@ -4,7 +4,6 @@
 #define MICROMACHINES_CARSTATS_H
 
 #include "../../../common/infostream/InfoBlock.h"
-#include "../../config/constants.h"
 
 class CarStats {
     InfoBlock base;

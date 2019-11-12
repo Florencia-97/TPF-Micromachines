@@ -195,13 +195,21 @@ void GameThread::_run() {
         this->game.loadWorld(mapName);
         _createCars();
         _sendStartMsg(mapName);
+        pluginLibrary.loadCars(&this->game.cars);
+        pluginLibrary.run();
         _runGame();
     }
+    pluginLibrary.close();
+    pluginLibrary.join();
     _killPlayers(true);
     close();
 }
 
 GameThread::~GameThread(){
+    if (pluginLibrary.isRunning()){
+        pluginLibrary.close();
+        pluginLibrary.join();
+    }
     _killPlayers(true);
     close();
 }

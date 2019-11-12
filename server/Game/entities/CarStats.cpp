@@ -1,4 +1,5 @@
 #include "CarStats.h"
+#include "../../config/constants.h"
 
 CarStats::CarStats(InfoBlock ib){
     this->laps = -1;

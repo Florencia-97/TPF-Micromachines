@@ -14,11 +14,11 @@ public:
         return;
     }
     //virtual void modifyCars(std::vector<int> cars);
-    virtual void modifyCars(std::vector<CarStats>& cars) {
+    virtual void modifyCars(std::vector<CarStats*>& cars) {
         return;
     }
 
-    virtual void modifyWorld(std::vector<CarStats>& world) {
+    virtual void modifyWorld(std::vector<CarStats*>& world) {
         return;
     }
 };
