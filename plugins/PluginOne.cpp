@@ -7,12 +7,13 @@
 // ../server/Game/status_effects/StatusEffect.cpp
 // g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
 
+// PluginOne boost al cars health with 50 points
+
 class PluginOne : public Plugin {
 public:
-    virtual void modifyCars(std::vector<CarStats>& cars) override {
+    virtual void modifyCars(std::vector<CarStats*>& cars) override {
         for (size_t i = 0; i < cars.size(); ++i){
-            //std::cout << cars[i].max_speed << std::endl;
-            //std::cout << cars[i] << std::endl;
+            cars[i]->hp += 50;
         }
     }
 };

@@ -195,6 +195,7 @@ void GameThread::_run() {
         this->game.loadWorld(mapName);
         _createCars();
         _sendStartMsg(mapName);
+        pluginLibrary.loadCars(&this->game.cars);
         pluginLibrary.run();
         _runGame();
     }

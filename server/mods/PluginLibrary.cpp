@@ -2,15 +2,22 @@
 #include <string>
 
 PluginLibrary::PluginLibrary(const char* path) {
-    // TODO: leaking memory when created in gameThread, why??
     this->path = path;
+    this->cars = nullptr;
+}
+
+void PluginLibrary::loadCars(std::list<RaceCar>* cars){
+    this->cars = cars;
 }
 
 void PluginLibrary::runPlugins(std::vector<PluginLoader*>& plugins){
-    std::vector<CarStats> cars;
-    for (size_t i=0; i< plugins.size(); ++i){
-        plugins[i]->plugin->modifyCars(cars);
-        plugins[i]->plugin->modifyWorld(cars);
+    std::vector<CarStats*> carsStats;
+    for (auto & car : *cars){
+        carsStats.push_back(&car.car_stats);
+    }
+    for (auto & plugin : plugins){
+        plugin->plugin->modifyCars(carsStats);
+        plugin->plugin->modifyWorld(carsStats);
     }
 }
 
@@ -39,7 +46,8 @@ void PluginLibrary::_run() {
         for (auto it = plugins.begin(); it != plugins.end(); ++it){
             delete(*it);
         }
-        this->sleep(10); // TODO: constant, time between plugins run
+        std::cout << "Waiting for plugins to reactivate again!\n";
+        this->sleep(15); // TODO: constant, time between plugins run
     }
-    std::cout << "Plugin library stops running\n";
+    std::cout << "Plugin library stops running, able to quit\n";
 }
