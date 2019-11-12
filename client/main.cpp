@@ -3,7 +3,7 @@
 // ./Client service port
 int main(int argc, char *args[]) {
     try {
-        if (argc != 3) return 1;
+        if (argc != 3) throw std::runtime_error("error! use ./Client [HOST] [PORT]");;
         std::string service = args[1];
         std::string port = args[2];
         Client client(service, port);

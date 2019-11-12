@@ -13,7 +13,7 @@ class PluginOne : public Plugin {
 public:
     virtual void modifyCars(std::vector<CarStats*>& cars) override {
         for (size_t i = 0; i < cars.size(); ++i){
-            cars[i]->hp += 50;
+            cars[i]->hp += 5;
         }
     }
 };
