@@ -46,6 +46,9 @@ void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
             tile->renderWithSize(camera, renderer);
         }
     }
+}
+
+void GameMap::renderDeco(SDL_Rect &camera, SDL_Renderer *renderer) {
     for (const auto& row: extras){
         for (const auto& tile: row){
             tile->renderWithSize(camera, renderer);

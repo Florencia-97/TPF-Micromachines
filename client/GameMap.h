@@ -18,8 +18,8 @@ public:
     int height;
     
     void loadMap(const std::string &map, SDL_Renderer *gRenderer);
-
     void render(SDL_Rect &camera, SDL_Renderer *renderer);
+    void renderDeco(SDL_Rect &camera, SDL_Renderer *renderer);
 };
 
 

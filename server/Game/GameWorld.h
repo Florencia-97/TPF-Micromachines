@@ -31,6 +31,7 @@ class GameWorld {
     void _createItem();
     float timeModifiers;
     int itemsId;
+    void _loadXYInRoad(int&x, int&y);
 
 public:
     //POS creates a world with no gravity for top-down action
