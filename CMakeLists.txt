@@ -106,7 +106,8 @@ set(CLIENT_SOURCE_FILES
 #		)
 
 set(LUA_SOURCE_FILES
-	lua/LuaWrapper.cpp lua/LuaWrapper.h
+		common/MapsLayer.cpp common/MapsLayer.h
+		lua/LuaWrapper.cpp lua/LuaWrapper.h
 		)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
@@ -122,5 +123,5 @@ target_link_libraries(Client yaml-cpp pthread
 		${SDL2TTF_LIBRARY}
 		${SDL2_MIXER_LIBRARIES}
 		)
-target_link_libraries( LuaPlayer PUBLIC LuaLib )
+target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
 #target_link_libraries(Test yaml-cpp Box2D)

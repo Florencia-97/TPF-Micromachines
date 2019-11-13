@@ -1,5 +1,4 @@
 #include <vector>
-#include <iostream>
 #include "LuaWrapper.h"
 
 LuaWrapper::LuaWrapper(){
@@ -56,7 +55,7 @@ std::string LuaWrapper::getDesition(std::vector<std::vector<int>>& iv, int x, in
 
     /* call the add function */
     std::string des = decide_move(iv, x, y);
-    
+
     return des;
 }
 

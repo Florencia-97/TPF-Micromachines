@@ -3,15 +3,29 @@
 #include <iostream>
 
 #include "LuaWrapper.h"
+#include "../common/MapsLayer.h"
 
 
 int main ( int argc, char *argv[] )
 {
     LuaWrapper lw;
-    std::vector<std::vector<int>> iv = {{1,2,3}, {4,5,6}, {7,8,9}};
+    MapsLayer mapsLayer("maps/race_1.yaml");
     int x = 3;
     int y = 5;
-    std::string des = lw.getDesition(iv, x, y);
+    std::cout << "Ground\n";
+    std::string des = lw.getDesition(mapsLayer.ground, x, y);
+    std::cout << des << std::endl;
+
+    x = 10;
+    y  = 32;
+    std::cout << "Road\n";
+    des = lw.getDesition(mapsLayer.road, x, y);
+    std::cout << des << std::endl;
+
+    x = 10;
+    y  = 32;
+    std::cout << "Extras\n";
+    des = lw.getDesition(mapsLayer.extras, x, y);
     std::cout << des << std::endl;
 	return 0;
 }
