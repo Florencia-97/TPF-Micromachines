@@ -6,10 +6,10 @@
 
 class LuaWrapper {
     lua_State* L;
-    std::string decide_move(std::vector<int>& v1);
+    std::string decide_move(std::vector<std::vector<int>>& v1, int x, int y);
 public:
     LuaWrapper();
-    std::string getDesition(std::vector<int>& iv);
+    std::string getDesition(std::vector<std::vector<int>>& iv, int x, int y);
     ~LuaWrapper();
 };
 
