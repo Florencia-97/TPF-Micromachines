@@ -4,8 +4,8 @@
 
 // ./Server port
 int main (int argc, char** argv) {
+    if (argc != 2) throw std::runtime_error("No port was specified! use ./Server [PORT]\n");
     try {
-        if (argc != 2) throw std::runtime_error("no port was specified! use ./Server [PORT]\n");
         Server server;
         std::string port = argv[1];
         return server.play(port);

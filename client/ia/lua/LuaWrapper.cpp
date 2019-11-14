@@ -51,7 +51,7 @@ std::string LuaWrapper::decide_move(std::vector<std::vector<int>>& v1, int x, in
 }
 
 std::string LuaWrapper::getDesition(std::vector<std::vector<int>>& iv, int x, int y){
-    luaL_dofile(this->L, "lua/fake_player.lua");
+    luaL_dofile(this->L, "client/ia/lua/fake_player.lua");
 
     /* call the add function */
     std::string des = decide_move(iv, x, y);

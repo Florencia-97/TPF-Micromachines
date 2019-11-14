@@ -6,6 +6,8 @@
 #include "../common/MapsLayer.h"
 
 
+//TODO: Kill whe finish ia testing!
+
 int main ( int argc, char *argv[] )
 {
     LuaWrapper lw;
