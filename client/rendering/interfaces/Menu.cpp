@@ -76,17 +76,14 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
     for (auto &button : carButtons) {
       button.render(screenWidth, screenHeight);
     }
-  label_choose_car.render(screenWidth, screenHeight);
-  textbox_lobby_name.render(screenWidth, screenHeight);
-  flavor_text.render(screenWidth, screenHeight);
-  notification.render(screenWidth, screenHeight);
+    label_choose_car.render(screenWidth, screenHeight);
+    textbox_lobby_name.render(screenWidth, screenHeight);
+    flavor_text.render(screenWidth, screenHeight);
+    notification.render(screenWidth, screenHeight);
     connectButton->render(screenWidth, screenHeight);
-    SDL_RenderPresent(gRenderer);
 }
 
 void Menu::dummy_init_as_leader() {
-  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderClear(gRenderer);
   set_buttons_as_leader();
   LTexture msg;
   wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT,true);
@@ -95,16 +92,12 @@ void Menu::dummy_init_as_leader() {
   for (auto &button : mapButtons) {
     //button.render();
   }
-  SDL_RenderPresent(gRenderer);
 }
 
 
 void Menu::init_as_follower() {
-  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderClear(gRenderer);
   wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
   wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0,true);
-  SDL_RenderPresent(gRenderer);
 }
 
 void Menu::set_buttons_positions() {

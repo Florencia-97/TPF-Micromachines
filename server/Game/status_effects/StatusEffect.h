@@ -3,6 +3,8 @@
 #ifndef MICROMACHINES_STATUSEFFECT_H
 #define MICROMACHINES_STATUSEFFECT_H
 
+#include <utility>
+
 #include "Game/entities/CarStats.h"
 
 class StatusEffect {
@@ -38,7 +40,7 @@ public:
     virtual void decreaseStack(){n_stacks--;};
 
     void setStateModifActive(std::string mod){
-        state_mod = mod+"|";
+        state_mod = std::move(mod);
         this->state_mod_enabled = true;
     };
 };

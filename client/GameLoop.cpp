@@ -12,6 +12,7 @@ void GameLoop::_runProgram(){
         runMenu(current_frame);
     }
     soundSystem.play(state == GAME_STATE);
+    SDL_RenderPresent(starter.get_global_renderer());
 }
 
 void GameLoop::_run(){

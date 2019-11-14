@@ -40,7 +40,6 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
   laps.render(width, height);
   timer.render(width, height);
   health.render(width, height);
-    SDL_RenderPresent(gRenderer);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
