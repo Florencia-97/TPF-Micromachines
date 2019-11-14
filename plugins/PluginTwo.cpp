@@ -4,7 +4,7 @@
 #include <iostream>
 
 // TODO: change names.
-// This plugin boost cars speed with 50
+// This plugin boost cars speed with 5
 // g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginTwo.so ./PluginTwo.cpp
 
 class PluginTwo : public Plugin {

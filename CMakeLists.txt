@@ -94,7 +94,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h
 		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
 		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
-		client/Item.cpp client/Item.h)
+		client/Item.cpp client/Item.h
+		client/ia/FakeClient.cpp client/ia/FakeClient.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp
@@ -107,21 +108,20 @@ set(CLIENT_SOURCE_FILES
 
 set(LUA_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
-		lua/LuaWrapper.cpp lua/LuaWrapper.h
+		client/ia/lua/LuaWrapper.cpp client/ia/lua/LuaWrapper.h
 		)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
-add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
-# For testing only, it goes in the client afterwards!
-add_executable(LuaPlayer lua/main.cpp ${LUA_SOURCE_FILES})
+add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES} ${LUA_SOURCE_FILES})
+# add_executable(LuaPlayer lua/main.cpp ${LUA_SOURCE_FILES})
 #add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp pthread Box2D ${CMAKE_DL_LIBS})
-target_link_libraries(Client yaml-cpp pthread
+target_link_libraries(Client yaml-cpp pthread LuaLib
 		${SDL2_LIBRARY}
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2TTF_LIBRARY}
 		${SDL2_MIXER_LIBRARIES}
 		)
-target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
+#target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
 #target_link_libraries(Test yaml-cpp Box2D)
