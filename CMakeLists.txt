@@ -20,6 +20,8 @@ include_directories(${PROJECT_SOURCE_DIR}/server)
 include_directories(${PROJECT_SOURCE_DIR}/server/Game)
 include_directories(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
 add_subdirectory(${PROJECT_SOURCE_DIR}/server/Game/Box2D)
+include_directories(${PROJECT_SOURCE_DIR}/lua)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lua53)
 
 set(SERVER_SOURCE_FILES
 		server/config/Configuration.cpp
@@ -103,8 +105,15 @@ set(CLIENT_SOURCE_FILES
 #		common/conc/SenderThread.cpp common/conc/SenderThread.h
 #		)
 
+set(LUA_SOURCE_FILES
+		common/MapsLayer.cpp common/MapsLayer.h
+		lua/LuaWrapper.cpp lua/LuaWrapper.h
+		)
+
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES})
+# For testing only, it goes in the client afterwards!
+add_executable(LuaPlayer lua/main.cpp ${LUA_SOURCE_FILES})
 #add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp pthread Box2D ${CMAKE_DL_LIBS})
@@ -114,4 +123,5 @@ target_link_libraries(Client yaml-cpp pthread
 		${SDL2TTF_LIBRARY}
 		${SDL2_MIXER_LIBRARIES}
 		)
+target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
 #target_link_libraries(Test yaml-cpp Box2D)
