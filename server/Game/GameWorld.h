@@ -15,6 +15,11 @@
 #include "Game/entities/FinishingLine.h"
 
 
+struct Coordinate{
+    float x = 0;
+    float y = 0;
+};
+
 class GameWorld {
     b2World world;
     MapsLayer map;
@@ -22,7 +27,8 @@ class GameWorld {
     std::shared_ptr<FinishingLine> finishingLine;
 
     //std::list<RaceCar> cars;
-    std::list<OffRoad> road_bodies;
+    std::list<OffRoad> offroad_bodies;
+    std::list<Coordinate> road_positions;
 
     //static instances are those which  will remain in place
     std::list<std::shared_ptr<Entity>> static_objs;
@@ -45,12 +51,16 @@ public:
 
     //POS advances the simulation and all instances within one timestep
     void Step(float timeStep);
-    void createRoad(int x, int y, int tileId); //yaml &stats?
+    void createOffRoad(int x, int y, int tileId); //yaml &stats?
     void createExtras(int x, int y, int tileId);
 
     void createFinishingLine(int x, int y);
 
     void respawnCar(RaceCar &car);
+
+    void attempItemSpawn();
+
+    void spentItemCleaning();
 };
 
 

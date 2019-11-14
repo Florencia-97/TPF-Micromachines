@@ -15,6 +15,7 @@ public:
     float max_speed;
     float rot_force;
     float accel_rate;
+    std::string state;
 
     int hp;
     int laps;

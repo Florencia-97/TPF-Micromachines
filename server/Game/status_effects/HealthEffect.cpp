@@ -3,7 +3,12 @@
 #include "HealthEffect.h"
 
 void HealthEffect::applyEffect(CarStats &entity) {
-    if (current_tick == 0){
+    if (apply_on_acquire){
+        applied = true;
+        duration = 0;
+        delay = 0;
+        entity.hp = std::max(0, entity.hp + power);
+    } else if (current_tick == 0){
         entity.hp = std::max(0, entity.hp + power);
     }
     current_tick = (++current_tick)%interval;
@@ -20,7 +25,7 @@ HealthEffect::HealthEffect(std::string id, bool apply_on_get, double delay, doub
     this->after_effect = 0;
     this->apply_on_acquire = apply_on_get;
     this->apply_on_remove = false;
-    this->interval = interval_frames;
+    this->interval = std::max(1,interval_frames);
     this->current_tick = 1;
 
 }

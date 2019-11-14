@@ -1,6 +1,7 @@
 
 
 #include "Entity.h"
+#include "../../config/constants.h"
 
 Entity::Entity(b2Body* &newBody) {
     this->body = newBody;
@@ -45,8 +46,8 @@ void Entity::loadPosToInfoBlock(InfoBlock& ib, int cont) {
     std::string itemId = std::to_string(this->id);
     std::string num = std::to_string(cont);
     ib["OId" + num] = this->id;
-    ib["Ox" + itemId] = (int) std::round(pos.x);
-    ib["Oy" + itemId] = (int) std::round(pos.y);
+    ib["Ox" + itemId] = (int) std::round(pos.x*PTM);
+    ib["Oy" + itemId] = (int) std::round(pos.y*PTM);
     ib["Ot" + itemId] = this->tileId;
 }
 

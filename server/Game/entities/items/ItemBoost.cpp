@@ -7,12 +7,13 @@ ItemBoost::ItemBoost(b2Body *&newBody, int itemId) :
 }
 
 void ItemBoost::resolveCollision(Entity *other) {
-    std::cout << "colision with boost\n" << std::endl;
+    if (!enabled) return;
     auto ptr = std::shared_ptr<StatusEffect>(new SpeedStatusEffect(ITEM_SPEED_BOOST,my_effect.delay,
                                                                    my_effect.duration, my_effect.after_effect, my_effect.speed_mod));
     other->addEffect(ptr);
+    this->enabled = false;
 }
 
 void ItemBoost::endContact(Entity *wasTouching) {
-    wasTouching->removeEffect(ITEM_SPEED_BOOST);
+    //wasTouching->removeEffect(ITEM_SPEED_BOOST);
 }
