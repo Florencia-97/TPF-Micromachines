@@ -7,7 +7,7 @@
 // ../server/Game/status_effects/StatusEffect.cpp
 // g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
 
-// PluginOne boost al cars health with 50 points
+// PluginOne boost al cars health with 5 points
 
 class PluginOne : public Plugin {
 public:
