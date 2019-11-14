@@ -12,6 +12,9 @@ void HealthEffect::applyEffect(CarStats &entity) {
         entity.hp = std::max(0, entity.hp + power);
     }
     current_tick = (++current_tick)%interval;
+    if (state_mod_enabled){
+        entity.state += state_mod;
+    }
 }
 
 HealthEffect::HealthEffect(std::string id, bool apply_on_get, double delay, double duration, int power, int interval_frames)
