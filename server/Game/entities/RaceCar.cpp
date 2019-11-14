@@ -87,6 +87,7 @@ void RaceCar::loadStateToInfoBlock(InfoBlock& ib) {
     ib["x" + autoId] = (int)std::round(pos.x*PTM);
     ib["y" + autoId] = (int)std::round(pos.y*PTM);
     ib["r" + autoId] = (int)std::round(this->body->GetAngle()/DEGTORAD);
+    ib["s" + autoId] = car_stats.state;
     ib["l" + autoId] = car_stats.laps;
 }
 

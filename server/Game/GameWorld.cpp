@@ -46,8 +46,15 @@ void GameWorld::loadWorld(std::string worldName){
     for (int j = 0; j < map.road.size(); j++){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
+            int x = i * PTM_TILE + PTM_TILE / 2;
+            int y =  j * PTM_TILE + PTM_TILE / 2;
             if (row[i] == 0){ //not road
-                createRoad(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
+                createOffRoad(x, y, row[i]);
+            } else {
+                Coordinate c;
+                c.x = x;
+                c.y = y;
+                road_positions.push_back(c);
             }
         }
     }
@@ -59,7 +66,7 @@ void GameWorld::loadWorld(std::string worldName){
                 createFinishingLine(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2);
             }
             else if (row[i] == pavilion_blue_tile) {
-                createExtras(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
+                //createExtras(i * PTM_TILE + PTM_TILE/2 , j*PTM_TILE + PTM_TILE/2, row[i]);
             }
         }
     }
@@ -99,14 +106,9 @@ void GameWorld::Step(float timeStep) {
     world.Step(timeStep, velocityIterations, positionIterations);
     this->timeModifiers += timeStep;
 
-    // TODO: make this random maybe a little better, Flor task
-    // We create random items
-    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS;
-    if ( (int) this->timeModifiers > randomTime){
-        std::cout << "We generate random item\n";
-        _createItem();
-        this->timeModifiers = 0;
-    } else if (this->timeModifiers > TIME_TO_ITEMS) this->timeModifiers = 0;
+    spentItemCleaning();
+    attempItemSpawn();
+
 }
 
 RaceCar &GameWorld::getCar(int id) {
@@ -125,31 +127,33 @@ void GameWorld::_createItem(){
     auto ptr = ItemCreator::createItem(newBody, itemsId);
     itemsId+=1;
     this->dynamic_objs.push_back(ptr);
-    createAndAddFixture(this->dynamic_objs.back().get(), PTM_TILE/PTM, PTM_TILE/PTM, 0, TILE, SENSOR, false);
-    if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS){
+    createAndAddFixture(this->dynamic_objs.back().get(), 60.0f/PTM, 60.0f/PTM, 0, TILE, SENSOR, false);
+    if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS*std::max(1,(int)cars.size()/2)){
         world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
     }
 }
 
 void GameWorld::_loadXYInRoad(int& x, int& y){
-    int tilesRoad = this->road_bodies.size();
+    int tilesRoad = this->road_positions.size();
     //Random
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, tilesRoad - 1);
     int pos = dis(gen);
 
-    auto it1 = std::next(this->road_bodies.begin(), pos);
-    x = (int) std::round(it1->getPosition().x) * PTM_TILE; // Remove hardcoded
-    y = (int) std::round(it1->getPosition().y) * PTM_TILE;
+    int rx = rand()%(int)PTM_TILE - PTM_TILE/2;
+    int ry = rand()%(int)PTM_TILE - PTM_TILE/2;;
+    auto it1 = std::next(this->road_positions.begin(), pos);
+    x = (int) (std::round(it1->x) + rx*.8);
+    y = (int) (std::round(it1->y) + ry*.8);
 }
 
 // TODO: If we dont use them, remove tileType as parameter
-void GameWorld::createRoad(int x, int y, int tileType) {
+void GameWorld::createOffRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
-    this->road_bodies.emplace_back("offroad",newBody);
-    createAndAddFixture(&(this->road_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
+    this->offroad_bodies.emplace_back("offroad", newBody);
+    createAndAddFixture(&(this->offroad_bodies.back()), PTM_TILE, PTM_TILE, 0, TILE, SENSOR, false);
 }
 
 void GameWorld::createExtras(int x, int y, int tileType) {
@@ -198,4 +202,24 @@ void GameWorld::respawnCar(RaceCar &car) {
     auto ptr = std::shared_ptr<StatusEffect>(new CallbackStatusEffect("RESPAWN", f, 5));
     car.addEffect(ptr);
     std::cout<<"a car died"<<std::endl;
+}
+
+void GameWorld::attempItemSpawn() {
+    int randomTime = rand() % (TIME_TO_ITEMS - TIME_FROM_ITEMS + 1) + TIME_FROM_ITEMS;
+    if ( (int) this->timeModifiers > randomTime*.5){
+        std::cout << "We generate random item\n";
+        _createItem();
+        this->timeModifiers = 0;
+    } else if (this->timeModifiers > TIME_TO_ITEMS)
+        this->timeModifiers = 0;
+}
+
+void GameWorld::spentItemCleaning() {
+    auto it = dynamic_objs.begin();
+    while(it != dynamic_objs.end()){
+        if (!it->get()->enabled){
+            world.DestroyBody(it->get()->getBody());
+            it = dynamic_objs.erase(it);
+        } else it++;
+    }
 }

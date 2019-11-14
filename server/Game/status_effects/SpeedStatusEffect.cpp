@@ -15,6 +15,9 @@ SpeedStatusEffect::SpeedStatusEffect(std::string id, double delay, double durati
 
 void SpeedStatusEffect::applyEffect(CarStats &entity) {
     entity.max_speed = entity.max_speed*speed_mod;
+    if (state_mod_enabled){
+        entity.state += state_mod;
+    }
 }
 
 void SpeedStatusEffect::increaseStack(StatusEffect *other) {

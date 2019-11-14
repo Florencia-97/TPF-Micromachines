@@ -14,10 +14,12 @@ CarStats::CarStats(InfoBlock ib){
     this->rot_force = this->base_rot_force;
     this->hp = this->base_hp;
     this->accel_rate = this->base_accel_rate;
+    this->state = "|";
 }
 
 void CarStats::step() {
     max_speed = this->base_max_speed;
     this->rot_force = this->base_rot_force;
     this->accel_rate = this->base_accel_rate;
+    this->state = "|";
 }

@@ -10,7 +10,6 @@
 
 //probably make this one a virtual class
 class Entity {
-    bool enabled;
     int y_size;
     int x_size;
     int id;
@@ -20,6 +19,8 @@ class Entity {
 protected:
     b2Body* body;
 public:
+    bool enabled;
+
     //only supports making objects with a square bounding box
     Entity(b2Body* &newbody);
 
