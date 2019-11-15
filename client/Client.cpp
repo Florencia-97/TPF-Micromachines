@@ -57,7 +57,7 @@ int Client::play() {
     userInput.run();
     // TODO: testing fake client, please dont remove doc code
     //std::string mapName = "maps/race_1.yaml";
-    //FakeClient fc(this->keyboard_e_queue, mapName);
+    //FakeClient fc(this->keyboard_e_queue, this->fake_player_queue , mapName);
     //userInput.isScript = true;
     while (!userInput.exit){
         try {
@@ -95,7 +95,7 @@ int Client::play() {
     return 0;
 }
 
-Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue),
+Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue, fake_player_queue),
                    userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue, &ready_to_connect),
                    receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
 {
