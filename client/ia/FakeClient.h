@@ -6,14 +6,17 @@
 #include "../../common/infostream/InfoBlock.h"
 #include "lua/LuaWrapper.h"
 #include "../../common/MapsLayer.h"
+#include "../../common/conc/BaseThread.h"
+#include "../../common/SafeQueue.h"
 
-class FakeClient {
-    std::queue<InfoBlock>* renderQueue;
-    std::queue<InfoBlock>* keyboardQueue;
+class FakeClient : public BaseThread {
+    //std::queue<InfoBlock>* renderQueue;
+    SafeQueue<InfoBlock>* keyboardQueue;
     LuaWrapper luaWrapper;
     MapsLayer mapsLayer; // TODO: Check if we can pass an instance of this class
+    void _run() override;
 public:
-    FakeClient(std::queue<InfoBlock> &rq, std::queue<InfoBlock> &kq, const std::string& map);
+    FakeClient(SafeQueue<InfoBlock> &kq, const std::string& map);
     void move();
 };
 

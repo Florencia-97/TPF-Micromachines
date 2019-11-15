@@ -1,9 +1,22 @@
 #include "FakeClient.h"
+#include "../../config/constants.h"
 
-FakeClient::FakeClient(std::queue<InfoBlock> &rq, std::queue<InfoBlock> &kq, const std::string& mapName):
+FakeClient::FakeClient(SafeQueue<InfoBlock> &kq, const std::string& mapName):
     luaWrapper(), mapsLayer(mapName) {
-    this->renderQueue = &rq;
+    //this->renderQueue = &rq;
     this->keyboardQueue = &kq;
+}
+
+void FakeClient::_run() {
+    //move();
+    while(this->isAlive()){
+        InfoBlock ib;
+        std::string actionType = ACTION_TYPE;
+        char eventType = UP;
+        ib[actionType] = eventType;
+        this->keyboardQueue->push(ib);
+        this->sleep(1);
+    }
 }
 
 void FakeClient::move() {
@@ -13,5 +26,5 @@ void FakeClient::move() {
     // Passing only where he can drive.
     std::string des = luaWrapper.getDesition(mapsLayer.road, x, y);
     std::cout << des << std::endl;
-    //Here we will need a sleeo, i guess
+    //Here we will need a sleep, i guess
 }

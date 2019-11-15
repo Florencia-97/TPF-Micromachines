@@ -22,6 +22,7 @@ class UserInput : public BaseThread {
 
 public:
     bool exit;
+    bool isScript;
 
   UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
             std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
