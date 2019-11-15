@@ -11,12 +11,17 @@ GameRenderer::GameRenderer(){
 void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
-        car.move(world_state.get<int>("x"+std::to_string(car.id)),
-                 world_state.get<int>("y"+std::to_string(car.id)),
-                 world_state.get<int>("r"+std::to_string(car.id)));
+        auto id = std::to_string(car.id);
+        car.move(world_state.get<int>("x"+id),
+                 world_state.get<int>("y"+id),
+                 world_state.get<int>("r"+id));
         if (car.id == my_car_id){
             car.setCamera(camera, map.width, map.height);
+            if (false){
+                stain.play(gRenderer, 0, 0);
+            }
         }
+        car.health = world_state.get<int>("h"+id);
         car.render(camera, gRenderer);
     }
     health.stageTextChange( "HP " + world_state.getString("h"+my_id));
@@ -35,7 +40,6 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
     updatePlayers(world_state, frame);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
     //explosion.play(gRenderer,300,0);
-    //stain.play(gRenderer, 0, 0);
 
   laps.render(width, height);
   timer.render(width, height);

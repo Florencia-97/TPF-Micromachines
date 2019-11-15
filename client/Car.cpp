@@ -10,7 +10,7 @@ Car::Car(short id){
     mBox.h = CAR_HEIGHT;
     rotation = 0;
     this->id = id;
-  health = 0;
+    health = 1;//any number > 0
 }
 
 void Car::addTexture(LTexture *my_texture) {

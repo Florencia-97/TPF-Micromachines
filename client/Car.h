@@ -11,11 +11,11 @@ class Car {
   SDL_Rect mBox;
   int rotation;
   LTexture* texture;
-  int health;
   Explosion explosion;
 
  public:
     short id;
+    int health;
 
     explicit Car(short id);
 
