@@ -1,9 +1,7 @@
 #include <iostream>
 #include "Menu.h"
 #include "../../../config/constants.h"
-#include "CarButton.h"
 #include "ConnectButton.h"
-#include "MapButton.h"
 #include "TextLabel.h"
 
 void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
@@ -44,20 +42,20 @@ void Menu::setMainMenuMode(){
 
 bool Menu::processEventsMouse() {
   while (!mouse_queue->empty()) {
-      auto event = &mouse_queue->front();
-      if (event->type == SDL_QUIT) return true;
-       for (auto &button : *active_buttons) {
-          if (button.handleEvent(event, sound_queue)){
-              while (!mouse_queue->empty()) mouse_queue->pop();
-              return  false;
-            }
-        }
-      if (connectButton->handleEvent(event, sound_queue)){
-          while (!mouse_queue->empty()) mouse_queue->pop();
-          return false;
+    auto event = &mouse_queue->front();
+    if (event->type == SDL_QUIT) return true;
+    for (auto &button : *active_buttons) {
+      if (button.handleEvent(event, sound_queue)) {
+        while (!mouse_queue->empty()) mouse_queue->pop();
+        return false;
       }
-      mouse_queue->pop();
     }
+    if (connectButton->handleEvent(event, sound_queue)) {
+      while (!mouse_queue->empty()) mouse_queue->pop();
+      return false;
+    }
+    mouse_queue->pop();
+  }
   return false;
 }
 
@@ -83,21 +81,34 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
     connectButton->render(screenWidth, screenHeight);
 }
 
-void Menu::dummy_init_as_leader() {
-  set_buttons_as_leader();
+void Menu::start_lobby() {
+  try {
+    if (!mapButtons.empty()) return;
+    load_media();
+    set_buttons_as_leader();
+  } catch (...) {
+    throw std::runtime_error("Failed to initialize textures!\n");
+  }
+}
+
+void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
+
+  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  SDL_RenderClear(gRenderer);
+
   LTexture msg;
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT,true);
   msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
-  msg.render_with_size(720, 500, 0, gRenderer, 800, 500,false);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
+  msg.render_with_size(720, 500, 0, gRenderer, 800, 500, false);
   for (auto &button : mapButtons) {
-    //button.render();
+    button.render(screenWidth, screenHeight);
   }
 }
 
 
 void Menu::init_as_follower() {
   wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0,true);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0, true);
 }
 
 void Menu::set_buttons_positions() {
@@ -109,7 +120,9 @@ void Menu::set_buttons_positions() {
 }
 
 void Menu::set_buttons_as_leader() {
-
+  mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
 }
 
 void Menu::load_media() {
@@ -156,7 +169,5 @@ void Menu::load_media() {
     mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
     mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
     mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons[0].setPosition(MAP_BUTTON_1_X, MAP_BUTTON_1_Y);
-    mapButtons[1].setPosition(MAP_BUTTON_2_X, MAP_BUTTON_2_Y);
-    mapButtons[2].setPosition(MAP_BUTTON_3_X, MAP_BUTTON_3_Y);
+  set_buttons_as_leader();
 }

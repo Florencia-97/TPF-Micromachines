@@ -8,12 +8,14 @@ void Explosion::load_frames(SDL_Renderer *renderer) {
                                    renderer)) {//todo do it in the textureLoader??
     printf("Failed to load explosion texture!\n");
   } else {
+    int k = 0;
     for (int i = 0; i < EXPLOSION_FRAMES_ROW; i++) {
       for (int j = 0; j < EXPLOSION_FRAMES_COLUMN; j++) {
-        totalSprites[i + j].x = 256 * j;
-        totalSprites[i + j].y = 0 * i;
-        totalSprites[i + j].w = 256;
-        totalSprites[i + j].h = 256;
+        totalSprites[k].x = 256 * j;
+        totalSprites[k].y = 256 * i;
+        totalSprites[k].w = 256;
+        totalSprites[k].h = 256;
+        k++;
       }
     }
   }
