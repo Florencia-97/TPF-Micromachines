@@ -1,7 +1,3 @@
-//
-// Created by brian on 10/30/19.
-//
-
 #ifndef MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
 #define MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
 
@@ -25,7 +21,6 @@ class Menu {
   std::shared_ptr<Button> connectButton;
   SDL_Renderer *gRenderer;
 
-  std::vector<Button> gButtons;
   std::vector<Button> carButtons;
   std::vector<Button> mapButtons;
   std::vector<Button>* active_buttons;
@@ -52,7 +47,7 @@ class Menu {
   //PRE must be initialized
   void render_first_menu(float screenWidth, float screenHeight);
 
-  void dummy_init_as_leader();
+  void dummy_init_as_leader(int screenWidth, int screenHeight);
 
   void set_buttons_as_leader();
 
@@ -63,6 +58,7 @@ class Menu {
   void setMainMenuMode();
 
     void displayNotification(std::string msg);
+  void start_lobby();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

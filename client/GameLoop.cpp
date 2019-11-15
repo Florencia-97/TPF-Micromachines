@@ -4,9 +4,9 @@
 
 void GameLoop::_runProgram(){
     SDL_RenderClear(starter.get_global_renderer());
-    if (state == GAME_STATE){
-        runGame(current_frame);
-    } else if (!in_menu.load()){ //if not in menu then in lobby
+  /*if (state == GAME_STATE){
+      runGame(current_frame);
+  } else*/ if (!in_menu.load()) { //if not in menu then in lobby
         runLobby(current_frame);
     } else if (in_menu.load()){
         runMenu(current_frame);
@@ -70,7 +70,6 @@ void GameLoop::runGame(int frame_id){
 }
 
 void GameLoop::runLobby(int frame_id) {
-
     if (!renderQueue->empty()){
         InfoBlock* gameState = &renderQueue->front();
         if (gameState->exists(RACE_ID)){
@@ -82,7 +81,8 @@ void GameLoop::runLobby(int frame_id) {
         renderQueue->pop();
     }
   starter.get_screen_dimensions(&screenWidth, &screenHeight);
-  menu.render_first_menu(screenWidth, screenHeight);//todo render lobby instead
+  menu.start_lobby();
+  menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
@@ -108,7 +108,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                      soundSystem(&sq){
     current_frame = 0;
     state = -1;
-    in_menu.store(true);
+  in_menu.store(false);
     renderQueue = &rq;
     soundQueue = &sq;
     fakePlayerQueue = &fpq;
