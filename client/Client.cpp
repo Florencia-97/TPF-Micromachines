@@ -1,6 +1,7 @@
 
 #include "Client.h"
 #include "../common/infostream/Protocol.h"
+#include "ia/FakeClient.h"
 
 bool Client::connectionCheck(){
     return (connection_state.exists(CONNECTED_TO_GAME) &&
@@ -54,7 +55,10 @@ bool Client::waitForConnection(){
 int Client::play() {
     gameLoop.run();
     userInput.run();
-
+    // TODO: testing fake client, please dont remove doc code
+    //std::string mapName = "maps/race_1.yaml";
+    //FakeClient fc(this->keyboard_e_queue, this->fake_player_queue , mapName);
+    //userInput.isScript = true;
     while (!userInput.exit){
         try {
             waitForConnection();
@@ -74,7 +78,9 @@ int Client::play() {
                 ib[RACE_ID] = gameLoop.menu.map_selected;
                 keyboard_e_queue.push(ib);
             }
-
+//            if (userInput.isScript && !fc.isRunning()){
+//                fc.run();
+//            }
             if (!receiver.isRunning()) {
                 receiver.run();
                 sender.run();
@@ -83,12 +89,13 @@ int Client::play() {
         }
 
     }
-
+//    fc.close();
+//    fc.join();
     release();
     return 0;
 }
 
-Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue),
+Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue, fake_player_queue),
                    userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue, &ready_to_connect),
                    receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
 {

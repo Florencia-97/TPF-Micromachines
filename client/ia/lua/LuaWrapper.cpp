@@ -37,8 +37,8 @@ std::string LuaWrapper::decide_move(std::vector<std::vector<int>>& v1, int x, in
 
     //asTable(L, v1.begin(), v1.end());
     asMatrix(L,v1);
-    lua_pushnumber(L, x);
     lua_pushnumber(L, y);
+    lua_pushnumber(L, x);
 
     /* call the function with 1 arguments, return 1 result */
     lua_call(L, 3, 1);

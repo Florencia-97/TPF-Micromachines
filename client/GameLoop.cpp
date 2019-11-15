@@ -52,11 +52,14 @@ void GameLoop::runGame(int frame_id){
     }
 
     if (!gameState->exists(GAME_END)) {
-      int height;
-      int width;
-      starter.get_screen_dimensions(&width, &height);
-      gameRenderer.render(*gameState, frame_id, width, height);
+        int height;
+        int width;
+        //fakePlayerQueue->push(*gameState);
+        starter.get_screen_dimensions(&width, &height);
+        gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
+
+
     } else {
         menu.displayNotification("RACE OVER!  you came out " +
                 gameState->getString("p"+std::to_string(gameRenderer.my_car_id)));
@@ -99,7 +102,8 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &queue,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r,
-                   std::queue<std::string> &sq)
+                   std::queue<std::string> &sq,
+                   std::queue<InfoBlock>& fpq)
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
                      soundSystem(&sq){
     current_frame = 0;
@@ -107,6 +111,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     in_menu.store(true);
     renderQueue = &rq;
     soundQueue = &sq;
+    fakePlayerQueue = &fpq;
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
