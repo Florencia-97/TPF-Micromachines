@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Explosion.h"
 
 void Explosion::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) {

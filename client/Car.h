@@ -12,7 +12,7 @@ class Car {
   int rotation;
   LTexture* texture;
   int health;
-  Explosion *explosion;
+  Explosion explosion;
 
  public:
     short id;
@@ -32,6 +32,8 @@ class Car {
 
     ~Car();
     bool compare_id(short i);
+
+    void loadAnimations(SDL_Renderer *gRenderer);
 };
 
 #endif

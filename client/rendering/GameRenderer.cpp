@@ -34,7 +34,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
     }
     updatePlayers(world_state, frame);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
-    //explosion.play(gRenderer,0,0);
+    //explosion.play(gRenderer,300,0);
     //stain.play(gRenderer, 0, 0);
 
   laps.render(width, height);
@@ -71,6 +71,7 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
         auto cartype = cars_info.getString(CAR_TYPE+id);
         std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);
         all_cars.back().addTexture(tloader.load_texture("cars/"+cartype+".png", gRenderer));
+        all_cars.back().loadAnimations(gRenderer);
     }
 }
 

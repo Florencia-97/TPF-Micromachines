@@ -10,8 +10,7 @@ Car::Car(short id){
     mBox.h = CAR_HEIGHT;
     rotation = 0;
     this->id = id;
-  health = 100;
-  explosion = new Explosion();
+  health = 0;
 }
 
 void Car::addTexture(LTexture *my_texture) {
@@ -45,9 +44,13 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                             CAR_WIDTH,
                             CAR_HEIGHT,
                             false);
-  if (health == 0) {
-    this->explosion->play(renderer, mBox.x, mBox.y);
+  if (health <= 0) {
+    this->explosion.play(renderer, mBox.x + x - camera.x - mBox.w, mBox.y + y - camera.y - mBox.h/4);
   }
+}
+
+void Car::loadAnimations(SDL_Renderer* gRenderer){
+    explosion.load_frames(gRenderer);
 }
 
 Car::~Car() {
