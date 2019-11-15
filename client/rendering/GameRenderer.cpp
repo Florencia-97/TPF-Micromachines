@@ -17,9 +17,6 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
                  world_state.get<int>("r"+id));
         if (car.id == my_car_id){
             car.setCamera(camera, map.width, map.height);
-            if (false){
-                stain.play(gRenderer, 0, 0);
-            }
         }
         car.health = world_state.get<int>("h"+id);
         car.render(camera, gRenderer);
@@ -27,6 +24,10 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
     health.stageTextChange( "HP " + world_state.getString("h"+my_id));
     laps.stageTextChange("laps  " + world_state.getString("l"+my_id));
     timer.stageTextChange(world_state.getString(TIME_LEFT));
+    auto state = world_state.getString("s"+my_id);
+    if (state.find("MUD") != std::string::npos){
+        stain.play(gRenderer, 0, 0);
+    }
 }
 
 void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {
