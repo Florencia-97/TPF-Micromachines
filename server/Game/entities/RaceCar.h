@@ -51,6 +51,10 @@ public:
     void removeEffect(std::string effectId) override;
 
     void stepEffects(float timestep);
+
+    void resolveCollision(Entity *collidedWith) override;
+
+    bool isPlayer() override;
 };
 
 #endif //MICROMACHINES_RACECAR_H

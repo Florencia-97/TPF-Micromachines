@@ -34,6 +34,8 @@ public:
 
     virtual void removeEffect(std::string effectId){};
 
+    virtual bool isPlayer(){return false;};
+
     b2Vec2 getPosition();
 
     b2Vec2 getSize();

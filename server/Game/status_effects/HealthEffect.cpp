@@ -45,7 +45,7 @@ void HealthEffect::increaseStack(StatusEffect *other) {
 void HealthEffect::decreaseStack() {
     if (n_stacks == 0) return;
     this->n_stacks--;
-    if (n_stacks == 0){
+    if (n_stacks == 0 || (apply_on_acquire && applied)){
         this->delay =0;
         this->duration = 0;
     }
