@@ -5,6 +5,7 @@
 #include "ItemBoost.h"
 #include "ItemRock.h"
 #include "ItemHealth.h"
+#include "ItemMud.h"
 #include "ItemOil.h"
 
 std::shared_ptr<Entity> ItemCreator::createItem(b2Body* newBody, int itemsId){
@@ -24,7 +25,7 @@ std::shared_ptr<Entity> ItemCreator::createItem(b2Body* newBody, int itemsId){
         case ITEM_OIL:
             return std::make_shared<ItemOil>(newBody, itemsId);
         case ITEM_MUD:
-            return std::make_shared<ItemRock>(newBody, itemsId);
+            return std::make_shared<ItemMud>(newBody, itemsId);
         case ITEM_HEALTH:
             return std::make_shared<ItemHealth>(newBody, itemsId);
         default:
