@@ -82,12 +82,6 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
 }
 
 void Menu::start_lobby() {
-    try {
-        if (!mapButtons.empty()) return;
-        set_buttons_as_leader();
-    } catch (...) {
-        throw std::runtime_error("Failed to initialize textures!\n");
-    }
     active_buttons = &mapButtons;
 }
 
@@ -133,7 +127,7 @@ void Menu::set_buttons_as_leader() {
                             gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
     auto callbackMap = [&](const std::string &clickedId) {
       std::cout << clickedId << std::endl;
-      for (auto &button : carButtons) {
+      for (auto &button : mapButtons) {
           if (button.id == clickedId) {
               button.changeColor(255, 255, 255, -1);
               map_selected = button.id;
@@ -192,6 +186,7 @@ void Menu::load_media() {
         button.changeColor(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
+    this->set_buttons_as_leader();
 
 }
 bool Menu::map_is_selected() {

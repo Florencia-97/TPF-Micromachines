@@ -80,10 +80,11 @@ void GameLoop::runLobby(int frame_id) {
         }
         renderQueue->pop();
     }
-    starter.get_screen_dimensions(&screenWidth, &screenHeight);
-    menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
     menu.processEventsMouse();
     menu.processEventsKeyboard();
+    starter.get_screen_dimensions(&screenWidth, &screenHeight);
+    menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
+
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
