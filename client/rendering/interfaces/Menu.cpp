@@ -14,6 +14,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     map_selected = "\n";
     car_selected = "RED_CAR";
     ready = false;
+    ai_on = false;
 }
 
 void Menu::displayNotification(std::string msg){
@@ -222,4 +223,12 @@ void Menu::load_media() {
     }
     set_buttons_as_leader();
 
+    auto ai_callback = [&](const std::string &clickedId) {
+        ai_on = !ai_on;
+        if (ai_on) {
+            connectButton->changeColor(80, 80, 80, -1);
+        } else {
+            connectButton->changeColor(255, 255, 255, -1);
+        }
+    };
 }

@@ -39,6 +39,7 @@ class Menu {
  public:
     std::string car_selected;
     std::string map_selected;
+    bool ai_on;
     std::queue<InfoBlock> open_games_update;
     bool ready;
 
