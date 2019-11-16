@@ -13,6 +13,8 @@ Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
   this->gRenderer = sdl_renderer;
   this->id = texture->get_string_name();
   this->soundWhenPressed = ""; // no sound
+    oldWidth = SCREEN_WIDTH;
+    oldHeight = SCREEN_HEIGHT;
 }
 
 void Button::setPosition(int x, int y) {
