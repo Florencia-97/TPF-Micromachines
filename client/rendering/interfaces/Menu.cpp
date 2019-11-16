@@ -41,30 +41,30 @@ void Menu::setMainMenuMode(){
 }
 
 bool Menu::processEventsMouse() {
-  while (!mouse_queue->empty()) {
-    auto event = &mouse_queue->front();
-    if (event->type == SDL_QUIT) return true;
-    for (auto &button : *active_buttons) {
-      if (button.handleEvent(event, sound_queue)) {
-        while (!mouse_queue->empty()) mouse_queue->pop();
-        return false;
-      }
-    }
-    if (connectButton->handleEvent(event, sound_queue)) {
-      while (!mouse_queue->empty()) mouse_queue->pop();
-      return false;
-    }
+    while (!mouse_queue->empty()) {
+        auto event = &mouse_queue->front();
+        if (event->type == SDL_QUIT) return true;
+        for (auto &button : *active_buttons) {
+            if (button.handleEvent(event, sound_queue)) {
+                while (!mouse_queue->empty()) mouse_queue->pop();
+                return false;
+            }
+        }
+        if (connectButton->handleEvent(event, sound_queue)) {
+            while (!mouse_queue->empty()) mouse_queue->pop();
+            return false;
+        }
     mouse_queue->pop();
-  }
-  return false;
+    }
+    return false;
 }
 
 void Menu::processEventsKeyboard() {
-  while (!text_queue->empty()) {
-    textbox_lobby_name.receiveInput(&text_queue->front());
-    text_queue->pop();
-  }
-  textbox_lobby_name.updateBounds();
+    while (!text_queue->empty()) {
+        textbox_lobby_name.receiveInput(&text_queue->front());
+        text_queue->pop();
+    }
+    textbox_lobby_name.updateBounds();
 }
 
 void Menu::render_first_menu(float screenWidth, float screenHeight) {
@@ -82,67 +82,92 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
 }
 
 void Menu::start_lobby() {
-  try {
-    if (!mapButtons.empty()) return;
-    load_media();
-    set_buttons_as_leader();
-  } catch (...) {
-    throw std::runtime_error("Failed to initialize textures!\n");
-  }
+    try {
+        if (!mapButtons.empty()) return;
+        load_media();
+        set_buttons_as_leader();
+    } catch (...) {
+        throw std::runtime_error("Failed to initialize textures!\n");
+    }
 }
 
 void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
 
-  SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderClear(gRenderer);
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(gRenderer);
 
-  LTexture msg;
-  msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
-  msg.render_with_size(720, 500, 0, gRenderer, 800, 500, false);
-  for (auto &button : mapButtons) {
-    button.render(screenWidth, screenHeight);
-  }
+    LTexture msg;
+    msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
+    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
+    msg.render_with_size(720, 500, 0, gRenderer, 800, 500, false);
+    for (auto &button : mapButtons) {
+        button.render(screenWidth, screenHeight);
+    }
+    connectButton->render(screenWidth, screenHeight);
 }
 
 
 void Menu::init_as_follower() {
-  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
-  wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0, true);
+    wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
+    wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0, true);
 }
 
 void Menu::set_buttons_positions() {
-  carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-  carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
-  carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
-  carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
-  connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+    carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+    carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
+    carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+    carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
+    connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
 void Menu::set_buttons_as_leader() {
-  mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-  mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-  mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+    mapButtons.emplace_back("map_1",
+                            gRenderer,
+                            textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+    mapButtons.emplace_back("map_2",
+                            gRenderer,
+                            textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+    mapButtons.emplace_back("map_3",
+                            gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+    auto callbackMap = [&](const std::string &clickedId) {
+      std::cout << clickedId << std::endl;
+      for (auto &button : carButtons) {
+          if (button.id == clickedId) {
+              button.changeColor(255, 255, 255, -1);
+              map_selected = button.id;
+          } else {
+              button.changeColor(80, 80, 80, -1);
+          }
+      }
+    };
+    for (auto &button : carButtons) {
+        button.addCallbackFunction(callbackMap);
+        button.changeColor(80, 80, 80, -1);
+        button.soundWhenPressed = SOUND_CAR_GEAR;
+    }
+    mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+    mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+    mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
 }
 
 void Menu::load_media() {
     wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png", gRenderer);
 
-  auto callback_start_game = [&](const std::string &clickedId) {
+    auto callback_start_game = [&](const std::string &clickedId) {
         map_selected = "race_1";
         ready = true;
         connectButton->changeColor(80, 80, 80, FPS*3);
         this->game_ready_cv->notify_all();
     };
     //car buttons
-  auto callback = [&](const std::string &clickedId) {
+    auto callback = [&](const std::string &clickedId) {
         std::cout<<clickedId<<std::endl;
-        for (auto &b : carButtons){
-            if (b.id == clickedId){
-                b.changeColor(255,255,255,-1);
-                car_selected = b.id;
+      for (auto &button : carButtons) {
+          if (button.id == clickedId) {
+              button.changeColor(255, 255, 255, -1);
+              car_selected = button.id;
             } else {
-                b.changeColor(80,80,80,-1);
+              button.changeColor(80, 80, 80, -1);
             }
         }
     };
@@ -159,15 +184,11 @@ void Menu::load_media() {
                             textureLoader.load_texture("buttons/connect.png", gRenderer));
     connectButton->addCallbackFunction(callback_start_game);
 
-  for (auto &button : carButtons) {
-    button.addCallbackFunction(callback);
-    button.changeColor(80, 80, 80, -1);
-    button.soundWhenPressed = SOUND_CAR_GEAR;
+    for (auto &button : carButtons) {
+        button.addCallbackFunction(callback);
+        button.changeColor(80, 80, 80, -1);
+        button.soundWhenPressed = SOUND_CAR_GEAR;
     }
+    set_buttons_as_leader();
 
-    //map buttons
-    mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons.emplace_back(gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-  set_buttons_as_leader();
 }

@@ -4,9 +4,9 @@
 
 void GameLoop::_runProgram(){
     SDL_RenderClear(starter.get_global_renderer());
-  /*if (state == GAME_STATE){
+    if (state == GAME_STATE) {
       runGame(current_frame);
-  } else*/ if (!in_menu.load()) { //if not in menu then in lobby
+    } else if (!in_menu.load()) { //if not in menu then in lobby
         runLobby(current_frame);
     } else if (in_menu.load()){
         runMenu(current_frame);
@@ -34,8 +34,8 @@ void GameLoop::_run(){
 void GameLoop::runMenu(int frame_id) {
     menu.processEventsMouse();
     menu.processEventsKeyboard();
-  starter.get_screen_dimensions(&screenWidth, &screenHeight);
-  menu.render_first_menu(screenWidth, screenHeight);
+    starter.get_screen_dimensions(&screenWidth, &screenHeight);
+    menu.render_first_menu(screenWidth, screenHeight);
 }
 
 void GameLoop::runGame(int frame_id){
@@ -108,7 +108,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                      soundSystem(&sq){
     current_frame = 0;
     state = -1;
-  in_menu.store(false);
+    in_menu.store(true);
     renderQueue = &rq;
     soundQueue = &sq;
     fakePlayerQueue = &fpq;
