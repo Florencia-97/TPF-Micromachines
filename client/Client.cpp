@@ -29,6 +29,15 @@ void Client::waitReadyButton() {
     }
 }
 
+void Client::waitMapButton() {
+    gameLoop.menu.ready = false;
+    std::mutex m;
+    std::unique_lock<std::mutex> l(m);
+    while (!gameLoop.menu.ready && !userInput.exit) {
+        ready_to_connect.wait(l);
+    }
+}
+
 bool Client::attempConnection() {
     skt.client(this->service, this->port);
     if (!skt.isValid()) throw  serverNotRunning();
@@ -72,7 +81,7 @@ int Client::play() {
             gameLoop.proceedToLobby(is_leader);
             gameLoop.menu.displayNotification("connected   proceeding   to   game!");
             if (is_leader) {
-                //todo waitReadyButton()
+                waitMapButton();
                 sleep(LOBBY_TIME);
                 InfoBlock ib;
                 ib[RACE_ID] = gameLoop.menu.map_selected;

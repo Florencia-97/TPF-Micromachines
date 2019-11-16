@@ -23,21 +23,22 @@ class Menu {
 
   std::vector<Button> carButtons;
   std::vector<Button> mapButtons;
-  std::vector<Button>* active_buttons;
+  std::vector<Button> *active_buttons;
   std::condition_variable *game_ready_cv;
 
   TextLabel label_choose_car;
   TextLabel flavor_text;
   TextLabel notification;
   TextBox textbox_lobby_name;
+  bool mapIsSelected = false;
 
   void load_media();
   void set_buttons_positions();
 
  public:
-    std::string car_selected;
-    std::string map_selected;
-    bool ready;
+  std::string car_selected;
+  std::string map_selected;
+  bool ready;
 
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
             std::condition_variable *attempConnectionCV, std::queue<std::string> *sq);
@@ -57,8 +58,9 @@ class Menu {
 
   void setMainMenuMode();
 
-    void displayNotification(std::string msg);
+  void displayNotification(std::string msg);
   void start_lobby();
+  bool map_is_selected();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

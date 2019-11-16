@@ -89,6 +89,7 @@ void Menu::start_lobby() {
     } catch (...) {
         throw std::runtime_error("Failed to initialize textures!\n");
     }
+    active_buttons = &mapButtons;
 }
 
 void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
@@ -191,4 +192,7 @@ void Menu::load_media() {
     }
     set_buttons_as_leader();
 
+}
+bool Menu::map_is_selected() {
+    return this->mapIsSelected;
 }

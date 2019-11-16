@@ -54,6 +54,7 @@ public:
     void waitGameEnd();
 
     void waitReadyButton();
+  void waitMapButton();
 };
 
 
