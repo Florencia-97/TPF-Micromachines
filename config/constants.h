@@ -70,10 +70,10 @@ const int RED_CAR_BUTTON_Y = 220;
 const int WHITE_CAR_BUTTON_X = 1280 - 150;
 const int WHITE_CAR_BUTTON_Y = 220;
 
-const int PLAY_BUTTON_X = 1280 / 2 - 150;
-const int PLAY_BUTTON_Y = 600;
-const int PLAY_BUTTON_WIDTH = 300;
-const int PLAY_BUTTON_HEIGHT = 120;
+const int PLAY_BUTTON_X = 1280 - 200;
+const int PLAY_BUTTON_Y = 850;
+const int PLAY_BUTTON_WIDTH = 150;
+const int PLAY_BUTTON_HEIGHT = 60;
 
 //MapButtons constants
 

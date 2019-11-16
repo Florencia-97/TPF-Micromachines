@@ -6,6 +6,7 @@
 #include "../Entity.h"
 
 class ItemOil : public Entity {
+public:
 
     ItemOil(b2Body* &newBody, int itemId);
 

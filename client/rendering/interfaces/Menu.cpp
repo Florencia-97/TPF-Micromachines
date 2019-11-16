@@ -29,6 +29,7 @@ void Menu::setMainMenuMode(){
         throw std::runtime_error("Failed to initialize textures!\n");
     }
     SDL_StartTextInput();
+    if (!open_games.empty()) return;
     SDL_Color gold{255, 189, 27, 0xFF};
     SDL_Color white{255, 255, 255, 0xFF};
     label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH / 2, 200, 28, gold, gRenderer);
@@ -38,6 +39,33 @@ void Menu::setMainMenuMode(){
     flavor_text.init("fiuba 2019    all rights reserved",
                      SCREEN_WIDTH / 2, SCREEN_HEIGHT - 30, 25, white, gRenderer);
     active_buttons = &carButtons;
+
+    for (int i = 0; i<6; i++) {
+        open_games.emplace_back();
+        open_games.back().init(" ",
+             450 + 400 * (i % 2), 580 + 75 * (int) (i / 2), 25, white, gRenderer);
+    }
+
+
+}
+
+void Menu::_updateOpenGames(){
+    if (!open_games_update.empty()){
+        int size = open_games_update.front().get<int>("SIZE");
+        int i = 0;
+        for (auto &label : open_games){
+            std::string text;
+            if (i < size) {
+                std::string key = "g"+std::to_string(i);
+                text = open_games_update.front().getString(key);
+            } else {
+                text = "empty";
+            }
+            label.stageTextChange(std::to_string(i+1) + "          " + text);
+            i++;
+        }
+        open_games_update.pop();
+    }
 }
 
 bool Menu::processEventsMouse() {
@@ -68,8 +96,6 @@ void Menu::processEventsKeyboard() {
 }
 
 void Menu::render_first_menu(float screenWidth, float screenHeight) {
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : carButtons) {
       button.render(screenWidth, screenHeight);
@@ -79,6 +105,11 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
     flavor_text.render(screenWidth, screenHeight);
     notification.render(screenWidth, screenHeight);
     connectButton->render(screenWidth, screenHeight);
+
+    _updateOpenGames();
+    for (auto& label : open_games){
+        label.render(screenWidth, screenHeight);
+    }
 }
 
 void Menu::start_lobby() {

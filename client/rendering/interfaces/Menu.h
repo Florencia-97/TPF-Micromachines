@@ -10,6 +10,7 @@
 #include "TextBox.h"
 #include <condition_variable>
 #include "../TextureLoader.h"
+#include "../../../common/infostream/InfoBlock.h"
 
 class Menu {
  private:
@@ -25,6 +26,7 @@ class Menu {
   std::vector<Button> mapButtons;
   std::vector<Button>* active_buttons;
   std::condition_variable *game_ready_cv;
+  std::list<TextLabel> open_games;
 
   TextLabel label_choose_car;
   TextLabel flavor_text;
@@ -37,6 +39,7 @@ class Menu {
  public:
     std::string car_selected;
     std::string map_selected;
+    std::queue<InfoBlock> open_games_update;
     bool ready;
 
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
@@ -59,6 +62,8 @@ class Menu {
 
     void displayNotification(std::string msg);
   void start_lobby();
+
+    void _updateOpenGames();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
