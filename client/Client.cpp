@@ -80,8 +80,7 @@ int Client::play() {
             gameLoop.proceedToLobby(is_leader);
             gameLoop.menu.displayNotification("connected   proceeding   to   game!");
             if (is_leader) {
-                //todo waitReadyButton()
-                sleep(LOBBY_TIME);
+                waitReadyButton();
                 InfoBlock ib;
                 ib[RACE_ID] = gameLoop.menu.map_selected;
                 keyboard_e_queue.push(ib);

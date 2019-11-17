@@ -6,7 +6,7 @@ void GameLoop::_runProgram(){
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
       runGame(current_frame);
-    } else if (!in_menu.load()) { //if not in menu then in lobby
+    } else if (!in_menu.load()) {
         runLobby(current_frame);
     } else if (in_menu.load()){
         runMenu(current_frame);
@@ -80,15 +80,17 @@ void GameLoop::runLobby(int frame_id) {
         }
         renderQueue->pop();
     }
-  starter.get_screen_dimensions(&screenWidth, &screenHeight);
-  menu.start_lobby();
-  menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
+    menu.processEventsMouse();
+    menu.processEventsKeyboard();
+    starter.get_screen_dimensions(&screenWidth, &screenHeight);
+    menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
+
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
     SDL_StopTextInput();
     if (is_leader){
-        //lobby.setLeadership(); //display map options
+        menu.start_lobby();
     }
     std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);

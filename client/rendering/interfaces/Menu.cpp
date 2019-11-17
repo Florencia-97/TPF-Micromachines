@@ -114,28 +114,17 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
 }
 
 void Menu::start_lobby() {
-    try {
-        if (!mapButtons.empty()) return;
-        load_media();
-        set_buttons_as_leader();
-    } catch (...) {
-        throw std::runtime_error("Failed to initialize textures!\n");
-    }
+    active_buttons = &mapButtons;
 }
 
 void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
-
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
-
-    LTexture msg;
-    msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
-    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
-    msg.render_with_size(720, 500, 0, gRenderer, 800, 500, false);
+    this->notification.stageTextChange("Choose your map");
+    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : mapButtons) {
         button.render(screenWidth, screenHeight);
     }
     connectButton->render(screenWidth, screenHeight);
+    notification.render(screenWidth, screenHeight);
 }
 
 
@@ -161,9 +150,12 @@ void Menu::set_buttons_as_leader() {
                             textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
     mapButtons.emplace_back("map_3",
                             gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+    mapButtons.emplace_back("map_4",
+                            gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+
     auto callbackMap = [&](const std::string &clickedId) {
-      std::cout << clickedId << std::endl;
-      for (auto &button : carButtons) {
+      for (auto &button : mapButtons) {
+          std::cout << clickedId<< button.id  << (button.id == clickedId) << std::endl;
           if (button.id == clickedId) {
               button.changeColor(255, 255, 255, -1);
               map_selected = button.id;
@@ -172,14 +164,16 @@ void Menu::set_buttons_as_leader() {
           }
       }
     };
-    for (auto &button : carButtons) {
+    for (auto &button : mapButtons) {
         button.addCallbackFunction(callbackMap);
         button.changeColor(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
+
     mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
     mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
     mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+    mapButtons[3].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
 }
 
 void Menu::load_media() {
@@ -221,7 +215,7 @@ void Menu::load_media() {
         button.changeColor(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
-    set_buttons_as_leader();
+    this->set_buttons_as_leader();
 
     auto ai_callback = [&](const std::string &clickedId) {
         ai_on = !ai_on;
@@ -231,4 +225,7 @@ void Menu::load_media() {
             connectButton->changeColor(255, 255, 255, -1);
         }
     };
+}
+bool Menu::map_is_selected() {
+    return this->mapIsSelected;
 }

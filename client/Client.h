@@ -55,6 +55,8 @@ public:
 
     void waitReadyButton();
 
+    void waitMapButton();
+
     bool connectToServer();
 };
 
