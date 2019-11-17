@@ -32,6 +32,22 @@ bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
     return false;
 }
 
+bool GamesManagerThread::_sendOpenGames(Socket& client){
+    InfoBlock games;
+    std::list<std::string> openGames;
+    for (auto &game : this->games){
+        if (game.lobby_mode){
+            openGames.push_back(game.gameName);
+        }
+    }
+    games["SIZE"] = openGames.size();
+    int cont = 0;
+    for (auto &name : openGames){
+        games["g"+std::to_string(cont)] = name;
+        cont++;
+    }
+    return Protocol::sendMsg(&client, games);
+}
 
 void GamesManagerThread::_run(){
     while( this->isAlive() ){
@@ -39,6 +55,7 @@ void GamesManagerThread::_run(){
         Socket client = this->skt.acceptClient();
         if (!this->skt.isValid()) break;
         std::cout  << "Client accepted\n";
+        _sendOpenGames(client);
         InfoBlock ib;
         if (!Protocol::recvMsg( &client, ib )){
             std::cout << "Error receiving msg\n";
@@ -49,7 +66,6 @@ void GamesManagerThread::_run(){
 
         // If players arena is not here, just go ahead and create one
         if (!_addPlayerToArena(client, ib)){
-            //todo leave it in the heap, or maybe not!
             this->games.emplace_back(client, ib, this->configs);
             this->games.back().run();
         }

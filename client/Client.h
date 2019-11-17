@@ -54,7 +54,8 @@ public:
     void waitGameEnd();
 
     void waitReadyButton();
-  void waitMapButton();
+
+    bool connectToServer();
 };
 
 

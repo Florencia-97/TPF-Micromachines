@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/mati/Downloads/clion/clion-2019.2.1/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/mati/Downloads/clion/clion-2019.2.1/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/flox/FIUBA/Taller/TP4/TPF-Micromachines
+CMAKE_SOURCE_DIR = /home/mati/CLionProjects/TPF-Micromachines
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/flox/FIUBA/Taller/TP4/TPF-Micromachines
+CMAKE_BINARY_DIR = /home/mati/CLionProjects/TPF-Micromachines
 
 # Include any dependencies generated for this target.
 include lua53/CMakeFiles/LuaLib.dir/depend.make
@@ -59,432 +59,432 @@ include lua53/CMakeFiles/LuaLib.dir/flags.make
 
 lua53/CMakeFiles/LuaLib.dir/src/lapi.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lapi.c.o: lua53/src/lapi.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lapi.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lapi.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lapi.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lapi.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lapi.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lapi.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lapi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lapi.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lapi.c > CMakeFiles/LuaLib.dir/src/lapi.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lapi.c > CMakeFiles/LuaLib.dir/src/lapi.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lapi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lapi.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lapi.c -o CMakeFiles/LuaLib.dir/src/lapi.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lapi.c -o CMakeFiles/LuaLib.dir/src/lapi.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.o: lua53/src/lauxlib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lauxlib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lauxlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lauxlib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lauxlib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lauxlib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lauxlib.c > CMakeFiles/LuaLib.dir/src/lauxlib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lauxlib.c > CMakeFiles/LuaLib.dir/src/lauxlib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lauxlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lauxlib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lauxlib.c -o CMakeFiles/LuaLib.dir/src/lauxlib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lauxlib.c -o CMakeFiles/LuaLib.dir/src/lauxlib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.o: lua53/src/lbaselib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lbaselib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbaselib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lbaselib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbaselib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lbaselib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbaselib.c > CMakeFiles/LuaLib.dir/src/lbaselib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbaselib.c > CMakeFiles/LuaLib.dir/src/lbaselib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lbaselib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lbaselib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbaselib.c -o CMakeFiles/LuaLib.dir/src/lbaselib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbaselib.c -o CMakeFiles/LuaLib.dir/src/lbaselib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.o: lua53/src/lbitlib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lbitlib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbitlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lbitlib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbitlib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lbitlib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbitlib.c > CMakeFiles/LuaLib.dir/src/lbitlib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbitlib.c > CMakeFiles/LuaLib.dir/src/lbitlib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lbitlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lbitlib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lbitlib.c -o CMakeFiles/LuaLib.dir/src/lbitlib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lbitlib.c -o CMakeFiles/LuaLib.dir/src/lbitlib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lcode.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lcode.c.o: lua53/src/lcode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lcode.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lcode.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcode.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lcode.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lcode.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcode.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lcode.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lcode.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcode.c > CMakeFiles/LuaLib.dir/src/lcode.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcode.c > CMakeFiles/LuaLib.dir/src/lcode.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lcode.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lcode.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcode.c -o CMakeFiles/LuaLib.dir/src/lcode.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcode.c -o CMakeFiles/LuaLib.dir/src/lcode.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.o: lua53/src/lcorolib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lcorolib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcorolib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lcorolib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcorolib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lcorolib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcorolib.c > CMakeFiles/LuaLib.dir/src/lcorolib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcorolib.c > CMakeFiles/LuaLib.dir/src/lcorolib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lcorolib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lcorolib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lcorolib.c -o CMakeFiles/LuaLib.dir/src/lcorolib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lcorolib.c -o CMakeFiles/LuaLib.dir/src/lcorolib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lctype.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lctype.c.o: lua53/src/lctype.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lctype.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lctype.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lctype.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lctype.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lctype.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lctype.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lctype.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lctype.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lctype.c > CMakeFiles/LuaLib.dir/src/lctype.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lctype.c > CMakeFiles/LuaLib.dir/src/lctype.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lctype.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lctype.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lctype.c -o CMakeFiles/LuaLib.dir/src/lctype.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lctype.c -o CMakeFiles/LuaLib.dir/src/lctype.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.o: lua53/src/ldblib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldblib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldblib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldblib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldblib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ldblib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldblib.c > CMakeFiles/LuaLib.dir/src/ldblib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldblib.c > CMakeFiles/LuaLib.dir/src/ldblib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ldblib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ldblib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldblib.c -o CMakeFiles/LuaLib.dir/src/ldblib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldblib.c -o CMakeFiles/LuaLib.dir/src/ldblib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.o: lua53/src/ldebug.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldebug.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldebug.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldebug.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldebug.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ldebug.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldebug.c > CMakeFiles/LuaLib.dir/src/ldebug.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldebug.c > CMakeFiles/LuaLib.dir/src/ldebug.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ldebug.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ldebug.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldebug.c -o CMakeFiles/LuaLib.dir/src/ldebug.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldebug.c -o CMakeFiles/LuaLib.dir/src/ldebug.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ldo.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ldo.c.o: lua53/src/ldo.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldo.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldo.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldo.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldo.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldo.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldo.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ldo.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ldo.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldo.c > CMakeFiles/LuaLib.dir/src/ldo.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldo.c > CMakeFiles/LuaLib.dir/src/ldo.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ldo.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ldo.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldo.c -o CMakeFiles/LuaLib.dir/src/ldo.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldo.c -o CMakeFiles/LuaLib.dir/src/ldo.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ldump.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ldump.c.o: lua53/src/ldump.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldump.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldump.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldump.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ldump.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ldump.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldump.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ldump.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ldump.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldump.c > CMakeFiles/LuaLib.dir/src/ldump.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldump.c > CMakeFiles/LuaLib.dir/src/ldump.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ldump.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ldump.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ldump.c -o CMakeFiles/LuaLib.dir/src/ldump.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ldump.c -o CMakeFiles/LuaLib.dir/src/ldump.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.o: lua53/src/lfunc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lfunc.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lfunc.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lfunc.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lfunc.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lfunc.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lfunc.c > CMakeFiles/LuaLib.dir/src/lfunc.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lfunc.c > CMakeFiles/LuaLib.dir/src/lfunc.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lfunc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lfunc.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lfunc.c -o CMakeFiles/LuaLib.dir/src/lfunc.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lfunc.c -o CMakeFiles/LuaLib.dir/src/lfunc.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lgc.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lgc.c.o: lua53/src/lgc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lgc.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lgc.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lgc.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lgc.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lgc.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lgc.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lgc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lgc.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lgc.c > CMakeFiles/LuaLib.dir/src/lgc.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lgc.c > CMakeFiles/LuaLib.dir/src/lgc.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lgc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lgc.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lgc.c -o CMakeFiles/LuaLib.dir/src/lgc.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lgc.c -o CMakeFiles/LuaLib.dir/src/lgc.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/linit.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/linit.c.o: lua53/src/linit.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object lua53/CMakeFiles/LuaLib.dir/src/linit.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/linit.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/linit.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object lua53/CMakeFiles/LuaLib.dir/src/linit.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/linit.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/linit.c
 
 lua53/CMakeFiles/LuaLib.dir/src/linit.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/linit.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/linit.c > CMakeFiles/LuaLib.dir/src/linit.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/linit.c > CMakeFiles/LuaLib.dir/src/linit.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/linit.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/linit.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/linit.c -o CMakeFiles/LuaLib.dir/src/linit.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/linit.c -o CMakeFiles/LuaLib.dir/src/linit.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/liolib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/liolib.c.o: lua53/src/liolib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object lua53/CMakeFiles/LuaLib.dir/src/liolib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/liolib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/liolib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object lua53/CMakeFiles/LuaLib.dir/src/liolib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/liolib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/liolib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/liolib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/liolib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/liolib.c > CMakeFiles/LuaLib.dir/src/liolib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/liolib.c > CMakeFiles/LuaLib.dir/src/liolib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/liolib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/liolib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/liolib.c -o CMakeFiles/LuaLib.dir/src/liolib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/liolib.c -o CMakeFiles/LuaLib.dir/src/liolib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/llex.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/llex.c.o: lua53/src/llex.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object lua53/CMakeFiles/LuaLib.dir/src/llex.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/llex.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/llex.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object lua53/CMakeFiles/LuaLib.dir/src/llex.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/llex.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/llex.c
 
 lua53/CMakeFiles/LuaLib.dir/src/llex.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/llex.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/llex.c > CMakeFiles/LuaLib.dir/src/llex.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/llex.c > CMakeFiles/LuaLib.dir/src/llex.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/llex.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/llex.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/llex.c -o CMakeFiles/LuaLib.dir/src/llex.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/llex.c -o CMakeFiles/LuaLib.dir/src/llex.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.o: lua53/src/lmathlib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lmathlib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmathlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lmathlib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmathlib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lmathlib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmathlib.c > CMakeFiles/LuaLib.dir/src/lmathlib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmathlib.c > CMakeFiles/LuaLib.dir/src/lmathlib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lmathlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lmathlib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmathlib.c -o CMakeFiles/LuaLib.dir/src/lmathlib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmathlib.c -o CMakeFiles/LuaLib.dir/src/lmathlib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lmem.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lmem.c.o: lua53/src/lmem.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lmem.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lmem.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmem.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lmem.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lmem.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmem.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lmem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lmem.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmem.c > CMakeFiles/LuaLib.dir/src/lmem.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmem.c > CMakeFiles/LuaLib.dir/src/lmem.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lmem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lmem.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lmem.c -o CMakeFiles/LuaLib.dir/src/lmem.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lmem.c -o CMakeFiles/LuaLib.dir/src/lmem.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.o: lua53/src/loadlib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/loadlib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loadlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/loadlib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loadlib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/loadlib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loadlib.c > CMakeFiles/LuaLib.dir/src/loadlib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loadlib.c > CMakeFiles/LuaLib.dir/src/loadlib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/loadlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/loadlib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loadlib.c -o CMakeFiles/LuaLib.dir/src/loadlib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loadlib.c -o CMakeFiles/LuaLib.dir/src/loadlib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lobject.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lobject.c.o: lua53/src/lobject.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lobject.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lobject.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lobject.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lobject.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lobject.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lobject.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lobject.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lobject.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lobject.c > CMakeFiles/LuaLib.dir/src/lobject.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lobject.c > CMakeFiles/LuaLib.dir/src/lobject.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lobject.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lobject.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lobject.c -o CMakeFiles/LuaLib.dir/src/lobject.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lobject.c -o CMakeFiles/LuaLib.dir/src/lobject.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.o: lua53/src/lopcodes.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lopcodes.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lopcodes.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lopcodes.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lopcodes.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lopcodes.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lopcodes.c > CMakeFiles/LuaLib.dir/src/lopcodes.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lopcodes.c > CMakeFiles/LuaLib.dir/src/lopcodes.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lopcodes.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lopcodes.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lopcodes.c -o CMakeFiles/LuaLib.dir/src/lopcodes.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lopcodes.c -o CMakeFiles/LuaLib.dir/src/lopcodes.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/loslib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/loslib.c.o: lua53/src/loslib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object lua53/CMakeFiles/LuaLib.dir/src/loslib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/loslib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loslib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object lua53/CMakeFiles/LuaLib.dir/src/loslib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/loslib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loslib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/loslib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/loslib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loslib.c > CMakeFiles/LuaLib.dir/src/loslib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loslib.c > CMakeFiles/LuaLib.dir/src/loslib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/loslib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/loslib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/loslib.c -o CMakeFiles/LuaLib.dir/src/loslib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/loslib.c -o CMakeFiles/LuaLib.dir/src/loslib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lparser.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lparser.c.o: lua53/src/lparser.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lparser.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lparser.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lparser.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lparser.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lparser.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lparser.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lparser.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lparser.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lparser.c > CMakeFiles/LuaLib.dir/src/lparser.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lparser.c > CMakeFiles/LuaLib.dir/src/lparser.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lparser.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lparser.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lparser.c -o CMakeFiles/LuaLib.dir/src/lparser.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lparser.c -o CMakeFiles/LuaLib.dir/src/lparser.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lstate.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lstate.c.o: lua53/src/lstate.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstate.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstate.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstate.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstate.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstate.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstate.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lstate.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lstate.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstate.c > CMakeFiles/LuaLib.dir/src/lstate.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstate.c > CMakeFiles/LuaLib.dir/src/lstate.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lstate.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lstate.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstate.c -o CMakeFiles/LuaLib.dir/src/lstate.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstate.c -o CMakeFiles/LuaLib.dir/src/lstate.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lstring.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lstring.c.o: lua53/src/lstring.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstring.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstring.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstring.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstring.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstring.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstring.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lstring.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lstring.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstring.c > CMakeFiles/LuaLib.dir/src/lstring.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstring.c > CMakeFiles/LuaLib.dir/src/lstring.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lstring.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lstring.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstring.c -o CMakeFiles/LuaLib.dir/src/lstring.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstring.c -o CMakeFiles/LuaLib.dir/src/lstring.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.o: lua53/src/lstrlib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstrlib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstrlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lstrlib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstrlib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lstrlib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstrlib.c > CMakeFiles/LuaLib.dir/src/lstrlib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstrlib.c > CMakeFiles/LuaLib.dir/src/lstrlib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lstrlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lstrlib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lstrlib.c -o CMakeFiles/LuaLib.dir/src/lstrlib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lstrlib.c -o CMakeFiles/LuaLib.dir/src/lstrlib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ltable.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ltable.c.o: lua53/src/ltable.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltable.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltable.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltable.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltable.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltable.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltable.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ltable.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ltable.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltable.c > CMakeFiles/LuaLib.dir/src/ltable.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltable.c > CMakeFiles/LuaLib.dir/src/ltable.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ltable.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ltable.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltable.c -o CMakeFiles/LuaLib.dir/src/ltable.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltable.c -o CMakeFiles/LuaLib.dir/src/ltable.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.o: lua53/src/ltablib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltablib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltablib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltablib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltablib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ltablib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltablib.c > CMakeFiles/LuaLib.dir/src/ltablib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltablib.c > CMakeFiles/LuaLib.dir/src/ltablib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ltablib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ltablib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltablib.c -o CMakeFiles/LuaLib.dir/src/ltablib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltablib.c -o CMakeFiles/LuaLib.dir/src/ltablib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/ltm.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/ltm.c.o: lua53/src/ltm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltm.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltm.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltm.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object lua53/CMakeFiles/LuaLib.dir/src/ltm.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/ltm.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltm.c
 
 lua53/CMakeFiles/LuaLib.dir/src/ltm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/ltm.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltm.c > CMakeFiles/LuaLib.dir/src/ltm.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltm.c > CMakeFiles/LuaLib.dir/src/ltm.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/ltm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/ltm.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/ltm.c -o CMakeFiles/LuaLib.dir/src/ltm.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/ltm.c -o CMakeFiles/LuaLib.dir/src/ltm.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lundump.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lundump.c.o: lua53/src/lundump.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lundump.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lundump.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lundump.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lundump.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lundump.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lundump.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lundump.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lundump.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lundump.c > CMakeFiles/LuaLib.dir/src/lundump.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lundump.c > CMakeFiles/LuaLib.dir/src/lundump.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lundump.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lundump.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lundump.c -o CMakeFiles/LuaLib.dir/src/lundump.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lundump.c -o CMakeFiles/LuaLib.dir/src/lundump.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.o: lua53/src/lutf8lib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lutf8lib.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lutf8lib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lutf8lib.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lutf8lib.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lutf8lib.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lutf8lib.c > CMakeFiles/LuaLib.dir/src/lutf8lib.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lutf8lib.c > CMakeFiles/LuaLib.dir/src/lutf8lib.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lutf8lib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lutf8lib.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lutf8lib.c -o CMakeFiles/LuaLib.dir/src/lutf8lib.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lutf8lib.c -o CMakeFiles/LuaLib.dir/src/lutf8lib.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lvm.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lvm.c.o: lua53/src/lvm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lvm.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lvm.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lvm.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lvm.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lvm.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lvm.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lvm.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lvm.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lvm.c > CMakeFiles/LuaLib.dir/src/lvm.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lvm.c > CMakeFiles/LuaLib.dir/src/lvm.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lvm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lvm.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lvm.c -o CMakeFiles/LuaLib.dir/src/lvm.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lvm.c -o CMakeFiles/LuaLib.dir/src/lvm.c.s
 
 lua53/CMakeFiles/LuaLib.dir/src/lzio.c.o: lua53/CMakeFiles/LuaLib.dir/flags.make
 lua53/CMakeFiles/LuaLib.dir/src/lzio.c.o: lua53/src/lzio.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lzio.c.o"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lzio.c.o   -c /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lzio.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object lua53/CMakeFiles/LuaLib.dir/src/lzio.c.o"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LuaLib.dir/src/lzio.c.o   -c /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lzio.c
 
 lua53/CMakeFiles/LuaLib.dir/src/lzio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LuaLib.dir/src/lzio.c.i"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lzio.c > CMakeFiles/LuaLib.dir/src/lzio.c.i
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lzio.c > CMakeFiles/LuaLib.dir/src/lzio.c.i
 
 lua53/CMakeFiles/LuaLib.dir/src/lzio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LuaLib.dir/src/lzio.c.s"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/src/lzio.c -o CMakeFiles/LuaLib.dir/src/lzio.c.s
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mati/CLionProjects/TPF-Micromachines/lua53/src/lzio.c -o CMakeFiles/LuaLib.dir/src/lzio.c.s
 
 # Object files for target LuaLib
 LuaLib_OBJECTS = \
@@ -560,9 +560,9 @@ lua53/libLuaLib.a: lua53/CMakeFiles/LuaLib.dir/src/lvm.c.o
 lua53/libLuaLib.a: lua53/CMakeFiles/LuaLib.dir/src/lzio.c.o
 lua53/libLuaLib.a: lua53/CMakeFiles/LuaLib.dir/build.make
 lua53/libLuaLib.a: lua53/CMakeFiles/LuaLib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/flox/FIUBA/Taller/TP4/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking C static library libLuaLib.a"
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -P CMakeFiles/LuaLib.dir/cmake_clean_target.cmake
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LuaLib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mati/CLionProjects/TPF-Micromachines/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking C static library libLuaLib.a"
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -P CMakeFiles/LuaLib.dir/cmake_clean_target.cmake
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LuaLib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 lua53/CMakeFiles/LuaLib.dir/build: lua53/libLuaLib.a
@@ -570,10 +570,10 @@ lua53/CMakeFiles/LuaLib.dir/build: lua53/libLuaLib.a
 .PHONY : lua53/CMakeFiles/LuaLib.dir/build
 
 lua53/CMakeFiles/LuaLib.dir/clean:
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -P CMakeFiles/LuaLib.dir/cmake_clean.cmake
+	cd /home/mati/CLionProjects/TPF-Micromachines/lua53 && $(CMAKE_COMMAND) -P CMakeFiles/LuaLib.dir/cmake_clean.cmake
 .PHONY : lua53/CMakeFiles/LuaLib.dir/clean
 
 lua53/CMakeFiles/LuaLib.dir/depend:
-	cd /home/flox/FIUBA/Taller/TP4/TPF-Micromachines && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/flox/FIUBA/Taller/TP4/TPF-Micromachines /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 /home/flox/FIUBA/Taller/TP4/TPF-Micromachines /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53 /home/flox/FIUBA/Taller/TP4/TPF-Micromachines/lua53/CMakeFiles/LuaLib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mati/CLionProjects/TPF-Micromachines && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mati/CLionProjects/TPF-Micromachines /home/mati/CLionProjects/TPF-Micromachines/lua53 /home/mati/CLionProjects/TPF-Micromachines /home/mati/CLionProjects/TPF-Micromachines/lua53 /home/mati/CLionProjects/TPF-Micromachines/lua53/CMakeFiles/LuaLib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : lua53/CMakeFiles/LuaLib.dir/depend
 

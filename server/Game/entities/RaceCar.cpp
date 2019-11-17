@@ -3,6 +3,7 @@
 #include "RaceCar.h"
 
 #include <utility>
+#include <Game/status_effects/HealthEffect.h>
 #include "../../../config/constants.h"
 
 #define DEGTORAD (M_PI*1/180)
@@ -181,4 +182,17 @@ void RaceCar::stepEffects(float timestep) {
 
 int RaceCar::getLaps() {
     return this->car_stats.laps;
+}
+
+void RaceCar::resolveCollision(Entity *collidedWith) {
+    if (collidedWith->isPlayer()){
+        auto ptr = std::shared_ptr<StatusEffect>(
+                new HealthEffect("car"+std::to_string(this->id), true, 0, .5f, -10,0)
+                );
+        collidedWith->addEffect(ptr);
+    }
+}
+
+bool RaceCar::isPlayer() {
+    return true;
 }

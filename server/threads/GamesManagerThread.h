@@ -24,6 +24,8 @@ public:
     explicit GamesManagerThread(std::string port);
     void close() override;
     ~GamesManagerThread();
+
+    bool _sendOpenGames(Socket &client);
 };
 
 
