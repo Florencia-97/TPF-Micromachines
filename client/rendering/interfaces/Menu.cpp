@@ -14,6 +14,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     map_selected = "\n";
     car_selected = "RED_CAR";
     ready = false;
+    ai_on = false;
 }
 
 void Menu::displayNotification(std::string msg){
@@ -117,18 +118,13 @@ void Menu::start_lobby() {
 }
 
 void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
-
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(gRenderer);
-
-    LTexture msg;
-    msg.load_from_file("client/rendering/assets/all_images/Decor/ChooseMsg.png", gRenderer);
-    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
-    msg.render_with_size(720, 500, 0, gRenderer, 800, 500, false);
+    this->notification.stageTextChange("Choose your map");
+    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : mapButtons) {
         button.render(screenWidth, screenHeight);
     }
     connectButton->render(screenWidth, screenHeight);
+    notification.render(screenWidth, screenHeight);
 }
 
 
@@ -156,9 +152,10 @@ void Menu::set_buttons_as_leader() {
                             gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
     mapButtons.emplace_back("map_4",
                             gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+
     auto callbackMap = [&](const std::string &clickedId) {
-      std::cout << clickedId << std::endl;
       for (auto &button : mapButtons) {
+          std::cout << clickedId<< button.id  << (button.id == clickedId) << std::endl;
           if (button.id == clickedId) {
               button.changeColor(255, 255, 255, -1);
               map_selected = button.id;
@@ -172,6 +169,7 @@ void Menu::set_buttons_as_leader() {
         button.changeColor(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
+
     mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
     mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
     mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
@@ -219,6 +217,14 @@ void Menu::load_media() {
     }
     this->set_buttons_as_leader();
 
+    auto ai_callback = [&](const std::string &clickedId) {
+        ai_on = !ai_on;
+        if (ai_on) {
+            connectButton->changeColor(80, 80, 80, -1);
+        } else {
+            connectButton->changeColor(255, 255, 255, -1);
+        }
+    };
 }
 bool Menu::map_is_selected() {
     return this->mapIsSelected;

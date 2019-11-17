@@ -2,6 +2,7 @@
 // Created by brian on 10/30/19.
 //
 
+#include <iostream>
 #include "Button.h"
 #include "ButtonAnswer.h"
 
@@ -100,6 +101,7 @@ void Button::callCallbackFunctions() {
   for (auto &function : callbacks) {
     function(this->id);
     }
+  std::cout<<this->id<<std::endl;
 }
 
 void Button::addCallbackFunction(std::function<void(std::string)> cf) {
