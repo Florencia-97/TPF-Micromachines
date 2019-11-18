@@ -112,26 +112,32 @@ void GameThread::_sendStartMsg(std::string raceId){
     }
 }
 
-void GameThread::_announceWinners() {
+void GameThread::_loadWinners(InfoBlock& b){
     std::list<int> plrs;
     for (auto &p : plr_threads){
         plrs.push_back(p.id);
     }
-
+    b["SIZE"] = plrs.size();
     plrs.sort([&](int &p1, int &p2){
         return (game.getCar(p1).getLaps() > game.getCar(p2).getLaps());
     });
-    InfoBlock gameEndStatus;
-    gameEndStatus[GAME_END] = 1;
-    std::string suffix[3] = {"st","nd","rd"};
+
     short n = 0;
     for (auto &pid : plrs){
-        std::string pos = std::to_string(n+1) + ((n > 2) ? "th" : suffix[n]);
-        gameEndStatus["p"+std::to_string(pid)] = pos;
+        b["p"+std::to_string(n)] = pid;
         n++;
     }
+}
+
+void GameThread::_announceWinners() {
+    InfoBlock gameEndStatus;
+    gameEndStatus[RACE_RESULTS] = 1;
+    _loadWinners(gameEndStatus);
     _sendAll(gameEndStatus);
-    this->sleep(2);
+    this->sleep(8);
+    InfoBlock gameEnd;
+    gameEnd[GAME_END] = 1;
+    _sendAll(gameEnd);
 }
 
 
@@ -153,10 +159,10 @@ void GameThread::_runGame() {
     float timestep_goal = 1.0/80;
     float timestep = timestep_goal;
     float time_left = GAME_DURATION_S;
-    float over_time = 5;
+    float over_time = 2;
 
     while (this->isAlive()) {
-        _processPlayerActions();
+        if (over_time > 0) _processPlayerActions();
         if (_anyPlayersAlive() && time_left > 0){
 
             this->game.Step(timestep_goal);

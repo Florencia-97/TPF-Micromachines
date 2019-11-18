@@ -6,6 +6,9 @@
 
 GameRenderer::GameRenderer(){
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    for (int i = 0; i<6; i++) {
+        race_results.emplace_back();
+    }
 }
 
 void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
@@ -42,10 +45,13 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
     //explosion.play(gRenderer,300,0);
 
-  laps.render(width, height);
-  timer.render(width, height);
-  health.render(width, height);
-  playertag.render(width, height);
+    laps.render(width, height);
+    timer.render(width, height);
+    health.render(width, height);
+    playertag.render(width, height);
+    for (auto& label : race_results) {
+        label.render(width, height);
+    }
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
@@ -61,8 +67,13 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 25, 60, w, gRenderer);
     auto text = "HP " + game_info.getString("h"+std::to_string(my_car_id));
     health.init(text, 100, 25, 35, w, gRenderer);
-    text = "Player " + std::to_string(my_car_id);
-    playertag.init(text, 100, SCREEN_HEIGHT - 50, 25, w, gRenderer);
+    text = "Player   " + std::to_string(my_car_id);
+    playertag.init(text, 100, SCREEN_HEIGHT - 50, 30, w, gRenderer);
+    int i = 0;
+    for (auto& label : race_results) {
+        label.init(" ", 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, w, gRenderer);
+        i++;
+    }
 }
 
 void GameRenderer::loadCars(InfoBlock &cars_info) {
@@ -119,6 +130,25 @@ void GameRenderer::_removeOld(std::vector<int>& ids){
         } else{
             it = this->all_items.erase(it);
         }
+    }
+}
+
+void GameRenderer::initLeaderboard(InfoBlock &block) {
+    int i = 0;
+    std::string suffix[3] = {"st","nd","rd"};
+    int n = block.get<int>("SIZE");
+    SDL_Color w = {255, 255, 255, 0xFF};
+
+    for (auto& label : race_results) {
+        std::string text;
+        std::string pos = std::to_string(i+1) + ((i > 2) ? "th" : suffix[i]);
+        if (i < n) {
+            auto id = block.getString("p"+std::to_string(i));
+            auto plr = (id != std::to_string(my_car_id))  ? "Player  " + id: "YOU";
+            text = pos + "     " +plr;
+        } else text = pos + "    no one";
+        label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, w, gRenderer);
+        i++;
     }
 }
 

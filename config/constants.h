@@ -8,6 +8,7 @@
 #define GAME_DURATION_S 120 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
+#define RACE_RESULTS "RR"
 
 // First msg
 #define ARENA_GAME "GA"

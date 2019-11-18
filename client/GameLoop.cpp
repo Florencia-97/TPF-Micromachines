@@ -48,7 +48,10 @@ void GameLoop::runGame(int frame_id){
             renderQueue->pop();
             //get the very last event
         }
-        gameState = &renderQueue->front();
+        if (renderQueue->front().exists(RACE_RESULTS)){
+            gameState = &previous_game_state;
+            gameRenderer.initLeaderboard(renderQueue->front());
+        } else gameState = &renderQueue->front();
     }
 
     if (!gameState->exists(GAME_END)) {
@@ -59,10 +62,8 @@ void GameLoop::runGame(int frame_id){
         gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
 
-
     } else {
-        menu.displayNotification("RACE OVER!  you came out " +
-                gameState->getString("p"+std::to_string(gameRenderer.my_car_id)));
+        menu.displayNotification("Open   Games");
         state = -1;
         in_menu.store(true);
         ready_to_play->notify_all();

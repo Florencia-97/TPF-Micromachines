@@ -30,6 +30,7 @@ class GameRenderer {
     TextLabel health;
     TextLabel laps;
     TextLabel playertag;
+    std::list<TextLabel> race_results;
 
     bool _itemInStock(std::string itemId);
     void _removeOld(std::vector<int>& ids);
@@ -48,6 +49,8 @@ public:
     void updatePlayers(InfoBlock &world_state, int frame);
 
     short my_car_id;
+
+    void initLeaderboard(InfoBlock &block);
 };
 
 

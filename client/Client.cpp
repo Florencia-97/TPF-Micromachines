@@ -36,6 +36,10 @@ bool Client::connectToServer(){
 }
 
 bool Client::attempConnection() {
+    if (gameLoop.menu.textbox_lobby_name.text == ""){
+        gameLoop.menu.displayNotification("enter  a  lobby  name  to  join  or  create  one!");
+        return  false;
+    }
     connection_state[ARENA_GAME] = gameLoop.menu.textbox_lobby_name.text;
     connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
     if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
@@ -54,7 +58,7 @@ bool Client::waitForConnection(){
         if (!userInput.exit) {
             try { connection_successful = attempConnection();}
             catch (serverNotRunning &e) {
-                gameLoop.menu.displayNotification("server is not running!");
+                gameLoop.menu.displayNotification("cant connect! restart the game");
             }
         }
     }

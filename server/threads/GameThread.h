@@ -52,6 +52,7 @@ public:
 
     ~GameThread();
 
+    void _loadWinners(InfoBlock &b);
 };
 
 
