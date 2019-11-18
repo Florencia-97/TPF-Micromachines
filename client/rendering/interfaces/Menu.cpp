@@ -11,7 +11,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     this->sound_queue = sq;
     this->gRenderer = sdl_renderer;
     this->game_ready_cv = attempConnectionCV;
-    map_selected = "\n";
+    map_selected = "race_1";
     car_selected = "RED_CAR";
     ready = false;
     ai_on = false;
@@ -142,16 +142,16 @@ void Menu::set_buttons_positions() {
 }
 
 void Menu::set_buttons_as_leader() {
-    mapButtons.emplace_back("map_1",
+    mapButtons.emplace_back("race_1",
                             gRenderer,
                             textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons.emplace_back("map_2",
+    mapButtons.emplace_back("race_2",
                             gRenderer,
-                            textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons.emplace_back("map_3",
-                            gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-    mapButtons.emplace_back("map_4",
-                            gRenderer, textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
+                            textureLoader.load_texture("all_images/Decor/8Circuit.png", gRenderer));
+    mapButtons.emplace_back("race_3",
+                            gRenderer, textureLoader.load_texture("all_images/Decor/eggTrack.png", gRenderer));
+    mapButtons.emplace_back("race_4",
+                            gRenderer, textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
 
     auto callbackMap = [&](const std::string &clickedId) {
       for (auto &button : mapButtons) {
@@ -180,7 +180,6 @@ void Menu::load_media() {
     wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png", gRenderer);
 
     auto callback_start_game = [&](const std::string &clickedId) {
-        map_selected = "race_1";
         ready = true;
         connectButton->changeColor(80, 80, 80, FPS*3);
         this->game_ready_cv->notify_all();
