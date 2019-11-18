@@ -9,21 +9,21 @@ local KEY_UP_LEFT = 4
 
 
 function decide_move(v, x, y, rot, last_mov)
-    print("----")
-    print(x)
-    print(y)
-    print(rot)
+--    print("----")
+--    print(x)
+--    print(y)
+--    print(rot)
     local i = math.floor(x)
     local j = math.floor(y)
     local r = math.floor(math.abs(rot) % 360)
     if j > #v or j<1 then return "" end
     if i > #v[j] or i<1 then return "" end
-    print (r)
+--    print (r)
     local next_tile = get_tile_ahead(v,i,j,r)
     if next_tile == -1 then return "" end
-    print(v[j][i])
-    print(next_tile)
-    print("----")
+--    print(v[j][i])
+--    print(next_tile)
+--    print("----")
     if i==9 and j==9 and last_mov ~= KEY_RIGHT then
         return "key-RIGHT"
     elseif i == 8 and j== 10 and last_mov == KEY_RIGHT and r > 70 then
