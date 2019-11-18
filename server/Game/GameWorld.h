@@ -38,6 +38,7 @@ class GameWorld {
     float timeModifiers;
     int itemsId;
     void _loadXYInRoad(int&x, int&y);
+    void _explodeIfOutOfBounds(RaceCar &car);
 
 public:
     //POS creates a world with no gravity for top-down action
@@ -61,6 +62,7 @@ public:
     void attempItemSpawn();
 
     void spentItemCleaning();
+
 };
 
 
