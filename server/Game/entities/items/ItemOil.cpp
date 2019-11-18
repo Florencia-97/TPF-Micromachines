@@ -4,7 +4,7 @@
 
 void ItemOil::resolveCollision(Entity *collidedWith) {
     if (!enabled) return;
-    auto ptr = std::shared_ptr<StatusEffect>(new DragEffect("Oil",0, 2,.65));
+    auto ptr = std::shared_ptr<StatusEffect>(new DragEffect("Oil",0, 2,4));
 
     collidedWith->addEffect(ptr);
     //ptr->setStateModifActive("Oil");
@@ -14,4 +14,4 @@ void ItemOil::resolveCollision(Entity *collidedWith) {
 void ItemOil::endContact(Entity *wasTouching) {
 }
 
-ItemOil::ItemOil(b2Body *&newBody, int itemId): Entity(newBody, itemId, ITEM_MUD) {}
+ItemOil::ItemOil(b2Body *&newBody, int itemId): Entity(newBody, itemId, ITEM_OIL) {}

@@ -8,6 +8,9 @@ int main(int argc, char *args[]) {
         std::string port = args[2];
         Client client(service, port);
         return client.play();
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return 1;
     } catch (...) {
         std::cout << "Exception unknown occurred\n";
         return 1;

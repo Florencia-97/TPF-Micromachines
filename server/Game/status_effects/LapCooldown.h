@@ -16,7 +16,16 @@ public:
         id = "";
     };
 
+    explicit LapCooldown(float duration, bool dont_add_lap){
+        delay = duration;
+        apply_on_remove = false;
+        apply_on_acquire = true;
+        applied = dont_add_lap;
+        id = "";
+    };
+
     void applyEffect(CarStats &entity) override{
+        if (applied) return;
         applied = true;
         entity.laps++;
     };

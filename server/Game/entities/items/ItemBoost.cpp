@@ -3,7 +3,7 @@
 #define ITEM_SPEED_BOOST "ITEM_SPEED_BOOST"
 
 ItemBoost::ItemBoost(b2Body *&newBody, int itemId) :
-    Entity(newBody, itemId, ITEM_BOOST), my_effect(ITEM_SPEED_BOOST,0,4,0,2){
+    Entity(newBody, itemId, ITEM_BOOST), my_effect(ITEM_SPEED_BOOST,0,4,0,1.5){
 }
 
 void ItemBoost::resolveCollision(Entity *other) {

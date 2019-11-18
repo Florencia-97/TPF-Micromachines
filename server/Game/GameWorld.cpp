@@ -43,6 +43,7 @@ GameWorld::GameWorld() : world(b2Vec2(0,0)) {
 
 void GameWorld::loadWorld(std::string worldName){
     map.load("maps/" + worldName+".yaml");
+
     for (int j = 0; j < map.road.size(); j++){
         auto row = map.road[j];
         for (int i= 0; i<row.size();i++){
@@ -95,6 +96,7 @@ void GameWorld::processEvent(int id, InfoBlock &event){
 void GameWorld::Step(float timeStep) {
     for (auto & car : cars) {
         bool wasAlive = car.car_stats.hp > 0;
+        _explodeIfOutOfBounds(car);
         car.step(timeStep);
         if (car.car_stats.hp <= 0 && wasAlive) {
             respawnCar(car);
@@ -131,6 +133,14 @@ void GameWorld::_createItem(){
     if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS*std::max(1,(int)cars.size()/2)){
         world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
+    }
+}
+
+void GameWorld::_explodeIfOutOfBounds(RaceCar &car){
+    auto pos = car.getPosition();
+    bool out_bounds = (pos.x < -5 || pos.x > map.width/PTM) || (pos.y < -5 || pos.y > map.width/PTM);
+    if (out_bounds){
+        car.takeDamage(car.car_stats.hp);
     }
 }
 
@@ -196,7 +206,7 @@ void GameWorld::respawnCar(RaceCar &car) {
         int y = fpos.y - 1.1f *CAR_HEIGHT/PTM;
         int x = fpos.x;
         car.getBody()->SetTransform(b2Vec2(x,y),0);
-        auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(5));
+        auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(15,true));
         car.addEffect(ptr);
     };
     auto ptr = std::shared_ptr<StatusEffect>(new CallbackStatusEffect("RESPAWN", f, 5));
