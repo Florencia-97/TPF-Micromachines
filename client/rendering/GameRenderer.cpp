@@ -137,7 +137,7 @@ void GameRenderer::initLeaderboard(InfoBlock &block) {
     int i = 0;
     std::string suffix[3] = {"st","nd","rd"};
     int n = block.get<int>("SIZE");
-    SDL_Color w = {255, 255, 255, 0xFF};
+    SDL_Color gold{255, 189, 27, 0xFF};
 
     for (auto& label : race_results) {
         std::string text;
@@ -147,7 +147,7 @@ void GameRenderer::initLeaderboard(InfoBlock &block) {
             auto plr = (id != std::to_string(my_car_id))  ? "Player  " + id: "YOU";
             text = pos + "     " +plr;
         } else text = pos + "    no one";
-        label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, w, gRenderer);
+        label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, gold, gRenderer);
         i++;
     }
 }

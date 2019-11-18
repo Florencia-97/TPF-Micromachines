@@ -182,7 +182,7 @@ void Menu::load_media() {
     auto callback_start_game = [&](const std::string &clickedId) {
         map_selected = "race_1";
         ready = true;
-        connectButton->changeColor(80, 80, 80, FPS*3);
+        connectButton->changeColor(80, 80, 80, FPS/2);
         this->game_ready_cv->notify_all();
     };
     //car buttons
