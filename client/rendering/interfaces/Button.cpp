@@ -6,11 +6,11 @@
 #include "Button.h"
 #include "ButtonAnswer.h"
 
-Button::Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) {
+Button::Button(SDL_Renderer *sdl_renderer, LTexture *l_texture) {
   mPosition.x = 0;
   mPosition.y = 0;
   colorChangeDuration = -1;
-  this->texture = buttonSpriteSheet;
+    this->texture = l_texture;
   this->gRenderer = sdl_renderer;
   this->id = texture->get_string_name();
   this->soundWhenPressed = ""; // no sound

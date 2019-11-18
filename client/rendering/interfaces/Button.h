@@ -30,7 +30,7 @@ class Button {
  public:
     std::string id;
     std::string soundWhenPressed;
-    explicit Button(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
+  explicit Button(SDL_Renderer *sdl_renderer, LTexture *l_texture);
 
     explicit Button(std::string id, SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
 

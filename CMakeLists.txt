@@ -112,7 +112,7 @@ set(CLIENT_SOURCE_FILES
 set(LUA_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
 		client/ia/lua/LuaWrapper.cpp client/ia/lua/LuaWrapper.h
-		)
+        client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES} ${LUA_SOURCE_FILES})
