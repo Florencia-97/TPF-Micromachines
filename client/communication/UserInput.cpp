@@ -62,6 +62,9 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
       case SDL_TEXTINPUT:;
           writing_queue->push(e);
           break;
+      case SDL_KEYUP:
+          if (e.key.keysym.sym == SDLK_F1)  sound_queue->push(SOUND_ON_OFF);
+          break;
     }
     if (!this->isScript){
         switch (e.type) {
@@ -90,9 +93,6 @@ void UserInput::_rcvKeyInput(SDL_Event &e){
                 actionType = ACTION_TYPE_DOWN;
                 event_value = false;
                 switch (e.key.keysym.sym) {
-                    case SDLK_F1:
-                        sound_queue->push(SOUND_ON_OFF);
-                        return;
                     case SDLK_UP:
                         if (e.key.state == SDL_RELEASED) {
                             eventType = UP;
