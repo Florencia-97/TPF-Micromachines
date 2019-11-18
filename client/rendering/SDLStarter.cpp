@@ -6,9 +6,14 @@
 #include "SDLStarter.h"
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+extern "C" {
+    #include <libavformat/avformat.h>
+    #include <libswscale/swscale.h>
+}
 
 bool SDLStarter::init() {
   bool success = true;
+  av_register_all(); // Not sure if it goes here!
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
     success = false;
@@ -43,7 +48,6 @@ bool SDLStarter::init() {
           printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
           success = false;
         }
-        printf("Opening sound\n");
         if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
               printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
               success = false;

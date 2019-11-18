@@ -13,6 +13,7 @@ void GameLoop::_runProgram(){
     }
     soundSystem.play(state == GAME_STATE);
     SDL_RenderPresent(starter.get_global_renderer());
+    //videoRecorder.record(starter.get_global_renderer());
 }
 
 void GameLoop::_run(){
@@ -125,4 +126,5 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
     ready_to_play = &r;
+    //videoRecorder.init(starter.get_global_renderer());
 }
