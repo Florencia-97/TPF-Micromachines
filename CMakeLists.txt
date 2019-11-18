@@ -55,7 +55,10 @@ set(SERVER_SOURCE_FILES
 		server/Game/entities/items/ItemMud.cpp server/Game/entities/items/ItemMud.h
 		server/Game/entities/items/ItemCreator.cpp server/Game/entities/items/ItemCreator.h
 		server/Game/status_effects/HealthEffect.cpp server/Game/status_effects/HealthEffect.h
-		server/Game/status_effects/CallbackStatusEffect.cpp server/Game/status_effects/CallbackStatusEffect.h server/Game/entities/items/ItemMud.cpp server/Game/entities/items/ItemMud.h server/Game/entities/items/ItemOil.cpp server/Game/entities/items/ItemOil.h server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h)
+		server/Game/status_effects/CallbackStatusEffect.cpp server/Game/status_effects/CallbackStatusEffect.h
+		server/Game/entities/items/ItemMud.cpp server/Game/entities/items/ItemMud.h
+		server/Game/entities/items/ItemOil.cpp server/Game/entities/items/ItemOil.h
+		server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
@@ -94,7 +97,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
 		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
 		client/Item.cpp client/Item.h
-		client/ia/FakeClient.cpp client/ia/FakeClient.h)
+		client/ia/FakeClient.cpp client/ia/FakeClient.h
+		client/rendering/VideoRecorder.cpp client/rendering/VideoRecorder.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp
