@@ -49,7 +49,10 @@ void GameLoop::runGame(int frame_id){
             renderQueue->pop();
             //get the very last event
         }
-        gameState = &renderQueue->front();
+        if (renderQueue->front().exists(RACE_RESULTS)){
+            gameState = &previous_game_state;
+            gameRenderer.initLeaderboard(renderQueue->front());
+        } else gameState = &renderQueue->front();
     }
 
     if (!gameState->exists(GAME_END)) {
@@ -60,10 +63,8 @@ void GameLoop::runGame(int frame_id){
         gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
 
-
     } else {
-        menu.displayNotification("RACE OVER!  you came out " +
-                gameState->getString("p"+std::to_string(gameRenderer.my_car_id)));
+        menu.displayNotification("Open   Games");
         state = -1;
         in_menu.store(true);
         ready_to_play->notify_all();
@@ -84,14 +85,19 @@ void GameLoop::runLobby(int frame_id) {
     menu.processEventsMouse();
     menu.processEventsKeyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
-    menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
+    if (leader) menu.renderAsLeader(screenWidth, screenHeight);
+    else menu.renderAsFollower(screenWidth, screenHeight);
 
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
     SDL_StopTextInput();
+    leader = is_leader;
     if (is_leader){
         menu.start_lobby();
+        menu.displayNotification("Choose a map for the game");
+    } else {
+        menu.displayNotification("Waiting for the host to start the game");
     }
     std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);

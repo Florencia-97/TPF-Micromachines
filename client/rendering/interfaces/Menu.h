@@ -31,7 +31,6 @@ class Menu {
   TextLabel label_choose_car;
   TextLabel flavor_text;
   TextLabel notification;
-  TextBox textbox_lobby_name;
   bool mapIsSelected = false;
 
   void load_media();
@@ -40,6 +39,7 @@ class Menu {
  public:
   std::string car_selected;
   std::string map_selected;
+  TextBox textbox_lobby_name;
   bool ready;
   bool ai_on;
   std::queue<InfoBlock> open_games_update;
@@ -52,11 +52,11 @@ class Menu {
   //PRE must be initialized
   void render_first_menu(float screenWidth, float screenHeight);
 
-  void dummy_init_as_leader(int screenWidth, int screenHeight);
+  void renderAsLeader(int screenWidth, int screenHeight);
 
   void set_buttons_as_leader();
 
-  void init_as_follower();
+  void renderAsFollower(int screenWidth, int screenHeight);
 
   bool processEventsMouse();
 
@@ -69,6 +69,7 @@ class Menu {
   void _updateOpenGames();
 
   bool map_is_selected();
+
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

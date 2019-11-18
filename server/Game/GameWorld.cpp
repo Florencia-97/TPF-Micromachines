@@ -185,7 +185,7 @@ int GameWorld::createCar(InfoBlock carStats) {
 
     createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
     createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER|OBSTACLE, false);
-    createAndAddFixture(&(cars.back()),1,1,0,SENSOR, TILE, true);
+    createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,SENSOR, TILE, true);
 
     auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(10));
     cars.back().addEffect(ptr);

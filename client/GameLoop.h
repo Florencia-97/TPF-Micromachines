@@ -31,6 +31,7 @@ class GameLoop : public BaseThread {
     int screenWidth;
     int screenHeight;
     bool ready;
+    bool leader;
 
     void _runProgram();
 

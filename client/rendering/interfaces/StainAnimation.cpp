@@ -11,12 +11,15 @@ void StainAnimation::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer
 
 StainAnimation::StainAnimation() {
   this->fading = 255;
+  loaded = false;
 }
 
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
+    if (loaded) return;
   if (!this->texture.load_from_file("client/rendering/assets/decoration/stain.png", gRenderer)) {
     printf("Failed to load stain texture!\n");
   }
+  loaded = true;
 }
 void StainAnimation::play(SDL_Renderer *gRenderer, int x, int y) {
   this->texture.setAlpha(fading);

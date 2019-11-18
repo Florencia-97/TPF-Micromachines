@@ -12,6 +12,8 @@ class Animation {
  private:
   LTexture actualSprite;
   int frame;
+protected:
+  bool loaded;
  public:
   virtual void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) = 0;
   virtual void load_frames(SDL_Renderer *gRenderer) = 0;

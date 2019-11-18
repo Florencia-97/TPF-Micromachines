@@ -13,7 +13,7 @@
 
 class serverNotRunning : public std::exception {
     virtual const char* what() const throw() {
-        return "Server was disconnected, maybe try running it first!\n";
+        return "Server is not connected, maybe try running it first!\n";
     }
 };
 
