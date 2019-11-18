@@ -101,7 +101,8 @@ set(CLIENT_SOURCE_FILES
 		client/ia/FakeClient.cpp client/ia/FakeClient.h
 		client/rendering/recording/VideoRecorder.cpp client/rendering/recording/VideoRecorder.h
 		client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
-		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h)
+		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
+		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

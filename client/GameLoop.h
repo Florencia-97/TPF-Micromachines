@@ -21,7 +21,7 @@
 class GameLoop : public BaseThread {
     SDLStarter starter;
     SoundSystem soundSystem;
-    VideoRecorder videoRecorder;
+    //VideoRecorder videoRecorder;
     int current_frame;
     int state; //thread state
     InfoBlock previous_game_state;
@@ -35,8 +35,6 @@ class GameLoop : public BaseThread {
     void _runProgram();
 
     void _run() override;
-
-    void _record();
 
     void runMenu(int frame_id);
 
