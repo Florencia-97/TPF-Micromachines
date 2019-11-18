@@ -4,6 +4,7 @@
 #include <SDL_render.h>
 #include <string>
 #include <SDL_ttf.h>
+
 class LTexture {
  private:
   SDL_Texture *texture;

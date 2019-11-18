@@ -10,6 +10,7 @@
 #include "rendering/interfaces/Menu.h"
 #include "rendering/GameRenderer.h"
 #include "sound_sys/SoundSystem.h"
+#include "rendering/recording/VideoRecorder.h"
 #include <SDL2/SDL.h>
 #include <queue>
 #include <atomic>
@@ -20,6 +21,7 @@
 class GameLoop : public BaseThread {
     SDLStarter starter;
     SoundSystem soundSystem;
+    VideoRecorder videoRecorder;
     int current_frame;
     int state; //thread state
     InfoBlock previous_game_state;
@@ -33,6 +35,8 @@ class GameLoop : public BaseThread {
     void _runProgram();
 
     void _run() override;
+
+    void _record();
 
     void runMenu(int frame_id);
 
