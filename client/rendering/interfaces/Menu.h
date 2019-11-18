@@ -31,7 +31,6 @@ class Menu {
   TextLabel label_choose_car;
   TextLabel flavor_text;
   TextLabel notification;
-  TextBox textbox_lobby_name;
   bool mapIsSelected = false;
 
   void load_media();
@@ -40,6 +39,7 @@ class Menu {
  public:
   std::string car_selected;
   std::string map_selected;
+  TextBox textbox_lobby_name;
   bool ready;
   bool ai_on;
   std::queue<InfoBlock> open_games_update;
@@ -69,6 +69,7 @@ class Menu {
   void _updateOpenGames();
 
   bool map_is_selected();
+
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

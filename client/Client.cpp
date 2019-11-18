@@ -36,7 +36,7 @@ bool Client::connectToServer(){
 }
 
 bool Client::attempConnection() {
-    connection_state[ARENA_GAME] = gameLoop.menu.map_selected;
+    connection_state[ARENA_GAME] = gameLoop.menu.textbox_lobby_name.text;
     connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
     if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
     if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();

@@ -45,6 +45,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
   laps.render(width, height);
   timer.render(width, height);
   health.render(width, height);
+  playertag.render(width, height);
 }
 
 void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
@@ -60,6 +61,8 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 25, 60, w, gRenderer);
     auto text = "HP " + game_info.getString("h"+std::to_string(my_car_id));
     health.init(text, 100, 25, 35, w, gRenderer);
+    text = "Player " + std::to_string(my_car_id);
+    playertag.init(text, 100, SCREEN_HEIGHT - 50, 25, w, gRenderer);
 }
 
 void GameRenderer::loadCars(InfoBlock &cars_info) {

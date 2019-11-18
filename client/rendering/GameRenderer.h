@@ -29,6 +29,7 @@ class GameRenderer {
     TextLabel timer;
     TextLabel health;
     TextLabel laps;
+    TextLabel playertag;
 
     bool _itemInStock(std::string itemId);
     void _removeOld(std::vector<int>& ids);
