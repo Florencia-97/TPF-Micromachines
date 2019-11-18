@@ -9,6 +9,9 @@ int main (int argc, char** argv) {
         Server server;
         std::string port = argv[1];
         return server.play(port);
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return 1;
     } catch (...) {
         std::cout << "Exception unknown occurred\n";
         return 1;
