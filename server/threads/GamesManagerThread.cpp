@@ -36,7 +36,7 @@ bool GamesManagerThread::_sendOpenGames(Socket& client){
     InfoBlock games;
     std::list<std::string> openGames;
     for (auto &game : this->games){
-        if (game.lobby_mode){
+        if (game.lobby_mode && game.isAlive()){
             openGames.push_back(game.gameName);
         }
     }

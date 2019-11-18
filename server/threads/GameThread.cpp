@@ -183,9 +183,9 @@ void GameThread::_runGame() {
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
     std::string mapName = _runLobby();
+    this->lobby_mode = false;
     if (this->isAlive()) {
         std::cout << "Race chosen is: " << mapName << std::endl;
-        this->lobby_mode = false; // Atomic?
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
         this->plr_threads.front().car_type = ownerInfo.getString(CAR_TYPE);
         this->plr_threads.front().run();
