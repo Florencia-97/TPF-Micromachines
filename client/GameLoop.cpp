@@ -84,14 +84,19 @@ void GameLoop::runLobby(int frame_id) {
     menu.processEventsMouse();
     menu.processEventsKeyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
-    menu.dummy_init_as_leader(screenWidth, screenHeight);//todo render lobby instead
+    if (leader) menu.renderAsLeader(screenWidth, screenHeight);
+    else menu.renderAsFollower(screenWidth, screenHeight);
 
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
     SDL_StopTextInput();
+    leader = is_leader;
     if (is_leader){
         menu.start_lobby();
+        menu.displayNotification("Choose a map for the game");
+    } else {
+        menu.displayNotification("Waiting for the host to start the game");
     }
     std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);

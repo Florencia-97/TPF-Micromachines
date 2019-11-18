@@ -52,11 +52,11 @@ class Menu {
   //PRE must be initialized
   void render_first_menu(float screenWidth, float screenHeight);
 
-  void dummy_init_as_leader(int screenWidth, int screenHeight);
+  void renderAsLeader(int screenWidth, int screenHeight);
 
   void set_buttons_as_leader();
 
-  void init_as_follower();
+  void renderAsFollower(int screenWidth, int screenHeight);
 
   bool processEventsMouse();
 

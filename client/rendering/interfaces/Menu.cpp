@@ -117,8 +117,7 @@ void Menu::start_lobby() {
     active_buttons = &mapButtons;
 }
 
-void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
-    this->notification.stageTextChange("Choose your map");
+void Menu::renderAsLeader(int screenWidth, int screenHeight) {
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : mapButtons) {
         button.render(screenWidth, screenHeight);
@@ -128,9 +127,9 @@ void Menu::dummy_init_as_leader(int screenWidth, int screenHeight) {
 }
 
 
-void Menu::init_as_follower() {
-    wallpaper.load_from_file("client/rendering/assets/all_images/Decor/waiting.png", gRenderer);
-    wallpaper.render_with_size(0, 0, 0, gRenderer, 0, 0, true);
+void Menu::renderAsFollower(int screenWidth, int screenHeight) {
+    wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
+    notification.render(screenWidth, screenHeight);
 }
 
 void Menu::set_buttons_positions() {
