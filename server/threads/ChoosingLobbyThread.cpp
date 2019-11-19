@@ -22,7 +22,7 @@ bool ChoosingLobbyThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
 
 void ChoosingLobbyThread::_run() {
     bool connected = false;
-    while (!connected) {
+    while (!connected && isAlive() && plr.isValid()) {
         InfoBlock ib;
         if (!Protocol::recvMsg(&plr, ib)) {
             std::cout << "Error receiving msg\n";

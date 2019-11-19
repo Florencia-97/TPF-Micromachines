@@ -19,13 +19,13 @@ class GameAlreadyStarted : public std::exception {
 
 class ChoosingLobbyThread : public BaseThread {
     std::list<GameThread>* games;
-    Socket plr;
     Configuration *configs;
 
     void _run() override;
 
 
 public:
+    Socket plr;
     ChoosingLobbyThread(std::list<GameThread>& games, Configuration &c, Socket& plr);
 
     bool _addPlayerToArena(Socket &client, InfoBlock &ib);

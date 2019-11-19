@@ -23,6 +23,7 @@ void GamesManagerThread::_killThreads(bool all){
     while (it2 != this->choosing.end()){
         if (all || !(it2)->isAlive()){
             if ((it2)->isAlive()) (it2)->close();
+            if (all) it2->plr.closeSd();
             (it2)->join();
             it2 = this->choosing.erase(it2);
         } else {
