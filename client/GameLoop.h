@@ -23,7 +23,7 @@ class GameLoop : public BaseThread {
     int current_frame;
     int state; //thread state
     InfoBlock previous_game_state;
-    std::condition_variable* ready_to_play;
+    std::condition_variable* client_ping;
     GameMap map;
     GameRenderer gameRenderer;
     int screenWidth;

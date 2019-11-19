@@ -58,7 +58,7 @@ set(SERVER_SOURCE_FILES
 		server/Game/status_effects/CallbackStatusEffect.cpp server/Game/status_effects/CallbackStatusEffect.h
 		server/Game/entities/items/ItemMud.cpp server/Game/entities/items/ItemMud.h
 		server/Game/entities/items/ItemOil.cpp server/Game/entities/items/ItemOil.h
-		server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h)
+		server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h server/threads/ChoosingLobbyThread.cpp server/threads/ChoosingLobbyThread.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp

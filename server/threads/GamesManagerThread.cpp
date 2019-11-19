@@ -7,7 +7,7 @@ GamesManagerThread::GamesManagerThread(std::string port)
     this->skt.server(port);
 }
 
-void GamesManagerThread::_killGames(bool all){
+void GamesManagerThread::_killThreads(bool all){
     auto it = this->games.begin();
     while (it != this->games.end()){
         if (all || !(it)->isAlive()){
@@ -18,19 +18,19 @@ void GamesManagerThread::_killGames(bool all){
             ++it;
         }
     }
+
+    auto it2 = this->choosing.begin();
+    while (it2 != this->choosing.end()){
+        if (all || !(it2)->isAlive()){
+            if ((it2)->isAlive()) (it2)->close();
+            (it2)->join();
+            it2 = this->choosing.erase(it2);
+        } else {
+            ++it2;
+        }
+    }
 }
 
-bool GamesManagerThread::_addPlayerToArena(Socket& client, InfoBlock& ib){
-    auto it = this->games.begin();
-    while (it != this->games.end()){
-    if ((it)->isAlive() && (it)->gameName == ib.getString(ARENA_GAME)){
-            (it)->addPLayer(client, ib);
-            return true;
-        }
-        ++it;
-    }
-    return false;
-}
 
 bool GamesManagerThread::_sendOpenGames(Socket& client){
     InfoBlock games;
@@ -56,22 +56,13 @@ void GamesManagerThread::_run(){
         if (!this->skt.isValid()) break;
         std::cout  << "Client accepted\n";
         _sendOpenGames(client);
-        InfoBlock ib;
-        if (!Protocol::recvMsg( &client, ib )){
-            std::cout << "Error receiving msg\n";
-            continue;
-        }
-        std::string arenaName = ib.get<std::string>(ARENA_GAME);
-        std::cout << arenaName << std::endl;
 
-        // If players arena is not here, just go ahead and create one
-        if (!_addPlayerToArena(client, ib)){
-            this->games.emplace_back(client, ib, this->configs);
-            this->games.back().run();
-        }
-        _killGames(false);
+        choosing.emplace_back(games, configs, client);
+        choosing.back().run();
+
+        _killThreads(false);
     }
-    _killGames(true);
+    _killThreads(true);
     close();
 }
 
@@ -79,11 +70,11 @@ void GamesManagerThread::_run(){
 void GamesManagerThread::close(){
     if (!this->isAlive()) return;
     skt.closeSd();
-    _killGames(true);
+    _killThreads(true);
     BaseThread::close();
 }
 
 GamesManagerThread::~GamesManagerThread(){
-    _killGames(true); // Should not go here
+    _killThreads(true); // Should not go here
     this->close();
 }

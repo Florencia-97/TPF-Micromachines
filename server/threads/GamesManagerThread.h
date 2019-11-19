@@ -7,6 +7,7 @@
 #include "../../common/infostream/Socket.h"
 #include "threads/PlayerThread.h"
 #include "threads/GameThread.h"
+#include "ChoosingLobbyThread.h"
 
 /*
  * Creats the socket of the server
@@ -17,9 +18,10 @@ class GamesManagerThread : public BaseThread{
     Configuration configs;
     Socket skt; //Server's socket
     std::list<GameThread> games;
-    void _killGames(bool all);
-    bool _addPlayerToArena(Socket& client, InfoBlock& ib);
+    std::list<ChoosingLobbyThread> choosing;
+    void _killThreads(bool all);
     void _run() override;
+
 public:
     explicit GamesManagerThread(std::string port);
     void close() override;

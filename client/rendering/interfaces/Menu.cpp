@@ -115,6 +115,9 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
 
 void Menu::start_lobby() {
     active_buttons = &mapButtons;
+    for (auto& label : open_games){
+        label.stageTextChange("");
+    }
 }
 
 void Menu::renderAsLeader(int screenWidth, int screenHeight) {

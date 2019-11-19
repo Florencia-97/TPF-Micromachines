@@ -48,7 +48,7 @@ public:
 
     //PRE lobby_mode must be true
     //POS adds player to the lobby
-    void addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
+    bool addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
 
     ~GameThread();
 

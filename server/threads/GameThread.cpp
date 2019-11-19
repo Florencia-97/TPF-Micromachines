@@ -63,7 +63,7 @@ std::string GameThread::_runLobby() {
     return (ib.exists(RACE_ID)) ? ib.get<std::string>(RACE_ID) : "race_1";
 }
 
-void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
+bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     // Adds a new player to the game while lobby is on
     InfoBlock ib;
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
@@ -72,6 +72,7 @@ void GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
         this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();
     }
+    return lobby_mode;
 }
 
 void GameThread::_createCars(){
