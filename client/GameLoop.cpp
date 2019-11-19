@@ -13,6 +13,7 @@ void GameLoop::_runProgram(){
     }
     soundSystem.play(state == GAME_STATE);
     SDL_RenderPresent(starter.get_global_renderer());
+    //videoRecorder.record(starter.get_global_renderer());
 }
 
 void GameLoop::_run(){
@@ -86,6 +87,7 @@ void GameLoop::runLobby(int frame_id) {
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
     if (leader) menu.renderAsLeader(screenWidth, screenHeight);
     else menu.renderAsFollower(screenWidth, screenHeight);
+
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
@@ -123,5 +125,6 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
+    //videoRecorder.init(starter.get_global_renderer());
     client_ping = &r;
 }
