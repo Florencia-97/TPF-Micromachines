@@ -55,8 +55,8 @@ void GamesManagerThread::_run(){
         Socket client = this->skt.acceptClient();
         if (!this->skt.isValid()) break;
         std::cout  << "Client accepted\n";
-        _sendOpenGames(client);
 
+        _sendOpenGames(client);
         choosing.emplace_back(games, configs, client);
         choosing.back().run();
 
