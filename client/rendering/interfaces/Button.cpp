@@ -49,6 +49,7 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string> *sq) {
   }
   return false;
 }
+
 void Button::render(float screenWidth, float screenHeight) {
   if (colorChangeDuration > -1) colorChangeDuration--;
   if (colorChangeDuration == 0) changeColor(255, 255, 255, -1);
