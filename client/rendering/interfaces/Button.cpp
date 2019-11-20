@@ -1,7 +1,6 @@
 #include <iostream>
 #include <utility>
 #include "Button.h"
-#include "ButtonAnswer.h"
 
 void Button::setPosition(int x, int y) {
   mPosition.x = x;

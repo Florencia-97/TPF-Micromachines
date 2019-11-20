@@ -3,8 +3,6 @@
 
 #include "../../../config/constants.h"
 #include "../LTexture.h"
-#include "ButtonAnswer.h"
-
 #include <SDL_events.h>
 #include <SDL_system.h>
 #include <list>
