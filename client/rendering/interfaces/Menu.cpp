@@ -16,7 +16,7 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     ready = false;
     ai_on = false;
     this->iaButton = new LuaButton(gRenderer,
-                                   textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
+                                   textureLoader.load_texture("buttons/tick.png", gRenderer));
 }
 
 void Menu::displayNotification(std::string msg){
@@ -230,9 +230,9 @@ void Menu::load_media() {
     auto ai_callback = [&](const std::string &clickedId) {
         ai_on = !ai_on;
         if (ai_on) {
-            iaButton->changeColor(80, 80, 80, -1);
+            iaButton->changeOpacity(255);
         } else {
-            iaButton->changeColor(255, 255, 255, -1);
+            iaButton->changeOpacity(0);
         }
     };
     iaButton->addCallbackFunction(ai_callback);

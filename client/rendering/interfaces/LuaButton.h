@@ -15,6 +15,7 @@ class LuaButton : public Button {
   LuaButton(SDL_Renderer *sdl_renderer, LTexture *texture);
   void render(float screenWidth, float screenHeight) override;
   void setPosition(int x, int y) override;
+  void changeOpacity(int i);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_LUABUTTON_H_
