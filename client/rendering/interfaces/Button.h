@@ -61,10 +61,12 @@ class Button {
    * recalcular la posicion en la nueva resolucion.*/
   virtual void render(float screenWidth, float screenHeight);
 
-
-	//POS apply a color(r,g,b) change to the button for duration frames
-	//if duration is negative then the change persists until called again
-	void changeColor(int r, int g, int b, int duration);
+  /*Cambia el color de la textura utilizando los valores
+   * RGB pasado por parametros. El parametro duration, es la cantidad de frames
+   * que se va a mantener este cambio.
+   * PRE: Si el valor es negativo, el cambio persiste hasta el proximo
+   * llamado de la funcion*/
+  void changeColor(int r, int g, int b, int duration);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_BUTTON_H_
