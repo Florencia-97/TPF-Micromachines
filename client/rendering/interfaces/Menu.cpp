@@ -3,7 +3,6 @@
 #include "../../../config/constants.h"
 #include "ConnectButton.h"
 #include "TextLabel.h"
-#include "MapButton.h"
 
 void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
                 std::condition_variable *attempConnectionCV, std::queue<std::string> *sq) {
@@ -16,6 +15,8 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
     car_selected = "RED_CAR";
     ready = false;
     ai_on = false;
+    this->iaButton = new LuaButton(gRenderer,
+                                   textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
 }
 
 void Menu::displayNotification(std::string msg){
@@ -47,8 +48,7 @@ void Menu::setMainMenuMode(){
         open_games.back().init(" ",
              450 + 400 * (i % 2), 580 + 75 * (int) (i / 2), 25, white, gRenderer);
     }
-    this->iaButton = new LuaButton(gRenderer,
-                                   textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
+
 
 }
 
@@ -143,6 +143,7 @@ void Menu::set_buttons_positions() {
     carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
     carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
     carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
+    iaButton->setPosition(BLUE_CAR_BUTTON_X + 60, PLAY_BUTTON_Y - 170);
     connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
@@ -236,5 +237,4 @@ bool Menu::map_is_selected() {
 }
 Menu::~Menu() {
     free(this->iaButton);
-
 }
