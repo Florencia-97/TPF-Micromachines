@@ -85,6 +85,10 @@ bool Menu::processEventsMouse() {
             while (!mouse_queue->empty()) mouse_queue->pop();
             return false;
         }
+        if (iaButton->handleEvent(event, sound_queue)) {
+            while (!mouse_queue->empty()) mouse_queue->pop();
+            return false;
+        }
     mouse_queue->pop();
     }
     return false;
@@ -226,11 +230,13 @@ void Menu::load_media() {
     auto ai_callback = [&](const std::string &clickedId) {
         ai_on = !ai_on;
         if (ai_on) {
-            connectButton->changeColor(80, 80, 80, -1);
+            iaButton->changeColor(80, 80, 80, -1);
         } else {
-            connectButton->changeColor(255, 255, 255, -1);
+            iaButton->changeColor(255, 255, 255, -1);
         }
     };
+    iaButton->addCallbackFunction(ai_callback);
+
 }
 bool Menu::map_is_selected() {
     return this->mapIsSelected;

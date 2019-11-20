@@ -94,7 +94,7 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/TextBox.cpp client/rendering/interfaces/TextBox.h
 		client/sound_sys/SoundSystem.cpp client/sound_sys/SoundSystem.h
 		client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h
-		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
+		client/rendering/interfaces/Animation.h
 		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
 		client/Item.cpp client/Item.h
 		client/ia/FakeClient.cpp client/ia/FakeClient.h
