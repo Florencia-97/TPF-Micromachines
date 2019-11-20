@@ -102,7 +102,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/recording/VideoRecorder.cpp client/rendering/recording/VideoRecorder.h
 		client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
 		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
-		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h)
+		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
+		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp
@@ -116,7 +117,7 @@ set(CLIENT_SOURCE_FILES
 set(LUA_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
 		client/ia/lua/LuaWrapper.cpp client/ia/lua/LuaWrapper.h
-        client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
+		)
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES} ${LUA_SOURCE_FILES})
