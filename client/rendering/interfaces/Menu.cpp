@@ -3,6 +3,7 @@
 #include "../../../config/constants.h"
 #include "ConnectButton.h"
 #include "TextLabel.h"
+#include "MapButton.h"
 
 void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
                 std::condition_variable *attempConnectionCV, std::queue<std::string> *sq) {
@@ -46,7 +47,8 @@ void Menu::setMainMenuMode(){
         open_games.back().init(" ",
              450 + 400 * (i % 2), 580 + 75 * (int) (i / 2), 25, white, gRenderer);
     }
-
+    this->iaButton = new LuaButton(gRenderer,
+                                   textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
 
 }
 
@@ -111,6 +113,7 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
     for (auto& label : open_games){
         label.render(screenWidth, screenHeight);
     }
+    iaButton->render(screenWidth, screenHeight);
 }
 
 void Menu::start_lobby() {
@@ -144,6 +147,7 @@ void Menu::set_buttons_positions() {
 }
 
 void Menu::set_buttons_as_leader() {
+    //todo MapButtons or Buttons?
     mapButtons.emplace_back("race_1",
                             gRenderer,
                             textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
@@ -229,4 +233,8 @@ void Menu::load_media() {
 }
 bool Menu::map_is_selected() {
     return this->mapIsSelected;
+}
+Menu::~Menu() {
+    free(this->iaButton);
+
 }

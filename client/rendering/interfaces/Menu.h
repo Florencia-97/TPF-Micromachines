@@ -11,6 +11,7 @@
 #include <condition_variable>
 #include "../TextureLoader.h"
 #include "../../../common/infostream/InfoBlock.h"
+#include "LuaButton.h"
 
 class Menu {
  private:
@@ -25,6 +26,7 @@ class Menu {
   std::vector<Button> carButtons;
   std::vector<Button> mapButtons;
   std::vector<Button> *active_buttons;
+  LuaButton *iaButton;
   std::condition_variable *game_ready_cv;
   std::list<TextLabel> open_games;
 
@@ -70,6 +72,7 @@ class Menu {
 
   bool map_is_selected();
 
+  ~Menu();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
