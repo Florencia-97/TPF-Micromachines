@@ -3,7 +3,7 @@ void LuaButton::render(float screenWidth, float screenHeight) {
     Button::render(screenWidth, screenHeight);
     this->msg.render(screenWidth, screenHeight);
 }
-LuaButton::LuaButton(SDL_Renderer *sdl_renderer, LTexture *texture) : Button(sdl_renderer, texture) {
+LuaButton::LuaButton(SDL_Renderer *sdl_renderer, LTexture *texture) : Button("ia", sdl_renderer, texture) {
 }
 void LuaButton::setPosition(int x, int y) {
     Button::setPosition(x, y);

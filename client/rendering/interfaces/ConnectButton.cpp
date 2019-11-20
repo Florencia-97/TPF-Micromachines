@@ -3,8 +3,8 @@
 //
 
 #include "ConnectButton.h"
-ConnectButton::ConnectButton(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) : Button(sdl_renderer,
-                                                                                               buttonSpriteSheet) {
+ConnectButton::ConnectButton(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet) : Button("", sdl_renderer,
+																																															 buttonSpriteSheet) {
   oldWidth = SCREEN_WIDTH;
   oldHeight = SCREEN_HEIGHT;
 }
