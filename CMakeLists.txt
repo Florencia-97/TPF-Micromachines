@@ -89,7 +89,6 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h
 		client/Client.cpp client/Client.h
 		client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h
-		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
 		client/rendering/interfaces/TextLabel.cpp client/rendering/interfaces/TextLabel.h
 		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h
 		client/rendering/interfaces/TextBox.cpp client/rendering/interfaces/TextBox.h
