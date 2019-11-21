@@ -65,7 +65,6 @@ std::string GameThread::_runLobby() {
 }
 
 bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
-    // Adds a new player to the game while lobby is on
     InfoBlock ib;
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
     if (Protocol::sendMsg(plr_socket, ib) && lobby_mode ) {
