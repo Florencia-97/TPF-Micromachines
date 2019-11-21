@@ -11,11 +11,11 @@ class Protocol {
 
     //POS recvs an info block
     //returns true if successfully received
-    static bool recvMsg(Socket* socket, InfoBlock& info);
+    static bool recvMsg(Socket& socket, InfoBlock& info);
 
     //POS sends an info block
     //returns true if successfully sent
-    static bool sendMsg(Socket* socket, InfoBlock& info);
+    static bool sendMsg(Socket& socket, InfoBlock& info);
 };
 
 #endif

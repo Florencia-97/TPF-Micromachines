@@ -42,15 +42,15 @@ bool Client::attempConnection() {
     }
     connection_state[ARENA_GAME] = gameLoop.menu.textbox_lobby_name.text;
     connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
-    if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
-    if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::sendMsg(skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::recvMsg(skt, connection_state)) throw  serverNotRunning();
     return connectionCheck();
 }
 
 bool Client::waitForConnection(){
     bool connection_successful = false;
     connectToServer();
-    if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::recvMsg(skt, connection_state)) throw  serverNotRunning();
     gameLoop.menu.open_games_update.push(connection_state);
     gameLoop.menu.displayNotification("open games");
     while (!userInput.exit && !connection_successful) {

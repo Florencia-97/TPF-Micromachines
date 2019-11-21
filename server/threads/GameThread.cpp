@@ -47,7 +47,7 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
 */
 std::string GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
-    if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
+    if (!Protocol::sendMsg(this->sktOwner, firstIb)){
         std::cout << "Error when sending status to player\n"<< HERE << std::endl;
         _killPlayers(true);
         close();
@@ -55,7 +55,7 @@ std::string GameThread::_runLobby() {
     }
 
     InfoBlock ib;
-    if (!Protocol::recvMsg(&this->sktOwner, ib)){
+    if (!Protocol::recvMsg(this->sktOwner, ib)){
         std::cout << "Error when receiving race id in: " << ib.srcString() << HERE << std::endl;
         _killPlayers(true);
         close();
@@ -68,7 +68,7 @@ bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     // Adds a new player to the game while lobby is on
     InfoBlock ib;
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
-    if (Protocol::sendMsg(&plr_socket, ib) && lobby_mode ) {
+    if (Protocol::sendMsg(plr_socket, ib) && lobby_mode ) {
         this->plr_threads.emplace_back(plr_socket, playerInfo);
         this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();

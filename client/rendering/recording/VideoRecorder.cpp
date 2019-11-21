@@ -40,6 +40,7 @@ void VideoRecorder::record(SDL_Renderer* render){
 }
 
 VideoRecorder::~VideoRecorder(){
+    if (!rec) return;
     std::vector<char> pill;
     videoQueue.push(pill);
     if (videoTexture != nullptr) {
