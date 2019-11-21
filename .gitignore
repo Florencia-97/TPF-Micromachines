@@ -6,3 +6,4 @@ cmake_install.cmake
 Makefile
 LuaPlayer
 lua53/*
+/server/Game/Box2D/Box2D.cbp
