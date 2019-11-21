@@ -24,48 +24,44 @@ class Button {
 	std::string id;
 	std::string soundWhenPressed;
 
-	/*Constructor de la clase Button.*/
+  /* Button class constructor. */
 	explicit Button(std::string id, SDL_Renderer *sdl_renderer,
 					LTexture *buttonSpriteSheet);
 
-  /*Establece la posicion del boton.
-   * PRE: El origen de coordenadas se encuentra en el extremo superior
-   * izquierdo*/
+  /*Sets the position of the button.
+   * PRE: The origin of coordinates is in the upper left corner*/
   virtual void setPosition(int x, int y);
 
-  /*Agrega una funcion al boton que se ejecutara al momento de clickear el
-   * boton
-   * POST: La nueva funcion, no sobreescribe las anteriores.*/
+  /*Adds a function to the button that runs when you click the button
+   * POST: The new function does not overwrite the previous ones.*/
   void addCallbackFunction(const std::function<void(std::string)> &cf);
 
-  /*Ejecuta todas las funciones almacenadas en el boton por medio de la
-   * funcion
+  /*Executes all the functions stored in the button by the function
    * addCallbackFunction()*/
 	void callCallbackFunctions();
 
-  /*Filtra los eventos para quedarse solamente con aquellos del tipo
-   * SDL_MOUSEMOTION,SDL_MOUSEBUTTONDOWN y SDL_MOUSEBUTTONUP. En el caso del
-   * 2do, devuelve true y ejecutacallCallbackFunctions(); En el resto de los
-   * casos, solo devuelve false;*/
+  /*Filter events to stay only with those of the type
+   * SDL_MOUSEMOTION,SDL_MOUSEBUTTONDOWN and SDL_MOUSEBUTTONUP. In the second
+   * case, returns true and executes callCallbackFunctions(); In the rest of the
+   * cases, returns false;*/
 	virtual bool handleEvent(SDL_Event *e, std::queue<std::string> *soundQueue);
 
-  /*Setea el area que sera representara el espacio que ocupara el boton en
-   * pantalla. PRE: tanto x como y deben ser mayores que 0 para su correcto
-   * funcionamiento*/
+  /*Sets the area that will be the space that the button will occupy in screen.
+   *PRE: both x and y must be greater than 0 for proper functioning*/
 	virtual void set_area(int x, int y);
 
-  /*Renderiza el boton con todos los efectos correspondientes.
-   * PRE: screenWidth y screenHeight deben ser el ancho y largo de la pantalla
-   * correspondientes al momento de ejecutar esta funcion. Si alguno de los
-   * dos parametros difiere de la resolucion original, se utilizaran para
-   * recalcular la posicion en la nueva resolucion.*/
+  /*Renders the button with all the corresponding effects.
+   * PRE: screenWidth and screenHeight must be the width and length of the
+   * screen corresponding at the time of executing this function. If any of the
+   * two parameters differ from the original resolution, they will be used for
+   * recalculate the position of the button in the new resolution.*/
   virtual void render(float screenWidth, float screenHeight);
 
-  /*Cambia el color de la textura utilizando los valores
-   * RGB pasado por parametros. El parametro duration, es la cantidad de frames
-   * que se va a mantener este cambio.
-   * PRE: Si el valor es negativo, el cambio persiste hasta el proximo
-   * llamado de la funcion*/
+  /*Changes the texture color using the values RGB passed by parameters.
+   * The duration parameter is the number of frames this change is going to be
+   * maintained.
+   * PRE: If the value is negative, the change persists until the next
+   * call of the function*/
   void changeColor(int r, int g, int b, int duration);
 };
 
