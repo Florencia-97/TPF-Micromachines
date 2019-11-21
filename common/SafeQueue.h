@@ -14,7 +14,7 @@ class SafeQueue{
     std::queue<T> q;
     std::mutex m;
     std::condition_variable cv;
-    bool open; //should probably be atomic
+    std::atomic<bool> open;
 
 public:
     SafeQueue();
