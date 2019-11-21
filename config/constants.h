@@ -114,6 +114,8 @@ const int ITEM_OIL = 2;
 const int ITEM_MUD = 3;
 const int ITEM_HEALTH = 4;
 
+// Plugins
+const int TIME_BETWEEN_PLUGINS = 15; // seconds
 
 // Events
 #define ACTION_TYPE "key"

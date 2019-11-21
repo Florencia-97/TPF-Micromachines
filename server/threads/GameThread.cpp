@@ -5,7 +5,8 @@
 
 GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
     : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)),
-    configs(configs), pluginLibrary("plugins"){
+    configs(configs){
+    pluginLibrary = new PluginLibrary("plugin");
     this->ownerInfo = ib;
 }
 
@@ -171,6 +172,7 @@ void GameThread::_runGame() {
             gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
             this->sleep(timestep);
+            pluginLibrary->runPlugins(timestep);
 
         } else {
             if (time_left <= 0) {
@@ -200,21 +202,15 @@ void GameThread::_run() {
         this->game.loadWorld(mapName);
         _createCars();
         _sendStartMsg(mapName);
-        pluginLibrary.loadCars(&this->game.cars);
-        pluginLibrary.run();
+        pluginLibrary->loadCars(&this->game.cars);
         _runGame();
     }
-    pluginLibrary.close();
-    pluginLibrary.join();
     _killPlayers(true);
     close();
 }
 
 GameThread::~GameThread(){
-    if (pluginLibrary.isRunning()){
-        pluginLibrary.close();
-        pluginLibrary.join();
-    }
+    delete(pluginLibrary);
     _killPlayers(true);
     close();
 }
