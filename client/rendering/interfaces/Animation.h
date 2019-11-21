@@ -12,16 +12,16 @@ class Animation {
  protected:
 	bool loaded;
  public:
-	/*Carga todos los frames de la animacion.
-	 * PRE: Debe ser implementada por las clases que hereden de esta*/
+  /*Loads all animation frames
+   * PRE: It must be implemented by the classes that inherit from this*/
 	virtual void load_frames(SDL_Renderer *gRenderer) = 0;
 
-	/*Renderiza un frame de la animacion.
-	 * PRE: Debe ser implementada por las clases que hereden de esta*/
+  /*Renders an animation frame.
+   * PRE: It must be implemented by the classes that inherit from this*/
 	virtual void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) = 0;
 
-	/*Reproduce la animacion.
-	 * PRE: Debe ser implementada por las clases que hereden de esta*/
+  /*Plays the animation.
+   * PRE: It must be implemented by the classes that inherit from this*/
 	virtual void play(SDL_Renderer *gRenderer, int x, int y) = 0;
 };
 
