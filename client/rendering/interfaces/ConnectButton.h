@@ -4,11 +4,11 @@
 
 class ConnectButton : public Button {
  public:
-  /*Constructor de la clase ConnectButton*/
+  /* ConnectButton class constructor */
   ConnectButton(SDL_Renderer *sdl_renderer, LTexture *buttonSpriteSheet);
 
-  /*Sobreescritura de la funcion set_area de la clase Button. En esta version,
-   * se modifica que constantes se usan para el calculo*/
+  /*Overwrites the set_area function of the Button class. In this version,
+   * it is modified which constants are used for the calculation*/
   void set_area(int x, int y) override;
 };
 
