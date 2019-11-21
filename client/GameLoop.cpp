@@ -3,6 +3,8 @@
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){
+    this->_checkVideoRecording();
+    SDL_SetRenderTarget(starter.get_global_renderer(), NULL);
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
       runGame(current_frame);
@@ -11,9 +13,36 @@ void GameLoop::_runProgram(){
     } else if (in_menu.load()){
         runMenu(current_frame);
     }
-    soundSystem.play(state == GAME_STATE);
+    if (this->recording) {
+        // TODO: THIS MUST CHANGE, how to render all window again without this?
+        // the thing is that now it renders images over video texture
+        // so, i must render things all over again
+        videoRecorder.setTarget(starter.get_global_renderer());
+        SDL_RenderClear(starter.get_global_renderer());
+        if (state == GAME_STATE) {
+            runGame(current_frame);
+        } else if (!in_menu.load()) {
+            runLobby(current_frame);
+        } else if (in_menu.load()){
+            runMenu(current_frame);
+        }
+    }
     SDL_RenderPresent(starter.get_global_renderer());
-    //videoRecorder.record(starter.get_global_renderer());
+    if (this->recording) videoRecorder.record(starter.get_global_renderer());
+    soundSystem.play(state == GAME_STATE);
+}
+
+void GameLoop::_checkVideoRecording(){
+    if (!videoQueue->empty()){
+        videoQueue->pop();
+        if (!videoRecorder.rec){
+            videoRecorder.init(starter.get_global_renderer());
+            videoRecorder.rec = true;
+            this->recording = true;
+            return;
+        }
+        this->recording = !this->recording;
+    }
 }
 
 void GameLoop::_run(){
@@ -112,19 +141,20 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r,
                    std::queue<std::string> &sq,
-                   std::queue<InfoBlock>& fpq)
+                   std::queue<InfoBlock>& fpq,
+                   std::queue<std::string> &vq)
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
-                     soundSystem(&sq){
+                     soundSystem(&sq), recording(false){
     current_frame = 0;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
     soundQueue = &sq;
+    videoQueue = &vq;
     fakePlayerQueue = &fpq;
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
     menu.setMainMenuMode();
-    //videoRecorder.init(starter.get_global_renderer());
     client_ping = &r;
 }
