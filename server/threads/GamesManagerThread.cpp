@@ -47,7 +47,7 @@ bool GamesManagerThread::_sendOpenGames(Socket& client){
         games["g"+std::to_string(cont)] = name;
         cont++;
     }
-    return Protocol::sendMsg(&client, games);
+    return Protocol::sendMsg(client, games);
 }
 
 void GamesManagerThread::_run(){

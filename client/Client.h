@@ -24,6 +24,7 @@ class Client {
     std::queue<SDL_Event> mouse_queue;
     std::queue<SDL_Event> text_queue;
     std::queue<std::string> sound_queue;
+    std::queue<std::string> video_queue;
     std::queue<InfoBlock> receiver_queue;
     std::queue<InfoBlock> fake_player_queue;
     std::condition_variable ready_to_connect;

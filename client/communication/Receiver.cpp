@@ -9,7 +9,7 @@ Receiver::Receiver(Socket& skt, std::queue<InfoBlock>* queue):
 void Receiver::_run() {
     while (this->isAlive()){
         InfoBlock news;
-        if (! Protocol::recvMsg(&skt, news)){
+        if (! Protocol::recvMsg(skt, news)){
             this->close();
             break;
         }

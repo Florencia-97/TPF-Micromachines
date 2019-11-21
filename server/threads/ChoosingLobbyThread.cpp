@@ -24,7 +24,7 @@ void ChoosingLobbyThread::_run() {
     bool connected = false;
     while (!connected && isAlive() && plr.isValid()) {
         InfoBlock ib;
-        if (!Protocol::recvMsg(&plr, ib)) {
+        if (!Protocol::recvMsg(plr, ib)) {
             std::cout << "Error receiving msg\n";
             plr.closeSd();
             close();

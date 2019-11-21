@@ -12,8 +12,10 @@ class VideoRecorder{
     SafeQueue<std::vector<char>> videoQueue;
     VideoWriter* videoWriter;
 public:
+    bool rec;
     VideoRecorder();
     void init(SDL_Renderer* render);
+    void setTarget(SDL_Renderer* render);
     void record(SDL_Renderer* render);
     ~VideoRecorder();
 };

@@ -9,15 +9,18 @@
 #include "PluginLoader.h"
 #include "../../common/conc/BaseThread.h"
 
-class PluginLibrary : public BaseThread{
+class PluginLibrary{
     const char* path;
     std::list<RaceCar>* cars;
-    void _run() override;
+    std::vector<PluginLoader*> plugins;
+    float clock;
+    void _runPlugins(std::vector<PluginLoader*>& plugins);
+    void _loadPlugins(std::vector<PluginLoader*>& plugins);
 public:
     explicit PluginLibrary(const char* p);
     void loadCars(std::list<RaceCar>* cars);
-    void runPlugins(std::vector<PluginLoader*>& plugins);
-    void loadPlugins(std::vector<PluginLoader*>& plugins);
+    void runPlugins(float timestep);
+    ~PluginLibrary();
 };
 
 

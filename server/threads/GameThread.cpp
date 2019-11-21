@@ -5,7 +5,8 @@
 
 GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
     : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)),
-    configs(configs), pluginLibrary("plugins"){
+    configs(configs){
+    pluginLibrary = new PluginLibrary("plugin");
     this->ownerInfo = ib;
 }
 
@@ -46,7 +47,7 @@ InfoBlock _createFirstCommunication(std::string connected, std::string owner){
 */
 std::string GameThread::_runLobby() {
     InfoBlock firstIb = _createFirstCommunication(CONNECTED_TO_GAME_YES, OWNER_YES);
-    if (!Protocol::sendMsg(&this->sktOwner, firstIb)){
+    if (!Protocol::sendMsg(this->sktOwner, firstIb)){
         std::cout << "Error when sending status to player\n"<< HERE << std::endl;
         _killPlayers(true);
         close();
@@ -54,7 +55,7 @@ std::string GameThread::_runLobby() {
     }
 
     InfoBlock ib;
-    if (!Protocol::recvMsg(&this->sktOwner, ib)){
+    if (!Protocol::recvMsg(this->sktOwner, ib)){
         std::cout << "Error when receiving race id in: " << ib.srcString() << HERE << std::endl;
         _killPlayers(true);
         close();
@@ -67,7 +68,7 @@ bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     // Adds a new player to the game while lobby is on
     InfoBlock ib;
     ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
-    if (Protocol::sendMsg(&plr_socket, ib) && lobby_mode ) {
+    if (Protocol::sendMsg(plr_socket, ib) && lobby_mode ) {
         this->plr_threads.emplace_back(plr_socket, playerInfo);
         this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();
@@ -171,6 +172,7 @@ void GameThread::_runGame() {
             gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
             this->sleep(timestep);
+            pluginLibrary->runPlugins(timestep);
 
         } else {
             if (time_left <= 0) {
@@ -200,21 +202,15 @@ void GameThread::_run() {
         this->game.loadWorld(mapName);
         _createCars();
         _sendStartMsg(mapName);
-        pluginLibrary.loadCars(&this->game.cars);
-        pluginLibrary.run();
+        pluginLibrary->loadCars(&this->game.cars);
         _runGame();
     }
-    pluginLibrary.close();
-    pluginLibrary.join();
     _killPlayers(true);
     close();
 }
 
 GameThread::~GameThread(){
-    if (pluginLibrary.isRunning()){
-        pluginLibrary.close();
-        pluginLibrary.join();
-    }
+    delete(pluginLibrary);
     _killPlayers(true);
     close();
 }

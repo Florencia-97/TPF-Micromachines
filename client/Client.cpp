@@ -42,15 +42,15 @@ bool Client::attempConnection() {
     }
     connection_state[ARENA_GAME] = gameLoop.menu.textbox_lobby_name.text;
     connection_state[CAR_TYPE] = gameLoop.menu.car_selected;
-    if (!Protocol::sendMsg(&skt, connection_state)) throw  serverNotRunning();
-    if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::sendMsg(skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::recvMsg(skt, connection_state)) throw  serverNotRunning();
     return connectionCheck();
 }
 
 bool Client::waitForConnection(){
     bool connection_successful = false;
     connectToServer();
-    if (!Protocol::recvMsg(&skt, connection_state)) throw  serverNotRunning();
+    if (!Protocol::recvMsg(skt, connection_state)) throw  serverNotRunning();
     gameLoop.menu.open_games_update.push(connection_state);
     gameLoop.menu.displayNotification("open games");
     while (!userInput.exit && !connection_successful) {
@@ -105,8 +105,8 @@ int Client::play() {
     return 0;
 }
 
-Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue, fake_player_queue),
-                   userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue, &ready_to_connect),
+Client::Client(std::string& s, std::string& p) : gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect, sound_queue, fake_player_queue, video_queue),
+                   userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue, &ready_to_connect, &video_queue),
                    receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue)
 {
     this->service = s;
