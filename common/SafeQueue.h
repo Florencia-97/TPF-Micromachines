@@ -39,6 +39,7 @@ std::queue<T>* SafeQueue<T>::getInternalQueue() {
 
 template<class T>
 void SafeQueue<T>::push(T &event) {
+    std::unique_lock<std::mutex> lock(this->m);
     this->q.push(event);
     this->cv.notify_one();
 }
