@@ -33,7 +33,6 @@ class Menu {
   TextLabel label_choose_car;
   TextLabel flavor_text;
   TextLabel notification;
-  bool mapIsSelected = false;
 
   /*Loads all necessary textures and images for the correct class performance*/
   void load_media();
@@ -42,6 +41,9 @@ class Menu {
    * first screen of the game. In order to do that, uses
    *  Button::add_callback_function()*/
   void set_buttons_positions();
+
+  /*Creates the buttons for the first screen of the game*/
+  void create_buttons_first_menu();
 
   /*Sets all the elements needed in set_main_menu_mode()*/
   void set_elements();
@@ -115,7 +117,6 @@ class Menu {
   /*Destroyer of the class*/
   ~Menu();
 
-  void create_buttons_first_menu();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

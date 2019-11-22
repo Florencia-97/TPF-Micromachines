@@ -1,6 +1,5 @@
 #include "GameRenderer.h"
 #include "../tiles/TilesFactory.h"
-#include "../../config/constants.h"
 #include "interfaces/StainAnimation.h"
 #include <algorithm>
 
@@ -29,7 +28,8 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
   timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {
+void GameRenderer::render(InfoBlock &world_state, int frame,
+						  float width, float height) {
     map.render(camera, gRenderer);
     int x = camera.x;
     int y = camera.y;
@@ -39,7 +39,6 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
     }
     updatePlayers(world_state, frame);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
-    //explosion.play(gRenderer,300,0);
 
     laps.render(width, height);
     timer.render(width, height);
@@ -64,14 +63,16 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
     SDL_Color w = {255, 255, 255, 0xFF};
 
     laps.init("0 LAPS", SCREEN_WIDTH - 100, 25, 35, w, gRenderer);
-    timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 25, 60, w, gRenderer);
+  timer.init(std::to_string(GAME_DURATION_S), SCREEN_WIDTH / 2, 25, 60,
+			 w, gRenderer);
     auto text = "HP " + game_info.getString("h"+std::to_string(my_car_id));
     health.init(text, 100, 25, 35, w, gRenderer);
     text = "Player   " + std::to_string(my_car_id);
     playertag.init(text, 100, SCREEN_HEIGHT - 50, 30, w, gRenderer);
     int i = 0;
     for (auto& label : race_results) {
-        label.init(" ", 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, w, gRenderer);
+	  label.init(" ", 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35,
+				 w, gRenderer);
         i++;
     }
 }
@@ -82,19 +83,21 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
     for (int i = 0; i < n_cars; i++) {
         auto id = std::to_string(i);
         this->all_cars.emplace_back(i);
-        all_cars.back().move(//set start position and rotation
+	  all_cars.back().move(
                 cars_info.exists("x" + id) ? cars_info.get<int>("x" + id) : 0,
                 cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
                 cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
         
         auto cartype = cars_info.getString(CAR_TYPE+id);
-        std::transform(cartype.begin(), cartype.end(), cartype.begin(), ::tolower);
-        all_cars.back().addTexture(tloader.load_texture("cars/"+cartype+".png", gRenderer));
+	  std::transform(cartype.begin(), cartype.end(),
+					 cartype.begin(), ::tolower);
+	  all_cars.back().addTexture(tloader.load_texture("cars/" + cartype + ".png",
+													  gRenderer));
         all_cars.back().loadAnimations(gRenderer);
     }
 }
 
-bool GameRenderer::_itemInStock(std::string itemId){
+bool GameRenderer::_itemInStock(const std::string &itemId) {
     for (auto &item: all_items){
         if (std::to_string(item.id) == itemId) return true;
     }
@@ -104,7 +107,6 @@ bool GameRenderer::_itemInStock(std::string itemId){
 void GameRenderer::loadItems(InfoBlock &event) {
     int n_items = event.exists(OBJECTS_AMOUNT) ? event.get<int>(OBJECTS_AMOUNT) : 0;
     std::vector<int> ids;
-    // Watch out case 0 items but we have in our list!
     for (int i = 0; i < n_items; i++) {
         auto num = std::to_string(i);
         auto itemId = event.getString("OId"+ num);

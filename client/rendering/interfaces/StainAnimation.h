@@ -24,7 +24,8 @@ class StainAnimation : public Animation {
    be used*/
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) override;
 
-  /*Implementation of the animation playback function*/
+  /*Implementation of the animation playback function
+   * PRE: The parameters x and y are not used*/
   void play(SDL_Renderer *gRenderer, int x, int y) override;
 
 };

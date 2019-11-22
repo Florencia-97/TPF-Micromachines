@@ -32,7 +32,7 @@ class GameRenderer {
     TextLabel playertag;
     std::list<TextLabel> race_results;
 
-    bool _itemInStock(std::string itemId);
+  bool _itemInStock(const std::string &itemId);
     void _removeOld(std::vector<int>& ids);
     void loadCars(InfoBlock& inf);
     void loadItems(InfoBlock &event);
