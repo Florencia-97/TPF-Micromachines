@@ -32,6 +32,8 @@ class TextLabel {
     int x;
     int y;
 
+    TextLabel();
+
     virtual void init(const std::string &msg, int x, int y, int size, SDL_Color c, SDL_Renderer *sdl_renderer);
 
     void init_intermitent_anim(int rate);

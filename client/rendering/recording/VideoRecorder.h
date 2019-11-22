@@ -2,7 +2,7 @@
 #define MICROMACHINES_VIDEORECORDER_H
 
 #include <SDL_render.h>
-#include <common/SafeQueue.h>
+#include "../common/SafeQueue.h"
 #include "FormatContext.h"
 #include "OutputFormat.h"
 #include "VideoWriter.h"

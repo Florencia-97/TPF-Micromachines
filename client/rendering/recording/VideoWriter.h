@@ -2,9 +2,9 @@
 #define MICROMACHINES_VIDEOWRITER_H
 
 
-#include <common/conc/BaseThread.h>
+#include "../common/conc/BaseThread.h"
 #include <vector>
-#include <common/SafeQueue.h>
+#include "../common/SafeQueue.h"
 #include "OutputFormat.h"
 #include "FormatContext.h"
 

@@ -1,6 +1,6 @@
 #include "PluginLibrary.h"
 #include <string>
-#include <config/constants.h>
+#include "../config/constants.h"
 
 PluginLibrary::PluginLibrary(const char* path) {
     this->path = path;
