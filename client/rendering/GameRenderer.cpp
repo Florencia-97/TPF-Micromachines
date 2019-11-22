@@ -10,7 +10,7 @@ GameRenderer::GameRenderer(){
     }
 }
 
-void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
+void GameRenderer::update_players(InfoBlock &world_state, int frame) {
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
         auto id = std::to_string(car.id);
@@ -37,7 +37,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
     for (auto &item: all_items){
         item.render(camera, gRenderer);
     }
-    updatePlayers(world_state, frame);
+  update_players(world_state, frame);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
 
     laps.render(width, height);
