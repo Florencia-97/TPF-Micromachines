@@ -6,14 +6,10 @@
 #include "SDLStarter.h"
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
-extern "C" {
-    #include <libavformat/avformat.h>
-    #include <libswscale/swscale.h>
-}
+
 
 bool SDLStarter::init() {
   bool success = true;
-  av_register_all(); // Not sure if it goes here!
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
     success = false;
