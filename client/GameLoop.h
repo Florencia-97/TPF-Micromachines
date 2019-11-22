@@ -21,7 +21,7 @@
 class GameLoop : public BaseThread {
     SDLStarter starter;
     SoundSystem soundSystem;
-    //VideoRecorder videoRecorder;
+    VideoRecorder videoRecorder;
     int current_frame;
     int state; //thread state
     InfoBlock previous_game_state;
@@ -43,10 +43,14 @@ class GameLoop : public BaseThread {
 
     void runLobby(int frame_id);
 
+    void _checkVideoRecording();
+
 public:
     Menu menu;
     std::atomic<bool> in_menu;
+    std::atomic<bool> recording;
     std::queue<InfoBlock>* renderQueue;
+    std::queue<std::string>* videoQueue;
     std::queue<std::string>* soundQueue;
     std::queue<InfoBlock>* fakePlayerQueue;
 
@@ -55,7 +59,8 @@ public:
            std::queue<SDL_Event> &mouseQueue,
            std::condition_variable &ready,
            std::queue<std::string> &sq,
-           std::queue<InfoBlock>& fpq);
+           std::queue<InfoBlock>& fpq,
+           std::queue<std::string> &vq);
 
     void proceedToLobby(bool is_leader);
 

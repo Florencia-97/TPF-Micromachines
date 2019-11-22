@@ -89,20 +89,19 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/Menu.cpp client/rendering/interfaces/Menu.h
 		client/Client.cpp client/Client.h
 		client/rendering/interfaces/ConnectButton.cpp client/rendering/interfaces/ConnectButton.h
-		client/rendering/interfaces/MapButton.cpp client/rendering/interfaces/MapButton.h
 		client/rendering/interfaces/TextLabel.cpp client/rendering/interfaces/TextLabel.h
-		client/rendering/interfaces/ButtonAnswer.cpp client/rendering/interfaces/ButtonAnswer.h
 		client/rendering/interfaces/TextBox.cpp client/rendering/interfaces/TextBox.h
 		client/sound_sys/SoundSystem.cpp client/sound_sys/SoundSystem.h
 		client/rendering/interfaces/Explosion.cpp client/rendering/interfaces/Explosion.h
-		client/rendering/interfaces/Animation.cpp client/rendering/interfaces/Animation.h
+		client/rendering/interfaces/Animation.h
 		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
 		client/Item.cpp client/Item.h
 		client/ia/FakeClient.cpp client/ia/FakeClient.h
 		client/rendering/recording/VideoRecorder.cpp client/rendering/recording/VideoRecorder.h
 		client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
 		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
-		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h)
+		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
+		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
 
 #set(TEST_SOURCE_FILES
 #        tests/tests.cpp

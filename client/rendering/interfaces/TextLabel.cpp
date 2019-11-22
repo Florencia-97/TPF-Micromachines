@@ -12,11 +12,11 @@ void TextLabel::init(const std::string &msg, int x, int y, int size, SDL_Color c
   text = msg;
   this->x = x;
   this->y = y;
-  this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", size);
+  if (!font) this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", size);
   textTexture.loadFromRenderedText(text, color, font, sdl_renderer);
   updateBounds();
-  oldWidth = SCREEN_WIDTH;
-  oldHeight = SCREEN_HEIGHT;
+  if (!oldWidth) oldWidth = SCREEN_WIDTH;
+  if (!oldHeight) oldHeight = SCREEN_HEIGHT;
 
 }
 void TextLabel::render(float screenWidth, float screenHeight) {
@@ -41,18 +41,12 @@ void TextLabel::updateBounds() {
                       textTexture.getHeight()};
 }
 
-
-
-void TextLabel::init_intermitent_anim(int rate) {
+void TextLabel::set_intermittent_rate(int rate) {
     this->rate = rate;
 }
 
-void TextLabel::stageTextChange(std::string m) {
+void TextLabel::stage_text_change(std::string m) {
     this->stagedText.push(m);
-}
-
-void TextLabel::stageColorChange(SDL_Color c) {
-    this->stagedColors.push(c);
 }
 
 void TextLabel::_update() {
@@ -77,6 +71,16 @@ void TextLabel::_update() {
         textTexture.loadFromRenderedText(text, color, font, renderer);
         updateBounds();
     }
+}
+
+TextLabel::TextLabel() {
+    oldWidth = 0;
+    oldHeight = 0;
+    font = nullptr;
+}
+
+TextLabel::~TextLabel() {
+    textTexture.free();
 }
 
 

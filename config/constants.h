@@ -61,7 +61,7 @@ enum ButtonSprite {
 };
 
 //Button constants
-const int BUTTON_WIDTH = 150;
+const int BUTTON_WIDTH = 151;
 const int BUTTON_HEIGHT = 170;
 const int TOTAL_BUTTONS = 3;
 const int BLUE_CAR_BUTTON_X = 0;
@@ -114,6 +114,8 @@ const int ITEM_OIL = 2;
 const int ITEM_MUD = 3;
 const int ITEM_HEALTH = 4;
 
+// Plugins
+const int TIME_BETWEEN_PLUGINS = 15; // seconds
 
 // Events
 #define ACTION_TYPE "key"

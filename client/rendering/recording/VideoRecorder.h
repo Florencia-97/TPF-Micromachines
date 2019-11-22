@@ -2,7 +2,7 @@
 #define MICROMACHINES_VIDEORECORDER_H
 
 #include <SDL_render.h>
-#include <common/SafeQueue.h>
+#include "../common/SafeQueue.h"
 #include "FormatContext.h"
 #include "OutputFormat.h"
 #include "VideoWriter.h"
@@ -12,8 +12,10 @@ class VideoRecorder{
     SafeQueue<std::vector<char>> videoQueue;
     VideoWriter* videoWriter;
 public:
+    bool rec;
     VideoRecorder();
     void init(SDL_Renderer* render);
+    void setTarget(SDL_Renderer* render);
     void record(SDL_Renderer* render);
     ~VideoRecorder();
 };

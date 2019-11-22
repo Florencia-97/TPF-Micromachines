@@ -1,16 +1,19 @@
 #include "PluginLibrary.h"
 #include <string>
+#include "../config/constants.h"
 
 PluginLibrary::PluginLibrary(const char* path) {
     this->path = path;
     this->cars = nullptr;
+    _loadPlugins(plugins);
 }
 
 void PluginLibrary::loadCars(std::list<RaceCar>* cars){
     this->cars = cars;
+    std::cout << "Cars Loaded\n";
 }
 
-void PluginLibrary::runPlugins(std::vector<PluginLoader*>& plugins){
+void PluginLibrary::_runPlugins(std::vector<PluginLoader*>& plugins){
     std::vector<CarStats*> carsStats;
     for (auto & car : *cars){
         carsStats.push_back(&car.car_stats);
@@ -21,7 +24,7 @@ void PluginLibrary::runPlugins(std::vector<PluginLoader*>& plugins){
     }
 }
 
-void PluginLibrary::loadPlugins(std::vector<PluginLoader*>& plugins){
+void PluginLibrary::_loadPlugins(std::vector<PluginLoader*>& plugins){
     if (auto dir = opendir(path)) {
         while (auto f = readdir(dir)) {
             if (f->d_name[0] == '.') continue;
@@ -37,17 +40,20 @@ void PluginLibrary::loadPlugins(std::vector<PluginLoader*>& plugins){
     }
 }
 
-void PluginLibrary::_run() {
-    while (this->isAlive()){
-        std::cout << "Fetching and running plugins\n";
-        std::vector<PluginLoader*> plugins;
-        loadPlugins(plugins);
-        runPlugins(plugins);
-        for (auto it = plugins.begin(); it != plugins.end(); ++it){
-            delete(*it);
-        }
-        std::cout << "Waiting for plugins to reactivate again!\n";
-        this->sleep(15); // TODO: constant, time between plugins run
+void PluginLibrary::runPlugins(float timestep) {
+    if (this->clock < TIME_BETWEEN_PLUGINS){
+        this->clock += timestep;
+        return;
     }
-    std::cout << "Plugin library stops running, able to quit\n";
+    std::cout << "Running plugins\n";
+    _runPlugins(plugins);
+    this->clock = 0.0;
+    std::cout << "Waiting for plugins to reactivate again!\n";
+}
+
+PluginLibrary::~PluginLibrary() {
+    std::cout << "Deleting plugins\n";
+    for (auto & plugin : plugins){
+        delete(plugin);
+    }
 }

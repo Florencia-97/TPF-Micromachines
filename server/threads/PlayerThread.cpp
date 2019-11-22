@@ -13,7 +13,7 @@ void PlayerThread::_run() {
     bool socketWorking;
     while (this->isAlive() && skt.isValid()){
         InfoBlock info;
-        socketWorking = Protocol::recvMsg(&skt, info);
+        socketWorking = Protocol::recvMsg(skt, info);
         if (socketWorking) this->eventQ.push(info);
         else break;
     }

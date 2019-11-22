@@ -11,42 +11,61 @@
 #include <queue>
 
 class TextLabel {
-    std::queue<std::string> stagedText;
-    std::queue<SDL_Color> stagedColors;
+  std::queue<std::string> stagedText;
+  std::queue<SDL_Color> stagedColors;
   int rate;
  protected:
-    TTF_Font *font;
-    LTexture textTexture;
+  TTF_Font *font;
+  LTexture textTexture;
 
-    SDL_Rect textArea;
-    SDL_Color color;
-    SDL_Renderer *renderer;
+  SDL_Rect textArea;
+  SDL_Color color;
+  SDL_Renderer *renderer;
 
-    void _update();
+  /*Update the message shown if there was any modification since the last
+   * call*/
+  void _update();
 
   float oldWidth;
   float oldHeight;
   int current_frame;
  public:
-    std::string text = "";
-    int x;
-    int y;
+  std::string text = "";
+  int x;
+  int y;
+  bool renderText;
 
-    virtual void init(const std::string &msg, int x, int y, int size, SDL_Color c, SDL_Renderer *sdl_renderer);
+  /*Constructor of the class*/
+  TextLabel();
 
-    void init_intermitent_anim(int rate);
+  /* Initialize the class.
+   * PRE: For the correct functioning of the object, it is necessary that this
+   * function be executed first */
+  virtual void init(const std::string &msg, int x, int y, int size,
+					SDL_Color c, SDL_Renderer *sdl_renderer);
 
-    void stageTextChange(std::string m);
+  /*Sets the rate for the intermittent animation*/
+  void set_intermittent_rate(int rate);
 
-    void stageColorChange(SDL_Color c);
+  /*Adds a change in the text to the queue stagedText*/
+  void stage_text_change(std::string m);
 
+  /*Implementation of the rendering for the class.
+   * * PRE: screenWidth and screenHeight must be the width and length of the
+   * screen corresponding at the time of executing this function. If any of the
+   * two parameters differ from the original resolution, they will be used for
+   * recalculate the position of the button in the new resolution.*/
   virtual void render(float screenWidth, float screenHeight);
 
-    virtual void receiveInput(SDL_Event *e){};
+  /*Virtual function that must be implemented by the classes that inherit
+   * from this*/
+  virtual void receiveInput(SDL_Event *e) {};
 
-    void updateBounds();
+  /*Update the borders of the image that represents the text*/
+  void updateBounds();
 
-    bool renderText;
+  /*Destructor of the class*/
+  ~TextLabel();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_FONT_H_

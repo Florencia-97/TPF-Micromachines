@@ -3,6 +3,8 @@
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){
+    this->_checkVideoRecording();
+    SDL_SetRenderTarget(starter.get_global_renderer(), NULL);
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
       runGame(current_frame);
@@ -11,9 +13,36 @@ void GameLoop::_runProgram(){
     } else if (in_menu.load()){
         runMenu(current_frame);
     }
-    soundSystem.play(state == GAME_STATE);
+    if (this->recording) {
+        // TODO: THIS MUST CHANGE, how to render all window again without this?
+        // the thing is that now it renders images over video texture
+        // so, i must render things all over again
+        videoRecorder.setTarget(starter.get_global_renderer());
+        SDL_RenderClear(starter.get_global_renderer());
+        if (state == GAME_STATE) {
+            runGame(current_frame);
+        } else if (!in_menu.load()) {
+            runLobby(current_frame);
+        } else if (in_menu.load()){
+            runMenu(current_frame);
+        }
+    }
     SDL_RenderPresent(starter.get_global_renderer());
-    //videoRecorder.record(starter.get_global_renderer());
+    if (this->recording) videoRecorder.record(starter.get_global_renderer());
+    soundSystem.play(state == GAME_STATE);
+}
+
+void GameLoop::_checkVideoRecording(){
+    if (!videoQueue->empty()){
+        videoQueue->pop();
+        if (!videoRecorder.rec){
+            videoRecorder.init(starter.get_global_renderer());
+            videoRecorder.rec = true;
+            this->recording = true;
+            return;
+        }
+        this->recording = !this->recording;
+    }
 }
 
 void GameLoop::_run(){
@@ -33,8 +62,8 @@ void GameLoop::_run(){
 }
 
 void GameLoop::runMenu(int frame_id) {
-    menu.processEventsMouse();
-    menu.processEventsKeyboard();
+  menu.process_events_mouse();
+  menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
     menu.render_first_menu(screenWidth, screenHeight);
 }
@@ -64,7 +93,7 @@ void GameLoop::runGame(int frame_id){
         previous_game_state = *gameState;
 
     } else {
-        menu.displayNotification("Open   Games");
+	  menu.display_notification("Open   Games");
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();
@@ -82,22 +111,22 @@ void GameLoop::runLobby(int frame_id) {
         }
         renderQueue->pop();
     }
-    menu.processEventsMouse();
-    menu.processEventsKeyboard();
+  menu.process_events_mouse();
+  menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
-    if (leader) menu.renderAsLeader(screenWidth, screenHeight);
-    else menu.renderAsFollower(screenWidth, screenHeight);
+  if (leader) menu.render_as_leader(screenWidth, screenHeight);
+  else menu.render_as_follower(screenWidth, screenHeight);
 
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
     SDL_StopTextInput();
     leader = is_leader;
-    menu.start_lobby();
+  menu.start_lobby_buttons();
     if (is_leader){
-        menu.displayNotification("Choose a map for the game");
+	  menu.display_notification("Choose a map for the game");
     } else {
-        menu.displayNotification("Waiting for the host  to  start  the game");
+	  menu.display_notification("Waiting for the host  to  start  the game");
     }
     std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);
@@ -112,19 +141,20 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r,
                    std::queue<std::string> &sq,
-                   std::queue<InfoBlock>& fpq)
+                   std::queue<InfoBlock>& fpq,
+                   std::queue<std::string> &vq)
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
-                     soundSystem(&sq){
+                     soundSystem(&sq), recording(false){
     current_frame = 0;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
     soundQueue = &sq;
+    videoQueue = &vq;
     fakePlayerQueue = &fpq;
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
-    menu.setMainMenuMode();
-    //videoRecorder.init(starter.get_global_renderer());
+  menu.set_main_menu_mode();
     client_ping = &r;
 }

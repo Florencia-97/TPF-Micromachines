@@ -21,7 +21,7 @@ void EventSender::_run() {
         if (_isFinalEvent(ib)){
             break;
         }
-        if (!Protocol::sendMsg(&this->skt, ib)){
+        if (!Protocol::sendMsg(this->skt, ib)){
             break;
         }
     }

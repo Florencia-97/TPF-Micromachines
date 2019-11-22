@@ -11,7 +11,7 @@ extern "C" {
 }
 const std::string videoFileName = "micromachinesVideo.mp4";
 
-VideoRecorder::VideoRecorder() {}
+VideoRecorder::VideoRecorder() : rec(false) {}
 
 void VideoRecorder::init(SDL_Renderer* render){
     // TODO: see if i can use the class texture loader here
@@ -23,20 +23,24 @@ void VideoRecorder::init(SDL_Renderer* render){
     std::cout << "All created correctly\n";
 }
 
-void VideoRecorder::record(SDL_Renderer* render){
+void VideoRecorder::setTarget(SDL_Renderer* render){
     SDL_SetRenderTarget(render, videoTexture);
+}
+
+void VideoRecorder::record(SDL_Renderer* render){
     std::vector<char> dataBuffer(BUFFER_WIDTH * BUFFER_HEIGHT * 3);
     int r = SDL_RenderReadPixels(render, NULL, SDL_PIXELFORMAT_RGB24, dataBuffer.data(), BUFFER_WIDTH * 3);
     if (r){
         std::cout << r << std::endl;
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "RendererReadPixels error", SDL_GetError(), NULL);
-        std::cout << "Error when rendering read pixels\n"; // I dont wanna throw an error, at least for now
+        std::cout << "Error when rendering read pixels\n";
         return;
     }
     videoQueue.push(dataBuffer);
 }
 
 VideoRecorder::~VideoRecorder(){
+    if (!rec) return;
     std::vector<char> pill;
     videoQueue.push(pill);
     if (videoTexture != nullptr) {

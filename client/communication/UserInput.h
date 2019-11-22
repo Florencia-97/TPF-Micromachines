@@ -16,6 +16,7 @@ class UserInput : public BaseThread {
     std::queue<SDL_Event> *mouse_queue;
     std::queue<SDL_Event> *writing_queue;
     std::queue<std::string> *sound_queue;
+    std::queue<std::string> *video_queue; // Is there a better way ?
     void _run() override;
     std::map<char, bool> key_pressings;
     std::condition_variable *close_window;
@@ -26,7 +27,7 @@ public:
 
   UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
             std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
-            std::condition_variable *close_window);
+            std::condition_variable *close_window, std::queue<std::string> *video_queue);
     void _rcvKeyInput(SDL_Event &e);
     void close() override;
 };

@@ -5,8 +5,10 @@
 #include <zconf.h>
 #include "StainAnimation.h"
 #include "../../../config/constants.h"
-void StainAnimation::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) {
-  this->texture.render_with_size(x, y, 0.0, renderer, SCREEN_WIDTH, SCREEN_HEIGHT, true);
+void StainAnimation::render(int x, int y, SDL_Rect *clip,
+							SDL_Renderer *renderer) {
+  this->texture.render_with_size(x, y, 0.0, renderer, SCREEN_WIDTH,
+								 SCREEN_HEIGHT, true);
 }
 
 StainAnimation::StainAnimation() {
@@ -16,11 +18,13 @@ StainAnimation::StainAnimation() {
 
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
     if (loaded) return;
-  if (!this->texture.load_from_file("client/rendering/assets/decoration/stain.png", gRenderer)) {
+  if (!this->texture.load_from_file("client/rendering/assets/decoration/stain.png",
+									gRenderer)) {
     printf("Failed to load stain texture!\n");
   }
   loaded = true;
 }
+
 void StainAnimation::play(SDL_Renderer *gRenderer, int x, int y) {
   this->texture.setAlpha(fading);
   render(0, 0, nullptr, gRenderer);
