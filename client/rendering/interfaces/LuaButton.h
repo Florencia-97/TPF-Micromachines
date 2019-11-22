@@ -18,15 +18,15 @@ class LuaButton : public Button {
 
   /* Implementation of the setPosition function inherited from the Button
    * class.
-   * PRE: Internally, call Button :: setPosition () and then establish the
+   * PRE: Internally, call Button :: set_position () and then establish the
    * correct position of the message associated with the button.
    * X and Y follow the same conditions as in the parent class*/
-  void setPosition(int x, int y) override;
+  void set_position(int x, int y) override;
 
   /*Changes the degree of transparency of the button
    * PRE: the range of i is [0: 255] being 0 transparent and 255 totally
    * opaque*/
-  void changeOpacity(int i);
+  void change_opacity(int i);
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_LUABUTTON_H_

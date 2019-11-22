@@ -2,18 +2,18 @@
 #include <utility>
 #include "Button.h"
 
-void Button::setPosition(int x, int y) {
+void Button::set_position(int x, int y) {
   mPosition.x = x;
   mPosition.y = y;
   set_area(x, y);
 }
 
-void Button::changeColor(int r, int g, int b, int duration) {
+void Button::change_color(int r, int g, int b, int duration) {
   this->texture->set_color(r, g, b);
   colorChangeDuration = duration;
 }
 
-bool Button::handleEvent(SDL_Event *e, std::queue<std::string> *sq) {
+bool Button::handle_event(SDL_Event *e, std::queue<std::string> *soundQueue) {
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
 	//Get mouse position
 	int x, y;
@@ -41,7 +41,7 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string> *sq) {
 		case SDL_MOUSEMOTION | SDL_MOUSEBUTTONUP:;
 		  return false;
 		case SDL_MOUSEBUTTONDOWN:;
-		  sq->push(this->soundWhenPressed);
+		  soundQueue->push(this->soundWhenPressed);
 		  callCallbackFunctions();
 		  return true;
 	  }
@@ -52,7 +52,7 @@ bool Button::handleEvent(SDL_Event *e, std::queue<std::string> *sq) {
 
 void Button::render(float screenWidth, float screenHeight) {
   if (colorChangeDuration > -1) colorChangeDuration--;
-  if (colorChangeDuration == 0) changeColor(255, 255, 255, -1);
+  if (colorChangeDuration == 0) change_color(255, 255, 255, -1);
   auto widthFactor = float(screenWidth / oldWidth);
   auto heightFactor = float(screenHeight / oldHeight);
   if (widthFactor != 1) {
@@ -78,7 +78,7 @@ void Button::callCallbackFunctions() {
   std::cout << this->id << std::endl;
 }
 
-void Button::addCallbackFunction(const std::function<void(std::string)> &cf) {
+void Button::add_callback_function(const std::function<void(std::string)> &cf) {
   callbacks.push_back(cf);
 }
 

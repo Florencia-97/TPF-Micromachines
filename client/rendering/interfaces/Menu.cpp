@@ -1,14 +1,15 @@
 #include <iostream>
+#include <utility>
 #include "Menu.h"
 #include "../../../config/constants.h"
 #include "ConnectButton.h"
 #include "TextLabel.h"
 
-void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::queue<SDL_Event> *textQueue,
-                std::condition_variable *attempConnectionCV, std::queue<std::string> *sq) {
+void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *mouseEventsQueue, std::queue<SDL_Event> *textQueue,
+				std::condition_variable *attempConnectionCV, std::queue<std::string> *soundQueue) {
     this->text_queue = textQueue;
-    this->mouse_queue = gQueue;
-    this->sound_queue = sq;
+  this->mouse_queue = mouseEventsQueue;
+  this->sound_queue = soundQueue;
     this->gRenderer = sdl_renderer;
     this->game_ready_cv = attempConnectionCV;
     map_selected = "race_1";
@@ -19,11 +20,11 @@ void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *gQueue, std::
                                    textureLoader.load_texture("buttons/tick.png", gRenderer));
 }
 
-void Menu::displayNotification(std::string msg){
-    notification.stageTextChange(msg);
+void Menu::display_notification(std::string msg) {
+  notification.stageTextChange(std::move(msg));
 }
 
-void Menu::setMainMenuMode(){
+void Menu::set_main_menu_mode() {
     try {
       if (!carButtons.empty()) return;
         load_media();
@@ -71,21 +72,21 @@ void Menu::_updateOpenGames(){
     }
 }
 
-bool Menu::processEventsMouse() {
+bool Menu::process_events_mouse() {
     while (!mouse_queue->empty()) {
         auto event = &mouse_queue->front();
         if (event->type == SDL_QUIT) return true;
         for (auto &button : *active_buttons) {
-            if (button.handleEvent(event, sound_queue)) {
+		  if (button.handle_event(event, sound_queue)) {
                 while (!mouse_queue->empty()) mouse_queue->pop();
                 return false;
             }
         }
-        if (connectButton->handleEvent(event, sound_queue)) {
+	  if (connectButton->handle_event(event, sound_queue)) {
             while (!mouse_queue->empty()) mouse_queue->pop();
             return false;
         }
-        if (iaButton->handleEvent(event, sound_queue)) {
+	  if (iaButton->handle_event(event, sound_queue)) {
             while (!mouse_queue->empty()) mouse_queue->pop();
             return false;
         }
@@ -94,7 +95,7 @@ bool Menu::processEventsMouse() {
     return false;
 }
 
-void Menu::processEventsKeyboard() {
+void Menu::process_events_keyboard() {
     while (!text_queue->empty()) {
         textbox_lobby_name.receiveInput(&text_queue->front());
         text_queue->pop();
@@ -120,14 +121,14 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
     iaButton->render(screenWidth, screenHeight);
 }
 
-void Menu::start_lobby() {
+void Menu::start_lobby_buttons() {
     active_buttons = &mapButtons;
     for (auto& label : open_games){
         label.stageTextChange("");
     }
 }
 
-void Menu::renderAsLeader(int screenWidth, int screenHeight) {
+void Menu::render_as_leader(int screenWidth, int screenHeight) {
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     for (auto &button : mapButtons) {
         button.render(screenWidth, screenHeight);
@@ -136,23 +137,21 @@ void Menu::renderAsLeader(int screenWidth, int screenHeight) {
     notification.render(screenWidth, screenHeight);
 }
 
-
-void Menu::renderAsFollower(int screenWidth, int screenHeight) {
+void Menu::render_as_follower(int screenWidth, int screenHeight) {
     wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
     notification.render(screenWidth, screenHeight);
 }
 
 void Menu::set_buttons_positions() {
-    carButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-    carButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
-    carButtons[2].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
-    carButtons[3].setPosition(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
-    iaButton->setPosition(BLUE_CAR_BUTTON_X + 60, PLAY_BUTTON_Y - 170);
-    connectButton->setPosition(PLAY_BUTTON_X, PLAY_BUTTON_Y);
+  carButtons[0].set_position(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  carButtons[1].set_position(BLACK_CAR_BUTTON_X, BLACK_CAR_BUTTON_Y);
+  carButtons[2].set_position(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  carButtons[3].set_position(WHITE_CAR_BUTTON_X, WHITE_CAR_BUTTON_Y);
+  iaButton->set_position(BLUE_CAR_BUTTON_X + 60, PLAY_BUTTON_Y - 170);
+  connectButton->set_position(PLAY_BUTTON_X, PLAY_BUTTON_Y);
 }
 
-void Menu::set_buttons_as_leader() {
-    //todo MapButtons or Buttons?
+void Menu::set_buttons_map_screen() {
     mapButtons.emplace_back("race_1",
                             gRenderer,
                             textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
@@ -168,23 +167,23 @@ void Menu::set_buttons_as_leader() {
       for (auto &button : mapButtons) {
           std::cout << clickedId<< button.id  << (button.id == clickedId) << std::endl;
           if (button.id == clickedId) {
-              button.changeColor(255, 255, 255, -1);
+			button.change_color(255, 255, 255, -1);
               map_selected = button.id;
           } else {
-              button.changeColor(80, 80, 80, -1);
+			button.change_color(80, 80, 80, -1);
           }
       }
     };
     for (auto &button : mapButtons) {
-        button.addCallbackFunction(callbackMap);
-        button.changeColor(80, 80, 80, -1);
+	  button.add_callback_function(callbackMap);
+	  button.change_color(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
 
-    mapButtons[0].setPosition(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-    mapButtons[1].setPosition(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-    mapButtons[2].setPosition(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-    mapButtons[3].setPosition(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  mapButtons[0].set_position(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[1].set_position(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[2].set_position(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[3].set_position(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
 }
 
 void Menu::load_media() {
@@ -192,7 +191,7 @@ void Menu::load_media() {
 
     auto callback_start_game = [&](const std::string &clickedId) {
         ready = true;
-        connectButton->changeColor(80, 80, 80, FPS/2);
+	  connectButton->change_color(80, 80, 80, FPS / 2);
         this->game_ready_cv->notify_all();
     };
     //car buttons
@@ -200,10 +199,10 @@ void Menu::load_media() {
         std::cout<<clickedId<<std::endl;
       for (auto &button : carButtons) {
           if (button.id == clickedId) {
-              button.changeColor(255, 255, 255, -1);
+			button.change_color(255, 255, 255, -1);
               car_selected = button.id;
             } else {
-              button.changeColor(80, 80, 80, -1);
+			button.change_color(80, 80, 80, -1);
             }
         }
     };
@@ -218,29 +217,27 @@ void Menu::load_media() {
                             textureLoader.load_texture("cars/white_car.png", gRenderer));
     connectButton = std::make_shared<ConnectButton>(gRenderer,
                             textureLoader.load_texture("buttons/connect.png", gRenderer));
-    connectButton->addCallbackFunction(callback_start_game);
+  connectButton->add_callback_function(callback_start_game);
 
     for (auto &button : carButtons) {
-        button.addCallbackFunction(callback);
-        button.changeColor(80, 80, 80, -1);
+	  button.add_callback_function(callback);
+	  button.change_color(80, 80, 80, -1);
         button.soundWhenPressed = SOUND_CAR_GEAR;
     }
-    this->set_buttons_as_leader();
+  this->set_buttons_map_screen();
 
     auto ai_callback = [&](const std::string &clickedId) {
         ai_on = !ai_on;
         if (ai_on) {
-            iaButton->changeOpacity(255);
+		  iaButton->change_opacity(255);
         } else {
-            iaButton->changeOpacity(0);
+		  iaButton->change_opacity(0);
         }
     };
-    iaButton->addCallbackFunction(ai_callback);
+  iaButton->add_callback_function(ai_callback);
 
 }
-bool Menu::map_is_selected() {
-    return this->mapIsSelected;
-}
+
 Menu::~Menu() {
     free(this->iaButton);
 }

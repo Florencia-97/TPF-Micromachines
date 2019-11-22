@@ -62,8 +62,8 @@ void GameLoop::_run(){
 }
 
 void GameLoop::runMenu(int frame_id) {
-    menu.processEventsMouse();
-    menu.processEventsKeyboard();
+  menu.process_events_mouse();
+  menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
     menu.render_first_menu(screenWidth, screenHeight);
 }
@@ -93,7 +93,7 @@ void GameLoop::runGame(int frame_id){
         previous_game_state = *gameState;
 
     } else {
-        menu.displayNotification("Open   Games");
+	  menu.display_notification("Open   Games");
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();
@@ -111,22 +111,22 @@ void GameLoop::runLobby(int frame_id) {
         }
         renderQueue->pop();
     }
-    menu.processEventsMouse();
-    menu.processEventsKeyboard();
+  menu.process_events_mouse();
+  menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
-    if (leader) menu.renderAsLeader(screenWidth, screenHeight);
-    else menu.renderAsFollower(screenWidth, screenHeight);
+  if (leader) menu.render_as_leader(screenWidth, screenHeight);
+  else menu.render_as_follower(screenWidth, screenHeight);
 
 }
 
 void GameLoop::proceedToLobby(bool is_leader) {
     SDL_StopTextInput();
     leader = is_leader;
-    menu.start_lobby();
+  menu.start_lobby_buttons();
     if (is_leader){
-        menu.displayNotification("Choose a map for the game");
+	  menu.display_notification("Choose a map for the game");
     } else {
-        menu.displayNotification("Waiting for the host  to  start  the game");
+	  menu.display_notification("Waiting for the host  to  start  the game");
     }
     std::cout<<"im in lobby now"<<std::endl;
     in_menu.store(false);
@@ -155,6 +155,6 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
-    menu.setMainMenuMode();
+  menu.set_main_menu_mode();
     client_ping = &r;
 }

@@ -37,7 +37,7 @@ bool Client::connectToServer(){
 
 bool Client::attempConnection() {
     if (gameLoop.menu.textbox_lobby_name.text == ""){
-        gameLoop.menu.displayNotification("enter  a  lobby  name  to  join  or  create  one!");
+	  gameLoop.menu.display_notification("enter  a  lobby  name  to  join  or  create  one!");
         return  false;
     }
     connection_state[ARENA_GAME] = gameLoop.menu.textbox_lobby_name.text;
@@ -52,13 +52,13 @@ bool Client::waitForConnection(){
     connectToServer();
     if (!Protocol::recvMsg(skt, connection_state)) throw  serverNotRunning();
     gameLoop.menu.open_games_update.push(connection_state);
-    gameLoop.menu.displayNotification("open games");
+  gameLoop.menu.display_notification("open games");
     while (!userInput.exit && !connection_successful) {
         waitReadyButton();
         if (!userInput.exit) {
             try { connection_successful = attempConnection();}
             catch (serverNotRunning &e) {
-                gameLoop.menu.displayNotification("cant connect! restart the game");
+			  gameLoop.menu.display_notification("cant connect! restart the game");
             }
         }
     }
