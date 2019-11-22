@@ -41,18 +41,12 @@ void TextLabel::updateBounds() {
                       textTexture.getHeight()};
 }
 
-
-
-void TextLabel::init_intermitent_anim(int rate) {
+void TextLabel::set_intermittent_rate(int rate) {
     this->rate = rate;
 }
 
-void TextLabel::stageTextChange(std::string m) {
+void TextLabel::stage_text_change(std::string m) {
     this->stagedText.push(m);
-}
-
-void TextLabel::stageColorChange(SDL_Color c) {
-    this->stagedColors.push(c);
 }
 
 void TextLabel::_update() {

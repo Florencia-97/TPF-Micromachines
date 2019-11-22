@@ -24,9 +24,9 @@ void GameRenderer::updatePlayers(InfoBlock &world_state, int frame){
         car.health = world_state.get<int>("h"+id);
         car.render(camera, gRenderer);
     }
-    health.stageTextChange( "HP " + world_state.getString("h"+my_id));
-    laps.stageTextChange("laps  " + world_state.getString("l"+my_id));
-    timer.stageTextChange(world_state.getString(TIME_LEFT));
+  health.stage_text_change("HP " + world_state.getString("h" + my_id));
+  laps.stage_text_change("laps  " + world_state.getString("l" + my_id));
+  timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
 void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {

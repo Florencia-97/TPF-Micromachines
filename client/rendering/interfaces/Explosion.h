@@ -20,7 +20,9 @@ class Explosion : public Animation {
    * PRE: It uses the file client/rendering/assets/decoration/explosion.png*/
   void load_frames(SDL_Renderer *gRenderer) override;
 
-  /*Implementation of the rendering function of an animation frame*/
+  /*Implementation of the rendering function of an animation frame
+   * PRE: x and y are the position values. It starts in the left upper corner
+   * (0,0)*/
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *gRenderer) override;
 
   /*Implementation of the animation playback function*/
