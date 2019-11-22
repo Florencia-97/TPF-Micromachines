@@ -19,20 +19,9 @@ bool Button::handle_event(SDL_Event *e, std::queue<std::string> *soundQueue) {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	bool inside = true;
-	//Mouse is left of the button
-	if (x < mPosition.x) {
+	if (x < mPosition.x || x > mPosition.x + this->area.w) {
 	  inside = false;
-	}
-	  //Mouse is right of the button
-	else if (x > mPosition.x + this->area.w) {
-	  inside = false;
-	}
-	  //Mouse above the button
-	else if (y < mPosition.y) {
-	  inside = false;
-	}
-	  //Mouse below the button
-	else if (y > mPosition.y + this->area.h) {
+	} else if (y < mPosition.y || y > mPosition.y + this->area.h) {
 	  inside = false;
 	}
 	if (inside) {
