@@ -38,11 +38,11 @@ class Button {
 
   /*Executes all the functions stored in the button by the function
    * add_callback_function()*/
-	void callCallbackFunctions();
+  void call_callback_functions();
 
   /*Filter events to stay only with those of the type
    * SDL_MOUSEMOTION,SDL_MOUSEBUTTONDOWN and SDL_MOUSEBUTTONUP. In the second
-   * case, returns true and executes callCallbackFunctions(); In the rest of the
+   * case, returns true and executes call_callback_functions(); In the rest of the
    * cases, returns false;*/
   virtual bool handle_event(SDL_Event *e,
 							std::queue<std::string> *soundQueue);

@@ -31,7 +31,7 @@ bool Button::handle_event(SDL_Event *e, std::queue<std::string> *soundQueue) {
 		  return false;
 		case SDL_MOUSEBUTTONDOWN:;
 		  soundQueue->push(this->soundWhenPressed);
-		  callCallbackFunctions();
+		  call_callback_functions();
 		  return true;
 	  }
 	}
@@ -60,7 +60,7 @@ void Button::set_area(int x, int y) {
   this->area = {x, y, BUTTON_WIDTH, BUTTON_HEIGHT};
 }
 
-void Button::callCallbackFunctions() {
+void Button::call_callback_functions() {
   for (auto &function : callbacks) {
 	function(this->id);
   }

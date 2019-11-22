@@ -5,19 +5,23 @@
 #include "ConnectButton.h"
 #include "TextLabel.h"
 
-void Menu::init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *mouseEventsQueue, std::queue<SDL_Event> *textQueue,
-				std::condition_variable *attempConnectionCV, std::queue<std::string> *soundQueue) {
+void Menu::init(SDL_Renderer *sdl_renderer,
+				std::queue<SDL_Event> *mouseEventsQueue,
+				std::queue<SDL_Event> *textQueue,
+				std::condition_variable *attemptConnectionCV,
+				std::queue<std::string> *soundQueue) {
   this->text_queue = textQueue;
   this->mouse_queue = mouseEventsQueue;
   this->sound_queue = soundQueue;
   this->gRenderer = sdl_renderer;
-  this->game_ready_cv = attempConnectionCV;
+  this->game_ready_cv = attemptConnectionCV;
   map_selected = "race_1";
   car_selected = "RED_CAR";
   ready = false;
   ai_on = false;
   this->iaButton = new LuaButton(gRenderer,
-								 textureLoader.load_texture("buttons/tick.png", gRenderer));
+								 textureLoader.load_texture("buttons/tick.png",
+															gRenderer));
   iaButton->change_opacity(0);
 }
 
@@ -35,12 +39,19 @@ void Menu::set_main_menu_mode() {
   }
   SDL_StartTextInput();
   if (!open_games.empty()) return;
+  set_elements();
+
+}
+void Menu::set_elements() {
   SDL_Color gold{255, 189, 27, 0xFF};
   SDL_Color white{255, 255, 255, 0xFF};
-  label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH / 2, 200, 28, gold, gRenderer);
+  label_choose_car.init("CLICK A CAR TO SELECT", SCREEN_WIDTH / 2, 200, 28,
+						gold, gRenderer);
   label_choose_car.set_intermittent_rate(FPS * 2 / 3);
-  textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION", SCREEN_WIDTH / 2, 450, 30, gold, gRenderer);
-  notification.init(" ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, 35, white, gRenderer);
+  textbox_lobby_name.init("START TYPING THE NAME OF YOUR SESSION",
+						  SCREEN_WIDTH / 2, 450, 30, gold, gRenderer);
+  notification.init(" ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, 35,
+					white, gRenderer);
   flavor_text.init("fiuba 2019    all rights reserved",
 				   SCREEN_WIDTH / 2, SCREEN_HEIGHT - 30, 25, white, gRenderer);
   active_buttons = &carButtons;
@@ -48,9 +59,9 @@ void Menu::set_main_menu_mode() {
   for (int i = 0; i < 6; i++) {
 	open_games.emplace_back();
 	open_games.back().init(" ",
-						   450 + 400 * (i % 2), 580 + 75 * (int) (i / 2), 25, white, gRenderer);
+						   450 + 400 * (i % 2), 580 + 75 * (int) (i / 2),
+						   25, white, gRenderer);
   }
-
 }
 
 void Menu::_updateOpenGames() {
@@ -104,7 +115,8 @@ void Menu::process_events_keyboard() {
 }
 
 void Menu::render_first_menu(float screenWidth, float screenHeight) {
-  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT, SCREEN_WIDTH, true);
+  wallpaper.render_with_size(0, 0, 0, gRenderer, SCREEN_HEIGHT,
+							 SCREEN_WIDTH, true);
   for (auto &button : carButtons) {
 	button.render(screenWidth, screenHeight);
   }
@@ -152,17 +164,7 @@ void Menu::set_buttons_positions() {
 }
 
 void Menu::set_buttons_map_screen() {
-  mapButtons.emplace_back("race_1",
-						  gRenderer,
-						  textureLoader.load_texture("all_images/Decor/dragon.png", gRenderer));
-  mapButtons.emplace_back("race_2",
-						  gRenderer,
-						  textureLoader.load_texture("all_images/Decor/8Circuit.png", gRenderer));
-  mapButtons.emplace_back("race_3",
-						  gRenderer, textureLoader.load_texture("all_images/Decor/eggTrack.png", gRenderer));
-  mapButtons.emplace_back("race_4",
-						  gRenderer, textureLoader.load_texture("all_images/Decor/rainbow.png", gRenderer));
-
+  create_map_buttons();
   auto callbackMap = [&](const std::string &clickedId) {
 	for (auto &button : mapButtons) {
 	  std::cout << clickedId << button.id << (button.id == clickedId) << std::endl;
@@ -185,10 +187,28 @@ void Menu::set_buttons_map_screen() {
   mapButtons[2].set_position(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
   mapButtons[3].set_position(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
 }
+void Menu::create_map_buttons() {
+  mapButtons.emplace_back("race_1",
+						  gRenderer,
+						  textureLoader.load_texture("all_images/Decor/dragon.png",
+													 gRenderer));
+  mapButtons.emplace_back("race_2",
+						  gRenderer,
+						  textureLoader.load_texture("all_images/Decor/8Circuit.png",
+													 gRenderer));
+  mapButtons.emplace_back("race_3",
+						  gRenderer,
+						  textureLoader.load_texture("all_images/Decor/eggTrack.png",
+													 gRenderer));
+  mapButtons.emplace_back("race_4",
+						  gRenderer,
+						  textureLoader.load_texture("all_images/Decor/rainbow.png",
+													 gRenderer));
+}
 
 void Menu::load_media() {
-  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png", gRenderer);
-
+  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png",
+						   gRenderer);
   auto callback_start_game = [&](const std::string &clickedId) {
 	ready = true;
 	connectButton->change_color(80, 80, 80, FPS / 2);
@@ -206,7 +226,27 @@ void Menu::load_media() {
 	  }
 	}
   };
+  auto ai_callback = [&](const std::string &clickedId) {
+	ai_on = !ai_on;
+	if (ai_on) {
+	  iaButton->change_opacity(255);
+	} else {
+	  iaButton->change_opacity(0);
+	}
+  };
+  create_buttons_first_menu();
+  connectButton->add_callback_function(callback_start_game);
 
+  for (auto &button : carButtons) {
+	button.add_callback_function(callback);
+	button.change_color(80, 80, 80, -1);
+	button.soundWhenPressed = SOUND_CAR_GEAR;
+  }
+  this->set_buttons_map_screen();
+  iaButton->add_callback_function(ai_callback);
+
+}
+void Menu::create_buttons_first_menu() {
   carButtons.emplace_back("BLUE_CAR", gRenderer,
 						  textureLoader.load_texture("cars/blue_car.png", gRenderer));
   carButtons.emplace_back("BLACK_CAR", gRenderer,
@@ -217,25 +257,6 @@ void Menu::load_media() {
 						  textureLoader.load_texture("cars/white_car.png", gRenderer));
   connectButton = std::make_shared<ConnectButton>(gRenderer,
 												  textureLoader.load_texture("buttons/connect.png", gRenderer));
-  connectButton->add_callback_function(callback_start_game);
-
-  for (auto &button : carButtons) {
-	button.add_callback_function(callback);
-	button.change_color(80, 80, 80, -1);
-	button.soundWhenPressed = SOUND_CAR_GEAR;
-  }
-  this->set_buttons_map_screen();
-
-  auto ai_callback = [&](const std::string &clickedId) {
-	ai_on = !ai_on;
-	if (ai_on) {
-	  iaButton->change_opacity(255);
-	} else {
-	  iaButton->change_opacity(0);
-	}
-  };
-  iaButton->add_callback_function(ai_callback);
-
 }
 
 Menu::~Menu() {

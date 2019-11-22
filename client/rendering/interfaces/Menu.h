@@ -43,6 +43,9 @@ class Menu {
    *  Button::add_callback_function()*/
   void set_buttons_positions();
 
+  /*Sets all the elements needed in set_main_menu_mode()*/
+  void set_elements();
+
  public:
   std::string car_selected;
   std::string map_selected;
@@ -56,7 +59,7 @@ class Menu {
    * necessary that this function be executed first */
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *mouseEventsQueue,
 			std::queue<SDL_Event> *textQueue,
-			std::condition_variable *attempConnectionCV,
+			std::condition_variable *attemptConnectionCV,
 			std::queue<std::string> *soundQueue);
 
   /*Renders the first screen of the game.
@@ -73,6 +76,10 @@ class Menu {
    * PRE: screenWidth and screenHeight must be the screen resolution parameters
    * at the moment of the execution*/
   void render_as_leader(int screenWidth, int screenHeight);
+
+  /*Creates all the buttons needed for the second screen of the game for the
+   * owner of the lobby*/
+  void create_map_buttons();
 
   /*Renders the second screen of the game for the player who is not the owner
    * of the lobby.
@@ -104,8 +111,11 @@ class Menu {
    * execution*/
   void _updateOpenGames();
 
+
   /*Destroyer of the class*/
   ~Menu();
+
+  void create_buttons_first_menu();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_
