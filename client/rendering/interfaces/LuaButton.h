@@ -8,23 +8,24 @@ class LuaButton : public Button {
   TextLabel msg;
  public:
 
-  /*Constructor de la clase LuaButton*/
+  /*LuaButton class builder*/
   LuaButton(SDL_Renderer *sdl_renderer, LTexture *texture);
 
-  /*Implementacion de la funcion para renderizar el boton. El uso de los
-   * parametros screenWidth y screenHeight es el mismo que en la clase
-   * madre.*/
+  /*Implementation of the function to render the button.
+   * The use of the screenWidth and screenHeight parameters is the same as
+   * in the parent class*/
   void render(float screenWidth, float screenHeight) override;
 
-  /* Implementacion de la funcion setPosition heredada de la clase Button.
-   * PRE: Internamente, realiza un llamado a Button::setPosition() para
-   * luego establecer la posicion correcta del mensaje asociado al boton.
-   * X e Y siguen las mismas condiciones que en la clase madre*/
+  /* Implementation of the setPosition function inherited from the Button
+   * class.
+   * PRE: Internally, call Button :: setPosition () and then establish the
+   * correct position of the message associated with the button.
+   * X and Y follow the same conditions as in the parent class*/
   void setPosition(int x, int y) override;
 
-  /*Cambia el grado de transparencia del boton.
-   * PRE: el rango de i es [0:255] siendo 0 transparente y 255 totalmente
-   * opaco*/
+  /*Changes the degree of transparency of the button
+   * PRE: the range of i is [0: 255] being 0 transparent and 255 totally
+   * opaque*/
   void changeOpacity(int i);
 };
 
