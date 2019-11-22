@@ -13,18 +13,17 @@ class Explosion : public Animation {
 
  public:
 
-  /*Constructor de la clase explosion*/
+  /*Constructor of the Explosion class*/
   Explosion();
 
-  /*Implementacion con de la funcion heredada para la creacion de los frames
-   * de la animacion de la explosion.
-   * PRE: Utiliza el archivo client/rendering/assets/decoration/explosion.png*/
+  /*Implementation of the inherited function for the creation of the frames
+   * PRE: It uses the file client/rendering/assets/decoration/explosion.png*/
   void load_frames(SDL_Renderer *gRenderer) override;
 
-  /*Implementacion de la funcion de renderizado de un frame de la animacion.*/
+  /*Implementation of the rendering function of an animation frame*/
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *gRenderer) override;
 
-  /*Implementacion de la funcion de reproduccion de la animacion*/
+  /*Implementation of the animation playback function*/
   void play(SDL_Renderer *gRenderer, int x, int y) override;
 };
 
