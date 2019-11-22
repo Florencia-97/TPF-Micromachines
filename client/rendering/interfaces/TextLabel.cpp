@@ -85,6 +85,10 @@ TextLabel::TextLabel() {
     font = nullptr;
 }
 
+TextLabel::~TextLabel() {
+    textTexture.free();
+}
+
 
 
 

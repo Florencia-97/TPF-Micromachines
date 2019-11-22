@@ -125,3 +125,7 @@ void LTexture::setAlpha(Uint8 alpha) {
   SDL_SetTextureAlphaMod(texture, alpha);
 }
 
+bool LTexture::isLoaded() {
+    return texture;
+}
+

@@ -35,6 +35,8 @@ class LTexture {
   int getHeight();
   void loadFromRenderedText(const std::string &msg, SDL_Color color, TTF_Font *font, SDL_Renderer *renderer);
   void setAlpha(Uint8 alpha);
+
+  bool isLoaded();
 };
 
 #endif //MICROMACHINES_CLIENT_LTEXTURE_H_

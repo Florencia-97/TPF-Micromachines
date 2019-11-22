@@ -49,6 +49,8 @@ class TextLabel {
     void updateBounds();
 
     bool renderText;
+
+    ~TextLabel();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_FONT_H_
