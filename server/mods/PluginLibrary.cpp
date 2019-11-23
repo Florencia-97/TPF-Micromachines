@@ -2,7 +2,7 @@
 #include <string>
 #include "../config/constants.h"
 
-PluginLibrary::PluginLibrary(const char* path) {
+PluginLibrary::PluginLibrary(const char* path): clock(0.0) {
     this->path = path;
     this->cars = nullptr;
     _loadPlugins(plugins);

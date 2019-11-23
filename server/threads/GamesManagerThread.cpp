@@ -71,11 +71,5 @@ void GamesManagerThread::_run(){
 void GamesManagerThread::close(){
     if (!this->isAlive()) return;
     skt.closeSd();
-    _killThreads(true);
     BaseThread::close();
-}
-
-GamesManagerThread::~GamesManagerThread(){
-    _killThreads(true); // Should not go here
-    this->close();
 }
