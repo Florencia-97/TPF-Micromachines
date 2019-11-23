@@ -24,19 +24,19 @@ class Car {
   // Centers the camera over the car
   void setCamera(SDL_Rect &camera, int level_width, int level_height);
 
-  void render(SDL_Rect &camera, SDL_Renderer *renderer);
+    void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
 
-  int get_health();
+    void move(int x, int y, int r);
 
-  void modify_health(int newLife);
+    SDL_Texture *get_texture();
 
-  short get_id();
+    void modify_health(int newLife);
 
-  void move(int x, int y, int r);
+    short get_id();
 
-  void loadAnimations(SDL_Renderer *gRenderer);
+    void loadAnimations(SDL_Renderer *gRenderer);
 
-  ~Car();
+    ~Car();
 };
 
 #endif

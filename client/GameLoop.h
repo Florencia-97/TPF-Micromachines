@@ -21,8 +21,8 @@
 class GameLoop : public BaseThread {
     SDLStarter starter;
     SoundSystem soundSystem;
-    VideoRecorder videoRecorder;
     int current_frame;
+    int frame_dif; //difference in frames compared to previous iteration
     int state; //thread state
     InfoBlock previous_game_state;
     std::condition_variable* client_ping;

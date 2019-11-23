@@ -11,6 +11,7 @@ class StainAnimation : public Animation {
   LTexture texture;
   Uint8 fading;
  public:
+  bool isPlaying;
 
   /*Constructor of the StainAnimation class*/
   StainAnimation();
@@ -26,7 +27,7 @@ class StainAnimation : public Animation {
 
   /*Implementation of the animation playback function
    * PRE: The parameters x and y are not used*/
-  void play(SDL_Renderer *gRenderer, int x, int y) override;
+  void play(SDL_Renderer *gRenderer, int frames, int x, int y) override;
 
 };
 

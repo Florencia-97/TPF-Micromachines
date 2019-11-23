@@ -22,7 +22,7 @@ class Animation {
 
   /*Plays the animation.
    * PRE: It must be implemented by the classes that inherit from this*/
-	virtual void play(SDL_Renderer *gRenderer, int x, int y) = 0;
+	virtual void play(SDL_Renderer *gRenderer, int frames, int x, int y) = 0;
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_ANIMATION_H_

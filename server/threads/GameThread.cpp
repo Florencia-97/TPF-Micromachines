@@ -66,13 +66,14 @@ std::string GameThread::_runLobby() {
 
 bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     InfoBlock ib;
-    ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
-    if (Protocol::sendMsg(plr_socket, ib) && lobby_mode ) {
+    bool lm = lobby_mode.load();
+    ib = _createFirstCommunication( lm? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
+    if (Protocol::sendMsg(plr_socket, ib) && lm ) {
         this->plr_threads.emplace_back(plr_socket, playerInfo);
         this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();
     }
-    return lobby_mode;
+    return lm;
 }
 
 void GameThread::_createCars(){
@@ -108,7 +109,7 @@ void GameThread::_sendStartMsg(std::string raceId){
     it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = it->id;
-        (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
+        (it)->sender.to_send.emplace(ib.srcString(),false);
         it++;
     }
 }
@@ -139,6 +140,7 @@ void GameThread::_announceWinners() {
     InfoBlock gameEnd;
     gameEnd[GAME_END] = 1;
     _sendAll(gameEnd);
+    this->sleep(2);
 }
 
 
@@ -157,16 +159,19 @@ void GameThread::_processPlayerActions(){
 
 void GameThread::_runGame() {
     Stopwatch c;
-    float timestep_goal = 1.0/80;
+    int server_fps = std::min(120, 2*FPS);
+    float timestep_goal = 1.0f/server_fps;
     float timestep = timestep_goal;
     float time_left = GAME_DURATION_S;
-    float over_time = 2;
+    float over_time = 2;//free time after the game ends
+    int current_frame = 0;
+    int last_framedif = 1;
 
     while (this->isAlive()) {
         if (over_time > 0) _processPlayerActions();
         if (_anyPlayersAlive() && time_left > 0){
 
-            this->game.Step(timestep_goal);
+            this->game.Step(timestep_goal*(float)last_framedif);
             auto gameStatus = this->game.status();
             gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
@@ -180,8 +185,10 @@ void GameThread::_runGame() {
             }
         }
         auto time_elapsed = c.diff();
+        last_framedif = std::ceil(time_elapsed/timestep_goal);
+        current_frame = (current_frame + last_framedif) % (server_fps);
         c.reset();
-        timestep = std::max(0.0f,timestep_goal- time_elapsed);
+        timestep = std::max(0.0f,timestep_goal- std::fmod(time_elapsed, timestep_goal));
         time_left -= timestep_goal;
     }
 
@@ -191,7 +198,7 @@ void GameThread::_runGame() {
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
     std::string mapName = _runLobby();
-    this->lobby_mode = false;
+    this->lobby_mode.store(false);
     if (this->isAlive()) {
         std::cout << "Race chosen is: " << mapName << std::endl;
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);

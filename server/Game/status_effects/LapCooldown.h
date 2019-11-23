@@ -13,7 +13,7 @@ public:
         apply_on_remove = false;
         apply_on_acquire = true;
         applied = false;
-        id = "";
+        id = "laps";
     };
 
     explicit LapCooldown(float duration, bool dont_add_lap){
@@ -21,7 +21,7 @@ public:
         apply_on_remove = false;
         apply_on_acquire = true;
         applied = dont_add_lap;
-        id = "";
+        id = "laps";
     };
 
     void applyEffect(CarStats &entity) override{
@@ -31,7 +31,7 @@ public:
     };
 
     void increaseStack(StatusEffect* other) override {
-        delay = other->duration;//refresh
+        delay = other->delay;//refresh
     };
 
     void decreaseStack() override {};

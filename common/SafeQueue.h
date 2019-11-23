@@ -15,16 +15,16 @@ class SafeQueue{
     std::mutex m;
     std::condition_variable cv;
     std::atomic<bool> open;
+    int capacity;
+    bool limited_space;
 
 public:
     SafeQueue();
 
-    //pushes an element to the queue, the element must have a copy constructor
-    //this is a protected operation
+    explicit SafeQueue(int capacity);
+
     void push(T& event);
 
-    //pops and returns the front of the queue
-    //blocks the thread if queue is empty
     T pop();
 
     void setOpen(bool v);
@@ -33,22 +33,22 @@ public:
 
     bool isEmpty();
 
-    //allows access to the internal structure for directly emplacing objects
-    //notice that doing so is not a protected operation so the usage is limited
-    std::queue<T>* getInternalQueue();
+    template<class... Args>
+    void emplace(Args&&... args){
+        std::unique_lock<std::mutex> lock(this->m);
+        if (limited_space && q.size() == capacity) q.pop();
+        q.emplace(std::forward<Args>(args)...);
+    }
 };
-
-template<class T>
-std::queue<T>* SafeQueue<T>::getInternalQueue() {
-    return &q;
-}
 
 template<class T>
 void SafeQueue<T>::push(T &event) {
     std::unique_lock<std::mutex> lock(this->m);
+    if (limited_space && q.size() == capacity) q.pop();
     this->q.push(event);
     this->cv.notify_one();
 }
+
 
 template<class T>
 T SafeQueue<T>::pop() {
@@ -64,9 +64,7 @@ T SafeQueue<T>::pop() {
 
 
 template<class T>
-SafeQueue<T>::SafeQueue() {
-    open = true;
-}
+SafeQueue<T>::SafeQueue(): capacity(0), limited_space(false), open (true){}
 
 template<class T>
 bool SafeQueue<T>::isOpen() {
@@ -82,6 +80,13 @@ void SafeQueue<T>::setOpen(bool v) {
 template<class T>
 bool SafeQueue<T>::isEmpty() {
     return this->q.empty();
+}
+
+template<class T>
+SafeQueue<T>::SafeQueue(int capacity) {
+    this->capacity = capacity;
+    this->limited_space = true;
+    open = true;
 }
 
 #endif //MICROMACHINES_SAFEQUEUE_H

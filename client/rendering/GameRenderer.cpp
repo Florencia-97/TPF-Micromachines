@@ -10,7 +10,7 @@ GameRenderer::GameRenderer(){
     }
 }
 
-void GameRenderer::update_players(InfoBlock &world_state, int frame) {
+void GameRenderer::update_players(InfoBlock &world_state, int frames) {
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
 	  auto id = std::to_string(car.get_id());
@@ -20,16 +20,15 @@ void GameRenderer::update_players(InfoBlock &world_state, int frame) {
 	  if (car.get_id() == my_car_id) {
             car.setCamera(camera, map.width, map.height);
         }
-	  car.modify_health(world_state.get<int>("h" + id));
-        car.render(camera, gRenderer);
+        car.modify_health(world_state.get<int>("h"+id));
+        car.render(camera, gRenderer, frames);
     }
   health.stage_text_change("HP " + world_state.getString("h" + my_id));
   laps.stage_text_change("laps  " + world_state.getString("l" + my_id));
   timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame,
-						  float width, float height) {
+void GameRenderer::render(InfoBlock &world_state, int frames, float width, float height) {
     map.render(camera, gRenderer);
     int x = camera.x;
     int y = camera.y;
@@ -37,19 +36,20 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
     for (auto &item: all_items){
         item.render(camera, gRenderer);
     }
-  update_players(world_state, frame);
+    update_players(world_state, frames);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
 
     laps.render(width, height);
     timer.render(width, height);
     health.render(width, height);
     playertag.render(width, height);
+
+    auto state = world_state.getString("s"+std::to_string(my_car_id));
+    if (stain.isPlaying || state.find("MUD") != std::string::npos){
+        stain.play(gRenderer, frames, 0, 0);
+    }
     for (auto& label : race_results) {
         label.render(width, height);
-    }
-    auto state = world_state.getString("s"+std::to_string(my_car_id));
-    if (state.find("MUD") != std::string::npos){
-        stain.play(gRenderer, 0, 0);
     }
 }
 
@@ -148,9 +148,8 @@ void GameRenderer::initLeaderboard(InfoBlock &block) {
             auto id = block.getString("p"+std::to_string(i));
             auto plr = (id != std::to_string(my_car_id))  ? "Player  " + id: "YOU";
             text = pos + "     " +plr;
-        } else text = pos + "    no one";
-	  label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35,
-				 gold, gRenderer);
+        } else text = pos + " ";
+        label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, gold, gRenderer);
         i++;
     }
 }
