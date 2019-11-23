@@ -2,7 +2,7 @@
 
 void GameLoop::_runProgram(){
     this->_checkVideoRecording();
-    SDL_SetRenderTarget(starter.get_global_renderer(), NULL);
+  SDL_SetRenderTarget(starter.get_global_renderer(), nullptr);
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
         runGame(frame_dif);

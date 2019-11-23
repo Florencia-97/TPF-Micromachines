@@ -36,8 +36,9 @@ class Client {
     std::string port;
     std::string service;
 
-    //attemps to connect to client
-    bool attempConnection();
+  /*Attempts to connect to the server. If it was possible, returns true.
+   * if not, returns false*/
+  bool attemptConnection();
 
     //true if connected, false if not
     bool connectionCheck();
