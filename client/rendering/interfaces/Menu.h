@@ -32,7 +32,7 @@ class Menu {
 
   TextLabel label_choose_car;
   TextLabel flavor_text;
-  TextLabel notification;
+  TextBox notification;
 
   /*Loads all necessary textures and images for the correct class performance*/
   void load_media();
