@@ -41,25 +41,30 @@ bool SDLStarter::init() {
 
         success = false;
       } else {
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-        int imgFlags = IMG_INIT_PNG;
-        if (!(IMG_Init(imgFlags) & imgFlags)) {
-		  printf("SDL_image could not initialize! SDL_image Error: %s\n",
-				 IMG_GetError());
-          success = false;
-        }
-        if (TTF_Init() == -1) {
-		  printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n",
-				 TTF_GetError());
-          success = false;
-        }
-        if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
-		  printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n",
-				 Mix_GetError());
-              success = false;
-        }
-      }
-    }
+		success = initialize_libraries(success);
+	  }
+	}
+  }
+  return success;
+}
+bool SDLStarter::initialize_libraries(bool success) const {
+  ;
+  SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  int imgFlags = IMG_INIT_PNG;
+  if (!(IMG_Init(imgFlags) & imgFlags)) {
+	printf("SDL_image could not initialize! SDL_image Error: %s\n",
+		   IMG_GetError());
+	success = false;
+  }
+  if (TTF_Init() == -1) {
+	printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n",
+		   TTF_GetError());
+	success = false;
+  }
+  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+	printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n",
+		   Mix_GetError());
+	success = false;
   }
   return success;
 }

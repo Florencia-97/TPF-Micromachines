@@ -34,6 +34,9 @@ class SDLStarter {
    * function*/
   void close();
 
+  /*Initializes the libraries SDL_Img, SDL_Mix and SDL_TTF.If any of the
+   * libraries fails to initialize, returns false*/
+  bool initialize_libraries(bool success) const;
 };
 
 #endif //MICROMACHINES_SDLSTARTER_H
