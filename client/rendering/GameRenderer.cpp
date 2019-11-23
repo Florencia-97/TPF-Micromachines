@@ -13,14 +13,14 @@ GameRenderer::GameRenderer(){
 void GameRenderer::update_players(InfoBlock &world_state, int frame) {
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
-        auto id = std::to_string(car.id);
+	  auto id = std::to_string(car.get_id());
         car.move(world_state.get<int>("x"+id),
                  world_state.get<int>("y"+id),
                  world_state.get<int>("r"+id));
-        if (car.id == my_car_id){
+	  if (car.get_id() == my_car_id) {
             car.setCamera(camera, map.width, map.height);
         }
-        car.health = world_state.get<int>("h"+id);
+	  car.modify_health(world_state.get<int>("h" + id));
         car.render(camera, gRenderer);
     }
   health.stage_text_change("HP " + world_state.getString("h" + my_id));

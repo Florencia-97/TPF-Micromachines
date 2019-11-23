@@ -37,8 +37,8 @@ void TextLabel::render(float screenWidth, float screenHeight) {
 }
 
 void TextLabel::updateBounds() {
-    this->textArea = {x - textTexture.getWidth()/ 2, y, textTexture.getWidth(),
-                      textTexture.getHeight()};
+  this->textArea = {x - textTexture.get_width() / 2, y, textTexture.get_width(),
+					textTexture.getHeight()};
 }
 
 void TextLabel::set_intermittent_rate(int rate) {
