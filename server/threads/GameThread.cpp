@@ -212,11 +212,14 @@ void GameThread::_run() {
         _runGame();
     }
     _killPlayers(true);
+    std::cout << "Players dead\n";
+    delete(pluginLibrary);
     close();
+    std::cout << "Game deleted correctly\n";
 }
 
 GameThread::~GameThread(){
-    delete(pluginLibrary);
-    _killPlayers(true);
-    close();
+//    _killPlayers(true);
+//    close();
+//    std::cout << "Game deleted correctly\n";
 }
