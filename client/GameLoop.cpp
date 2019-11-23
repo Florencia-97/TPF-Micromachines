@@ -35,9 +35,9 @@ void GameLoop::_runProgram(){
 void GameLoop::_checkVideoRecording(){
     if (!videoQueue->empty()){
         videoQueue->pop();
-        if (!videoRecorder.rec){
+	  if (!videoRecorder.get_rec_value()) {
             videoRecorder.init(starter.get_global_renderer());
-            videoRecorder.rec = true;
+		videoRecorder.set_rec_value(true);
             this->recording = true;
             return;
         }

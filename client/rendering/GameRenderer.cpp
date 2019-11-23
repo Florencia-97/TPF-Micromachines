@@ -13,14 +13,14 @@ GameRenderer::GameRenderer(){
 void GameRenderer::update_players(InfoBlock &world_state, int frame) {
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
-        auto id = std::to_string(car.id);
+	  auto id = std::to_string(car.get_id());
         car.move(world_state.get<int>("x"+id),
                  world_state.get<int>("y"+id),
                  world_state.get<int>("r"+id));
-        if (car.id == my_car_id){
+	  if (car.get_id() == my_car_id) {
             car.setCamera(camera, map.width, map.height);
         }
-        car.health = world_state.get<int>("h"+id);
+	  car.modify_health(world_state.get<int>("h" + id));
         car.render(camera, gRenderer);
     }
   health.stage_text_change("HP " + world_state.getString("h" + my_id));
@@ -99,7 +99,7 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
 
 bool GameRenderer::_itemInStock(const std::string &itemId) {
     for (auto &item: all_items){
-        if (std::to_string(item.id) == itemId) return true;
+	  if (std::to_string(item.get_id()) == itemId) return true;
     }
     return false;
 }
@@ -126,7 +126,7 @@ void GameRenderer::loadItems(InfoBlock &event) {
 void GameRenderer::_removeOld(std::vector<int>& ids){
     auto it = this->all_items.begin();
     while (it != this->all_items.end()){
-        auto found = std::find(ids.begin(), ids.end(), (it)->id);
+	  auto found = std::find(ids.begin(), ids.end(), it->get_id());
         if (found != ids.end()) {
             ++it;
         } else{
@@ -149,7 +149,8 @@ void GameRenderer::initLeaderboard(InfoBlock &block) {
             auto plr = (id != std::to_string(my_car_id))  ? "Player  " + id: "YOU";
             text = pos + "     " +plr;
         } else text = pos + "    no one";
-        label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, gold, gRenderer);
+	  label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35,
+				 gold, gRenderer);
         i++;
     }
 }

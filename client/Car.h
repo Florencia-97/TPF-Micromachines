@@ -10,30 +10,33 @@
 class Car {
   SDL_Rect mBox;
   int rotation;
-  LTexture* texture;
+  LTexture *texture;
   Explosion explosion;
+  short id;
+  int health;
 
  public:
-    short id;
-    int health;
 
-    explicit Car(short id);
+  explicit Car(short id);
 
-    void addTexture(LTexture* my_texture);
+  void addTexture(LTexture *my_texture);
 
-    // Centers the camera over the car
-    void setCamera(SDL_Rect &camera, int level_width, int level_height);
+  // Centers the camera over the car
+  void setCamera(SDL_Rect &camera, int level_width, int level_height);
 
-    void render(SDL_Rect &camera, SDL_Renderer *renderer);
+  void render(SDL_Rect &camera, SDL_Renderer *renderer);
 
-    void move(int x, int y, int r);
-  void explode(Explosion animation, SDL_Renderer *renderer);
-    SDL_Texture *get_texture();
+  int get_health();
 
-    ~Car();
-    bool compare_id(short i);
+  void modify_health(int newLife);
 
-    void loadAnimations(SDL_Renderer *gRenderer);
+  short get_id();
+
+  void move(int x, int y, int r);
+
+  void loadAnimations(SDL_Renderer *gRenderer);
+
+  ~Car();
 };
 
 #endif

@@ -10,8 +10,14 @@ class TEXTURE_ERROR : public std::exception {
  private:
   char msg_error[BUF_LEN]{};
  public:
+
+  /*Builder of the exception*/
   explicit TEXTURE_ERROR(const char *format);
+
+  /*Override of the what method of the std::exception*/
   const char *what() const noexcept override;
+
+  /*Destroyer of the class*/
   ~TEXTURE_ERROR() noexcept override;
 };
 

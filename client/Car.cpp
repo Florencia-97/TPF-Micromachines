@@ -34,7 +34,6 @@ void Car::setCamera( SDL_Rect& camera, int level_width, int level_height ){
 }
 
 void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
-  //SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
   int x = rand()%2;
   int y = rand()%2;
   texture->render_with_size(mBox.x + x - camera.x,
@@ -45,7 +44,8 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                             CAR_HEIGHT,
                             false);
   if (health <= 0) {
-    this->explosion.play(renderer, mBox.x + x - camera.x - mBox.w, mBox.y + y - camera.y - mBox.h/4);
+	this->explosion.play(renderer, mBox.x + x - camera.x - mBox.w,
+						 mBox.y + y - camera.y - mBox.h / 4);
   }
 }
 
@@ -58,11 +58,13 @@ Car::~Car() {
         texture->free();
     }
 }
-
-SDL_Texture *Car::get_texture() {
-  return this->texture->get_texture();
+int Car::get_health() {
+  return this->health;
+}
+short Car::get_id() {
+  return this->id;
+}
+void Car::modify_health(int newLife) {
+  this->health = newLife;
 }
 
-bool Car::compare_id(short i) {
-  return this->id == i;
-}

@@ -1,7 +1,3 @@
-//
-// Created by brian on 10/26/19.
-//
-
 #ifndef MICROMACHINES_CLIENT_TEXTURELOADER_H_
 #define MICROMACHINES_CLIENT_TEXTURELOADER_H_
 #include <SDL2/SDL.h>
@@ -15,13 +11,17 @@
 #include "../tiles/Tile.h"
 
 class TextureLoader {
-    std::unordered_map<std::string, LTexture> texture_cache;
+ private:
+  std::unordered_map<std::string, LTexture> texture_cache;
+ public:
 
-    public:
+  /*Builder of the class*/
+  TextureLoader() = default;
 
-    TextureLoader() = default;
-
-    LTexture* load_texture(std::string name, SDL_Renderer *renderer);
+  /*Makes a LTexture using the path "client/rendering/assets/" + name
+   * POST: If the path was used previously, returns the same pointer
+   * than the previous call to the fuction*/
+  LTexture *load_texture(std::string name, SDL_Renderer *renderer);
 
 };
 

@@ -19,8 +19,12 @@ class SafeQueue{
 public:
     SafeQueue();
 
+    //pushes an element to the queue, the element must have a copy constructor
+    //this is a protected operation
     void push(T& event);
 
+    //pops and returns the front of the queue
+    //blocks the thread if queue is empty
     T pop();
 
     void setOpen(bool v);
@@ -29,6 +33,8 @@ public:
 
     bool isEmpty();
 
+    //allows access to the internal structure for directly emplacing objects
+    //notice that doing so is not a protected operation so the usage is limited
     std::queue<T>* getInternalQueue();
 };
 

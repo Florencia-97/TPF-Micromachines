@@ -1,6 +1,5 @@
 #include <SDL2/SDL_image.h>
 #include "LTexture.h"
-#include "../../config/constants.h"
 
 /*Constructor of LTexture*/
 LTexture::LTexture() {
@@ -69,7 +68,7 @@ void LTexture::render(int x, int y, SDL_Rect *clip, double angle,
 int LTexture::getHeight() {
   return height;
 }
-int LTexture::getWidth() {
+int LTexture::get_width() {
   return width;
 }
 

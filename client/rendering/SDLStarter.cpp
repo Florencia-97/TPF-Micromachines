@@ -13,7 +13,7 @@ extern "C" {
 
 bool SDLStarter::init() {
   bool success = true;
-  av_register_all(); // Not sure if it goes here!
+  av_register_all();
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
     success = false;
@@ -33,23 +33,29 @@ bool SDLStarter::init() {
     } else {
         icon = IMG_Load("client/rendering/assets/decoration/icon.png");
         SDL_SetWindowIcon(window, icon);
-      renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	  renderer = SDL_CreateRenderer(window, -1,
+									SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
       if (renderer == nullptr) {
-        printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+		printf("Renderer could not be created! SDL Error: %s\n",
+			   SDL_GetError());
+
         success = false;
       } else {
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         int imgFlags = IMG_INIT_PNG;
         if (!(IMG_Init(imgFlags) & imgFlags)) {
-          printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+		  printf("SDL_image could not initialize! SDL_image Error: %s\n",
+				 IMG_GetError());
           success = false;
         }
         if (TTF_Init() == -1) {
-          printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+		  printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n",
+				 TTF_GetError());
           success = false;
         }
         if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
-              printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+		  printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n",
+				 Mix_GetError());
               success = false;
         }
       }
