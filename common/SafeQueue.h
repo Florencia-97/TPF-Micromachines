@@ -21,6 +21,8 @@ public:
 
     void push(T& event);
 
+
+
     T pop();
 
     void setOpen(bool v);
@@ -29,13 +31,11 @@ public:
 
     bool isEmpty();
 
-    std::queue<T>* getInternalQueue();
+    template<class... Args>
+    void emplace(Args&&... args){
+        q.emplace(std::forward<Args>(args)...);
+    }
 };
-
-template<class T>
-std::queue<T>* SafeQueue<T>::getInternalQueue() {
-    return &q;
-}
 
 template<class T>
 void SafeQueue<T>::push(T &event) {
@@ -43,6 +43,7 @@ void SafeQueue<T>::push(T &event) {
     this->q.push(event);
     this->cv.notify_one();
 }
+
 
 template<class T>
 T SafeQueue<T>::pop() {
