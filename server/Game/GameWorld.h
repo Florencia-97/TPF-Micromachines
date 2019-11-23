@@ -34,34 +34,51 @@ class GameWorld {
     std::list<std::shared_ptr<Entity>> static_objs;
     //Dynamic Instances are those which come and go from the field, (ie items)
     std::list<std::shared_ptr<Entity>> dynamic_objs;
-    void _createItem();
+
     float timeModifiers;
     int itemsId;
+
+    void _createItem();
+    //loads a random position from a random road to x & y
     void _loadXYInRoad(int&x, int&y);
     void _explodeIfOutOfBounds(RaceCar &car);
+    //creates a physical representation of an off road section of the map
+    void createOffRoad(int x, int y, int tileId);
+    void createExtras(int x, int y, int tileId);
+    void createFinishingLine(int x, int y);
+    void respawnCar(RaceCar &car);
+    void attempItemSpawn();
+    //removes all items marked as consumed
+    void spentItemCleaning();
 
 public:
     //POS creates a world with no gravity for top-down action
     std::list<RaceCar> cars;
+
     GameWorld();
+
+    //PRE carStats must contain the keys ACCELERATION, HEALTH, ROTATION_FORCE & MAX_SPEED
+    //creates a car and returns the new car's id
     int createCar(InfoBlock carStats);
+
+    //Proccesses a keyPressed event sent from client
+    //PRE if the keys ACTION_TYPE or ACTION_TYPE_DOWN exist in event they
+    //must contain one of the following values UP, DOWN, LEFT, RIGHT
     void processEvent(int id, InfoBlock &event);
+
+    //PRE id must be valid
+    //POS returns a reference to the car with the id
     RaceCar& getCar(int id);
-    void loadWorld(std::string);
+
+    //loads the world from file, map_name must be a valid name of a map stored in a file
+    void loadWorld(std::string map_name);
+
+    //returns positions and statuses of all dynamic (cars & items) objects in the world
+    //at the moment of calling
     InfoBlock status();
 
-    //POS advances the simulation and all instances within one timestep
+    //POS advances the simulation one timestep
     void Step(float timeStep);
-    void createOffRoad(int x, int y, int tileId); //yaml &stats?
-    void createExtras(int x, int y, int tileId);
-
-    void createFinishingLine(int x, int y);
-
-    void respawnCar(RaceCar &car);
-
-    void attempItemSpawn();
-
-    void spentItemCleaning();
 
 };
 
