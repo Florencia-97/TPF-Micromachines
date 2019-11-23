@@ -37,7 +37,7 @@ void GameLoop::_checkVideoRecording(){
         videoQueue->pop();
 	  if (!videoRecorder.get_rec_value()) {
             videoRecorder.init(starter.get_global_renderer());
-		videoRecorder.set_rec_value(true);
+		    videoRecorder.set_rec_value(true);
             this->recording = true;
             return;
         }
@@ -62,8 +62,8 @@ void GameLoop::_run(){
 }
 
 void GameLoop::runMenu(int frame_id) {
-  menu.process_events_mouse();
-  menu.process_events_keyboard();
+    menu.process_events_mouse();
+    menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
     menu.render_first_menu(screenWidth, screenHeight);
 }
@@ -87,13 +87,13 @@ void GameLoop::runGame(int frame_id){
     if (!gameState->exists(GAME_END)) {
         int height;
         int width;
-        //fakePlayerQueue->push(*gameState);
+        if (isIaPlayer) fakePlayerQueue->push(*gameState);
         starter.get_screen_dimensions(&width, &height);
         gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
 
     } else {
-	  menu.display_notification("Open   Games");
+	    menu.display_notification("Open   Games");
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();
@@ -119,10 +119,11 @@ void GameLoop::runLobby(int frame_id) {
 
 }
 
-void GameLoop::proceedToLobby(bool is_leader) {
+void GameLoop::proceedToLobby(bool is_leader, bool isIa) {
+    isIaPlayer = isIa;
     SDL_StopTextInput();
     leader = is_leader;
-  menu.start_lobby_buttons();
+    menu.start_lobby_buttons();
     if (is_leader){
 	  menu.display_notification("Choose a map for the game");
     } else {
@@ -155,6 +156,6 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
-  menu.set_main_menu_mode();
+    menu.set_main_menu_mode();
     client_ping = &r;
 }
