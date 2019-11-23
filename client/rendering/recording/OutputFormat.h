@@ -10,10 +10,7 @@ class AVStream;
 class AVCodecContext;
 class FormatContext;
 class SwsContext;
-/**
- * Clase que encapsula lógica la salida de video
- * Se recomienda modularizar aun más esta clase, reforzando RAII
- */
+
 class OutputFormat {
 public:
     // Ctor

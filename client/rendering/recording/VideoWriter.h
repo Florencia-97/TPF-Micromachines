@@ -1,7 +1,6 @@
 #ifndef MICROMACHINES_VIDEOWRITER_H
 #define MICROMACHINES_VIDEOWRITER_H
 
-
 #include "../common/conc/BaseThread.h"
 #include <vector>
 #include "../common/SafeQueue.h"

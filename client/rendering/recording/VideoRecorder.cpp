@@ -9,6 +9,7 @@ extern "C" {
     #include <libavformat/avformat.h>
     #include <libswscale/swscale.h>
 }
+
 const std::string videoFileName = "micromachinesVideo.mp4";
 
 VideoRecorder::VideoRecorder() : rec(false) {}

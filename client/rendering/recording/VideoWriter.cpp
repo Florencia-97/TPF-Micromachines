@@ -1,6 +1,5 @@
 #include "VideoWriter.h"
 #include "../../../config/constants.h"
-
 extern "C" {
     #include <libavformat/avformat.h>
     #include <libswscale/swscale.h>
