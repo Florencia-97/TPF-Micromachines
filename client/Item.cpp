@@ -44,3 +44,6 @@ void Item::addTexture(TextureLoader& tLoader, SDL_Renderer *gRenderer, int pngNu
     }
     this->texture = tLoader.load_texture("modifiers/" + nameItem + ".png", gRenderer);
 }
+int Item::get_id() {
+  return id;
+}

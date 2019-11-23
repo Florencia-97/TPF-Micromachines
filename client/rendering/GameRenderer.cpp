@@ -99,7 +99,7 @@ void GameRenderer::loadCars(InfoBlock &cars_info) {
 
 bool GameRenderer::_itemInStock(const std::string &itemId) {
     for (auto &item: all_items){
-        if (std::to_string(item.id) == itemId) return true;
+	  if (std::to_string(item.get_id()) == itemId) return true;
     }
     return false;
 }
@@ -126,7 +126,7 @@ void GameRenderer::loadItems(InfoBlock &event) {
 void GameRenderer::_removeOld(std::vector<int>& ids){
     auto it = this->all_items.begin();
     while (it != this->all_items.end()){
-        auto found = std::find(ids.begin(), ids.end(), (it)->id);
+	  auto found = std::find(ids.begin(), ids.end(), it->get_id());
         if (found != ids.end()) {
             ++it;
         } else{

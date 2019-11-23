@@ -7,17 +7,17 @@
 #include "rendering/LTexture.h"
 #include "rendering/TextureLoader.h"
 
-
 class Item {
-    SDL_Rect mBox;
-    int rotation;
-    LTexture* texture;
-public:
-    int id;
-    Item(int id, int x, int y);
-    void render(SDL_Rect &camera, SDL_Renderer *renderer);
-    void addTexture(TextureLoader& tLoader, SDL_Renderer *renderer, int pngNum);
-};
+  SDL_Rect mBox;
+  int rotation;
+  LTexture *texture;
+  int id;
+ public:
 
+  Item(int id, int x, int y);
+  int get_id();
+  void render(SDL_Rect &camera, SDL_Renderer *renderer);
+  void addTexture(TextureLoader &tLoader, SDL_Renderer *renderer, int pngNum);
+};
 
 #endif //MICROMACHINES_ITEM_H
