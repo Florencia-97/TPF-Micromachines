@@ -11,22 +11,22 @@
 
 class Button {
  protected:
-	SDL_Renderer *gRenderer = nullptr;
-	LTexture *texture;
-	SDL_Point mPosition;
-	SDL_Rect area;
-	std::list<std::function<void(std::string)>> callbacks;
+  SDL_Renderer *gRenderer = nullptr;
+  LTexture *texture;
+  SDL_Point mPosition;
+  SDL_Rect area;
+  std::list<std::function<void(std::string)>> callbacks;
   float oldWidth;
   float oldHeight;
   int colorChangeDuration;
 
  public:
-	std::string id;
-	std::string soundWhenPressed;
+  std::string id;
+  std::string soundWhenPressed;
 
   /* Button class constructor. */
-	explicit Button(std::string id, SDL_Renderer *sdl_renderer,
-					LTexture *buttonSpriteSheet);
+  explicit Button(std::string id, SDL_Renderer *sdl_renderer,
+				  LTexture *buttonSpriteSheet);
 
   /*Sets the position of the button.
    * PRE: The origin of coordinates is in the upper left corner*/
@@ -49,7 +49,7 @@ class Button {
 
   /*Sets the area that will be the space that the button will occupy in screen.
    *PRE: both x and y must be greater than 0 for proper functioning*/
-	virtual void set_area(int x, int y);
+  virtual void set_area(int x, int y);
 
   /*Renders the button with all the corresponding effects.
    * PRE: screenWidth and screenHeight must be the width and length of the

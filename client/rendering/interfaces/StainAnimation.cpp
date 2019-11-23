@@ -19,22 +19,22 @@ StainAnimation::StainAnimation() {
 }
 
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
-    if (loaded) return;
+  if (loaded) return;
   if (!this->texture.load_from_file("assets/decoration/stain.png",
 									gRenderer)) {
-    printf("Failed to load stain texture!\n");
+	printf("Failed to load stain texture!\n");
   }
   loaded = true;
 }
 
 void StainAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
-  if (!this->isPlaying)  isPlaying = true;
+  if (!this->isPlaying) isPlaying = true;
   this->texture.setAlpha(fading);
   render(0, 0, nullptr, gRenderer);
-  this->fading -= 1*frames;
-  if (this->fading <= 0){
-    fading = 255;
-    isPlaying = false;
+  this->fading -= 1 * frames;
+  if (this->fading <= 0) {
+	fading = 255;
+	isPlaying = false;
   }
 }
 

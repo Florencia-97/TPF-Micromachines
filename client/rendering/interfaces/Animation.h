@@ -7,22 +7,22 @@
 
 class Animation {
  private:
-	LTexture actualSprite;
-	int frame;
+  LTexture actualSprite;
+  int frame;
  protected:
-	bool loaded;
+  bool loaded;
  public:
   /*Loads all animation frames
    * PRE: It must be implemented by the classes that inherit from this*/
-	virtual void load_frames(SDL_Renderer *gRenderer) = 0;
+  virtual void load_frames(SDL_Renderer *gRenderer) = 0;
 
   /*Renders an animation frame.
    * PRE: It must be implemented by the classes that inherit from this*/
-	virtual void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) = 0;
+  virtual void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) = 0;
 
   /*Plays the animation.
    * PRE: It must be implemented by the classes that inherit from this*/
-	virtual void play(SDL_Renderer *gRenderer, int frames, int x, int y) = 0;
+  virtual void play(SDL_Renderer *gRenderer, int frames, int x, int y) = 0;
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_ANIMATION_H_
