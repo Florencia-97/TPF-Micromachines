@@ -15,13 +15,15 @@ class SafeQueue{
     std::mutex m;
     std::condition_variable cv;
     std::atomic<bool> open;
+    int capacity;
+    bool limited_space;
 
 public:
     SafeQueue();
 
+    explicit SafeQueue(int capacity);
+
     void push(T& event);
-
-
 
     T pop();
 
@@ -41,6 +43,7 @@ public:
 template<class T>
 void SafeQueue<T>::push(T &event) {
     std::unique_lock<std::mutex> lock(this->m);
+    if (limited_space && q.size() == capacity) q.pop();
     this->q.push(event);
     this->cv.notify_one();
 }
@@ -60,9 +63,7 @@ T SafeQueue<T>::pop() {
 
 
 template<class T>
-SafeQueue<T>::SafeQueue() {
-    open = true;
-}
+SafeQueue<T>::SafeQueue(): capacity(0), limited_space(false), open (true){}
 
 template<class T>
 bool SafeQueue<T>::isOpen() {
@@ -78,6 +79,13 @@ void SafeQueue<T>::setOpen(bool v) {
 template<class T>
 bool SafeQueue<T>::isEmpty() {
     return this->q.empty();
+}
+
+template<class T>
+SafeQueue<T>::SafeQueue(int capacity) {
+    this->capacity = capacity;
+    this->limited_space = true;
+    open = true;
 }
 
 #endif //MICROMACHINES_SAFEQUEUE_H
