@@ -20,6 +20,9 @@ class GameThread : public BaseThread {
     InfoBlock ownerInfo;
     Configuration& configs;
     PluginLibrary* pluginLibrary;
+    GameWorld game;
+    std::list<PlayerThread> plr_threads;
+
     std::string _runLobby();
 
     // Override BaseThread class
@@ -58,8 +61,6 @@ class GameThread : public BaseThread {
 public:
     std::string gameName;
     bool lobby_mode;
-    std::list<PlayerThread> plr_threads;
-    GameWorld game;
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game
@@ -67,7 +68,7 @@ public:
 
     //PRE lobby_mode must be true
     // Adds a new player to the game while lobby is on
-    //POS adds player to the lobby
+    //POS returns whether or not the player was added successfully
     bool addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
 
     ~GameThread();

@@ -108,6 +108,8 @@ void GameThread::_sendStartMsg(std::string raceId){
     it = this->plr_threads.begin();
     while (it != this->plr_threads.end()){
         ib[MY_ID] = it->id;
+        //I need access to the internal queue to pass the InfoBlock without errors
+        //as it could be modified before its sent
         (it)->sender.to_send.getInternalQueue()->emplace(ib.srcString(),false);
         it++;
     }
