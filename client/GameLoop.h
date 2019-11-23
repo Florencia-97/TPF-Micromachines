@@ -53,6 +53,7 @@ public:
     std::queue<std::string>* videoQueue;
     std::queue<std::string>* soundQueue;
     std::queue<InfoBlock>* fakePlayerQueue;
+    bool isIaPlayer;
 
   GameLoop(std::queue<InfoBlock> &rq,
            std::queue<SDL_Event> &textQueue,
@@ -62,7 +63,7 @@ public:
            std::queue<InfoBlock>& fpq,
            std::queue<std::string> &vq);
 
-    void proceedToLobby(bool is_leader);
+    void proceedToLobby(bool is_leader, bool isIa);
 
     ~GameLoop();
 

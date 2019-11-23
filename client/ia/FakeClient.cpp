@@ -1,8 +1,8 @@
 #include "FakeClient.h"
 #include "../../config/constants.h"
 
-FakeClient::FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, const std::string& mapName):
-    luaWrapper(), mapsLayer(mapName) {
+FakeClient::FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos):
+    luaWrapper(), mapsLayer("maps/race_1.yaml") {
     this->keyboardQueue = &kq;
     this->posQueue = &pos;
 }
