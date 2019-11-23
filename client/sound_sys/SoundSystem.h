@@ -7,19 +7,28 @@
 #include <queue>
 
 class SoundSystem {
-    bool playSounds;
-    std::string lastSound;
-    std::map<std::string, Mix_Chunk*> musicEffects;
-    std::map<std::string, Mix_Music*> backgroundEffects;
-    std::queue<std::string>* sound_queue;
-    bool _controlSound(std::string& event);
-    bool _controlCarSound(std::string& event);
-public:
-    explicit SoundSystem(std::queue<std::string> *sq);
-    void play(bool inRace);
-    void init();
-    ~SoundSystem();
-};
+  bool playSounds;
+  std::string lastSound;
+  std::map<std::string, Mix_Chunk *> musicEffects;
+  std::map<std::string, Mix_Music *> backgroundEffects;
+  std::queue<std::string> *sound_queue;
+  static bool _controlSound(std::string &event);
+  bool _controlCarSound(std::string &event);
+ public:
 
+  /*Builder of the class SoundSystem*/
+  explicit SoundSystem(std::queue<std::string> *queue);
+
+  /*Initializes all the components of the object for later use. It is necessary
+   * to execute this function first of all for the correct operation of the
+   * object*/
+  void init();
+
+  /*Plays the music if inRace is true*/
+  void play(bool inRace);
+
+  /*Destroyer of the class*/
+  ~SoundSystem();
+};
 
 #endif //MICROMACHINES_SOUNDSYSTEM_H

@@ -8,7 +8,7 @@ class SDLStarter {
   const int screenHeight;
   SDL_Window *window = nullptr;
   SDL_Renderer *renderer = nullptr;
-  SDL_Surface* icon;
+  SDL_Surface *icon;
 
  public:
   /*Builder of the class SDLStarter.
@@ -16,7 +16,7 @@ class SDLStarter {
    * is initialized here*/
   SDLStarter(const int width, const int height) :
 	  screenWidth(width), screenHeight(height), window(nullptr),
-      renderer(nullptr) {};
+	  renderer(nullptr) {};
 
   /*Initializes all the SDL libraries. If any of the libraries fails to
    * initialize, it does not throw an exception, but reports the same by
