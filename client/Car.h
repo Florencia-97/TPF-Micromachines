@@ -24,13 +24,14 @@ class Car {
     // Centers the camera over the car
     void setCamera(SDL_Rect &camera, int level_width, int level_height);
 
-    void render(SDL_Rect &camera, SDL_Renderer *renderer);
+    void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
 
     void move(int x, int y, int r);
-  void explode(Explosion animation, SDL_Renderer *renderer);
+
     SDL_Texture *get_texture();
 
     ~Car();
+
     bool compare_id(short i);
 
     void loadAnimations(SDL_Renderer *gRenderer);

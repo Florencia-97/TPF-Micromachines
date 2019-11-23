@@ -52,19 +52,20 @@ class GameWorld {
     void spentItemCleaning();
 
 public:
-    //POS creates a world with no gravity for top-down action
+    //list of all cars currently in the game
     std::list<RaceCar> cars;
 
+    //POS creates a world with no gravity for top-down action
     GameWorld();
 
     //PRE carStats must contain the keys ACCELERATION, HEALTH, ROTATION_FORCE & MAX_SPEED
     //creates a car and returns the new car's id
     int createCar(InfoBlock carStats);
 
-    //Proccesses a keyPressed event sent from client
+    //Proccesses a keyPressed/released event sent from client
     //PRE if the keys ACTION_TYPE or ACTION_TYPE_DOWN exist in event they
     //must contain one of the following values UP, DOWN, LEFT, RIGHT
-    void processEvent(int id, InfoBlock &event);
+    void processEvent(int id, InfoBlock &keyPressed);
 
     //PRE id must be valid
     //POS returns a reference to the car with the id

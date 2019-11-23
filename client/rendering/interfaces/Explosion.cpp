@@ -23,10 +23,10 @@ void Explosion::load_frames(SDL_Renderer *renderer) {
   }
   loaded = true;
 }
-void Explosion::play(SDL_Renderer *gRenderer, int x, int y) {
+void Explosion::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
   SDL_Rect *currentClip = &totalSprites[frame / 10];
   this->render(x, y, currentClip, gRenderer);
-  frame =  (++frame)%TOTAL_FRAMES;
+  frame =  (frame + frames)%TOTAL_FRAMES;
 
 }
 Explosion::Explosion() {

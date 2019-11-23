@@ -14,6 +14,7 @@ void StainAnimation::render(int x, int y, SDL_Rect *clip,
 StainAnimation::StainAnimation() {
   this->fading = 255;
   loaded = false;
+  isPlaying = false;
 }
 
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
@@ -25,12 +26,14 @@ void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
   loaded = true;
 }
 
-void StainAnimation::play(SDL_Renderer *gRenderer, int x, int y) {
+void StainAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
+  if (!this->isPlaying)  isPlaying = true;
   this->texture.setAlpha(fading);
   render(0, 0, nullptr, gRenderer);
-  this->fading -= 1;
-  if (this->fading <= 0) {
+  this->fading -= 1*frames;
+  if (this->fading <= 0){
     fading = 255;
+    isPlaying = false;
   }
 }
 

@@ -33,7 +33,7 @@ void Car::setCamera( SDL_Rect& camera, int level_width, int level_height ){
   if (camera.y > level_height - camera.h) camera.y = level_height - camera.h;
 }
 
-void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
+void Car::render(SDL_Rect &camera, SDL_Renderer *renderer, int frames) {
   //SDL_RenderCopy(gRenderer, texture->get_texture(), nullptr, &area);
   int x = rand()%2;
   int y = rand()%2;
@@ -45,7 +45,7 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer) {
                             CAR_HEIGHT,
                             false);
   if (health <= 0) {
-    this->explosion.play(renderer, mBox.x + x - camera.x - mBox.w, mBox.y + y - camera.y - mBox.h/4);
+      this->explosion.play(renderer, frames, mBox.x + x - camera.x - mBox.w, mBox.y + y - camera.y - mBox.h / 4);
   }
 }
 

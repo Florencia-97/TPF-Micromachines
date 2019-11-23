@@ -157,16 +157,19 @@ void GameThread::_processPlayerActions(){
 
 void GameThread::_runGame() {
     Stopwatch c;
-    float timestep_goal = 1.0/80;
+    int server_fps = std::min(120, 2*FPS);
+    float timestep_goal = 1.0f/server_fps;
     float timestep = timestep_goal;
     float time_left = GAME_DURATION_S;
-    float over_time = 2;
+    float over_time = 3;//free time after the game ends
+    int current_frame = 0;
+    int last_framedif = 1;
 
     while (this->isAlive()) {
         if (over_time > 0) _processPlayerActions();
         if (_anyPlayersAlive() && time_left > 0){
 
-            this->game.Step(timestep_goal);
+            this->game.Step(timestep_goal*(float)last_framedif);
             auto gameStatus = this->game.status();
             gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
@@ -180,8 +183,10 @@ void GameThread::_runGame() {
             }
         }
         auto time_elapsed = c.diff();
+        last_framedif = std::ceil(time_elapsed/timestep_goal);
+        current_frame = (current_frame + last_framedif) % (server_fps);
         c.reset();
-        timestep = std::max(0.0f,timestep_goal- time_elapsed);
+        timestep = std::max(0.0f,timestep_goal- std::fmod(time_elapsed, timestep_goal));
         time_left -= timestep_goal;
     }
 

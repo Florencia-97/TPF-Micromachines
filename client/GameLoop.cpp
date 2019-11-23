@@ -7,11 +7,11 @@ void GameLoop::_runProgram(){
     SDL_SetRenderTarget(starter.get_global_renderer(), NULL);
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
-      runGame(current_frame);
+        runGame(frame_dif);
     } else if (!in_menu.load()) {
-        runLobby(current_frame);
+        runLobby(frame_dif);
     } else if (in_menu.load()){
-        runMenu(current_frame);
+        runMenu(frame_dif);
     }
     if (this->recording) {
         // TODO: THIS MUST CHANGE, how to render all window again without this?
@@ -19,11 +19,11 @@ void GameLoop::_runProgram(){
         // so, i must render things all over again
         SDL_RenderClear(starter.get_global_renderer());
         if (state == GAME_STATE) {
-            runGame(current_frame);
+            runGame(frame_dif);
         } else if (!in_menu.load()) {
-            runLobby(current_frame);
+            runLobby(frame_dif);
         } else if (in_menu.load()){
-            runMenu(current_frame);
+            runMenu(frame_dif);
         }
     }
     SDL_RenderPresent(starter.get_global_renderer());
@@ -37,15 +37,16 @@ void GameLoop::_checkVideoRecording(){
 void GameLoop::_run(){
     Stopwatch c;
     float timestep_goal = 1.0/FPS;
-    float timestep = timestep_goal;
+    float timesleep = timestep_goal;
 
     while (this->isAlive()) {
         _runProgram();
-        this->sleep(timestep);
+        this->sleep(timesleep);
         float t_elapsed = c.diff();
-        timestep = std::max(0.0f,timestep_goal - t_elapsed);
+        timesleep = std::max(0.0f, timestep_goal - std::fmod(t_elapsed, timestep_goal));
         c.reset();
-        this->current_frame = (current_frame+ std::max(1,(int)(FPS*t_elapsed))) % FPS;
+        frame_dif = std::ceil(timestep_goal*t_elapsed);
+        this->current_frame = (current_frame+ frame_dif)%FPS;
     }
     close();
 }
@@ -135,6 +136,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
                      soundSystem(&sq), recording(false){
     current_frame = 0;
+    frame_dif = 1;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;

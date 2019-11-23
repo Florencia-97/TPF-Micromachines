@@ -10,7 +10,7 @@ GameRenderer::GameRenderer(){
     }
 }
 
-void GameRenderer::update_players(InfoBlock &world_state, int frame) {
+void GameRenderer::update_players(InfoBlock &world_state, int frames) {
     auto my_id = std::to_string(my_car_id);
     for (auto &car: all_cars) {
         auto id = std::to_string(car.id);
@@ -21,15 +21,14 @@ void GameRenderer::update_players(InfoBlock &world_state, int frame) {
             car.setCamera(camera, map.width, map.height);
         }
         car.health = world_state.get<int>("h"+id);
-        car.render(camera, gRenderer);
+        car.render(camera, gRenderer, frames);
     }
   health.stage_text_change("HP " + world_state.getString("h" + my_id));
   laps.stage_text_change("laps  " + world_state.getString("l" + my_id));
   timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame,
-						  float width, float height) {
+void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {
     map.render(camera, gRenderer);
     int x = camera.x;
     int y = camera.y;
@@ -37,7 +36,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
     for (auto &item: all_items){
         item.render(camera, gRenderer);
     }
-  update_players(world_state, frame);
+    update_players(world_state, frame);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
 
     laps.render(width, height);
@@ -48,8 +47,8 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
         label.render(width, height);
     }
     auto state = world_state.getString("s"+std::to_string(my_car_id));
-    if (state.find("MUD") != std::string::npos){
-        stain.play(gRenderer, 0, 0);
+    if (stain.isPlaying || state.find("MUD") != std::string::npos){
+        stain.play(gRenderer, 0, 0, 0);
     }
 }
 
