@@ -1,5 +1,3 @@
-
-
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){

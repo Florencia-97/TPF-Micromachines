@@ -26,6 +26,7 @@ class GameLoop : public BaseThread {
     int state; //thread state
     InfoBlock previous_game_state;
     std::condition_variable* client_ping;
+    VideoRecorder videoRecorder;
     GameMap map;
     GameRenderer gameRenderer;
     int screenWidth;

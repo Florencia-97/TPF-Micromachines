@@ -128,6 +128,6 @@ target_link_libraries(Client yaml-cpp pthread LuaLib
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2TTF_LIBRARY}
 		${SDL2_MIXER_LIBRARIES}
-		)
+		avformat avcodec avutil swscale)
 #target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
 #target_link_libraries(Test yaml-cpp Box2D)

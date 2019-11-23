@@ -14,7 +14,7 @@ class VideoWriter : public BaseThread{
     SwsContext* ctx = nullptr;
     void _run() override;
 public:
-    explicit VideoWriter(SafeQueue<std::vector<char>>* vq);
+    VideoWriter(SafeQueue<std::vector<char>>* vq, int w, int h);
     ~VideoWriter();
 };
 
