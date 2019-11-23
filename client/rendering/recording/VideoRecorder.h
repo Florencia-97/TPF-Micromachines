@@ -7,18 +7,20 @@
 #include "OutputFormat.h"
 #include "VideoWriter.h"
 
-class VideoRecorder{
-    SDL_Texture* videoTexture = nullptr;
-    SafeQueue<std::vector<char>> videoQueue;
-    VideoWriter* videoWriter;
-public:
-    bool rec;
-    VideoRecorder();
-    void init(SDL_Renderer* render);
-    void setTarget(SDL_Renderer* render);
-    void record(SDL_Renderer* render);
-    ~VideoRecorder();
-};
+class VideoRecorder {
+  SDL_Texture *videoTexture = nullptr;
+  SafeQueue<std::vector<char>> videoQueue;
+  VideoWriter *videoWriter;
+  bool rec;
+ public:
 
+  VideoRecorder();
+  bool get_rec_value();
+  void init(SDL_Renderer *render);
+  void setTarget(SDL_Renderer *render);
+  void record(SDL_Renderer *render);
+  ~VideoRecorder();
+  void set_rec_value(bool valueForRec);
+};
 
 #endif //MICROMACHINES_VIDEORECORDER_H

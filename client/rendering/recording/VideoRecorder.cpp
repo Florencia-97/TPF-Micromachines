@@ -50,4 +50,11 @@ VideoRecorder::~VideoRecorder(){
     videoWriter->join();
     delete(videoWriter);
 }
+bool VideoRecorder::get_rec_value() {
+  return rec;
+}
+void VideoRecorder::set_rec_value(bool valueForRec) {
+  this->rec = valueForRec;
+
+}
 
