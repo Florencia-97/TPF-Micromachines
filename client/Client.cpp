@@ -77,7 +77,7 @@ int Client::play() {
 	}
 	if (skt.isValid() && !userInput.exit) {
 	  bool is_leader = connection_state.getString(OWNER) == OWNER_YES;
-	  bool is_ia = false;
+	  bool is_ia = gameLoop.menu.get_ia();
 	  gameLoop.proceedToLobby(is_leader, is_ia);
 	  if (is_leader) {
 		waitReadyButton();
