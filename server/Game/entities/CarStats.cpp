@@ -2,7 +2,7 @@
 #include "../../config/constants.h"
 
 CarStats::CarStats(InfoBlock ib){
-    this->laps = -1;
+    this->laps = 0;
     this->base = ib;
     this->base_max_speed = ib.get<int>(MAX_SPEED);
     this->base_rot_force = ib.get<int>(ROTATION_FORCE);

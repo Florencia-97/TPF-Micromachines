@@ -3,6 +3,7 @@
 //
 
 #include <zconf.h>
+#include <iostream>
 #include "StainAnimation.h"
 #include "../../../config/constants.h"
 void StainAnimation::render(int x, int y, SDL_Rect *clip,

@@ -28,7 +28,7 @@ void GameRenderer::update_players(InfoBlock &world_state, int frames) {
   timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame, float width, float height) {
+void GameRenderer::render(InfoBlock &world_state, int frames, float width, float height) {
     map.render(camera, gRenderer);
     int x = camera.x;
     int y = camera.y;
@@ -36,19 +36,20 @@ void GameRenderer::render(InfoBlock &world_state, int frame, float width, float 
     for (auto &item: all_items){
         item.render(camera, gRenderer);
     }
-    update_players(world_state, frame);
+    update_players(world_state, frames);
     map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
 
     laps.render(width, height);
     timer.render(width, height);
     health.render(width, height);
     playertag.render(width, height);
-    for (auto& label : race_results) {
-        label.render(width, height);
-    }
+
     auto state = world_state.getString("s"+std::to_string(my_car_id));
     if (stain.isPlaying || state.find("MUD") != std::string::npos){
-        stain.play(gRenderer, 0, 0, 0);
+        stain.play(gRenderer, frames, 0, 0);
+    }
+    for (auto& label : race_results) {
+        label.render(width, height);
     }
 }
 

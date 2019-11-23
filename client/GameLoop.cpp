@@ -45,7 +45,7 @@ void GameLoop::_run(){
         float t_elapsed = c.diff();
         timesleep = std::max(0.0f, timestep_goal - std::fmod(t_elapsed, timestep_goal));
         c.reset();
-        frame_dif = std::ceil(timestep_goal*t_elapsed);
+        frame_dif = std::ceil(t_elapsed/timestep_goal);
         this->current_frame = (current_frame+ frame_dif)%FPS;
     }
     close();
