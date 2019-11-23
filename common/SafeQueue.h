@@ -33,6 +33,7 @@ public:
 
     template<class... Args>
     void emplace(Args&&... args){
+        std::unique_lock<std::mutex> lock(this->m);
         q.emplace(std::forward<Args>(args)...);
     }
 };
