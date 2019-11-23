@@ -95,6 +95,7 @@ void GameLoop::runGame(int frame_id){
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();
+        SDL_StartTextInput();
     }
 }
 
