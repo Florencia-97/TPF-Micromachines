@@ -36,6 +36,7 @@ public:
     template<class... Args>
     void emplace(Args&&... args){
         std::unique_lock<std::mutex> lock(this->m);
+        if (limited_space && q.size() == capacity) q.pop();
         q.emplace(std::forward<Args>(args)...);
     }
 };
