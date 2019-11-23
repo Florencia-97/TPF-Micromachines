@@ -13,6 +13,7 @@ int Server::play(std::string& port) {
     std::string input;
     // Server closes with a simple q
     while (input.compare("q") != 0) getline(std::cin, input);
+    std::cout << "Server is closing, please wait up to a few seconds\n";
     gamesManager.close();
     gamesManager.join();
 }
