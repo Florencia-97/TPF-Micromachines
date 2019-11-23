@@ -7,7 +7,7 @@ void Explosion::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) {
 void Explosion::load_frames(SDL_Renderer *renderer) {
     if (loaded) return;
   if (!actualSprite.load_from_file(
-	  "client/rendering/assets/decoration/explosion.png", renderer)) {
+	  "assets/decoration/explosion.png", renderer)) {
     printf("Failed to load explosion texture!\n");
   } else {
     int k = 0;
