@@ -148,7 +148,7 @@ void GameRenderer::initLeaderboard(InfoBlock &block) {
             auto id = block.getString("p"+std::to_string(i));
             auto plr = (id != std::to_string(my_car_id))  ? "Player  " + id: "YOU";
             text = pos + "     " +plr;
-        } else text = pos + "    no one";
+        } else text = pos + " ";
         label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35, gold, gRenderer);
         i++;
     }

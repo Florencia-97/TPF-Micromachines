@@ -9,7 +9,7 @@ LuaButton::LuaButton(SDL_Renderer *sdl_renderer, LTexture *texture)
 void LuaButton::set_position(int x, int y) {
   Button::set_position(x, y);
   SDL_Color white{255, 255, 255, 0xFF};
-  this->msg.init("CLICK FOR USING IA", this->mPosition.x + 100,
+  this->msg.init("USE BOT", this->mPosition.x + 100,
 				 this->mPosition.y + 180, 27, white, gRenderer);
 }
 void LuaButton::change_opacity(int i) {

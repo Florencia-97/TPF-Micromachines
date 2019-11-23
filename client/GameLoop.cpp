@@ -81,9 +81,8 @@ void GameLoop::runGame(int frame_id){
         starter.get_screen_dimensions(&width, &height);
         gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
-
     } else {
-	  menu.display_notification("Open   Games");
+	    menu.display_notification("Please wait Loading");
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();

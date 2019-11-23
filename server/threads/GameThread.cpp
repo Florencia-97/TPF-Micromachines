@@ -141,6 +141,7 @@ void GameThread::_announceWinners() {
     InfoBlock gameEnd;
     gameEnd[GAME_END] = 1;
     _sendAll(gameEnd);
+    this->sleep(2);
 }
 
 
@@ -163,7 +164,7 @@ void GameThread::_runGame() {
     float timestep_goal = 1.0f/server_fps;
     float timestep = timestep_goal;
     float time_left = GAME_DURATION_S;
-    float over_time = 3;//free time after the game ends
+    float over_time = 2;//free time after the game ends
     int current_frame = 0;
     int last_framedif = 1;
 
