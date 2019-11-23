@@ -60,7 +60,7 @@ class GameThread : public BaseThread {
 
 public:
     std::string gameName;
-    bool lobby_mode;
+    std::atomic<bool> lobby_mode;
 
     //POS spawns a Game in lobby_mode = true;
     //lobby owner can switch to lobby_mode = false by starting the game

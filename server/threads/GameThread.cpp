@@ -66,13 +66,14 @@ std::string GameThread::_runLobby() {
 
 bool GameThread::addPLayer(Socket &plr_socket, InfoBlock& playerInfo) {
     InfoBlock ib;
-    ib = _createFirstCommunication( lobby_mode? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
-    if (Protocol::sendMsg(plr_socket, ib) && lobby_mode ) {
+    bool lm = lobby_mode.load();
+    ib = _createFirstCommunication( lm? CONNECTED_TO_GAME_YES : CONNECTED_TO_GAME_NO , OWNER_NO);
+    if (Protocol::sendMsg(plr_socket, ib) && lm ) {
         this->plr_threads.emplace_back(plr_socket, playerInfo);
         this->plr_threads.back().car_type = playerInfo.getString(CAR_TYPE);
         this->plr_threads.back().run();
     }
-    return lobby_mode;
+    return lm;
 }
 
 void GameThread::_createCars(){
@@ -199,7 +200,7 @@ void GameThread::_runGame() {
 void GameThread::_run() {
     std::cout << "Running a new game!\n";
     std::string mapName = _runLobby();
-    this->lobby_mode = false;
+    this->lobby_mode.store(false);
     if (this->isAlive()) {
         std::cout << "Race chosen is: " << mapName << std::endl;
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
