@@ -20,7 +20,7 @@ StainAnimation::StainAnimation() {
 
 void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
     if (loaded) return;
-  if (!this->texture.load_from_file("client/rendering/assets/decoration/stain.png",
+  if (!this->texture.load_from_file("assets/decoration/stain.png",
 									gRenderer)) {
     printf("Failed to load stain texture!\n");
   }

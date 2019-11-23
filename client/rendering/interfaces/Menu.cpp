@@ -207,7 +207,7 @@ void Menu::create_map_buttons() {
 }
 
 void Menu::load_media() {
-  wallpaper.load_from_file("client/rendering/assets/all_images/Decor/background.png",
+  wallpaper.load_from_file("assets/all_images/Decor/background.png",
 						   gRenderer);
   auto callback_start_game = [&](const std::string &clickedId) {
 	ready = true;

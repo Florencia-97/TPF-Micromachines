@@ -31,7 +31,7 @@ bool SDLStarter::init() {
       printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
       success = false;
     } else {
-        icon = IMG_Load("client/rendering/assets/decoration/icon.png");
+        icon = IMG_Load("assets/decoration/icon.png");
         SDL_SetWindowIcon(window, icon);
 	  renderer = SDL_CreateRenderer(window, -1,
 									SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

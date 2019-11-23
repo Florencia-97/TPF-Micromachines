@@ -47,7 +47,7 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
 
-const int BUFFER_WIDTH = 352, BUFFER_HEIGHT = 288;
+const int BUFFER_WIDTH = 1280, BUFFER_HEIGHT = 960;
 
 const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
