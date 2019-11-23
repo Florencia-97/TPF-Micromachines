@@ -53,7 +53,7 @@ class Menu {
   std::string map_selected;
   TextBox textbox_lobby_name;
   bool ready;
-  bool ai_on;
+  bool iaOn;
   std::queue<InfoBlock> open_games_update;
 
   /* Initialize the menu.
@@ -117,6 +117,7 @@ class Menu {
   /*Destroyer of the class*/
   ~Menu();
 
+  bool get_ia();
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_MENU_H_

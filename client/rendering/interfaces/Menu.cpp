@@ -18,7 +18,7 @@ void Menu::init(SDL_Renderer *sdl_renderer,
   map_selected = "race_1";
   car_selected = "RED_CAR";
   ready = false;
-  ai_on = false;
+  iaOn = false;
   this->iaButton = new LuaButton(gRenderer,
 								 textureLoader.load_texture("buttons/tick.png",
 															gRenderer));
@@ -93,11 +93,11 @@ bool Menu::process_events_mouse() {
 		return false;
 	  }
 	}
-	if (connectButton->handle_event(event, sound_queue)) {
+	if (iaButton->handle_event(event, sound_queue)) {
 	  while (!mouse_queue->empty()) mouse_queue->pop();
 	  return false;
 	}
-	if (iaButton->handle_event(event, sound_queue)) {
+	if (connectButton->handle_event(event, sound_queue)) {
 	  while (!mouse_queue->empty()) mouse_queue->pop();
 	  return false;
 	}
@@ -227,8 +227,8 @@ void Menu::load_media() {
 	}
   };
   auto ai_callback = [&](const std::string &clickedId) {
-	ai_on = !ai_on;
-	if (ai_on) {
+	iaOn = !iaOn;
+	if (iaOn) {
 	  iaButton->change_opacity(255);
 	} else {
 	  iaButton->change_opacity(0);
@@ -261,4 +261,7 @@ void Menu::create_buttons_first_menu() {
 
 Menu::~Menu() {
   free(this->iaButton);
+}
+bool Menu::get_ia() {
+  return iaOn;
 }

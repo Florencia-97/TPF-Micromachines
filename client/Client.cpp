@@ -36,7 +36,7 @@ bool Client::connectToServer() {
 }
 
 bool Client::attemptConnection() {
-  if (gameLoop.menu.textbox_lobby_name.text == "") {
+  if (gameLoop.menu.textbox_lobby_name.text.empty()) {
 	gameLoop.menu.display_notification("enter  a  lobby  name  to  join  or  create  one!");
 	return false;
   }
@@ -85,7 +85,7 @@ int Client::play() {
 		ib[RACE_ID] = gameLoop.menu.map_selected;
 		keyboard_e_queue.push(ib);
 	  }
-	  if (is_ia) {
+	  if (gameLoop.menu.get_ia()) {
 		userInput.isScript = true;
 		fc.run();
 	  }
