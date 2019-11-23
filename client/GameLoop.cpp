@@ -80,7 +80,7 @@ void GameLoop::runGame(int frame_id){
         }
         if (renderQueue->front().exists(RACE_RESULTS)){
             gameState = &previous_game_state;
-            gameRenderer.initLeaderboard(renderQueue->front());
+		  gameRenderer.init_leaderboard(renderQueue->front());
         } else gameState = &renderQueue->front();
     }
 

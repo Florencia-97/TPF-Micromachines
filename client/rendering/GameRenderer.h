@@ -31,10 +31,20 @@ class GameRenderer {
   TextLabel playertag;
   std::list<TextLabel> race_results;
 
+  /*Searchs in the list stored in the object if there is an instance of the
+   * object named itemId. If there is, returns true. If not, false*/
   bool _itemInStock(const std::string &itemId);
+
+  /*For each item stored in the vector, delete the oldest instance stored
+   * in the object*/
   void _removeOld(std::vector<int> &ids);
+
+  /*Loads all the cars stored, including their positions for later rendering*/
   void loadCars(InfoBlock &inf);
+
+  /*Loads all the items stored, including their positions for later rendering*/
   void loadItems(InfoBlock &event);
+
  public:
   short my_car_id;
 
@@ -54,7 +64,7 @@ class GameRenderer {
   void update_players(InfoBlock &world_state, int frame);
 
   /*Leaderboard initializer*/
-  void initLeaderboard(InfoBlock &block);
+  void init_leaderboard(InfoBlock &block);
 };
 
 #endif //MICROMACHINES_GAMERENDERER_H

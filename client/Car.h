@@ -24,22 +24,26 @@ class Car {
    * at the moment of rendering*/
   void addTexture(LTexture *my_texture);
 
-/*Centers the camera over the
-void setCamera(SDL_Rect &camera, int level_width, int level_height);
+  /*Centers the camera over the car using the level values for this.
+  * PRE: level_width and level_height must be greather than 0*/
+  void setCamera(SDL_Rect &camera, int level_width, int level_height);
 
-void render(SDL_Rect &camera, SDL_Renderer *renderer);
+  /*Renders the texture stored in the car.
+   * PRE: For this function to work properly, it is necessary that a texture
+   * has been previously saved using the add_texture method*/
+  void render(SDL_Rect &camera, SDL_Renderer *renderer);
 
-int get_health();
+  int get_health();
 
-void modify_health(int newLife);
+  void modify_health(int newLife);
 
-short get_id();
+  short get_id();
 
-void move(int x, int y, int r);
+  void move(int x, int y, int r);
 
-void loadAnimations(SDL_Renderer *gRenderer);
+  void loadAnimations(SDL_Renderer *gRenderer);
 
-~Car();
+  ~Car();
 };
 
 #endif
