@@ -28,7 +28,7 @@ class Car {
 
     void move(int x, int y, int r);
 
-    SDL_Texture *get_texture();
+    int get_health();
 
     void modify_health(int newLife);
 
