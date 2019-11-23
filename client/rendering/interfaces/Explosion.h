@@ -26,7 +26,7 @@ class Explosion : public Animation {
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *gRenderer) override;
 
   /*Implementation of the animation playback function*/
-  void play(SDL_Renderer *gRenderer, int x, int y) override;
+  void play(SDL_Renderer *gRenderer, int frames, int x, int y) override;
 };
 
 #endif //MICROMACHINES_CLIENT_RENDERING_INTERFACES_EXPLOSION_H_

@@ -7,7 +7,7 @@ void Explosion::render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) {
 void Explosion::load_frames(SDL_Renderer *renderer) {
     if (loaded) return;
   if (!actualSprite.load_from_file(
-	  "client/rendering/assets/decoration/explosion.png", renderer)) {
+	  "assets/decoration/explosion.png", renderer)) {
     printf("Failed to load explosion texture!\n");
   } else {
     int k = 0;
@@ -23,10 +23,10 @@ void Explosion::load_frames(SDL_Renderer *renderer) {
   }
   loaded = true;
 }
-void Explosion::play(SDL_Renderer *gRenderer, int x, int y) {
+void Explosion::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
   SDL_Rect *currentClip = &totalSprites[frame / 10];
   this->render(x, y, currentClip, gRenderer);
-  frame =  (++frame)%TOTAL_FRAMES;
+  frame =  (frame + frames)%TOTAL_FRAMES;
 
 }
 Explosion::Explosion() {

@@ -3,7 +3,7 @@
 #define ITEM_SPEED_DROP "MUD_SPD_DWN"
 
 ItemMud::ItemMud(b2Body *&newBody, int itemId) :
-        Entity(newBody, itemId, ITEM_MUD), my_effect(ITEM_SPEED_DROP,0,4,0,0.5){
+        Entity(newBody, itemId, ITEM_MUD), my_effect(ITEM_SPEED_DROP,0,5,0,0.5){
 }
 
 void ItemMud::resolveCollision(Entity *other) {

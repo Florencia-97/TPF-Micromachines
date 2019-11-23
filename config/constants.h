@@ -5,7 +5,7 @@
 #define PORT "8080"
 #define FPS 40 //client fps
 #define LOBBY_TIME 5
-#define GAME_DURATION_S 120 //2mins
+#define GAME_DURATION_S 12 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 #define RACE_RESULTS "RR"
@@ -47,7 +47,7 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
 
-const int BUFFER_WIDTH = 352, BUFFER_HEIGHT = 288;
+const int BUFFER_WIDTH = 1280, BUFFER_HEIGHT = 960;
 
 const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;

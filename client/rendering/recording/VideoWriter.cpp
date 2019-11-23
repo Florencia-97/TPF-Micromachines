@@ -1,6 +1,5 @@
 #include "VideoWriter.h"
 #include "../../../config/constants.h"
-
 extern "C" {
     #include <libavformat/avformat.h>
     #include <libswscale/swscale.h>
@@ -8,11 +7,11 @@ extern "C" {
 
 const std::string videoFileName = "micromachinesVideo.mp4";
 
-VideoWriter::VideoWriter(SafeQueue<std::vector<char>>* vq)
-    : context(), videoOutput(context, videoFileName) {
+VideoWriter::VideoWriter(SafeQueue<std::vector<char>>* vq, int w, int h)
+    : context(), videoOutput(context, videoFileName, w, h) {
     videoQueue = vq;
-    ctx = sws_getContext(BUFFER_WIDTH, BUFFER_HEIGHT,
-                         AV_PIX_FMT_RGB24, BUFFER_WIDTH, BUFFER_HEIGHT,
+    ctx = sws_getContext(w, h,
+                         AV_PIX_FMT_RGB24, w, h,
                          AV_PIX_FMT_YUV420P, 0, 0, 0, 0);
 }
 

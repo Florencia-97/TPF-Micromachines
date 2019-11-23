@@ -32,8 +32,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/LuaLib.dir/src/lutf8lib.c.o"
   "CMakeFiles/LuaLib.dir/src/lvm.c.o"
   "CMakeFiles/LuaLib.dir/src/lzio.c.o"
-  "libLuaLib.a"
   "libLuaLib.pdb"
+  "libLuaLib.a"
 )
 
 # Per-language clean rules from dependency scanning.

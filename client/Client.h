@@ -2,6 +2,7 @@
 #ifndef MICROMACHINES_CLIENT_H
 #define MICROMACHINES_CLIENT_H
 
+#include <client/ia/FakeClient.h>
 #include "communication/EventSender.h"
 #include "communication/Receiver.h"
 #include "communication/UserInput.h"
@@ -31,6 +32,7 @@ class Client {
     UserInput userInput;
     Receiver receiver;
     EventSender sender;
+    FakeClient fc;
     std::string port;
     std::string service;
 

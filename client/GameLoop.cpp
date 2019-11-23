@@ -1,5 +1,3 @@
-
-
 #include "GameLoop.h"
 
 void GameLoop::_runProgram(){
@@ -7,11 +5,11 @@ void GameLoop::_runProgram(){
     SDL_SetRenderTarget(starter.get_global_renderer(), NULL);
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
-      runGame(current_frame);
+        runGame(frame_dif);
     } else if (!in_menu.load()) {
-        runLobby(current_frame);
+        runLobby(frame_dif);
     } else if (in_menu.load()){
-        runMenu(current_frame);
+        runMenu(frame_dif);
     }
     if (this->recording) {
         // TODO: THIS MUST CHANGE, how to render all window again without this?
@@ -20,11 +18,11 @@ void GameLoop::_runProgram(){
         videoRecorder.setTarget(starter.get_global_renderer());
         SDL_RenderClear(starter.get_global_renderer());
         if (state == GAME_STATE) {
-            runGame(current_frame);
+            runGame(frame_dif);
         } else if (!in_menu.load()) {
-            runLobby(current_frame);
+            runLobby(frame_dif);
         } else if (in_menu.load()){
-            runMenu(current_frame);
+            runMenu(frame_dif);
         }
     }
     SDL_RenderPresent(starter.get_global_renderer());
@@ -37,7 +35,7 @@ void GameLoop::_checkVideoRecording(){
         videoQueue->pop();
 	  if (!videoRecorder.get_rec_value()) {
             videoRecorder.init(starter.get_global_renderer());
-		videoRecorder.set_rec_value(true);
+		    videoRecorder.set_rec_value(true);
             this->recording = true;
             return;
         }
@@ -48,22 +46,23 @@ void GameLoop::_checkVideoRecording(){
 void GameLoop::_run(){
     Stopwatch c;
     float timestep_goal = 1.0/FPS;
-    float timestep = timestep_goal;
+    float timesleep = timestep_goal;
 
     while (this->isAlive()) {
         _runProgram();
-        this->sleep(timestep);
+        this->sleep(timesleep);
         float t_elapsed = c.diff();
-        timestep = std::max(0.0f,timestep_goal - t_elapsed);
+        timesleep = std::max(0.0f, timestep_goal - std::fmod(t_elapsed, timestep_goal));
         c.reset();
-        this->current_frame = (current_frame+ std::max(1,(int)(FPS*t_elapsed))) % FPS;
+        frame_dif = std::ceil(t_elapsed/timestep_goal);
+        this->current_frame = (current_frame+ frame_dif)%FPS;
     }
     close();
 }
 
 void GameLoop::runMenu(int frame_id) {
-  menu.process_events_mouse();
-  menu.process_events_keyboard();
+    menu.process_events_mouse();
+    menu.process_events_keyboard();
     starter.get_screen_dimensions(&screenWidth, &screenHeight);
     menu.render_first_menu(screenWidth, screenHeight);
 }
@@ -87,13 +86,12 @@ void GameLoop::runGame(int frame_id){
     if (!gameState->exists(GAME_END)) {
         int height;
         int width;
-        //fakePlayerQueue->push(*gameState);
+        if (isIaPlayer) fakePlayerQueue->push(*gameState);
         starter.get_screen_dimensions(&width, &height);
         gameRenderer.render(*gameState, frame_id, width, height);
         previous_game_state = *gameState;
-
     } else {
-	  menu.display_notification("Open   Games");
+	    menu.display_notification("Please wait Loading");
         state = -1;
         in_menu.store(true);
         client_ping->notify_all();
@@ -119,10 +117,11 @@ void GameLoop::runLobby(int frame_id) {
 
 }
 
-void GameLoop::proceedToLobby(bool is_leader) {
+void GameLoop::proceedToLobby(bool is_leader, bool isIa) {
+    isIaPlayer = isIa;
     SDL_StopTextInput();
     leader = is_leader;
-  menu.start_lobby_buttons();
+    menu.start_lobby_buttons();
     if (is_leader){
 	  menu.display_notification("Choose a map for the game");
     } else {
@@ -146,6 +145,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
                      soundSystem(&sq), recording(false){
     current_frame = 0;
+    frame_dif = 1;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
@@ -155,6 +155,6 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
     starter.init();
     soundSystem.init();
     menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
-  menu.set_main_menu_mode();
+    menu.set_main_menu_mode();
     client_ping = &r;
 }

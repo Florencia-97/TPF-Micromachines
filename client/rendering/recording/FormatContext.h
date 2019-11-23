@@ -3,6 +3,7 @@
 #include <string>
 
 class AVFormatContext;
+
 class FormatContext {
 public:
     FormatContext();

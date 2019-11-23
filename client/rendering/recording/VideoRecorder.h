@@ -12,6 +12,7 @@ class VideoRecorder {
   SafeQueue<std::vector<char>> videoQueue;
   VideoWriter *videoWriter;
   bool rec;
+
  public:
 
   VideoRecorder();

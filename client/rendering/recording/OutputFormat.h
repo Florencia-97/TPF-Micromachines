@@ -10,14 +10,11 @@ class AVStream;
 class AVCodecContext;
 class FormatContext;
 class SwsContext;
-/**
- * Clase que encapsula lógica la salida de video
- * Se recomienda modularizar aun más esta clase, reforzando RAII
- */
+
 class OutputFormat {
 public:
     // Ctor
-    OutputFormat(FormatContext& context, const std::string& filename);
+    OutputFormat(FormatContext& context, const std::string& filename, int w, int h);
     // Dtor
     ~OutputFormat();
     // Escribe un frame a disco. Utiliza `swsContext` para convertir
@@ -38,5 +35,7 @@ private:
     FILE* outputFile;
     AVFrame* frame;
     AVPacket* pkt;
+    int video_width;
+    int video_height;
 };
 #endif

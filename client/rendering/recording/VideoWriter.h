@@ -1,7 +1,6 @@
 #ifndef MICROMACHINES_VIDEOWRITER_H
 #define MICROMACHINES_VIDEOWRITER_H
 
-
 #include "../common/conc/BaseThread.h"
 #include <vector>
 #include "../common/SafeQueue.h"
@@ -15,7 +14,7 @@ class VideoWriter : public BaseThread{
     SwsContext* ctx = nullptr;
     void _run() override;
 public:
-    explicit VideoWriter(SafeQueue<std::vector<char>>* vq);
+    VideoWriter(SafeQueue<std::vector<char>>* vq, int w, int h);
     ~VideoWriter();
 };
 

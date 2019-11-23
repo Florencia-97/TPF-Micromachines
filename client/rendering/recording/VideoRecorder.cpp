@@ -9,6 +9,7 @@ extern "C" {
     #include <libavformat/avformat.h>
     #include <libswscale/swscale.h>
 }
+
 const std::string videoFileName = "micromachinesVideo.mp4";
 
 VideoRecorder::VideoRecorder() : rec(false) {}
@@ -18,7 +19,7 @@ void VideoRecorder::init(SDL_Renderer* render){
     videoTexture = SDL_CreateTexture(render,
                                      SDL_PIXELFORMAT_RGB24,
                                      SDL_TEXTUREACCESS_TARGET, BUFFER_WIDTH, BUFFER_HEIGHT);
-    videoWriter = new VideoWriter(&videoQueue);
+    videoWriter = new VideoWriter(&videoQueue, BUFFER_WIDTH, BUFFER_HEIGHT);
     videoWriter->run();
     std::cout << "All created correctly\n";
 }

@@ -32,10 +32,13 @@ class Car {
    * PRE: For this function to work properly, it is necessary that a texture
    * has been previously saved using the add_texture method*/
   void render(SDL_Rect &camera, SDL_Renderer *renderer);
+    void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
 
-  int get_health();
+    void move(int x, int y, int r);
 
-  void modify_health(int newLife);
+    int get_health();
+
+    void modify_health(int newLife);
 
   short get_id();
 

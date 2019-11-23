@@ -21,11 +21,12 @@
 class GameLoop : public BaseThread {
     SDLStarter starter;
     SoundSystem soundSystem;
-    VideoRecorder videoRecorder;
     int current_frame;
+    int frame_dif; //difference in frames compared to previous iteration
     int state; //thread state
     InfoBlock previous_game_state;
     std::condition_variable* client_ping;
+    VideoRecorder videoRecorder;
     GameMap map;
     GameRenderer gameRenderer;
     int screenWidth;
@@ -53,6 +54,7 @@ public:
     std::queue<std::string>* videoQueue;
     std::queue<std::string>* soundQueue;
     std::queue<InfoBlock>* fakePlayerQueue;
+    bool isIaPlayer;
 
   GameLoop(std::queue<InfoBlock> &rq,
            std::queue<SDL_Event> &textQueue,
@@ -62,7 +64,7 @@ public:
            std::queue<InfoBlock>& fpq,
            std::queue<std::string> &vq);
 
-    void proceedToLobby(bool is_leader);
+    void proceedToLobby(bool is_leader, bool isIa);
 
     ~GameLoop();
 

@@ -18,7 +18,7 @@ class FakeClient : public BaseThread {
     void _run() override;
     bool _move(InfoBlock& ib, int x, int y, int r, int& lastMove);
 public:
-    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, const std::string& map);
+    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos);
 };
 
 

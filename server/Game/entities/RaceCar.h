@@ -43,7 +43,6 @@ public:
     int getLaps();
 
     //POS parses the car's current status into an infoblock with keys
-    // {x, y, r, hp}
     void loadStateToInfoBlock(InfoBlock& ib);
 
     bool addEffect(std::shared_ptr<StatusEffect> &newStatusEffect) override;
