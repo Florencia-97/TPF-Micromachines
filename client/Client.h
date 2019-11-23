@@ -18,7 +18,6 @@ class serverNotRunning : public std::exception {
 };
 
 class Client {
-    //todo check passing of gRenderer
     Socket skt;
     SafeQueue<InfoBlock> keyboard_e_queue;
     std::queue<SDL_Event> mouse_queue;
@@ -55,8 +54,6 @@ public:
     void waitGameEnd();
 
     void waitReadyButton();
-
-    void waitMapButton();
 
     bool connectToServer();
 };
