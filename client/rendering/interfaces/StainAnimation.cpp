@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include "StainAnimation.h"
 #include "../../../config/constants.h"
@@ -26,7 +27,7 @@ void StainAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
   if (!this->isPlaying) isPlaying = true;
   this->texture.set_alpha(fading);
   render(0, 0, nullptr, gRenderer);
-  this->fading -= 1;
+  this->fading -= 1 * frames;
   if (this->fading <= 0) {
 	fading = 255;
 	isPlaying = false;
