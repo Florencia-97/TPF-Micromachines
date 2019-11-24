@@ -4,7 +4,7 @@
 #include <SDL_rect.h>
 #include <SDL_events.h>
 #include <SDL_render.h>
-#include <client/rendering/interfaces/DustAnimation.h>
+#include "rendering/interfaces/DustAnimation.h"
 #include "rendering/LTexture.h"
 #include "rendering/TextureLoader.h"
 

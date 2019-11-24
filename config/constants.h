@@ -1,7 +1,7 @@
 #ifndef _CONSTANTS_
 #define _CONSTANTS_
 #define FPS 40 //client fps
-#define GAME_DURATION_S 120 //2mins
+#define GAME_DURATION_S 12 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 #define RACE_RESULTS "RR"

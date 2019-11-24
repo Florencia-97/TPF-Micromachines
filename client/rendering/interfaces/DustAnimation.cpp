@@ -1,4 +1,4 @@
-#include <config/constants.h>
+#include "../config/constants.h"
 #include "DustAnimation.h"
 DustAnimation::DustAnimation() {
   this->fading = 255;
