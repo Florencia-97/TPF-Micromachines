@@ -12,7 +12,12 @@ extern "C" {
 
 const std::string videoFileName = "micromachinesVideo.mp4";
 
-VideoRecorder::VideoRecorder() : rec(false) {}
+VideoRecorder::VideoRecorder() : videoQueue(1) ,rec(false), dataBuffer(BUFFER_WIDTH * BUFFER_HEIGHT * 3) {
+    mBox.x = BUFFER_WIDTH/2 - 200;
+    mBox.y = BUFFER_HEIGHT/2 - 200;
+    mBox.w = 400;
+    mBox.h = 400;
+}
 
 void VideoRecorder::init(SDL_Renderer* render){
     // TODO: see if i can use the class texture loader here
@@ -29,8 +34,7 @@ void VideoRecorder::setTarget(SDL_Renderer* render){
 }
 
 void VideoRecorder::record(SDL_Renderer* render){
-    std::vector<char> dataBuffer(BUFFER_WIDTH * BUFFER_HEIGHT * 3);
-    int r = SDL_RenderReadPixels(render, NULL, SDL_PIXELFORMAT_RGB24, dataBuffer.data(), BUFFER_WIDTH * 3);
+    int r = SDL_RenderReadPixels(render, &mBox, SDL_PIXELFORMAT_RGB24, dataBuffer.data(), BUFFER_WIDTH * 3);
     if (r){
         std::cout << r << std::endl;
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "RendererReadPixels error", SDL_GetError(), NULL);
@@ -51,11 +55,12 @@ VideoRecorder::~VideoRecorder(){
     videoWriter->join();
     delete(videoWriter);
 }
-bool VideoRecorder::get_rec_value() {
-  return rec;
-}
-void VideoRecorder::set_rec_value(bool valueForRec) {
-  this->rec = valueForRec;
 
+bool VideoRecorder::get_rec_value() {
+    return rec;
+}
+
+void VideoRecorder::set_rec_value(bool valueForRec) {
+    this->rec = valueForRec;
 }
 
