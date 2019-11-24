@@ -65,7 +65,7 @@ void LTexture::render(int x, int y, SDL_Rect *clip, double angle,
 
 }
 
-int LTexture::getHeight() {
+int LTexture::get_height() {
   return height;
 }
 int LTexture::get_width() {
@@ -86,8 +86,8 @@ void LTexture::render_with_size(float x, float y, int r, SDL_Renderer *renderer,
 	SDL_RenderCopy(renderer, texture, nullptr, nullptr);
   }
 }
-void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color,
-									TTF_Font *font, SDL_Renderer *renderer) {
+void LTexture::load_from_rendered_text(const std::string &msg, SDL_Color color,
+									   TTF_Font *font, SDL_Renderer *renderer) {
   free();
   //Render text surface
   SDL_Surface *textSurface = TTF_RenderText_Solid(font, msg.c_str(), color);
@@ -111,7 +111,7 @@ void LTexture::loadFromRenderedText(const std::string &msg, SDL_Color color,
   }
 }
 
-void LTexture::setAlpha(Uint8 alpha) {
+void LTexture::set_alpha(Uint8 alpha) {
   //Modulate texture alpha
   SDL_SetTextureAlphaMod(texture, alpha);
 }

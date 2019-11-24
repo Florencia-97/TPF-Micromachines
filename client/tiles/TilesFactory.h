@@ -19,8 +19,8 @@ class TilesFactory {
    * file
    * POS: this function returns a pointer to the created Tile. This tile, will
    * have the position X and Y*/
-  std::shared_ptr<Tile> getTile(int tyleType, int x, int y,
-								SDL_Renderer *gRenderer);
+  std::shared_ptr<Tile> get_tile(int tyleType, int x, int y,
+								 SDL_Renderer *gRenderer);
 
   /*Destroyer of the class*/
   ~TilesFactory();

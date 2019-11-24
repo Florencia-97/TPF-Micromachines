@@ -18,7 +18,7 @@ void GameRenderer::update_players(InfoBlock &world_state, int frame) {
 			 world_state.get<int>("y" + id),
 			 world_state.get<int>("r" + id));
 	if (car.get_id() == my_car_id) {
-	  car.setCamera(camera, map.width, map.height);
+	  car.set_camera(camera, map.width, map.height);
 	}
 	car.modify_health(world_state.get<int>("h" + id));
 	car.render(camera, gRenderer, frame);
@@ -33,7 +33,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
   map.render(camera, gRenderer);
   int x = camera.x;
   int y = camera.y;
-  loadItems(world_state);
+  load_items(world_state);
   for (auto &item: all_items) {
 	item.render(camera, gRenderer);
   }
@@ -57,7 +57,7 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
   gRenderer = gr;
   explosion.load_frames(gRenderer);
   stain.load_frames(gRenderer);
-  loadCars(game_info);
+  load_cars(game_info);
   map.loadMap("maps/" + game_info.getString(RACE_ID) + ".yaml", gRenderer);
 
   SDL_Color w = {255, 255, 255, 0xFF};
@@ -77,23 +77,23 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
   }
 }
 
-void GameRenderer::loadCars(InfoBlock &cars_info) {
-  my_car_id = cars_info.exists(MY_ID) ? cars_info.get<int>(MY_ID) : 0;
-  int n_cars = cars_info.exists(PLAYERS_AMOUNT) ? cars_info.get<int>(PLAYERS_AMOUNT) : 1;
+void GameRenderer::load_cars(InfoBlock &inf) {
+  my_car_id = inf.exists(MY_ID) ? inf.get<int>(MY_ID) : 0;
+  int n_cars = inf.exists(PLAYERS_AMOUNT) ? inf.get<int>(PLAYERS_AMOUNT) : 1;
   for (int i = 0; i < n_cars; i++) {
 	auto id = std::to_string(i);
 	this->all_cars.emplace_back(i);
 	all_cars.back().move(
-		cars_info.exists("x" + id) ? cars_info.get<int>("x" + id) : 0,
-		cars_info.exists("y" + id) ? cars_info.get<int>("y" + id) : 0,
-		cars_info.exists("r" + id) ? cars_info.get<int>("r" + id) : 0);
+		inf.exists("x" + id) ? inf.get<int>("x" + id) : 0,
+		inf.exists("y" + id) ? inf.get<int>("y" + id) : 0,
+		inf.exists("r" + id) ? inf.get<int>("r" + id) : 0);
 
-	auto cartype = cars_info.getString(CAR_TYPE + id);
+	auto cartype = inf.getString(CAR_TYPE + id);
 	std::transform(cartype.begin(), cartype.end(),
 				   cartype.begin(), ::tolower);
-	all_cars.back().addTexture(tloader.load_texture("cars/" + cartype + ".png",
-													gRenderer));
-	all_cars.back().loadAnimations(gRenderer);
+	all_cars.back().add_texture(tloader.load_texture("cars/" + cartype + ".png",
+													 gRenderer));
+	all_cars.back().load_animations(gRenderer);
   }
 }
 
@@ -104,7 +104,7 @@ bool GameRenderer::_itemInStock(const std::string &itemId) {
   return false;
 }
 
-void GameRenderer::loadItems(InfoBlock &event) {
+void GameRenderer::load_items(InfoBlock &event) {
   int n_items = event.exists(OBJECTS_AMOUNT) ? event.get<int>(OBJECTS_AMOUNT) : 0;
   std::vector<int> ids;
   for (int i = 0; i < n_items; i++) {

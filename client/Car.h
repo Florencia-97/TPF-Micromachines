@@ -22,27 +22,37 @@ class Car {
 
   /*Adds a texture to the car in order to represent the car in the screen
    * at the moment of rendering*/
-  void addTexture(LTexture *my_texture);
+  void add_texture(LTexture *my_texture);
 
   /*Centers the camera over the car using the level values for this.
   * PRE: level_width and level_height must be greather than 0*/
-  void setCamera(SDL_Rect &camera, int level_width, int level_height);
+  void set_camera(SDL_Rect &camera, int level_width, int level_height);
 
   /*Renders the texture stored in the car.
    * PRE: For this function to work properly, it is necessary that a texture
-   * has been previously saved using the add_texture method*/
+   * has been previously saved using the add_texture method
+   * POST: For making the efect of the car moving, this function renders
+   * the car in the position x+ rand(2), y + rand(1) */
   void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
 
-  void move(int x, int y, int r);
+  /*Places the car in the position x,y and rotates it using the rotation
+   * parameter.
+   * POST: There is not animation between one position or other*/
+  void move(int x, int y, int rotationValue);
 
-  int get_health();
-
+  /*Changes the value of the health of the car.
+   * POST: The value newLife is the new valor*/
   void modify_health(int newLife);
 
+  /*Returns the id of the car.
+   * POST: This value given in the constructor of the class is never modified*/
   short get_id();
 
-  void loadAnimations(SDL_Renderer *gRenderer);
+  /*Loads the animation of the explosion to the car in order to play it in the
+   * future*/
+  void load_animations(SDL_Renderer *gRenderer);
 
+  /*Destroyer of the class*/
   ~Car();
 };
 

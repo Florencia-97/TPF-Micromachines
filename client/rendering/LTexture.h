@@ -40,7 +40,7 @@ class LTexture {
   int get_width();
 
   /*Returns the height of the image stored in the object*/
-  int getHeight();
+  int get_height();
 
   /*Returns  the pointer to the SDL_Texture stored in the object.
    * POST: If there is not a texture stored, it returns nullptr*/
@@ -55,11 +55,11 @@ class LTexture {
 
   /*Create an image in which the message given by parameter will be using the
    * font given by parameter*/
-  void loadFromRenderedText(const std::string &msg, SDL_Color color,
-							TTF_Font *font, SDL_Renderer *renderer);
+  void load_from_rendered_text(const std::string &msg, SDL_Color color,
+							   TTF_Font *font, SDL_Renderer *renderer);
 
   /*Sets an alpha mask to the image stored in the object*/
-  void setAlpha(Uint8 alpha);
+  void set_alpha(Uint8 alpha);
 
   /*Destroyer of the object*/
   ~LTexture();

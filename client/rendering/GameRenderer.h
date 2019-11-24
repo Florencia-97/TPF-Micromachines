@@ -40,10 +40,10 @@ class GameRenderer {
   void _removeOld(std::vector<int> &ids);
 
   /*Loads all the cars stored, including their positions for later rendering*/
-  void loadCars(InfoBlock &inf);
+  void load_cars(InfoBlock &inf);
 
   /*Loads all the items stored, including their positions for later rendering*/
-  void loadItems(InfoBlock &event);
+  void load_items(InfoBlock &event);
 
  public:
   short my_car_id;

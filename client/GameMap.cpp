@@ -27,7 +27,7 @@ void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer
             if (tileType == 0){
                 continue;
             }
-            auto tile = tiles_factory.getTile(tileType, x, y, gRenderer);
+		  auto tile = tiles_factory.get_tile(tileType, x, y, gRenderer);
             if (mapName == "ground") this->ground.back().push_back(tile);
             else if (mapName == "road") this->road.back().push_back(tile);
             else this->extras.back().push_back(tile);

@@ -29,7 +29,7 @@ void StainAnimation::load_frames(SDL_Renderer *gRenderer) {
 
 void StainAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
   if (!this->isPlaying) isPlaying = true;
-  this->texture.setAlpha(fading);
+  this->texture.set_alpha(fading);
   render(0, 0, nullptr, gRenderer);
   this->fading -= 1 * frames;
   if (this->fading <= 0) {
