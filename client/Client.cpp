@@ -91,10 +91,8 @@ void Client::play_game() {
 	  ib[RACE_ID] = gameLoop.menu.map_selected;
 	  keyboard_e_queue.push(ib);
 	}
-	if (gameLoop.menu.get_ia()) {
-	  userInput.isScript = true;
-	  fc.run();
-	}
+	userInput.isScript = is_ia;
+	if (is_ia) fc.run();
 	if (!receiver.isRunning()) {
 	  receiver.run();
 	  sender.run();
