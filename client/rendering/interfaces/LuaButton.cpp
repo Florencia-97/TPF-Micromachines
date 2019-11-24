@@ -13,7 +13,7 @@ void LuaButton::set_position(int x, int y) {
 				 this->mPosition.y + 180, 27, white, gRenderer);
 }
 void LuaButton::change_opacity(int i) {
-  this->texture->setAlpha(i);
+  this->texture->set_alpha(i);
 }
 
 

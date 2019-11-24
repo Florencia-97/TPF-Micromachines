@@ -6,8 +6,8 @@ TilesFactory::TilesFactory() {
   this->ib = InfoBlock("config/tilesInfo.yaml", true);
 }
 
-std::shared_ptr<Tile> TilesFactory::getTile(int tyleType, int x,
-											int y, SDL_Renderer *gRenderer) {
+std::shared_ptr<Tile> TilesFactory::get_tile(int tyleType, int x,
+											 int y, SDL_Renderer *gRenderer) {
   std::string key;
   switch (tyleType) {
 	case GRASS_TILE: key = "grass_tile";

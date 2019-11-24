@@ -13,7 +13,7 @@ void TextLabel::init(const std::string &msg, int x, int y, int size, SDL_Color c
   this->x = x;
   this->y = y;
   if (!font) this->font = TTF_OpenFont("client/rendering/interfaces/arcade.ttf", size);
-  textTexture.loadFromRenderedText(text, color, font, sdl_renderer);
+  textTexture.load_from_rendered_text(text, color, font, sdl_renderer);
   updateBounds();
   if (!oldWidth) oldWidth = SCREEN_WIDTH;
   if (!oldHeight) oldHeight = SCREEN_HEIGHT;
@@ -38,7 +38,7 @@ void TextLabel::render(float screenWidth, float screenHeight) {
 
 void TextLabel::updateBounds() {
   this->textArea = {x - textTexture.get_width() / 2, y, textTexture.get_width(),
-					textTexture.getHeight()};
+					textTexture.get_height()};
 }
 
 void TextLabel::set_intermittent_rate(int rate) {
@@ -68,7 +68,7 @@ void TextLabel::_update() {
   }
   if (needed) {
 	textTexture.free();
-	textTexture.loadFromRenderedText(text, color, font, renderer);
+	textTexture.load_from_rendered_text(text, color, font, renderer);
 	updateBounds();
   }
 }
