@@ -134,7 +134,7 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<InfoBlock>& fpq,
                    std::queue<std::string> &vq)
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
-                     soundSystem(&sq), recording(false){
+                     soundSystem(&sq), recording(false), gameRenderer(sq){
     current_frame = 0;
     frame_dif = 1;
     state = -1;

@@ -46,7 +46,7 @@ void SoundSystem::play(bool inRace) {
 	  return;
 	}
 	Mix_PlayChannel(1, this->musicEffects[event], 0);
-	this->lastSound = event;
+    this->lastSound = event;
   }
 }
 
@@ -68,6 +68,7 @@ bool SoundSystem::_controlCarSound(std::string &event) {
   } else {
 	return false;
   }
+  this->lastSound = event;
   return true;
 }
 
