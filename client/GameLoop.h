@@ -19,56 +19,58 @@
 #define GAME_STATE 2
 
 class GameLoop : public BaseThread {
-    SDLStarter starter;
-    SoundSystem soundSystem;
-    int current_frame;
-    int frame_dif; //difference in frames compared to previous iteration
-    int state; //thread state
-    InfoBlock previous_game_state;
-    std::condition_variable* client_ping;
-    VideoRecorder videoRecorder;
-    GameMap map;
-    GameRenderer gameRenderer;
-    int screenWidth;
-    int screenHeight;
-    bool ready;
-    bool leader;
+  SDLStarter starter;
+  SoundSystem soundSystem;
+  int current_frame;
+  int frame_dif; //difference in frames compared to previous iteration
+  int state; //thread state
+  InfoBlock previous_game_state;
+  std::condition_variable *client_ping;
+  VideoRecorder videoRecorder;
+  GameMap map;
+  GameRenderer gameRenderer;
+  int screenWidth;
+  int screenHeight;
+  bool ready;
+  bool leader;
 
-    void _runProgram();
+  void _runProgram();
 
-    void _run() override;
+  void _run() override;
 
-    void runMenu(int frame_id);
+  void runMenu(int frame_id);
 
-    void runGame(int frame_id);
+  void runGame(int frame_id);
 
-    void runLobby(int frame_id);
+  void runLobby(int frame_id);
 
-    void _checkVideoRecording();
+  void _checkVideoRecording();
 
-public:
-    Menu menu;
-    std::atomic<bool> in_menu;
-    std::atomic<bool> recording;
-    std::queue<InfoBlock>* renderQueue;
-    std::queue<std::string>* videoQueue;
-    std::queue<std::string>* soundQueue;
-    std::queue<InfoBlock>* fakePlayerQueue;
-    bool isIaPlayer;
+ public:
+  Menu menu;
+  std::atomic<bool> in_menu;
+  std::atomic<bool> recording;
+  std::queue<InfoBlock> *renderQueue;
+  std::queue<std::string> *videoQueue;
+  std::queue<std::string> *soundQueue;
+  std::queue<InfoBlock> *fakePlayerQueue;
+  bool isIaPlayer;
 
+  /*Builder of the class gameLoop*/
   GameLoop(std::queue<InfoBlock> &rq,
-           std::queue<SDL_Event> &textQueue,
-           std::queue<SDL_Event> &mouseQueue,
-           std::condition_variable &ready,
-           std::queue<std::string> &sq,
-           std::queue<InfoBlock>& fpq,
-           std::queue<std::string> &vq);
+		   std::queue<SDL_Event> &textQueue,
+		   std::queue<SDL_Event> &mouseQueue,
+		   std::condition_variable &ready,
+		   std::queue<std::string> &sq,
+		   std::queue<InfoBlock> &fpq,
+		   std::queue<std::string> &vq);
 
-    void proceedToLobby(bool is_leader, bool isIa);
+  /*Proceeds to the correspondent menu using the value proceedToLobby.
+   * In order to do that, uses the value is_leader*/
+  void proceedToLobby(bool is_leader, bool isIa);
 
-    ~GameLoop();
+  ~GameLoop();
 
 };
-
 
 #endif //MICROMACHINES_GAMELOOP_H
