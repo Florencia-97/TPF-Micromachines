@@ -38,12 +38,12 @@ void GameMap::_loadLayer(std::vector<std::vector<int>> layerMatrix, SDL_Renderer
 void GameMap::render(SDL_Rect &camera, SDL_Renderer *renderer){
     for (const auto& row: ground){
         for (const auto& tile: row){
-          tile->renderWithSize(camera, renderer);
+		  tile->render(camera, renderer);
         }
     }
     for (const auto& row: road){
         for (const auto& tile: row){
-            tile->renderWithSize(camera, renderer);
+		  tile->render(camera, renderer);
         }
     }
 }
@@ -53,7 +53,7 @@ void GameMap::renderDeco(SDL_Rect &camera, SDL_Renderer *renderer, int x, int y)
         for (const auto& tile: row){
             tile->getBox().x += x;
             tile->getBox().y += y;
-            tile->renderWithSize(camera, renderer);
+		  tile->render(camera, renderer);
             tile->getBox().x -= x;
             tile->getBox().y -= y;
         }
