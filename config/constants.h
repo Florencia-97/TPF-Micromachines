@@ -5,7 +5,7 @@
 #define PORT "8080"
 #define FPS 40 //client fps
 #define LOBBY_TIME 5
-#define GAME_DURATION_S 12 //2mins
+#define GAME_DURATION_S 25 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 #define RACE_RESULTS "RR"

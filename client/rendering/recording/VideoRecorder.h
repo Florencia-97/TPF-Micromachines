@@ -8,20 +8,21 @@
 #include "VideoWriter.h"
 
 class VideoRecorder {
-  SDL_Texture *videoTexture = nullptr;
-  SafeQueue<std::vector<char>> videoQueue;
-  VideoWriter *videoWriter;
-  bool rec;
+    SDL_Texture *videoTexture = nullptr;
+    SafeQueue<std::vector<char>> videoQueue;
+    VideoWriter *videoWriter;
+    bool rec;
+    std::vector<char> dataBuffer;
+    SDL_Rect mBox;
 
- public:
-
-  VideoRecorder();
-  bool get_rec_value();
-  void init(SDL_Renderer *render);
-  void setTarget(SDL_Renderer *render);
-  void record(SDL_Renderer *render);
-  ~VideoRecorder();
-  void set_rec_value(bool valueForRec);
+public:
+    VideoRecorder();
+    bool get_rec_value();
+    void init(SDL_Renderer *render);
+    void setTarget(SDL_Renderer *render);
+    void record(SDL_Renderer *render);
+    ~VideoRecorder();
+    void set_rec_value(bool valueForRec);
 };
 
 #endif //MICROMACHINES_VIDEORECORDER_H

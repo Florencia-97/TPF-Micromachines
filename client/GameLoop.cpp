@@ -2,7 +2,11 @@
 
 void GameLoop::_runProgram(){
     this->_checkVideoRecording();
-  SDL_SetRenderTarget(starter.get_global_renderer(), nullptr);
+    if (!this->recording || this->current_frame % 5 != 0) {
+        SDL_SetRenderTarget(starter.get_global_renderer(), nullptr);
+    } else {
+        videoRecorder.setTarget(starter.get_global_renderer());
+    }
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
         runGame(frame_dif);
@@ -11,22 +15,8 @@ void GameLoop::_runProgram(){
     } else if (in_menu.load()){
         runMenu(frame_dif);
     }
-    if (this->recording) {
-        // TODO: THIS MUST CHANGE, how to render all window again without this?
-        // the thing is that now it renders images over video texture
-        // so, i must render things all over again
-        videoRecorder.setTarget(starter.get_global_renderer());
-        SDL_RenderClear(starter.get_global_renderer());
-        if (state == GAME_STATE) {
-            runGame(frame_dif);
-        } else if (!in_menu.load()) {
-            runLobby(frame_dif);
-        } else if (in_menu.load()){
-            runMenu(frame_dif);
-        }
-    }
     SDL_RenderPresent(starter.get_global_renderer());
-    if (this->recording) videoRecorder.record(starter.get_global_renderer());
+    if (this->recording && this->current_frame % 5 == 0) videoRecorder.record(starter.get_global_renderer());
     soundSystem.play(state == GAME_STATE);
 }
 
@@ -55,6 +45,7 @@ void GameLoop::_run(){
         timesleep = std::max(0.0f, timestep_goal - std::fmod(t_elapsed, timestep_goal));
         c.reset();
         frame_dif = std::ceil(t_elapsed/timestep_goal);
+        std::cout << frame_dif << std::endl;
         this->current_frame = (current_frame+ frame_dif)%FPS;
     }
     close();
