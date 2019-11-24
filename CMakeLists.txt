@@ -99,10 +99,10 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/interfaces/StainAnimation.cpp client/rendering/interfaces/StainAnimation.h
 		client/Item.cpp client/Item.h
 		client/ia/FakeClient.cpp client/ia/FakeClient.h
-		client/rendering/recording/VideoRecorder.cpp client/rendering/recording/VideoRecorder.h
-		client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
-		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
-		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
+		#client/rendering/recording/VideoRecorder.cpp client/rendering/recording/VideoRecorder.h
+		#client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
+		#client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
+		#client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
 		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
 
 #set(TEST_SOURCE_FILES
@@ -130,7 +130,7 @@ target_link_libraries(Client yaml-cpp pthread LuaLib
 		${SDL2_IMAGE_LIBRARIES}
 		${SDL2TTF_LIBRARY}
 		${SDL2_MIXER_LIBRARIES}
-		avformat avcodec avutil swscale
+		#avformat avcodec avutil swscale
 		)
 #target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
 #target_link_libraries(Test yaml-cpp Box2D)

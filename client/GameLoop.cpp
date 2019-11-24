@@ -5,7 +5,7 @@ void GameLoop::_runProgram(){
     if (!this->recording || this->current_frame % 5 != 0) {
         SDL_SetRenderTarget(starter.get_global_renderer(), nullptr);
     } else {
-        videoRecorder.setTarget(starter.get_global_renderer());
+ //       videoRecorder.setTarget(starter.get_global_renderer());
     }
     SDL_RenderClear(starter.get_global_renderer());
     if (state == GAME_STATE) {
@@ -16,19 +16,19 @@ void GameLoop::_runProgram(){
         runMenu(frame_dif);
     }
     SDL_RenderPresent(starter.get_global_renderer());
-    if (this->recording && this->current_frame % 5 == 0) videoRecorder.record(starter.get_global_renderer());
+//    if (this->recording && this->current_frame % 5 == 0) videoRecorder.record(starter.get_global_renderer());
     soundSystem.play(state == GAME_STATE);
 }
 
 void GameLoop::_checkVideoRecording(){
     if (!videoQueue->empty()){
         videoQueue->pop();
-	  if (!videoRecorder.get_rec_value()) {
-            videoRecorder.init(starter.get_global_renderer());
-		    videoRecorder.set_rec_value(true);
-            this->recording = true;
-            return;
-        }
+//	  if (!videoRecorder.get_rec_value()) {
+  //          videoRecorder.init(starter.get_global_renderer());
+	//	    videoRecorder.set_rec_value(true);
+      //      this->recording = true;
+        //    return;
+       // }
         this->recording = !this->recording;
     }
 }

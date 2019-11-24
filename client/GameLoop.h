@@ -10,7 +10,7 @@
 #include "rendering/interfaces/Menu.h"
 #include "rendering/GameRenderer.h"
 #include "sound_sys/SoundSystem.h"
-#include "rendering/recording/VideoRecorder.h"
+//#include "rendering/recording/VideoRecorder.h"
 #include <SDL2/SDL.h>
 #include <queue>
 #include <atomic>
@@ -26,7 +26,7 @@ class GameLoop : public BaseThread {
   int state; //thread state
   InfoBlock previous_game_state;
   std::condition_variable *client_ping;
-  VideoRecorder videoRecorder;
+//VideoRecorder videoRecorder;
   GameMap map;
   GameRenderer gameRenderer;
   int screenWidth;

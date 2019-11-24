@@ -50,9 +50,7 @@ void Car::load_animations(SDL_Renderer *gRenderer) {
 }
 
 Car::~Car() {
-  if (texture != nullptr) {
-	texture->free();
-  }
+
 }
 
 short Car::get_id() {
