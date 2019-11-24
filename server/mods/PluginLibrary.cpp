@@ -40,9 +40,9 @@ void PluginLibrary::_loadPlugins(std::vector<PluginLoader*>& plugins){
     }
 }
 
-void PluginLibrary::runPlugins(float timestep) {
+void PluginLibrary::runPlugins(float timeStep) {
     if (this->clock < TIME_BETWEEN_PLUGINS){
-        this->clock += timestep;
+        this->clock += timeStep;
         return;
     }
     std::cout << "Running plugins\n";
@@ -52,7 +52,6 @@ void PluginLibrary::runPlugins(float timestep) {
 }
 
 PluginLibrary::~PluginLibrary() {
-    std::cout << "Deleting plugins\n";
     for (auto & plugin : plugins){
         delete(plugin);
     }
