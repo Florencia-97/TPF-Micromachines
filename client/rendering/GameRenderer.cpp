@@ -29,7 +29,7 @@ void GameRenderer::update_players(InfoBlock &world_state, int frame) {
   timer.stage_text_change(world_state.getString(TIME_LEFT));
 }
 
-void GameRenderer::render(InfoBlock &world_state, int frame,
+void GameRenderer::render(InfoBlock &world_state, int frames,
 						  float width, float height) {
   map.render(camera, gRenderer);
   int x = camera.x;
@@ -38,7 +38,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
   for (auto &item: all_items) {
 	item.render(camera, gRenderer);
   }
-  update_players(world_state, frame);
+  update_players(world_state, frames);
   map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
 
   laps.render(width, height);
@@ -50,7 +50,7 @@ void GameRenderer::render(InfoBlock &world_state, int frame,
   }
   auto state = world_state.getString("s" + std::to_string(my_car_id));
   if (state.find("MUD") != std::string::npos) {
-	stain.play(gRenderer, 0, 0, frame);
+	stain.play(gRenderer, frames, 0, 0);
   }
 }
 
@@ -81,6 +81,7 @@ void GameRenderer::init(SDL_Renderer *gr, InfoBlock &game_info) {
 void GameRenderer::load_cars(InfoBlock &inf) {
   my_car_id = inf.exists(MY_ID) ? inf.get<int>(MY_ID) : 0;
   int n_cars = inf.exists(PLAYERS_AMOUNT) ? inf.get<int>(PLAYERS_AMOUNT) : 1;
+  all_cars.clear();
   for (int i = 0; i < n_cars; i++) {
 	auto id = std::to_string(i);
 	this->all_cars.emplace_back(i);
@@ -148,7 +149,7 @@ void GameRenderer::init_leaderboard(InfoBlock &block) {
 	  auto id = block.getString("p" + std::to_string(i));
 	  auto plr = (id != std::to_string(my_car_id)) ? "Player  " + id : "YOU";
 	  text = pos + "     " + plr;
-	} else text = pos + "    no one";
+	} else text = pos + "   ";
 	label.init(text, 450 + 400 * (i % 2), 350 + 75 * (int) (i / 2), 35,
 			   gold, gRenderer);
 	i++;
