@@ -33,7 +33,7 @@ void Car::set_camera(SDL_Rect &camera, int level_width, int level_height) {
   if (camera.y > level_height - camera.h) camera.y = level_height - camera.h;
 }
 
-void Car::render(SDL_Rect &camera, SDL_Renderer *renderer, int frames) {
+void Car::render(SDL_Rect &camera, SDL_Renderer *renderer, int frames, std::queue<std::string> *sq) {
   int x = rand() % 2;
   int y = rand() % 2;
   texture->render_with_size(mBox.x + x - camera.x, mBox.y + y - camera.y,
@@ -41,6 +41,7 @@ void Car::render(SDL_Rect &camera, SDL_Renderer *renderer, int frames) {
   if (health <= 0) {
 	this->explosion.play(renderer, frames, mBox.x + x - camera.x - mBox.w,
 						 mBox.y + y - camera.y - mBox.h / 4);
+    sq->push(SOUND_CAR_EXPLODES);
   }
 }
 

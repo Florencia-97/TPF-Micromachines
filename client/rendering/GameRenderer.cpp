@@ -3,7 +3,8 @@
 #include "interfaces/StainAnimation.h"
 #include <algorithm>
 
-GameRenderer::GameRenderer() {
+GameRenderer::GameRenderer(std::queue<std::string> &sq) {
+  sound_queue = &sq;
   camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
   for (int i = 0; i < 6; i++) {
 	race_results.emplace_back();
@@ -21,7 +22,7 @@ void GameRenderer::update_players(InfoBlock &world_state, int frame) {
 	  car.set_camera(camera, map.width, map.height);
 	}
 	car.modify_health(world_state.get<int>("h" + id));
-	car.render(camera, gRenderer, frame);
+	car.render(camera, gRenderer, frame, sound_queue);
   }
   health.stage_text_change("HP " + world_state.getString("h" + my_id));
   laps.stage_text_change("laps  " + world_state.getString("l" + my_id));

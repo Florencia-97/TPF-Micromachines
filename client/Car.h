@@ -3,6 +3,7 @@
 
 #include <SDL_rect.h>
 #include <SDL_events.h>
+#include <queue>
 #include "rendering/LTexture.h"
 #include "tiles/Tile.h"
 #include "rendering/interfaces/Explosion.h"
@@ -33,7 +34,7 @@ class Car {
    * has been previously saved using the add_texture method
    * POST: For making the efect of the car moving, this function renders
    * the car in the position x+ rand(2), y + rand(1) */
-  void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
+  void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames, std::queue<std::string> *sq);
 
   /*Places the car in the position x,y and rotates it using the rotation
    * parameter.
