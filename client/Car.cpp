@@ -49,12 +49,6 @@ void Car::load_animations(SDL_Renderer *gRenderer) {
   explosion.load_frames(gRenderer);
 }
 
-Car::~Car() {
-  if (texture != nullptr) {
-	texture->free();
-  }
-}
-
 short Car::get_id() {
   return this->id;
 }

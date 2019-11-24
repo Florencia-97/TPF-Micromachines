@@ -27,7 +27,7 @@ class Item {
 
   /*Renders the item in the screen using the position of the camera parameter as
    * guide*/
-  void render(SDL_Rect &camera, SDL_Renderer *renderer);
+  void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
 
   /*Adds a texture to the object in order to show it when the render() method is
    * executed

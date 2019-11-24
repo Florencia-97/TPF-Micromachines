@@ -22,7 +22,7 @@ void DustAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
   if (this->isPlaying) {
 	this->texture.set_alpha(fading);
 	render(x, y, nullptr, gRenderer);
-	this->fading -= 1;
+	this->fading -= 1*frames;
 	if (this->fading == 1) {
 	  isPlaying = false;
 	}

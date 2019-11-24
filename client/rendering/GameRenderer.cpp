@@ -36,7 +36,7 @@ void GameRenderer::render(InfoBlock &world_state, int frames,
   int y = camera.y;
   load_items(world_state);
   for (auto &item: all_items) {
-	item.render(camera, gRenderer);
+      item.render(camera, gRenderer, frames);
   }
   update_players(world_state, frames);
   map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);
