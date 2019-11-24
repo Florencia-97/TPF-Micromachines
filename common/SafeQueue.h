@@ -13,6 +13,7 @@ template <class T>
 class SafeQueue{
     std::queue<T> q;
     std::mutex m;
+    std::mutex m2;
     std::condition_variable cv;
     std::atomic<bool> open;
     int capacity;
@@ -52,11 +53,12 @@ void SafeQueue<T>::push(T &event) {
 
 template<class T>
 T SafeQueue<T>::pop() {
-    std::unique_lock<std::mutex> lock(this->m);
+    std::unique_lock<std::mutex> lock(this->m2);
     while (this->q.empty()){
         if (!open) return T();
         this->cv.wait(lock);
     }
+    std::unique_lock<std::mutex> lock2(this->m);
     T comp = this->q.front();
     this->q.pop();
     return comp;
