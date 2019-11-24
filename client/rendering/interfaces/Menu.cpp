@@ -134,7 +134,6 @@ void Menu::render_first_menu(float screenWidth, float screenHeight) {
 }
 
 void Menu::start_lobby_buttons() {
-  active_buttons = &mapButtons;
   for (auto &label : open_games) {
 	label.stage_text_change(" ");
   }
@@ -212,6 +211,11 @@ void Menu::load_media() {
   auto callback_start_game = [&](const std::string &clickedId) {
 	ready = true;
 	connectButton->change_color(80, 80, 80, FPS / 2);
+	if (active_buttons == &mapButtons) {
+	  active_buttons = &carButtons;
+	} else {
+	  active_buttons = &mapButtons;
+	}
 	this->game_ready_cv->notify_all();
   };
   //car buttons
@@ -248,15 +252,20 @@ void Menu::load_media() {
 }
 void Menu::create_buttons_first_menu() {
   carButtons.emplace_back("BLUE_CAR", gRenderer,
-						  textureLoader.load_texture("cars/blue_car.png", gRenderer));
+						  textureLoader.load_texture("cars/blue_car.png",
+													 gRenderer));
   carButtons.emplace_back("BLACK_CAR", gRenderer,
-						  textureLoader.load_texture("cars/black_car.png", gRenderer));
+						  textureLoader.load_texture("cars/black_car.png",
+													 gRenderer));
   carButtons.emplace_back("RED_CAR", gRenderer,
-						  textureLoader.load_texture("cars/red_car.png", gRenderer));
+						  textureLoader.load_texture("cars/red_car.png",
+													 gRenderer));
   carButtons.emplace_back("WHITE_CAR", gRenderer,
-						  textureLoader.load_texture("cars/white_car.png", gRenderer));
+						  textureLoader.load_texture("cars/white_car.png",
+													 gRenderer));
   connectButton = std::make_shared<ConnectButton>(gRenderer,
-												  textureLoader.load_texture("buttons/connect.png", gRenderer));
+												  textureLoader.load_texture("buttons/connect.png",
+																			 gRenderer));
 }
 
 Menu::~Menu() {
