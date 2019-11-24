@@ -2,7 +2,7 @@
 #ifndef MICROMACHINES_CLIENT_H
 #define MICROMACHINES_CLIENT_H
 
-#include <client/ia/FakeClient.h>
+#include "ia/FakeClient.h"
 #include "communication/EventSender.h"
 #include "communication/Receiver.h"
 #include "communication/UserInput.h"

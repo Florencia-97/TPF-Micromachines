@@ -53,8 +53,6 @@ class Car {
    * future*/
   void load_animations(SDL_Renderer *gRenderer);
 
-  /*Destroyer of the class*/
-  ~Car();
 };
 
 #endif
