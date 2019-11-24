@@ -23,7 +23,7 @@ class GameLoop : public BaseThread {
   SoundSystem soundSystem;
   int current_frame;
   int frame_dif; //difference in frames compared to previous iteration
-  int state; //thread state
+  int state;
   InfoBlock previous_game_state;
   std::condition_variable *client_ping;
   VideoRecorder videoRecorder;
@@ -65,9 +65,12 @@ class GameLoop : public BaseThread {
 		   std::queue<InfoBlock> &fpq,
 		   std::queue<std::string> &vq);
 
-  /*Proceeds to the correspondent menu using the value proceedToLobby.
-   * In order to do that, uses the value is_leader*/
-  void proceedToLobby(bool is_leader, bool isIa);
+  //PRE the game must be in menu mode
+  //is_AI marks whether the player is using a bot or not
+  //POS proceeds to the next interface screen
+  //if is_leader is true, the next screen will
+  //prompt the player to select a map
+  void proceedToLobby(bool is_leader, bool is_AI);
 
   ~GameLoop();
 

@@ -19,8 +19,8 @@ public:
     std::string car_type;
     std::queue<InfoBlock> eventQ;
     int id;
-
     SenderThread sender;
+
     PlayerThread(Socket &my_skt, InfoBlock& ib);
     void close() override;
 };

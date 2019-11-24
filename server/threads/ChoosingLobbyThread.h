@@ -23,12 +23,12 @@ class ChoosingLobbyThread : public BaseThread {
 
     void _run() override;
 
+    bool _addPlayerToArena(Socket &client, InfoBlock &ib);
 
 public:
     Socket plr;
-    ChoosingLobbyThread(std::list<GameThread>& games, Configuration &c, Socket& plr);
 
-    bool _addPlayerToArena(Socket &client, InfoBlock &ib);
+    ChoosingLobbyThread(std::list<GameThread>& games, Configuration &c, Socket& plr);
 };
 
 
