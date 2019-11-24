@@ -11,8 +11,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-static void encode(AVCodecContext *enc_ctx, AVFrame *frame, AVPacket *pkt,
-                   FILE *outfile) {
+static void encode(AVCodecContext *enc_ctx, AVFrame *frame, AVPacket *pkt, FILE *outfile) {
     int ret = avcodec_send_frame(enc_ctx, frame);
     if (ret < 0) {
         throw std::runtime_error("Error al enviar frame");
@@ -22,7 +21,7 @@ static void encode(AVCodecContext *enc_ctx, AVFrame *frame, AVPacket *pkt,
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
             return;
         else if (ret < 0) {
-            throw std::runtime_error("Error al codificar");
+            throw std::runtime_error("Error when encoding");
         }
         fwrite(pkt->data, 1, pkt->size, outfile);
         av_packet_unref(pkt);
@@ -33,23 +32,23 @@ OutputFormat::OutputFormat(FormatContext& context, const std::string& filename, 
     context(context), video_height(h), video_width(w) {
     this->frame = av_frame_alloc();
     if (!frame) {
-        throw std::runtime_error("No se pudo reservar memoria para frame");
+        throw std::runtime_error("Coudnt get frames memorie ");
     }
     this->pkt = av_packet_alloc();
-    // Intenta deducir formato según extensión
+    // Tries to induce format by extension
     this->avOutputFormat = av_guess_format(NULL, filename.c_str(), NULL);
     if (!this->avOutputFormat) {
-        // Intenta usar el formato standard
+        // Tries using standar format
         this->avOutputFormat = av_guess_format("mpeg", NULL, NULL);
     }
     if (!this->avOutputFormat) {
         throw std::runtime_error("No se encontró formato de salida");
     }
-    // h.264 es bastante popular, pero hay mejores
+    // h.264 is pretty popular, but there are better ones
     this->avOutputFormat->video_codec = AV_CODEC_ID_H264;
     AVCodec *codec = avcodec_find_encoder(this->avOutputFormat->video_codec);
     if (!codec) {
-        throw std::runtime_error("No se pudo instanciar codec");
+        throw std::runtime_error("Coundt find codec");
     }
     codecContextInit(codec);
     this->outputFile = fopen(filename.c_str(), "wb");
@@ -58,7 +57,7 @@ OutputFormat::OutputFormat(FormatContext& context, const std::string& filename, 
 
 void OutputFormat::close() {
     encode(this->codecContext, NULL, this->pkt, this->outputFile);
-    /* add sequence end code to have a real MPEG file */
+    /* Add sequence end code to have a real MPEG file */
     uint8_t endcode[] = { 0, 0, 1, 0xb7 };
     fwrite(endcode, 1, sizeof(endcode), this->outputFile);
 }
@@ -74,19 +73,18 @@ void OutputFormat::initFrame() {
 
 void OutputFormat::writeFrame(const char* data, SwsContext* ctx ) {
     const u_int8_t* tmp = (const u_int8_t*) data;
-    // El ancho del video x3 por la cantidad de bytes
+    // three times width, because of RGB
     int width = video_width * 3;
     sws_scale(ctx, &tmp, &width, 0, frame->height, frame->data, frame->linesize);
-    //drawFrame(frame, data);
     frame->pts = currentPts;
     currentPts++;
-    /* encode the image */
+    /* Encode the image */
     encode(this->codecContext, frame, pkt, this->outputFile);
 }
 
 void OutputFormat::codecContextInit(AVCodec* codec){
     this->codecContext = avcodec_alloc_context3(codec);
-    // La resolución debe ser múltiplo de 2
+    // Resolution must be * 2
     this->codecContext->width = video_width;
     this->codecContext->height = video_height;
     this->codecContext->time_base = {1,25};

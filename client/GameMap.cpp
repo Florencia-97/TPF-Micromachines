@@ -53,7 +53,7 @@ void GameMap::renderDeco(SDL_Rect &camera, SDL_Renderer *renderer, int x, int y)
         for (const auto& tile: row){
             tile->getBox().x += x;
             tile->getBox().y += y;
-		  tile->render(camera, renderer);
+		    tile->render(camera, renderer);
             tile->getBox().x -= x;
             tile->getBox().y -= y;
         }

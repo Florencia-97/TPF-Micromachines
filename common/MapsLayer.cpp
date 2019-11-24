@@ -1,4 +1,3 @@
-#include <iostream>
 #include "yaml-cpp/yaml.h"
 #include "MapsLayer.h"
 

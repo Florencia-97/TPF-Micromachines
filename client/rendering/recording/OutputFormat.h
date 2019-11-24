@@ -6,30 +6,17 @@ class AVCodec;
 class AVFrame;
 class AVPacket;
 class AVOutputFormat;
-class AVStream;
 class AVCodecContext;
 class FormatContext;
 class SwsContext;
 
 class OutputFormat {
-public:
-    // Ctor
-    OutputFormat(FormatContext& context, const std::string& filename, int w, int h);
-    // Dtor
-    ~OutputFormat();
-    // Escribe un frame a disco. Utiliza `swsContext` para convertir
-    // de RGB24 a YUV420p
-    void writeFrame(const char* data, SwsContext* swsContext);
-    // Cierra el stream de video
-    void close();
 private:
-    // Inicializa frame
     void initFrame();
-    // Inicializa contexto de codec
+    // Starts codec context
     void codecContextInit(AVCodec* codec);
     FormatContext& context;
     AVOutputFormat* avOutputFormat;
-    AVStream* video_avstream;
     AVCodecContext* codecContext;
     int currentPts;
     FILE* outputFile;
@@ -37,5 +24,15 @@ private:
     AVPacket* pkt;
     int video_width;
     int video_height;
+public:
+    OutputFormat(FormatContext& cxt, const std::string& fn, int w, int h);
+
+    // Writes frame to disk, Uses swsContext to convert from RGB24 to YUV420p
+    void writeFrame(const char* data, SwsContext* swsContext);
+
+    // Closes video stream
+    void close();
+
+    ~OutputFormat();
 };
 #endif

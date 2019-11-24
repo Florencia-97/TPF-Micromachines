@@ -5,11 +5,10 @@
 class AVFormatContext;
 
 class FormatContext {
+    AVFormatContext *pFormatCtx;
 public:
     FormatContext();
     ~FormatContext();
     AVFormatContext* getContext() const;
-private:
-    AVFormatContext *pFormatCtx;
 };
 #endif
