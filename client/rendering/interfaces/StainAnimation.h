@@ -1,7 +1,3 @@
-//
-// Created by brian on 11/9/19.
-//
-
 #ifndef MICROMACHINES_CLIENT_RENDERING_INTERFACES_STAINANIMATION_H_
 #define MICROMACHINES_CLIENT_RENDERING_INTERFACES_STAINANIMATION_H_
 
@@ -10,8 +6,8 @@ class StainAnimation : public Animation {
  private:
   LTexture texture;
   Uint8 fading;
- public:
   bool isPlaying;
+ public:
 
   /*Constructor of the StainAnimation class*/
   StainAnimation();
@@ -21,7 +17,7 @@ class StainAnimation : public Animation {
   void load_frames(SDL_Renderer *gRenderer) override;
 
   /*Implementation of the rendering function of an animation frame
-   PRE: * x and y are the positions in the screen. The parameter clip will not
+   PRE: * x and y will not be used. The parameter clip will not
    be used*/
   void render(int x, int y, SDL_Rect *clip, SDL_Renderer *renderer) override;
 
