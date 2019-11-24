@@ -1,8 +1,3 @@
-//
-// Created by brian on 11/9/19.
-//
-
-#include <zconf.h>
 #include <iostream>
 #include "StainAnimation.h"
 #include "../../../config/constants.h"

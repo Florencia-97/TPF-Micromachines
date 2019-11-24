@@ -13,17 +13,15 @@ Item::Item(int id, int x, int y){
 void Item::render(SDL_Rect &camera, SDL_Renderer *renderer) {
     int x = rand()%2;
     int y = rand()%2;
-    texture->render_with_size(mBox.x + x - camera.x,
-                              mBox.y + y - camera.y,
-                              rotation,
-                              renderer,
-                              ITEM_WIDTH,
-                              ITEM_HEIGHT,
-                              false);
+  texture->render_with_size(mBox.x + x - camera.x, mBox.y + y - camera.y,
+							rotation, renderer, ITEM_WIDTH, ITEM_HEIGHT,
+							false);
+  dust.play(renderer, 1, mBox.x + x - camera.x, mBox.y + y - camera.y);
 }
 
 void Item::addTexture(TextureLoader& tLoader, SDL_Renderer *gRenderer, int pngNum) {
     std::string nameItem = "speed_boost";
+  dust.load_frames(gRenderer);
     switch (pngNum){
         case ITEM_BOOST:
             break;

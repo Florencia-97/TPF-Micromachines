@@ -1,10 +1,6 @@
 #ifndef _CONSTANTS_
 #define _CONSTANTS_
-
-#define SERVICE "localhost"
-#define PORT "8080"
 #define FPS 40 //client fps
-#define LOBBY_TIME 5
 #define GAME_DURATION_S 25 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
@@ -40,10 +36,6 @@
 #define ACCELERATION "ACC"
 #define ROTATION_FORCE "ROT"
 
-// Error tipe
-#define GAME_NOT_IN_LOBBY "El juego ya esta siendo jugado, intenta con otro nombre!"
-
-
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 960;
 
@@ -52,18 +44,10 @@ const int BUFFER_WIDTH = 1280, BUFFER_HEIGHT = 960;
 const int LEVEL_WIDTH = 1280;
 const int LEVEL_HEIGHT = 960;
 
-enum ButtonSprite {
-  BUTTON_SPRITE_MOUSE_OUT,
-  BUTTON_SPRITE_MOUSE_OVER_MOTION ,
-  BUTTON_SPRITE_MOUSE_DOWN,
-  BUTTON_SPRITE_MOUSE_UP,
-  BUTTON_SPRITE_TOTAL
-};
 
 //Button constants
 const int BUTTON_WIDTH = 151;
 const int BUTTON_HEIGHT = 170;
-const int TOTAL_BUTTONS = 3;
 const int BLUE_CAR_BUTTON_X = 0;
 const int BLUE_CAR_BUTTON_Y = 220;
 const int BLACK_CAR_BUTTON_X = 320;
@@ -78,16 +62,6 @@ const int PLAY_BUTTON_Y = 850;
 const int PLAY_BUTTON_WIDTH = 150;
 const int PLAY_BUTTON_HEIGHT = 60;
 
-//MapButtons constants
-
-const int MAP_BUTTON_1_X = 0;
-const int MAP_BUTTON_1_Y = 100;
-const int MAP_BUTTON_2_X = SCREEN_WIDTH * 2 / 3;
-const int MAP_BUTTON_2_Y = 100;
-const int MAP_BUTTON_3_X = SCREEN_WIDTH - 500;
-const int MAP_BUTTON_3_Y = 100;
-const int MAP_BUTTON_WIDTH = 300;
-const int MAP_BUTTON_HEIGHT = 300;
 
 //Car size
 const int CAR_WIDTH = 100;
@@ -125,10 +99,8 @@ const int TIME_BETWEEN_PLUGINS = 15; // seconds
 #define DOWN 's'
 #define LEFT 'a'
 #define RIGHT 'd'
-#define NONE "NONE"
 #define MOUSE_BUTTON_DOWN 'M'
 #define MOUSE_BUTTON_UP 'W'
-#define MOUSE_MOTION "mouse_motion"
 
 #define MAX_VOLUME_BACKGROUND_SOUND 6
 #define MAX_VOLUME_EFFECTS_SOUND 6

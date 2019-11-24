@@ -4,6 +4,7 @@
 #include <SDL_rect.h>
 #include <SDL_events.h>
 #include <SDL_render.h>
+#include <client/rendering/interfaces/DustAnimation.h>
 #include "rendering/LTexture.h"
 #include "rendering/TextureLoader.h"
 
@@ -12,6 +13,7 @@ class Item {
   int rotation;
   LTexture *texture;
   int id;
+  DustAnimation dust;
  public:
 
   /*Builder of the class Item.
