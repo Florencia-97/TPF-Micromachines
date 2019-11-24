@@ -14,6 +14,7 @@ class Item {
   LTexture *texture;
   int id;
   DustAnimation dust;
+  Uint8 fading;
  public:
 
   /*Builder of the class Item.
