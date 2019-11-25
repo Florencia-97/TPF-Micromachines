@@ -13,6 +13,7 @@
 class FakeClient : public BaseThread {
     SafeQueue<InfoBlock>* keyboardQueue;
     std::queue<InfoBlock>* posQueue;
+    std::queue<std::string>* soundQueue;
     LuaWrapper luaWrapper;
     MapsLayer mapsLayer;
     void _firstMove();
@@ -20,7 +21,7 @@ class FakeClient : public BaseThread {
     void _run() override;
     bool _move(InfoBlock& ib, int x, int y, int r, int& lastMove);
 public:
-    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos);
+    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, std::queue<std::string> &sq);
     void setRace(std::string raceName);
 };
 

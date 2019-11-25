@@ -1,10 +1,13 @@
 #include "FakeClient.h"
 #include "../../config/constants.h"
 
-FakeClient::FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos):
+FakeClient::FakeClient(SafeQueue<InfoBlock> &kq,
+                        std::queue<InfoBlock> &pos,
+                       std::queue<std::string> &sq):
     luaWrapper(), mapsLayer() {
     this->keyboardQueue = &kq;
     this->posQueue = &pos;
+    this->soundQueue = &sq;
 }
 
 void FakeClient::setRace(std::string raceName){
@@ -63,6 +66,7 @@ bool FakeClient::_move(InfoBlock& ib, int x, int y, int r, int& lastMove) {
     char et;
 
     // Getting action type and event type
+    this->soundQueue->push(SOUND_CAR_RUN);
     if (eventType == "UP") et = UP;
     else if (eventType == "DOWN") et = DOWN;
     else if (eventType == "LEFT") et = LEFT;

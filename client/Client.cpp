@@ -112,7 +112,7 @@ Client::Client(std::string &s, std::string &p) :
 	userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue,
 			  &ready_to_connect, &video_queue),
 	receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue),
-	fc(this->keyboard_e_queue, this->fake_player_queue) {
+	fc(this->keyboard_e_queue, this->fake_player_queue, this->sound_queue) {
   this->service = s;
   this->port = p;
 }
