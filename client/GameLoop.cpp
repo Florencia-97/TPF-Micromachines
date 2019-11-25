@@ -97,6 +97,7 @@ void GameLoop::runLobby(int frame_id) {
             previous_game_state = *gameState;
             state = GAME_STATE;
             gameRenderer.init(starter.get_global_renderer(), *gameState);
+            fakePlayerQueue->push(*gameState);
         }
         renderQueue->pop();
     }

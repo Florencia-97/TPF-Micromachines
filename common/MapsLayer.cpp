@@ -38,7 +38,6 @@ MapsLayer::MapsLayer(const std::string& mapPath): height(0), width(0) {
 }
 
 void MapsLayer::load(const std::string &mapPath) {
-    std::cout << "loading new arena\n";
     std::string _ground = "Ground";
     std::string _road = "Road";
     std::string _extras = "Extras";
@@ -49,5 +48,4 @@ void MapsLayer::load(const std::string &mapPath) {
     _loadMap(mapPath, _road,this->road);
     _loadMap(mapPath, _extras ,this->extras);
     _loadHW(mapPath);
-    std::cout << "finished loading new arena\n";
 }

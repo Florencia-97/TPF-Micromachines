@@ -17,14 +17,20 @@ void FakeClient::_firstMove(){
     this->keyboardQueue->push(ib);
 }
 
+std::string FakeClient::_getId(){
+    while (posQueue->empty()) continue;
+    InfoBlock ib = posQueue->front();
+    posQueue->pop();
+    int my_car_id = ib.exists(MY_ID) ? ib.get<int>(MY_ID) : 0;
+    return std::to_string(my_car_id);
+}
+
 void FakeClient::_run() {
     InfoBlock* gameState;
     this->_firstMove();
     int lastMove = 0;
+    std::string id = _getId();
     while (this->isAlive()){
-        // TODO : remove hard coding!
-        std::string id = "0";
-        //int id = gameState->exists(MY_ID) ? gameState->get<int>(MY_ID) : 0;
         InfoBlock ib;
         if ( !posQueue->empty()){
             while (posQueue->size()>1){

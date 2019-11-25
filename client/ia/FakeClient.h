@@ -3,6 +3,7 @@
 
 
 #include <queue>
+#include <string>
 #include "../../common/infostream/InfoBlock.h"
 #include "lua/LuaWrapper.h"
 #include "../../common/MapsLayer.h"
@@ -15,6 +16,7 @@ class FakeClient : public BaseThread {
     LuaWrapper luaWrapper;
     MapsLayer mapsLayer;
     void _firstMove();
+    std::string _getId();
     void _run() override;
     bool _move(InfoBlock& ib, int x, int y, int r, int& lastMove);
 public:
