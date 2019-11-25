@@ -129,7 +129,7 @@ void GameWorld::_createItem(){
     auto ptr = ItemCreator::createItem(newBody, itemsId);
     itemsId+=1;
     this->dynamic_objs.push_back(ptr);
-    createAndAddFixture(this->dynamic_objs.back().get(), 60.0f/PTM, 60.0f/PTM, 0, ITEM, SENSOR, false);
+    createAndAddFixture(this->dynamic_objs.back().get(), 60.0f/PTM, 60.0f/PTM, 0, ITEMS, SENSOR, false);
     if (this->dynamic_objs.size() > MAX_AMOUNT_OBJECTS*std::max(1,(int)cars.size()/2)){
         world.DestroyBody(this->dynamic_objs.front().get()->getBody());
         this->dynamic_objs.pop_front(); // I remove the first one, life cycle over.
@@ -184,7 +184,7 @@ int GameWorld::createCar(InfoBlock carStats) {
     newBody->SetBullet(true);
 
     createAndAddFixture(&(cars.back()),1,2,1,PLAYER, 0, false);
-    createAndAddFixture(&(cars.back()), (float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER|OBSTACLE, false);
+    createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,PLAYER, PLAYER|OBSTACLE, false);
     createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,SENSOR, ITEMS, true);
     createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/(PTM*2), (float)CAR_HEIGHT/(PTM*2),0,SENSOR, TILE, true);
 
