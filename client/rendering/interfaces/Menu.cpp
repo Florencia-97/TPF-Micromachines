@@ -22,7 +22,7 @@ void Menu::init(SDL_Renderer *sdl_renderer,
   this->iaButton = new LuaButton(gRenderer,
 								 textureLoader.load_texture("buttons/tick.png",
 															gRenderer));
-  iaButton->change_opacity(0);
+  iaButton->change_opacity(60);
 }
 
 void Menu::display_notification(std::string msg) {
@@ -235,7 +235,7 @@ void Menu::load_media() {
 	if (iaOn) {
 	  iaButton->change_opacity(255);
 	} else {
-	  iaButton->change_opacity(0);
+	  iaButton->change_opacity(60);
 	}
   };
   create_buttons_first_menu();
