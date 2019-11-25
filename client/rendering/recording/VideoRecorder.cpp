@@ -20,7 +20,6 @@ VideoRecorder::VideoRecorder() : videoQueue(1) ,rec(false), dataBuffer(BUFFER_WI
 }
 
 void VideoRecorder::init(SDL_Renderer* render){
-    // TODO: see if i can use the class texture loader here
     videoTexture = SDL_CreateTexture(render,
                                      SDL_PIXELFORMAT_RGB24,
                                      SDL_TEXTUREACCESS_TARGET, BUFFER_WIDTH, BUFFER_HEIGHT);
@@ -44,6 +43,14 @@ void VideoRecorder::record(SDL_Renderer* render){
     videoQueue.push(dataBuffer);
 }
 
+bool VideoRecorder::get_rec_value() {
+    return rec;
+}
+
+void VideoRecorder::set_rec_value(bool valueForRec) {
+    this->rec = valueForRec;
+}
+
 VideoRecorder::~VideoRecorder(){
     if (!rec) return;
     std::vector<char> pill;
@@ -54,13 +61,5 @@ VideoRecorder::~VideoRecorder(){
     videoWriter->close();
     videoWriter->join();
     delete(videoWriter);
-}
-
-bool VideoRecorder::get_rec_value() {
-    return rec;
-}
-
-void VideoRecorder::set_rec_value(bool valueForRec) {
-    this->rec = valueForRec;
 }
 
