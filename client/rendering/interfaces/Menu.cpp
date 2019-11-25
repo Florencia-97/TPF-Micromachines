@@ -181,10 +181,10 @@ void Menu::set_buttons_map_screen() {
 	button.soundWhenPressed = SOUND_CAR_GEAR;
   }
 
-  mapButtons[0].set_position(BLUE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
+  mapButtons[0].set_position(BLUE_CAR_BUTTON_X + 40, BLUE_CAR_BUTTON_Y);
   mapButtons[1].set_position(BLACK_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-  mapButtons[2].set_position(WHITE_CAR_BUTTON_X, BLUE_CAR_BUTTON_Y);
-  mapButtons[3].set_position(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  mapButtons[2].set_position(RED_CAR_BUTTON_X, RED_CAR_BUTTON_Y);
+  mapButtons[3].set_position(WHITE_CAR_BUTTON_X - 40, BLUE_CAR_BUTTON_Y);
 }
 void Menu::create_map_buttons() {
   mapButtons.emplace_back("race_1",
