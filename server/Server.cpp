@@ -16,4 +16,5 @@ int Server::play(std::string& port) {
     std::cout << "Server is closing, please wait up to a few seconds\n";
     gamesManager.close();
     gamesManager.join();
+    std::cout << "Goodbye, and thanks for playing our game\n";
 }
