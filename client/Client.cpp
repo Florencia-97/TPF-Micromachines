@@ -18,6 +18,8 @@ void Client::wait_game_end() {
   sender.close();
   receiver.join();
   sender.join();
+  fc.close();
+  fc.join();
 }
 
 void Client::wait_ready_button() {
@@ -92,7 +94,10 @@ void Client::play_game() {
 	  keyboard_e_queue.push(ib);
 	}
 	userInput.isScript = is_ia;
-	if (is_ia) fc.run();
+	if (is_ia && !fc.isRunning()){
+        fc.setRace(gameLoop.menu.map_selected);
+        fc.run();
+	}
 	if (!receiver.isRunning()) {
 	  receiver.run();
 	  sender.run();
