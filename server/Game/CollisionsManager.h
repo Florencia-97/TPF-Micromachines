@@ -9,7 +9,7 @@
 
 enum _entityCategory {
     TILE = 0x0001,
-    MODIFS = 0x0002,
+    ITEMS = 0x0002,
     PLAYER = 0x0004,
     SENSOR = 0x0008,
     OBSTACLE = 0x0016
