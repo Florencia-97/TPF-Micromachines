@@ -1,3 +1,4 @@
+#include <iostream>
 #include "yaml-cpp/yaml.h"
 #include "MapsLayer.h"
 
@@ -32,16 +33,19 @@ void MapsLayer::_loadHW(const std::string &mapPath){
     this->height = h.as<int>();
 }
 
-MapsLayer::MapsLayer(const std::string& mapPath) {
+MapsLayer::MapsLayer(const std::string& mapPath): height(0), width(0) {
     load(mapPath);
 }
 
 void MapsLayer::load(const std::string &mapPath) {
-    std::string ground = "Ground";
-    std::string road = "Road";
-    std::string extras = "Extras";
-    _loadMap(mapPath, ground, this->ground);
-    _loadMap(mapPath, road,this->road);
-    _loadMap(mapPath, extras ,this->extras);
+    std::string _ground = "Ground";
+    std::string _road = "Road";
+    std::string _extras = "Extras";
+    this->ground.clear();
+    this->road.clear();
+    this->extras.clear();
+    _loadMap(mapPath, _ground, this->ground);
+    _loadMap(mapPath, _road,this->road);
+    _loadMap(mapPath, _extras ,this->extras);
     _loadHW(mapPath);
 }

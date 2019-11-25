@@ -204,7 +204,6 @@ void GameThread::_run() {
         this->plr_threads.emplace_front(this->sktOwner, this->ownerInfo);
         this->plr_threads.front().car_type = ownerInfo.getString(CAR_TYPE);
         this->plr_threads.front().run();
-        // TODO: Clean queues: idea, send an event that breaks lobby mode?
         this->game.loadWorld(mapName);
         _createCars();
         _sendStartMsg(mapName);
@@ -216,10 +215,4 @@ void GameThread::_run() {
     delete(pluginLibrary);
     close();
     std::cout << "Game deleted correctly\n";
-}
-
-GameThread::~GameThread(){
-//    _killPlayers(true);
-//    close();
-//    std::cout << "Game deleted correctly\n";
 }

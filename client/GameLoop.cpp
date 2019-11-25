@@ -17,7 +17,7 @@ void GameLoop::_runProgram(){
     }
     SDL_RenderPresent(starter.get_global_renderer());
     if (this->recording && this->current_frame % 5 == 0) videoRecorder.record(starter.get_global_renderer());
-    soundSystem.play(state == GAME_STATE);
+    soundSystem.play(state == GAME_STATE || isIaPlayer);
 }
 
 void GameLoop::_checkVideoRecording(){
@@ -97,6 +97,7 @@ void GameLoop::runLobby(int frame_id) {
             previous_game_state = *gameState;
             state = GAME_STATE;
             gameRenderer.init(starter.get_global_renderer(), *gameState);
+            fakePlayerQueue->push(*gameState);
         }
         renderQueue->pop();
     }

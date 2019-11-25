@@ -18,6 +18,8 @@ void Client::wait_game_end() {
   sender.close();
   receiver.join();
   sender.join();
+  fc.close();
+  fc.join();
 }
 
 void Client::wait_ready_button() {
@@ -91,9 +93,10 @@ void Client::play_game() {
 	  ib[RACE_ID] = gameLoop.menu.map_selected;
 	  keyboard_e_queue.push(ib);
 	}
-	if (gameLoop.menu.get_ia()) {
-	  userInput.isScript = true;
-	  fc.run();
+	userInput.isScript = is_ia;
+	if (is_ia && !fc.isRunning()){
+        fc.setRace(gameLoop.menu.map_selected);
+        fc.run();
 	}
 	if (!receiver.isRunning()) {
 	  receiver.run();
@@ -109,7 +112,7 @@ Client::Client(std::string &s, std::string &p) :
 	userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue,
 			  &ready_to_connect, &video_queue),
 	receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue),
-	fc(this->keyboard_e_queue, this->fake_player_queue) {
+	fc(this->keyboard_e_queue, this->fake_player_queue, this->sound_queue) {
   this->service = s;
   this->port = p;
 }

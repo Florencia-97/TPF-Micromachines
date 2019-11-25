@@ -19,11 +19,13 @@ void DustAnimation::render(int x, int y, SDL_Rect *clip, SDL_Renderer *gRenderer
 }
 
 void DustAnimation::play(SDL_Renderer *gRenderer, int frames, int x, int y) {
-  if (this->isPlaying) {
+  if (isPlaying) {
 	this->texture.set_alpha(fading);
 	render(x, y, nullptr, gRenderer);
-	this->fading -= 1*frames;
-	if (this->fading == 1) {
+	Uint8 previous = fading;
+	this->fading -= 1 * frames;
+	if (fading > previous) {
+	  fading = 255;
 	  isPlaying = false;
 	}
   }

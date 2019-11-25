@@ -3,12 +3,9 @@
 #include <vector>
 #include <iostream>
 
-// TODO: change names.
-// ../server/Game/status_effects/StatusEffect.cpp
-// g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
-
 // PluginOne boost al cars health with 5 points
 
+// g++ --std=c++11 -fPIC -rdynamic -shared -o ./pluginOne.so ./PluginOne.cpp
 class PluginOne : public Plugin {
 public:
     virtual void modifyCars(std::vector<CarStats*>& cars) override {

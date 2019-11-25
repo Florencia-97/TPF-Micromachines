@@ -19,7 +19,7 @@ public:
     //create an unloaded map
     MapsLayer() = default;
 
-    //PRE can only be called once to load an unloaded map
+    //Loads map asked, if map already loaded, it cleans old one away
     void load(const std::string& mapPath);
 
     //create and load a map (calls load())

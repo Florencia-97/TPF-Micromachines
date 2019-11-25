@@ -17,12 +17,17 @@ class VideoRecorder {
 
 public:
     VideoRecorder();
+    // Return whether recording is on or not
     bool get_rec_value();
+    // Starts recorder
     void init(SDL_Renderer *render);
+    // Sets render target to video Texture
     void setTarget(SDL_Renderer *render);
+    // Records what is rendered in buffer, and pushes it in queue
     void record(SDL_Renderer *render);
-    ~VideoRecorder();
+    // Changes state of  recorder
     void set_rec_value(bool valueForRec);
+    ~VideoRecorder();
 };
 
 #endif //MICROMACHINES_VIDEORECORDER_H

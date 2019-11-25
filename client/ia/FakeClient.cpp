@@ -1,10 +1,17 @@
 #include "FakeClient.h"
 #include "../../config/constants.h"
 
-FakeClient::FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos):
-    luaWrapper(), mapsLayer("maps/race_1.yaml") {
+FakeClient::FakeClient(SafeQueue<InfoBlock> &kq,
+                        std::queue<InfoBlock> &pos,
+                       std::queue<std::string> &sq):
+    luaWrapper(), mapsLayer() {
     this->keyboardQueue = &kq;
     this->posQueue = &pos;
+    this->soundQueue = &sq;
+}
+
+void FakeClient::setRace(std::string raceName){
+    mapsLayer.load("maps/" + raceName + ".yaml");
 }
 
 void FakeClient::_firstMove(){
@@ -13,14 +20,20 @@ void FakeClient::_firstMove(){
     this->keyboardQueue->push(ib);
 }
 
+std::string FakeClient::_getId(){
+    while (posQueue->empty()) continue;
+    InfoBlock ib = posQueue->front();
+    posQueue->pop();
+    int my_car_id = ib.exists(MY_ID) ? ib.get<int>(MY_ID) : 0;
+    return std::to_string(my_car_id);
+}
+
 void FakeClient::_run() {
     InfoBlock* gameState;
     this->_firstMove();
     int lastMove = 0;
+    std::string id = _getId();
     while (this->isAlive()){
-        // TODO : remove hard coding!
-        std::string id = "0";
-        //int id = gameState->exists(MY_ID) ? gameState->get<int>(MY_ID) : 0;
         InfoBlock ib;
         if ( !posQueue->empty()){
             while (posQueue->size()>1){
@@ -53,6 +66,7 @@ bool FakeClient::_move(InfoBlock& ib, int x, int y, int r, int& lastMove) {
     char et;
 
     // Getting action type and event type
+    this->soundQueue->push(SOUND_CAR_RUN);
     if (eventType == "UP") et = UP;
     else if (eventType == "DOWN") et = DOWN;
     else if (eventType == "LEFT") et = LEFT;

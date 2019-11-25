@@ -3,6 +3,7 @@
 
 
 #include <queue>
+#include <string>
 #include "../../common/infostream/InfoBlock.h"
 #include "lua/LuaWrapper.h"
 #include "../../common/MapsLayer.h"
@@ -12,13 +13,16 @@
 class FakeClient : public BaseThread {
     SafeQueue<InfoBlock>* keyboardQueue;
     std::queue<InfoBlock>* posQueue;
+    std::queue<std::string>* soundQueue;
     LuaWrapper luaWrapper;
-    MapsLayer mapsLayer; // TODO: Check if we can pass an instance of this class
+    MapsLayer mapsLayer;
     void _firstMove();
+    std::string _getId();
     void _run() override;
     bool _move(InfoBlock& ib, int x, int y, int r, int& lastMove);
 public:
-    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos);
+    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, std::queue<std::string> &sq);
+    void setRace(std::string raceName);
 };
 
 

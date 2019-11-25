@@ -6,16 +6,10 @@ LuaWrapper::LuaWrapper(){
     luaL_openlibs(L);
 }
 
-//template <typename T, typename U>
-//void asTable(lua_State* L, T begin, U end) {
-//    lua_newtable(L);
-//    for (size_t i = 0; begin != end; ++begin, ++i) {
-//        lua_pushinteger(L, i + 1);
-//        lua_pushnumber(L, *begin);
-//        lua_settable(L, -3);
-//    }
-//}
-
+/*
+ * Pushes to lua stack a table of tables, that can be
+ * also considered a matrix, of ints
+*/
 void asMatrix(lua_State* L, std::vector<std::vector<int>>& iv) {
     lua_createtable(L, iv.size(), 0);
     for (size_t i = 0; i != iv.size(); ++i) {

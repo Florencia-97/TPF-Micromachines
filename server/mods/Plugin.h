@@ -9,11 +9,6 @@ protected:
     double side_length_;
 public:
     Plugin() : side_length_(0) {}
-    virtual ~Plugin() {}
-    void set_side_length(double side_length) {
-        return;
-    }
-    //virtual void modifyCars(std::vector<int> cars);
     virtual void modifyCars(std::vector<CarStats*>& cars) {
         return;
     }
@@ -21,6 +16,7 @@ public:
     virtual void modifyWorld(std::vector<CarStats*>& world) {
         return;
     }
+    virtual ~Plugin() {}
 };
 
 // the types of the class factories

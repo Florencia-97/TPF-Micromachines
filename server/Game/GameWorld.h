@@ -26,12 +26,12 @@ class GameWorld {
     CollisionsManager cl;
     std::shared_ptr<FinishingLine> finishingLine;
 
-    //std::list<RaceCar> cars;
     std::list<OffRoad> offroad_bodies;
     std::list<Coordinate> road_positions;
 
-    //static instances are those which  will remain in place
+    //Static instances are those which  will remain in place
     std::list<std::shared_ptr<Entity>> static_objs;
+
     //Dynamic Instances are those which come and go from the field, (ie items)
     std::list<std::shared_ptr<Entity>> dynamic_objs;
 
@@ -62,7 +62,7 @@ public:
     //creates a car and returns the new car's id
     int createCar(InfoBlock carStats);
 
-    //Proccesses a keyPressed/released event sent from client
+    //Processes a keyPressed/released event sent from client
     //PRE if the keys ACTION_TYPE or ACTION_TYPE_DOWN exist in event they
     //must contain one of the following values UP, DOWN, LEFT, RIGHT
     void processEvent(int id, InfoBlock &keyPressed);
