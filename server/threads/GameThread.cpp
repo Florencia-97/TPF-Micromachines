@@ -216,9 +216,3 @@ void GameThread::_run() {
     close();
     std::cout << "Game deleted correctly\n";
 }
-
-GameThread::~GameThread(){
-//    _killPlayers(true);
-//    close();
-//    std::cout << "Game deleted correctly\n";
-}

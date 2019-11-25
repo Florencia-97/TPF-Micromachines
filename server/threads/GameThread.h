@@ -71,7 +71,6 @@ public:
     //POS returns whether or not the player was added successfully
     bool addPLayer(Socket &plr_socket, InfoBlock& playerInfo);
 
-    ~GameThread();
 };
 
 
