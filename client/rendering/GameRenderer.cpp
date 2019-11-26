@@ -3,8 +3,8 @@
 #include "interfaces/StainAnimation.h"
 #include <algorithm>
 
-GameRenderer::GameRenderer(std::queue<std::string> &sq) {
-  sound_queue = &sq;
+GameRenderer::GameRenderer(ThreadQueue *sq) {
+  sound_queue = sq;
   camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
   for (int i = 0; i < 6; i++) {
 	race_results.emplace_back();

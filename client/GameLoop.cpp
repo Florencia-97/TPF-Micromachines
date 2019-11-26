@@ -131,22 +131,22 @@ GameLoop::GameLoop(std::queue<InfoBlock> &rq,
                    std::queue<SDL_Event> &queue,
                    std::queue<SDL_Event> &mouseQueue,
                    std::condition_variable &r,
-                   std::queue<std::string> &sq,
+                   ThreadQueue *sq,
                    std::queue<InfoBlock>& fpq,
                    std::queue<std::string> &vq)
                    : starter(SCREEN_WIDTH,SCREEN_HEIGHT),
-                     soundSystem(&sq), recording(false), gameRenderer(sq){
+                     soundSystem(sq), recording(false), gameRenderer(sq){
     current_frame = 0;
     frame_dif = 1;
     state = -1;
     in_menu.store(true);
     renderQueue = &rq;
-    soundQueue = &sq;
+    soundQueue = sq;
     videoQueue = &vq;
     fakePlayerQueue = &fpq;
     starter.init();
     soundSystem.init();
-    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, &sq);
+    menu.init(starter.get_global_renderer(), &mouseQueue, &queue, &r, sq);
     menu.set_main_menu_mode();
     client_ping = &r;
 }

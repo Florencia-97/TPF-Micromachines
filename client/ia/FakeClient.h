@@ -4,6 +4,7 @@
 
 #include <queue>
 #include <string>
+#include <common/ThreadQueue.h>
 #include "../../common/infostream/InfoBlock.h"
 #include "lua/LuaWrapper.h"
 #include "../../common/MapsLayer.h"
@@ -13,7 +14,7 @@
 class FakeClient : public BaseThread {
     SafeQueue<InfoBlock>* keyboardQueue;
     std::queue<InfoBlock>* posQueue;
-    std::queue<std::string>* soundQueue;
+    ThreadQueue* soundQueue;
     LuaWrapper luaWrapper;
     MapsLayer mapsLayer;
     void _firstMove();
@@ -21,7 +22,7 @@ class FakeClient : public BaseThread {
     void _run() override;
     bool _move(InfoBlock& ib, int x, int y, int r, int& lastMove);
 public:
-    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, std::queue<std::string> &sq);
+    FakeClient(SafeQueue<InfoBlock> &kq, std::queue<InfoBlock> &pos, ThreadQueue *sq);
     void setRace(std::string raceName);
 };
 

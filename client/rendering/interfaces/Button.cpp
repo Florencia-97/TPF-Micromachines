@@ -13,7 +13,7 @@ void Button::change_color(int r, int g, int b, int duration) {
   colorChangeDuration = duration;
 }
 
-bool Button::handle_event(SDL_Event *e, std::queue<std::string> *soundQueue) {
+bool Button::handle_event(SDL_Event *e, ThreadQueue *soundQueue) {
   if (e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
 	//Get mouse position
 	int x, y;

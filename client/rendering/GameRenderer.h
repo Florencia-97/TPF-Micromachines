@@ -8,6 +8,7 @@
 #include "../Car.h"
 #include "TextureLoader.h"
 #include <map>
+#include <common/ThreadQueue.h>
 #include "../common/infostream/InfoBlock.h"
 #include "../config/constants.h"
 #include "interfaces/Explosion.h"
@@ -24,7 +25,7 @@ class GameRenderer {
   std::list<Car> all_cars;
   std::list<Item> all_items;
   StainAnimation stain;
-  std::queue<std::string> *sound_queue;
+  ThreadQueue *sound_queue;
 
   TextLabel timer;
   TextLabel health;
@@ -50,7 +51,7 @@ class GameRenderer {
   short my_car_id;
 
   /*Constructor of the class*/
-  explicit GameRenderer(std::queue<std::string> &sq);
+  explicit GameRenderer(ThreadQueue *sq);
 
   /*Object intializer.
    * PRE: For the correct functioning of the object, it is

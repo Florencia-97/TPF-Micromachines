@@ -5,6 +5,7 @@
 #include "../common/conc/BaseThread.h"
 #include "../common/SafeQueue.h"
 #include "../common/infostream/InfoBlock.h"
+#include "../common/SafeQueue.h"
 #include <map>
 /*
  This thread reads user input.
@@ -15,7 +16,7 @@ class UserInput : public BaseThread {
     SafeQueue<InfoBlock>* keyboard_input;
     std::queue<SDL_Event> *mouse_queue;
     std::queue<SDL_Event> *writing_queue;
-    std::queue<std::string> *sound_queue;
+    ThreadQueue *sound_queue;
     std::queue<std::string> *video_queue; // Is there a better way ?
     void _run() override;
     std::map<char, bool> key_pressings;
@@ -26,7 +27,7 @@ public:
     bool isScript;
 
   UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
-            std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
+            std::queue<SDL_Event> *text_queue, ThreadQueue *sound_queue,
             std::condition_variable *close_window, std::queue<std::string> *video_queue);
     void _rcvKeyInput(SDL_Event &e);
     void close() override;

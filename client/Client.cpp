@@ -108,11 +108,11 @@ void Client::play_game() {
 
 Client::Client(std::string &s, std::string &p) :
 	gameLoop(this->receiver_queue, text_queue, mouse_queue, ready_to_connect,
-			 sound_queue, fake_player_queue, video_queue),
+			 &sound_queue, fake_player_queue, video_queue),
 	userInput(&keyboard_e_queue, &mouse_queue, &text_queue, &sound_queue,
 			  &ready_to_connect, &video_queue),
 	receiver(skt, &receiver_queue), sender(skt, &keyboard_e_queue),
-	fc(this->keyboard_e_queue, this->fake_player_queue, this->sound_queue) {
+	fc(this->keyboard_e_queue, this->fake_player_queue, &this->sound_queue) {
   this->service = s;
   this->port = p;
 }

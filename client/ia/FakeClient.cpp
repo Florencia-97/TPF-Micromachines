@@ -3,11 +3,11 @@
 
 FakeClient::FakeClient(SafeQueue<InfoBlock> &kq,
                         std::queue<InfoBlock> &pos,
-                       std::queue<std::string> &sq):
+                       ThreadQueue *sq):
     luaWrapper(), mapsLayer() {
     this->keyboardQueue = &kq;
     this->posQueue = &pos;
-    this->soundQueue = &sq;
+    this->soundQueue = sq;
 }
 
 void FakeClient::setRace(std::string raceName){
