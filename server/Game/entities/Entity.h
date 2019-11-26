@@ -42,7 +42,7 @@ public:
     b2Vec2 dirToTarget(){
         auto v = (target - getPosition());
         std::cout<<v.Length()<<std::endl;
-        if (v.Length() < .2f) return {0,0};
+        if (v.Length() < .8f) return {0,0};
         v.Normalize();
         return v; 
     };

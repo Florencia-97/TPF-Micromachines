@@ -126,8 +126,9 @@ void GameWorld::_createItem(){
     int y = 0;
     int x0 = 0, y0=0;
     _loadXYInRoad(x, y);
-    x0 = (x < map.width/2) ? -10 : map.width + 10;
-    y0 = (x < map.height/2) ? -10 : map.height + 10;
+    x0 = (x < map.width/(2*PTM)) ? -10 : map.width/PTM + 10;
+    y0 = (y < map.height/(2*PTM)) ? -10 : map.height/PTM + 10;
+    std::cout<<x0<<" "<<y0<<std::endl;
     b2Body* newBody = makeNewBody(world, b2_dynamicBody, x0, y0);
     auto ptr = ItemCreator::createItem(newBody, itemsId);
     ptr->setTargetPosition(b2Vec2(x,y));
@@ -236,7 +237,7 @@ void GameWorld::stepItems() {
             it = dynamic_objs.erase(it);
         } else {
             auto v = it->get()->dirToTarget();
-            it->get()->getBody()->SetLinearVelocity(100.0*v);
+            it->get()->getBody()->SetLinearVelocity(45.0*v);
             it++;
         }
     }
