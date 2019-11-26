@@ -3,7 +3,7 @@
 #include "../../config/constants.h"
 #include "../../common/infostream/InfoBlock.h"
 
-SoundSystem::SoundSystem(std::queue<std::string> *queue)
+SoundSystem::SoundSystem(ThreadQueue *queue)
 	: playSounds(true) {
   this->sound_queue = queue;
   this->lastSound = "";
@@ -33,9 +33,8 @@ void SoundSystem::init() {
 }
 
 void SoundSystem::play(bool inRace) {
-  if (this->sound_queue->empty()) return;
-  std::string event = this->sound_queue->front();
-  this->sound_queue->pop();
+  if (this->sound_queue->isEmpty()) return;
+  std::string event = this->sound_queue->pop();
   if (_controlSound(event)) return;
   if (Mix_PausedMusic() == 1) return;
   if (inRace && _controlCarSound(event)) return;

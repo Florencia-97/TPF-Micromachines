@@ -3,8 +3,8 @@
 #include "interfaces/StainAnimation.h"
 #include <algorithm>
 
-GameRenderer::GameRenderer(std::queue<std::string> &sq) {
-  sound_queue = &sq;
+GameRenderer::GameRenderer(ThreadQueue *sq) {
+  sound_queue = sq;
   camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
   for (int i = 0; i < 6; i++) {
 	race_results.emplace_back();
@@ -36,7 +36,10 @@ void GameRenderer::render(InfoBlock &world_state, int frames,
   int y = camera.y;
   load_items(world_state);
   for (auto &item: all_items) {
-      item.render(camera, gRenderer, frames);
+      auto id = std::to_string(item.get_id());
+	item.render(camera, gRenderer, frames,
+	        world_state.get<int>("Ox"+id),
+            world_state.get<int>("Oy"+id));
   }
   update_players(world_state, frames);
   map.renderDeco(camera, gRenderer, camera.x - x, camera.y - y);

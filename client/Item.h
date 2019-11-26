@@ -14,6 +14,9 @@ class Item {
   LTexture *texture;
   int id;
   DustAnimation dust;
+
+    void _renderItem(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
+
  public:
 
   /*Builder of the class Item.
@@ -26,13 +29,15 @@ class Item {
 
   /*Renders the item in the screen using the position of the camera parameter as
    * guide*/
-  void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames);
+    void render(SDL_Rect &camera, SDL_Renderer *renderer, int frames, int x, int y);
 
   /*Adds a texture to the object in order to show it when the render() method is
    * executed
    * PRE: pngNum must be one of the options for items in constanst.h. These are
    * ITEM_BOOST,ITEM_ROCK,ITEM_MUD,ITEM_OIL or ITEM_HEALTH*/
   void addTexture(TextureLoader &tLoader, SDL_Renderer *renderer, int pngNum);
+
+
 };
 
 #endif //MICROMACHINES_ITEM_H

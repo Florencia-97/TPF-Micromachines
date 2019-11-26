@@ -49,7 +49,7 @@ class GameWorld {
     void respawnCar(RaceCar &car);
     void attempItemSpawn();
     //removes all items marked as consumed
-    void spentItemCleaning();
+    void stepItems();
 
 public:
     //list of all cars currently in the game

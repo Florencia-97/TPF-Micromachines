@@ -9,6 +9,7 @@
 #include "TextLabel.h"
 #include "TextBox.h"
 #include <condition_variable>
+#include <common/ThreadQueue.h>
 #include "../TextureLoader.h"
 #include "../../../common/infostream/InfoBlock.h"
 #include "LuaButton.h"
@@ -19,7 +20,7 @@ class Menu {
   TextureLoader textureLoader;
   std::queue<SDL_Event> *mouse_queue;
   std::queue<SDL_Event> *text_queue;
-  std::queue<std::string> *sound_queue;
+  ThreadQueue *sound_queue;
   std::shared_ptr<Button> connectButton;
   SDL_Renderer *gRenderer;
 
@@ -62,7 +63,7 @@ class Menu {
   void init(SDL_Renderer *sdl_renderer, std::queue<SDL_Event> *mouseEventsQueue,
 			std::queue<SDL_Event> *textQueue,
 			std::condition_variable *attemptConnectionCV,
-			std::queue<std::string> *soundQueue);
+            ThreadQueue *soundQueue);
 
   /*Renders the first screen of the game.
    * PRE: screenWidth and screenHeight must be the screen resolution parameters

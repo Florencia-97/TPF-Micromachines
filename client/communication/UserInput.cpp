@@ -1,12 +1,12 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <common/ThreadQueue.h>
 
 #include "UserInput.h"
 #include "../../config/constants.h"
-#include "../common/SafeQueue.h"
 
 UserInput::UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
-                     std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
+                     std::queue<SDL_Event> *text_queue, ThreadQueue *sound_queue,
                      std::condition_variable *close_window, std::queue<std::string> *video_queue) {
     this->keyboard_input = q_keyboard;
     this->mouse_queue = mouse_queue;

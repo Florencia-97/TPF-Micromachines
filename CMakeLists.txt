@@ -59,7 +59,8 @@ set(SERVER_SOURCE_FILES
 		server/Game/status_effects/CallbackStatusEffect.cpp server/Game/status_effects/CallbackStatusEffect.h
 		server/Game/entities/items/ItemMud.cpp server/Game/entities/items/ItemMud.h
 		server/Game/entities/items/ItemOil.cpp server/Game/entities/items/ItemOil.h
-		server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h server/threads/ChoosingLobbyThread.cpp server/threads/ChoosingLobbyThread.h)
+		server/Game/status_effects/DragEffect.cpp server/Game/status_effects/DragEffect.h
+		server/threads/ChoosingLobbyThread.cpp server/threads/ChoosingLobbyThread.h)
 
 set(CLIENT_SOURCE_FILES
 		common/infostream/Socket.cpp
@@ -103,7 +104,8 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/recording/FormatContext.cpp client/rendering/recording/FormatContext.h
 		client/rendering/recording/OutputFormat.cpp client/rendering/recording/OutputFormat.h
 		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
-		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
+		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h
+		common/ThreadQueue.cpp common/ThreadQueue.h)
 
 set(LUA_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h

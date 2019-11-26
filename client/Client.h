@@ -2,6 +2,7 @@
 #ifndef MICROMACHINES_CLIENT_H
 #define MICROMACHINES_CLIENT_H
 
+#include <common/ThreadQueue.h>
 #include "ia/FakeClient.h"
 #include "communication/EventSender.h"
 #include "communication/Receiver.h"
@@ -23,7 +24,7 @@ class Client {
   SafeQueue<InfoBlock> keyboard_e_queue;
   std::queue<SDL_Event> mouse_queue;
   std::queue<SDL_Event> text_queue;
-  std::queue<std::string> sound_queue;
+  ThreadQueue sound_queue;
   std::queue<std::string> video_queue;
   std::queue<InfoBlock> receiver_queue;
   std::queue<InfoBlock> fake_player_queue;

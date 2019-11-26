@@ -9,7 +9,7 @@ void Menu::init(SDL_Renderer *sdl_renderer,
 				std::queue<SDL_Event> *mouseEventsQueue,
 				std::queue<SDL_Event> *textQueue,
 				std::condition_variable *attemptConnectionCV,
-				std::queue<std::string> *soundQueue) {
+                ThreadQueue *soundQueue) {
   this->text_queue = textQueue;
   this->mouse_queue = mouseEventsQueue;
   this->sound_queue = soundQueue;

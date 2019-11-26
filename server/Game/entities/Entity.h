@@ -18,11 +18,12 @@ class Entity {
 
 protected:
     b2Body* body;
+    b2Vec2 target;
 public:
     bool enabled;
 
     //only supports making objects with a square bounding box
-    Entity(b2Body* &newbody);
+    explicit Entity(b2Body* &newbody);
 
     Entity(b2Body* &newbody, int id, const int tile);
 
@@ -35,6 +36,15 @@ public:
     virtual void removeEffect(std::string effectId){};
 
     virtual bool isPlayer(){return false;};
+
+    void setTargetPosition(b2Vec2 pos){target = pos;};
+
+    b2Vec2 dirToTarget(){
+        auto v = (target - getPosition());
+        if (v.Length() < .8f) return {0,0};
+        v.Normalize();
+        return v; 
+    };
 
     b2Vec2 getPosition();
 

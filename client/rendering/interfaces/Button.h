@@ -8,6 +8,7 @@
 #include <list>
 #include <functional>
 #include <queue>
+#include <common/ThreadQueue.h>
 
 class Button {
  protected:
@@ -45,7 +46,7 @@ class Button {
    * case, returns true and executes call_callback_functions(); In the rest of the
    * cases, returns false;*/
   virtual bool handle_event(SDL_Event *e,
-							std::queue<std::string> *soundQueue);
+                            ThreadQueue *soundQueue);
 
   /*Sets the area that will be the space that the button will occupy in screen.
    *PRE: both x and y must be greater than 0 for proper functioning*/

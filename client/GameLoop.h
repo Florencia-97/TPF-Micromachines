@@ -14,6 +14,7 @@
 #include <SDL2/SDL.h>
 #include <queue>
 #include <atomic>
+#include <common/ThreadQueue.h>
 
 #define LOBBY_STATE 1
 #define GAME_STATE 2
@@ -52,7 +53,7 @@ class GameLoop : public BaseThread {
   std::atomic<bool> recording;
   std::queue<InfoBlock> *renderQueue;
   std::queue<std::string> *videoQueue;
-  std::queue<std::string> *soundQueue;
+  ThreadQueue *soundQueue;
   std::queue<InfoBlock> *fakePlayerQueue;
   bool isIaPlayer;
 
@@ -61,7 +62,7 @@ class GameLoop : public BaseThread {
 		   std::queue<SDL_Event> &textQueue,
 		   std::queue<SDL_Event> &mouseQueue,
 		   std::condition_variable &ready,
-		   std::queue<std::string> &sq,
+		   ThreadQueue *sq,
 		   std::queue<InfoBlock> &fpq,
 		   std::queue<std::string> &vq);
 
