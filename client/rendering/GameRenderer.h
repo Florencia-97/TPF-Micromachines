@@ -67,6 +67,9 @@ class GameRenderer {
 
   /*Leaderboard initializer*/
   void init_leaderboard(InfoBlock &block);
+
+  /*Resets the map to an empty state*/
+  void clean_map();
 };
 
 #endif //MICROMACHINES_GAMERENDERER_H
