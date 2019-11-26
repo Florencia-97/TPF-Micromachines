@@ -18,7 +18,6 @@ enum _entityCategory {
 
 
 class CollisionsManager : public b2ContactListener {
-    //todo std::map<std::string, carMods> delayed_effects;
 public:
     void BeginContact(b2Contact* contact) override;
 

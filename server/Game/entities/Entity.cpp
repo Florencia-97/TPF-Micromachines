@@ -14,7 +14,6 @@ Entity::Entity(b2Body* &newBody) {
 }
 
 Entity::Entity(b2Body* &newBody, int id, const int tile){
-    // TODO: refactor, quick copy paste for testing
     this->body = newBody;
     this->x_size = 0;
     this->y_size = 0;

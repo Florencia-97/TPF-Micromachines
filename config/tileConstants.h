@@ -1,6 +1,4 @@
 //all these numbers can be modified if needed
-// TODO load with all images
-// TODO OF TODO: enum
 #define GRASS_TILE 1
 
 // Cement

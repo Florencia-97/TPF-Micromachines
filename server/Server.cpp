@@ -6,7 +6,6 @@
 
 int Server::play(std::string& port) {
     std::cout << "Server running!\n";
-    // TODO: check if port is right
     GamesManagerThread gamesManager(port);
     gamesManager.run();
     std::cout << "Game Manager running!\n";
