@@ -125,7 +125,7 @@ void GameWorld::_createItem(){
     int y = 0;
     int x0 = 0, y0=0;
     _loadXYInRoad(x, y);
-    x0 = x;
+    x0 = x + (std::rand()%400)/PTM - 200/PTM;
     y0 = (x < map.height/(2*PTM)) ? -10 : map.height/PTM + 10;
     b2Body* newBody = makeNewBody(world, b2_dynamicBody, x0, y0);
     auto ptr = ItemCreator::createItem(newBody, itemsId);
