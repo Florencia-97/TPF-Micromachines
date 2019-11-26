@@ -1,7 +1,7 @@
 #ifndef _CONSTANTS_
 #define _CONSTANTS_
 #define FPS 40 //client fps
-#define GAME_DURATION_S 12 //2mins
+#define GAME_DURATION_S 35 //2mins
 #define TIME_LEFT "tl"
 #define GAME_END "GG"
 #define RACE_RESULTS "RR"
@@ -89,7 +89,7 @@ const int ITEM_MUD = 3;
 const int ITEM_HEALTH = 4;
 
 // Plugins
-const int TIME_BETWEEN_PLUGINS = 15; // seconds
+const int TIME_BETWEEN_PLUGINS = 10; // seconds
 
 // Events
 #define ACTION_TYPE "key"
