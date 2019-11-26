@@ -190,7 +190,7 @@ int GameWorld::createCar(InfoBlock carStats) {
     createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/PTM, (float)CAR_HEIGHT/PTM,0,SENSOR, ITEMS, true);
     createAndAddFixture(&(cars.back()),(float)CAR_WIDTH/(PTM*2), (float)CAR_HEIGHT/(PTM*2),0,SENSOR, TILE, true);
 
-    auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(10, true));
+    auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(8, true));
     cars.back().addEffect(ptr);
     return carId;
 }
@@ -209,7 +209,7 @@ void GameWorld::respawnCar(RaceCar &car) {
         int y = fpos.y - 1.1f *CAR_HEIGHT/PTM;
         int x = fpos.x;
         car.getBody()->SetTransform(b2Vec2(x,y),0);
-        auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(15,true));
+        auto ptr = std::shared_ptr<StatusEffect>(new LapCooldown(8,true));
         car.addEffect(ptr);
     };
     auto ptr = std::shared_ptr<StatusEffect>(new CallbackStatusEffect("RESPAWN", f, 5));
