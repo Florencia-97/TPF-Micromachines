@@ -5,5 +5,7 @@ CMakeFiles/*
 cmake_install.cmake
 Makefile
 LuaPlayer
+.github
+*.mp4
 lua53/*
 
