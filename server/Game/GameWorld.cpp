@@ -108,7 +108,7 @@ void GameWorld::Step(float timeStep) {
     world.Step(timeStep, velocityIterations, positionIterations);
     this->timeModifiers += timeStep;
 
-    spentItemCleaning();
+    stepItems();
     attempItemSpawn();
 
 }
@@ -124,9 +124,13 @@ RaceCar &GameWorld::getCar(int id) {
 void GameWorld::_createItem(){
     int x = 0;
     int y = 0;
+    int x0 = 0, y0=0;
     _loadXYInRoad(x, y);
-    b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
+    x0 = (x < map.width/2) ? -10 : map.width + 10;
+    y0 = (x < map.height/2) ? -10 : map.height + 10;
+    b2Body* newBody = makeNewBody(world, b2_dynamicBody, x0, y0);
     auto ptr = ItemCreator::createItem(newBody, itemsId);
+    ptr->setTargetPosition(b2Vec2(x,y));
     itemsId+=1;
     this->dynamic_objs.push_back(ptr);
     createAndAddFixture(this->dynamic_objs.back().get(), 60.0f/PTM, 60.0f/PTM, 0, TILE, SENSOR, false);
@@ -224,12 +228,16 @@ void GameWorld::attempItemSpawn() {
         this->timeModifiers = 0;
 }
 
-void GameWorld::spentItemCleaning() {
+void GameWorld::stepItems() {
     auto it = dynamic_objs.begin();
     while(it != dynamic_objs.end()){
         if (!it->get()->enabled){
             world.DestroyBody(it->get()->getBody());
             it = dynamic_objs.erase(it);
-        } else it++;
+        } else {
+            auto v = it->get()->dirToTarget();
+            it->get()->getBody()->SetLinearVelocity(100.0*v);
+            it++;
+        }
     }
 }
