@@ -15,8 +15,8 @@ const std::string videoFileName = "micromachinesVideo.mp4";
 VideoRecorder::VideoRecorder() : videoQueue(1) ,rec(false), dataBuffer(BUFFER_WIDTH * BUFFER_HEIGHT * 3) {
     mBox.x = BUFFER_WIDTH/2 - 200;
     mBox.y = BUFFER_HEIGHT/2 - 200;
-    mBox.w = 400;
-    mBox.h = 400;
+    mBox.w = 800;
+    mBox.h = 600;
 }
 
 void VideoRecorder::init(SDL_Renderer* render){
@@ -25,7 +25,6 @@ void VideoRecorder::init(SDL_Renderer* render){
                                      SDL_TEXTUREACCESS_TARGET, BUFFER_WIDTH, BUFFER_HEIGHT);
     videoWriter = new VideoWriter(&videoQueue, BUFFER_WIDTH, BUFFER_HEIGHT);
     videoWriter->run();
-    std::cout << "All created correctly\n";
 }
 
 void VideoRecorder::setTarget(SDL_Renderer* render){
