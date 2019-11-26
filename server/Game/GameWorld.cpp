@@ -126,7 +126,7 @@ void GameWorld::_createItem(){
     int y = 0;
     int x0 = 0, y0=0;
     _loadXYInRoad(x, y);
-    x0 = (x < map.width/(2*PTM)) ? -10 : map.width/PTM + 10;
+    x0 = x;
     y0 = (y < map.height/(2*PTM)) ? -10 : map.height/PTM + 10;
     std::cout<<x0<<" "<<y0<<std::endl;
     b2Body* newBody = makeNewBody(world, b2_dynamicBody, x0, y0);
