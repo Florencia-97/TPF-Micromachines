@@ -59,7 +59,6 @@ void GameWorld::loadWorld(std::string worldName){
             }
         }
     }
-    // TODO: Load  all the extras (the ones you just crash with)
     for (size_t j = 0; j < map.extras.size(); j++){
         auto row = map.extras[j];
         for (size_t i= 0; i < row.size(); i++){
@@ -163,7 +162,6 @@ void GameWorld::_loadXYInRoad(int& x, int& y){
     y = (int) (std::round(it1->y) + ry*.8);
 }
 
-// TODO: If we dont use them, remove tileType as parameter
 void GameWorld::createOffRoad(int x, int y, int tileType) {
     b2Body* newBody = makeNewBody(world, b2_staticBody, x, y);
     this->offroad_bodies.emplace_back("offroad", newBody);

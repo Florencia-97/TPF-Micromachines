@@ -8,7 +8,6 @@
 UserInput::UserInput(SafeQueue<InfoBlock> *q_keyboard, std::queue<SDL_Event> *mouse_queue,
                      std::queue<SDL_Event> *text_queue, std::queue<std::string> *sound_queue,
                      std::condition_variable *close_window, std::queue<std::string> *video_queue) {
-    // TODO assign to class safeQueue a way of being past without pointer
     this->keyboard_input = q_keyboard;
     this->mouse_queue = mouse_queue;
     this->writing_queue = text_queue;
