@@ -52,17 +52,23 @@ void FakeClient::_run() {
     }
 }
 
-bool FakeClient::_move(InfoBlock& ib, int x, int y, int r, int& lastMove) {
-    std::string des = luaWrapper.getDesition(mapsLayer.road, x +1, y+ 1, r, lastMove);
-    if (des == "") return false;
+void _getAction(std::string& des, std::string& actionType, std::string& eventType){
     std::stringstream ss(des);
     std::string token;
     // Getting Action Type
     std::getline(ss, token, '-');
-    std::string actionType = token ;
+    actionType = token ;
     // Getting Event type
     std::getline(ss, token);
-    std::string eventType = token;
+    eventType = token;
+}
+
+bool FakeClient::_move(InfoBlock& ib, int x, int y, int r, int& lastMove) {
+    std::string des = luaWrapper.getDesition(mapsLayer.road, x +1, y+ 1, r, lastMove);
+    if (des == "") return false;
+    std::string actionType = "";
+    std::string eventType = "";
+    _getAction(des, actionType, eventType);
     char et;
 
     // Getting action type and event type
@@ -76,5 +82,6 @@ bool FakeClient::_move(InfoBlock& ib, int x, int y, int r, int& lastMove) {
     else if (actionType == ACTION_TYPE && et == LEFT) lastMove = 3;
     else if (actionType == ACTION_TYPE_DOWN && et == LEFT) lastMove = 4;
     ib[actionType] = et;
+
     return true;
 }
