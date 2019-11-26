@@ -33,6 +33,8 @@ public:
     /*Renders the decoration of the map*/
     void renderDeco(SDL_Rect &camera, SDL_Renderer *renderer, int xoffset,
             int yoffset);
+
+  void clear();
 };
 
 #endif //MICROMACHINES_GAMEMAP_H
