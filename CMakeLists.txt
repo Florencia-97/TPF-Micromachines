@@ -105,15 +105,6 @@ set(CLIENT_SOURCE_FILES
 		client/rendering/recording/VideoWriter.cpp client/rendering/recording/VideoWriter.h
 		client/rendering/interfaces/LuaButton.cpp client/rendering/interfaces/LuaButton.h)
 
-#set(TEST_SOURCE_FILES
-#        tests/tests.cpp
-#		server/Game/CollisionsManager.cpp server/Game/CollisionsManager.h
-#		server/threads/GameThread.cpp server/threads/GameThread.h
-#		common/conc/BaseThread.cpp common/conc/BaseThread.h
-#		server/threads/PlayerThread.cpp server/threads/PlayerThread.h
-#		common/conc/SenderThread.cpp common/conc/SenderThread.h
-#		)
-
 set(LUA_SOURCE_FILES
 		common/MapsLayer.cpp common/MapsLayer.h
 		client/ia/lua/LuaWrapper.cpp client/ia/lua/LuaWrapper.h
@@ -121,8 +112,6 @@ set(LUA_SOURCE_FILES
 
 add_executable(Server server/main.cpp ${SERVER_SOURCE_FILES})
 add_executable(Client client/main.cpp ${CLIENT_SOURCE_FILES} ${LUA_SOURCE_FILES})
-# add_executable(LuaPlayer lua/main.cpp ${LUA_SOURCE_FILES})
-#add_executable(Test ${TEST_SOURCE_FILES} ${SERVER_SOURCE_FILES})
 
 target_link_libraries(Server yaml-cpp pthread Box2D ${CMAKE_DL_LIBS})
 target_link_libraries(Client yaml-cpp pthread LuaLib
@@ -132,5 +121,3 @@ target_link_libraries(Client yaml-cpp pthread LuaLib
 		${SDL2_MIXER_LIBRARIES}
 		avformat avcodec avutil swscale
 		)
-#target_link_libraries( LuaPlayer PUBLIC yaml-cpp LuaLib )
-#target_link_libraries(Test yaml-cpp Box2D)
