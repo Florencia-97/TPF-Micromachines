@@ -1,4 +1,3 @@
-#include <iostream>
 #include "yaml-cpp/yaml.h"
 #include "MapsLayer.h"
 
@@ -33,6 +32,12 @@ void MapsLayer::_loadHW(const std::string &mapPath){
     this->height = h.as<int>();
 }
 
+void MapsLayer::_cleanLayers(){
+    this->ground.clear();
+    this->road.clear();
+    this->extras.clear();
+}
+
 MapsLayer::MapsLayer(const std::string& mapPath): height(0), width(0) {
     load(mapPath);
 }
@@ -41,9 +46,7 @@ void MapsLayer::load(const std::string &mapPath) {
     std::string _ground = "Ground";
     std::string _road = "Road";
     std::string _extras = "Extras";
-    this->ground.clear();
-    this->road.clear();
-    this->extras.clear();
+    _cleanLayers();
     _loadMap(mapPath, _ground, this->ground);
     _loadMap(mapPath, _road,this->road);
     _loadMap(mapPath, _extras ,this->extras);

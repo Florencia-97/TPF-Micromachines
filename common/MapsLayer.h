@@ -9,6 +9,7 @@
 class MapsLayer {
     void _loadMap(const std::string &mapPath, std::string& key, std::vector<std::vector<int>>& matrix);
     void _loadHW(const std::string &mapPath);
+    void _cleanLayers();
 public:
     std::vector<std::vector<int>> ground;
     std::vector<std::vector<int>> road;
