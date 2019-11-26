@@ -38,7 +38,6 @@ class GameWorld {
     float timeModifiers;
     int itemsId;
 
-    void _createItem();
     //loads a random position from a random road to x & y
     void _loadXYInRoad(int&x, int&y);
     void _explodeIfOutOfBounds(RaceCar &car);
@@ -77,6 +76,9 @@ public:
     //returns positions and statuses of all dynamic (cars & items) objects in the world
     //at the moment of calling
     InfoBlock status();
+
+    // Creates a random item in world
+    void _createItem();
 
     //POS advances the simulation one timestep
     void Step(float timeStep);

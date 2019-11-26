@@ -5,7 +5,7 @@
 PluginLibrary::PluginLibrary(const char* path): clock(0.0) {
     this->path = path;
     this->cars = nullptr;
-    _loadPlugins(plugins);
+    _loadPlugins();
 }
 
 void PluginLibrary::loadCars(std::list<RaceCar>* cars){
@@ -13,18 +13,21 @@ void PluginLibrary::loadCars(std::list<RaceCar>* cars){
     std::cout << "Cars Loaded\n";
 }
 
-void PluginLibrary::_runPlugins(std::vector<PluginLoader*>& plugins){
+void PluginLibrary::_runPlugins(GameWorld* game){
     std::vector<CarStats*> carsStats;
     for (auto & car : *cars){
         carsStats.push_back(&car.car_stats);
     }
     for (auto & plugin : plugins){
         plugin->plugin->modifyCars(carsStats);
-        plugin->plugin->modifyWorld(carsStats);
+        if (plugin->plugin->createItem()){
+            std::cout << "Plugin creates random item\n";
+            game->_createItem();
+        }
     }
 }
 
-void PluginLibrary::_loadPlugins(std::vector<PluginLoader*>& plugins){
+void PluginLibrary::_loadPlugins(){
     if (auto dir = opendir(path)) {
         while (auto f = readdir(dir)) {
             if (f->d_name[0] == '.') continue;
@@ -40,13 +43,13 @@ void PluginLibrary::_loadPlugins(std::vector<PluginLoader*>& plugins){
     }
 }
 
-void PluginLibrary::runPlugins(float timeStep) {
+void PluginLibrary::runPlugins(float timeStep, GameWorld* game) {
     if (this->clock < TIME_BETWEEN_PLUGINS){
         this->clock += timeStep;
         return;
     }
     std::cout << "Running plugins\n";
-    _runPlugins(plugins);
+    _runPlugins(game);
     this->clock = 0.0;
     std::cout << "Waiting for plugins to reactivate again!\n";
 }

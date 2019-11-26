@@ -13,8 +13,8 @@ public:
         return;
     }
 
-    virtual void modifyWorld(std::vector<CarStats*>& world) {
-        return;
+    virtual bool createItem() {
+        return false;
     }
     virtual ~Plugin() {}
 };

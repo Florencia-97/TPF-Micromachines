@@ -6,7 +6,7 @@
 GameThread::GameThread(Socket &lobby_owner, InfoBlock& ib, Configuration& configs)
     : lobby_mode(true), sktOwner(std::move(lobby_owner)), gameName(ib.getString(ARENA_GAME)),
     configs(configs){
-    pluginLibrary = new PluginLibrary("plugin");
+    pluginLibrary = new PluginLibrary("plugins");
     this->ownerInfo = ib;
 }
 
@@ -176,7 +176,7 @@ void GameThread::_runGame() {
             gameStatus[TIME_LEFT] = ((over_time <= 0) ? "END" : std::to_string((int)time_left));
             _sendAll(gameStatus);
             this->sleep(timestep);
-            pluginLibrary->runPlugins(timestep);
+            pluginLibrary->runPlugins(timestep, &this->game);
 
         } else {
             if (time_left <= 0) {

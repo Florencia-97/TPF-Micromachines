@@ -13,6 +13,11 @@ public:
             cars[i]->max_speed += 5;
         }
     }
+
+    virtual bool createItem() override {
+        // It creates a random item
+        return true;
+    }
 };
 
 // the class factories

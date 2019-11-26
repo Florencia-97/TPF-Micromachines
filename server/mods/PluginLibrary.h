@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <Game/entities/RaceCar.h>
+#include <server/Game/GameWorld.h>
 #include "PluginLoader.h"
 #include "../../common/conc/BaseThread.h"
 
@@ -14,12 +15,12 @@ class PluginLibrary{
     std::list<RaceCar>* cars;
     std::vector<PluginLoader*> plugins;
     float clock;
-    void _runPlugins(std::vector<PluginLoader*>& plugins);
-    void _loadPlugins(std::vector<PluginLoader*>& plugins);
+    void _runPlugins(GameWorld* game);
+    void _loadPlugins();
 public:
     explicit PluginLibrary(const char* p);
     void loadCars(std::list<RaceCar>* cars);
-    void runPlugins(float timestep);
+    void runPlugins(float timestep, GameWorld* game);
     ~PluginLibrary();
 };
 
