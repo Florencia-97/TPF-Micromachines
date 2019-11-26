@@ -60,7 +60,7 @@ void GameMap::renderDeco(SDL_Rect &camera, SDL_Renderer *renderer, int x, int y)
     }
 }
 void GameMap::clear() {
-  this->road.clear();
   this->ground.clear();
   this->extras.clear();
+  this->road.clear();
 }

@@ -33,7 +33,7 @@ public:
     /*Renders the decoration of the map*/
     void renderDeco(SDL_Rect &camera, SDL_Renderer *renderer, int xoffset,
             int yoffset);
-
+  /*Cleans the four vectors in the class*/
   void clear();
 };
 

@@ -159,4 +159,8 @@ void GameRenderer::init_leaderboard(InfoBlock &block) {
   }
 }
 
+void GameRenderer::clean_map() {
+  this->map.clear();
+}
+
 
